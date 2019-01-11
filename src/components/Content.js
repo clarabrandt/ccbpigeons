@@ -11,7 +11,11 @@ export default class Content extends Component {
     return (
       <div className='content--grid'>
         <div className='content--left'>
-        <div className='news'>News</div>
+        <div className='news'>
+          <h3>Notícias</h3>
+          <h4>>> 11/01/2019 Prêmio melhor pombo do ano CCB Pigeons</h4>
+          <h4>>> 05/01/2019 Peça seu catálogo para o próximo leilão da CCB Pigeons</h4>
+        </div>
         </div>
         <div className='content--main'>
         <h1>CCB Pigeons</h1>
