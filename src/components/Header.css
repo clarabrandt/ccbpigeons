@@ -1,7 +1,21 @@
 .header {
   display: grid;
-  grid-template-columns: repeat(2, 300px auto);
+  grid-template-columns: 200px auto 40px 60px;
   background-color: lightgrey;
 }
+  .header-items {
+    display: grid;
+    grid-template-columns: auto auto;
+    max-height: 40px;
+  }
+    .flag {
+      align-self: center;
+    }
+    .login {
+      margin: 10px;
+      padding-right: 10px;
+      text-decoration: underline;
+      color: darkblue;
+    }
 
   

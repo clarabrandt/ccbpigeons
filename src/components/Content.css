@@ -1,0 +1,52 @@
+.content--grid {
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  grid-template-columns: 300px auto 300px;
+  grid-template-rows: 100vh;
+  overflow-y: scroll;
+}
+  .content--left,
+  .content--main,
+  .content--right {
+    height: 100vh;
+  }
+  .content--main {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 2rem;
+  }
+    h1 {
+      padding: 20px;
+    }
+    p {
+      padding: 0 20px;
+      text-align: justify;
+      line-height: 27px;
+    }
+  
+    .content--right {
+      display: grid;
+      grid-template-rows: 35vh 5vh 5vh;
+    } 
+      .videos {
+        margin-top: 35px;
+        
+      }
+      .news {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: 2em 1.7em 2em 1.7em;
+        width: 270px;
+        height: 40vh;
+      }
+      .canal-youtube--text {
+        margin-top: 15px;
+        max-height: 50px;
+      }
+      .canal-youtube {
+        display: grid;
+        grid-template-columns: 60px 220px;
+        max-height: 50px;
+        align-self: top;
+      }

@@ -1,0 +1,21 @@
+.menu--item {
+  color: darkblue;
+  font-size: 20px;
+  align-self: baseline;
+  display: grid;
+  grid-template-columns: auto auto;
+
+}
+.menu--item:hover {
+    text-decoration: underline;
+    transform: scale(1.1);
+    cursor: pointer;
+    font-weight: 550;
+
+  }
+
+  .icon {
+    align-self: center;
+    justify-self: right;
+    margin-right: 3px;
+  }

@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import './Menu.css';
-import Pigeons from './Pigeons.js';
-import Results from './Results.js';
-import Blog from './Blog.js';
-import Leiloes from './Leiloes.js';
+import MenuItem from './MenuItem';
 
 export default class Menu extends Component {
   render() {
     return (
       <div className='menu'>
-        <div></div>
-        <div></div>
-        <Pigeons /> 
-        <Results />
-        <Leiloes />
-        <Blog />
-        <div></div>
-        <div></div>
+        
+       <div></div>
+        <MenuItem name='Home' />
+        <MenuItem name='Pombos' />
+        <MenuItem name='Resultados' />
+        <MenuItem name='Leilões' />
+        <MenuItem name='Blog' />
+     
+
        
       </div>
     )
