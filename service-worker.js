@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/ccb-pigeons/precache-manifest.29f69396d841e6d4c0bdd85a29f12e9b.js"
+  "/ccbpigeons/precache-manifest.0b64c694bd8885d04c0b6513374eaf28.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/ccb-pigeons/index.html", {
+workbox.routing.registerNavigationRoute("/ccbpigeons/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
