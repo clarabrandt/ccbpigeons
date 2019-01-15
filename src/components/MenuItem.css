@@ -1,7 +1,7 @@
 .menu--item {
   color: darkblue;
   font-size: 20px;
-  align-self: baseline;
+  align-self: end;
   display: grid;
   grid-template-columns: auto auto;
 
@@ -15,7 +15,7 @@
   }
 
   .icon {
-    align-self: center;
+    align-self: start;
     justify-self: right;
-    margin-right: 3px;
+    margin-right: 4px;
   }
