@@ -1,21 +1,52 @@
 .header {
   display: grid;
-  grid-template-columns: 200px auto 40px 60px;
+  grid-template-areas: 
+    "logo title title title title title items"
+    "logo title title title title title items"
+    "logo title title title title title items";
+  /* grid-template-columns: 200px auto 40px 60px; */
   background-color: lightgrey;
 }
+  .logo--logo {
+    grid-area: logo;
+  }
+  .title--title {
+    grid-area: title;
+    align-self: center;
+  }
   .header-items {
+    grid-area: items;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-areas: 
+    "flag login"
+    "flag login"
+    "flag login"
+    "flag login";
     max-height: 40px;
   }
     .flag {
+      grid-area: flag;
       align-self: center;
     }
     .login {
-      margin: 10px;
+      grid-area: login;
+      margin: 10px 10px 10px 0;
       padding-right: 10px;
       text-decoration: underline;
       color: darkblue;
     }
 
   
+  @media only screen and (max-width: 420px) {
+      .header{
+        display: grid;
+        grid-template-areas: 
+        "title title title items"
+        "title title title items";
+        height: 80px;
+      }
+
+      .logo--logo {
+        display: none;
+      }
+    }

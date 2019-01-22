@@ -1,12 +1,44 @@
 .menu {
   margin: 10px 15px;
-  display: grid;
-  grid-template-columns: repeat(8, auto);
-  position: sticky;
-  position: -webkit-sticky;
-  top: -1px;
-  background-color: #fff;
-  z-index: 9999;
+  
+}
+  .hamburger {
+    display: none;
+  }
+  .menu--dropdown {
+    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    position: sticky;
+    position: -webkit-sticky;
+    top: -1px;
+    background-color: #fff;
+    z-index: 9999;
+  }
+
+@media only screen and (max-width: 420px) {
+  
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+    .menu--dropdown {
+      background-color: yellow;
+      grid-template-columns: 100%;
+      grid-template-rows: repeat(5, auto);
+      padding: 20px;
+
+    }
+
+    .menu--dropdown.open {
+      height: 100%;
+      display: block;
+    }
+    .menu--dropdown.closed {
+      height: 0px;
+      display: none;  
+    }
+  
 }
  
 

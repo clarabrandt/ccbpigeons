@@ -10,7 +10,9 @@ export default class MenuItem extends Component {
         <div className='icon'>
         <Icon name={this.props.name}/>
         </div>
+        <div className='name'>
         {this.props.name}
+        </div>
       </div>
     )
   }
