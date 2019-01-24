@@ -34,6 +34,7 @@
 
     .menu--dropdown.open {
       height: 100%;
+      width: 130px;
       visibility: visible;
       display: block;
       background-color: #f9f9f9;

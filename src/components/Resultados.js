@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './Resultados.css'
 export default class Pombos extends Component {
   
   render() {
@@ -10,7 +10,7 @@ export default class Pombos extends Component {
         
         </div>
         <div className='content--main'>
-          Resultados
+          <h1>Resultados</h1>
         </div>
         <div className='content--right'>
          

@@ -3,8 +3,10 @@ import './Header.css';
 import Title from './Title.js';
 import Logo from './Logo.js'
 import Flag from './svgs/Flag'
+import Login from './Login';
 
 class Header extends Component {
+
   render() {
     return (
       <div className='header'>
@@ -16,7 +18,9 @@ class Header extends Component {
       </div>
         <div className='header-items'>
           <Flag />
-          <div className='login'>login</div>
+          <div className='Login'>login
+          <Login name='Login' handleClick={this.props.handleClick}/>
+          </div>
         </div>
       </div>
     )

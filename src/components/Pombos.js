@@ -11,7 +11,7 @@ export default class Pombos extends Component {
     return (
       <div className='card'>
         <div className="card--grid">
-           <h4><b>Pombo 1</b></h4> 
+          Pombo 1
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
@@ -20,7 +20,7 @@ export default class Pombos extends Component {
           </div>
         </div>
         <div className="card--grid">
-           <h4><b>Pombo 2</b></h4> 
+          Pombo 2
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
@@ -29,7 +29,7 @@ export default class Pombos extends Component {
           </div>
         </div>
         <div className="card--grid">
-           <h4><b>Pombo 3</b></h4> 
+          Pombo 3 
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
@@ -38,7 +38,7 @@ export default class Pombos extends Component {
           </div>
         </div>
         <div className="card--grid">
-           <h4><b>Pombo 4</b></h4> 
+          Pombo 4 
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
@@ -47,7 +47,7 @@ export default class Pombos extends Component {
           </div>
         </div>
         <div className="card--grid">
-           <h4><b>Pombo 5</b></h4> 
+          Pombo 5 
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
@@ -56,7 +56,7 @@ export default class Pombos extends Component {
           </div>
         </div>
         <div className="card--grid">
-           <h4><b>Pombo 6</b></h4> 
+          Pombo 6 
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
@@ -65,7 +65,7 @@ export default class Pombos extends Component {
           </div>
         </div>
         <div className="card--grid">
-           <h4><b>Pombo 7</b></h4> 
+          Pombo 7 
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
@@ -74,7 +74,7 @@ export default class Pombos extends Component {
           </div>
         </div>
         <div className="card--grid">
-           <h4><b>Pombo 8</b></h4> 
+          Pombo 8 
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
@@ -83,7 +83,7 @@ export default class Pombos extends Component {
           </div>
         </div>
         <div className="card--grid">
-           <h4><b>Pombo 9</b></h4> 
+          Pombo 9 
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
@@ -92,7 +92,7 @@ export default class Pombos extends Component {
           </div>
         </div>
         <div className="card--grid">
-           <h4><b>Pombo 10</b></h4> 
+          Pombo 10 
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
@@ -101,7 +101,7 @@ export default class Pombos extends Component {
           </div>
         </div>
         <div className="card--grid">
-           <h4><b>Pombo 11</b></h4> 
+          Pombo 11 
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
@@ -110,7 +110,7 @@ export default class Pombos extends Component {
           </div>
         </div>
         <div className="card--grid">
-           <h4><b>Pombo 12</b></h4> 
+          Pombo 12 
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>

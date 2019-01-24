@@ -5,6 +5,7 @@ import Content from './Content';
 import Pombos from './Pombos';
 import Resultados from './Resultados';
 import Blog from './Blog';
+import Login from './Login';
 import Footer from './Footer';
 
 export default class Grid extends Component {
@@ -42,13 +43,22 @@ export default class Grid extends Component {
         clicked: 'Blog'
       })
     } 
+    if(clickedItem === 'Login'){
+      this.setState({
+        clicked: 'Login'
+      })
+    } 
     
   }
 
   render() {
     return (
       <div>
-        <Header />
+        <Header handleClick = { this.handleClick }/>
+      
+        {this.state.clicked === 'Login' && 
+        <Login />
+        }
         <Menu handleClick = { this.handleClick } />
         {this.state.clicked === 'Pombos' && 
         <Pombos />

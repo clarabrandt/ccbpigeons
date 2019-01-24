@@ -27,7 +27,9 @@
       display: none;
     }
     .menu--item {
-      font-size: 16px;
+      font-size: 18px;
+      margin: 1px 0 4px 0;
+      
     }
     .menu--item:hover {
       color: white;
@@ -35,5 +37,8 @@
       transform: initial;
       cursor: pointer;
       background-color: grey;
+    }
+    .name {
+      margin: 1px solid black;
     }
   }

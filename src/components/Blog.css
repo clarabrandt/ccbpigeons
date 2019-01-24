@@ -1,0 +1,58 @@
+.posts {
+  display: grid;
+  grid-template-areas: 
+  "old new new . . ."
+  "old new new . . ." 
+}
+
+  .posts--old {
+    grid-area: old;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 2em 2em 2em 1.7em;
+    max-width: 270px;
+    height: 40vh;
+    font-weight: 550;
+
+  }
+  .posts--new {
+    grid-area: new;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 2em 10em 2em 2em;
+    max-width: 100%;
+    height: 100vh;
+  }
+    h1,
+    p {
+      margin: 20px 30px;
+    }
+
+    h3, h4 {
+      margin: 0 20px;
+      text-align: justify;
+      line-height: 20px;
+
+    }
+    h4 {
+      font-weight: normal;
+      padding-top: 25px;
+      cursor: pointer;
+    }
+
+    h4:hover {
+      text-decoration: underline;
+      color: darkblue;
+    }
+
+
+@media only screen and (max-width: 420px) {
+  .posts {
+    display: grid;
+    grid-template-areas: 
+    'new new new'
+    'new new new'
+    'new new new'
+    'old old old';
+  }
+}

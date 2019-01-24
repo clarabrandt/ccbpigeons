@@ -1,16 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './Login.css'
 
-export default class login extends Component {
+export default class Login extends Component {
+
+  
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className='login--form'>
         <label>
           Name:
-          <input type="text" name="name" onChange={this.handleChange} />
+          <input type="text" name="name"/>
         </label>
         <label>
           Password:
-          <input type="text" name="password" onChange={this.handleChange} />
+          <input type="text" name="password"/>
         </label>
         <input type="submit" value="Submit" />
       </form>
