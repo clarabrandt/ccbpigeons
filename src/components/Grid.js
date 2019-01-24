@@ -2,26 +2,45 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Menu from './Menu';
 import Content from './Content';
+import Pombos from './Pombos';
+import Resultados from './Resultados';
+import Blog from './Blog';
 import Footer from './Footer';
 
 export default class Grid extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state= {
+      clicked: 'Home'
+    }
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   handleClick(clickedItem) {
-    console.log(clickedItem)
-    if (clickedItem=== 'Home') {
-      console.log('Pombos')
+    
+    if (clickedItem === 'Home') {
+      this.setState({
+        clicked: 'Home'
+      })
     }
     if(clickedItem === 'Pombos'){
-      console.log('Pombos')
+      this.setState({
+        clicked: 'Pombos'
+      })
     } 
     if(clickedItem === 'Resultados'){
-      console.log('Resultados')
+      this.setState({
+        clicked: 'Resultados'
+      })
     } 
     if(clickedItem === 'Leilões'){
       window.open('http://www.ccbleiloes.com.br/')
     } 
     if(clickedItem === 'Blog'){
-      console.log('blog')
+      this.setState({
+        clicked: 'Blog'
+      })
     } 
     
   }
@@ -31,7 +50,19 @@ export default class Grid extends Component {
       <div>
         <Header />
         <Menu handleClick = { this.handleClick } />
+        {this.state.clicked === 'Pombos' && 
+        <Pombos />
+        }
+        {this.state.clicked === 'Home' && 
         <Content />
+        }
+        {this.state.clicked === 'Blog' && 
+        <Blog />
+        }
+        {this.state.clicked === 'Resultados' && 
+        <Resultados />
+        }
+        
         <Footer />
       </div>
     )

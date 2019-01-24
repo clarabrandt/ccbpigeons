@@ -11,7 +11,6 @@
     transform: scale(1.1);
     cursor: pointer;
     font-weight: 550;
-
   }
 
   .icon {
@@ -29,5 +28,12 @@
     }
     .menu--item {
       font-size: 16px;
+    }
+    .menu--item:hover {
+      color: white;
+      text-decoration: none;
+      transform: initial;
+      cursor: pointer;
+      background-color: grey;
     }
   }

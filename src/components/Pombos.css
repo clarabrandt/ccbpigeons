@@ -1,0 +1,26 @@
+.card {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(3, auto);
+  margin: 30px 15px;
+  max-width: 100%;
+  justify-content: space-around;
+}
+
+
+  .card--grid {
+    display: grid;
+    grid-template-rows: 30px auto 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* height: 50vh; */
+    width: 100%;
+    margin: 10px;
+  }
+
+    .card--pic {
+      margin: 1px solid black;
+    }
+    .card--text {
+      justify-items: center;
+    }

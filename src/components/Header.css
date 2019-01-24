@@ -1,11 +1,10 @@
 .header {
   display: grid;
   grid-template-areas: 
-    "logo title title title title title items"
-    "logo title title title title title items"
-    "logo title title title title title items";
-  /* grid-template-columns: 200px auto 40px 60px; */
+  "logo title title title title title items"
+  "logo title title title title title items";
   background-color: lightgrey;
+  max-height: 180px;
 }
   .logo--logo {
     grid-area: logo;
@@ -27,6 +26,7 @@
     .flag {
       grid-area: flag;
       align-self: center;
+      cursor: pointer;
     }
     .login {
       grid-area: login;
@@ -34,6 +34,7 @@
       padding-right: 10px;
       text-decoration: underline;
       color: darkblue;
+      cursor: pointer;
     }
 
   
