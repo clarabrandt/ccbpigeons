@@ -7,6 +7,7 @@ import Resultados from './Resultados';
 import Blog from './Blog';
 import Login from './Login';
 import Footer from './Footer';
+import Layout from './Layout';
 
 export default class Grid extends Component {
 
@@ -19,7 +20,6 @@ export default class Grid extends Component {
   }
 
   handleClick(clickedItem) {
-    
     if (clickedItem === 'Home') {
       this.setState({
         clicked: 'Home'
@@ -54,16 +54,16 @@ export default class Grid extends Component {
   render() {
     return (
       <div>
-        <Header handleClick = { this.handleClick }/>
-      
-        {this.state.clicked === 'Login' && 
-        <Login />
-        }
+        <Header />
         <Menu handleClick = { this.handleClick } />
+        {this.state.clicked === 'Home' &&
+        <Layout />
+        }
         {this.state.clicked === 'Pombos' && 
         <Pombos />
         }
         {this.state.clicked === 'Home' && 
+        
         <Content />
         }
         {this.state.clicked === 'Blog' && 
@@ -72,7 +72,6 @@ export default class Grid extends Component {
         {this.state.clicked === 'Resultados' && 
         <Resultados />
         }
-        
         <Footer />
       </div>
     )

@@ -6,4 +6,7 @@
   /* grid-template-areas:  */
  
 }
+  .layout.yes {
+    display: none;
+  }
 
