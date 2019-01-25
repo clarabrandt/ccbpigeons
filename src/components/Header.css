@@ -44,12 +44,13 @@
       .header{
         display: grid;
         grid-template-areas: 
-        "title title title items"
-        "title title title items";
+        "title items"
+        "title items";
         height: 80px;
+        border-bottom: 10px solid  rgb(22, 7, 163);
       }
 
-      .logo--logo {
+      /* .logo--logo {
         display: none;
-      }
+      } */
     }

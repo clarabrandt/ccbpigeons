@@ -19,7 +19,6 @@
   }
     .news {
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       margin: 2em 1.7em 2em 1.7em;
       width: 270px;
       height: 40vh;
@@ -40,7 +39,6 @@
     }
     .content--main {
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       margin: 2rem;
       grid-area: main;
       
@@ -52,8 +50,6 @@
         padding: 0 20px;
         text-align: justify;
         line-height: 26px;
-
-        
       }
     
       .content--right {
@@ -64,7 +60,6 @@
       } 
         .videos {
           margin-top: 35px;
-          
         }
         
         .canal-youtube--text {
@@ -91,19 +86,34 @@
   }
   .content--left,
   .content--right{
-    height: 50vh;
+    height: 45vh;
+    justify-self: center;
+    width: 90%;
+   
   }
-
   .content--main{
     height: 100vh;
+    margin: 10px;
   }
-  .content--right {
-    justify-content: center;
-    display: inline;
-    justify-self: center
-  }
-  .news {
-    width: 85%;
-  }
+    p {
+      padding: 0;
+    }
   
+  .news {
+    margin: 10px 10px 0 0;
+    width: 100%;
+  }
+  .videos {
+    margin: 0;
+    justify-self: center;
+  }
+  .canal-youtube--text {
+    margin-top: 0;
+    align-self: center;
+  }
+  .canal-youtube {
+    display: grid;
+    grid-template-columns: 60px 220px;
+    align-self: center;
+  }
 }
