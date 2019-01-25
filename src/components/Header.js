@@ -10,9 +10,9 @@ class Header extends Component {
   render() {
     return (
       <div className='header'>
-      <div className='logo--logo'>
+      {/* <div className='logo--logo'>
         <Logo />
-      </div>
+      </div> */}
       <div className='title--title'>
         <Title />
       </div>
