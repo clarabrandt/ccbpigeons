@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Changa+One");
 
 .title {
-  font-family: 'Changa One';
+  font-family: 'Acme', 'Changa One';
   font-size: 75px;
   padding-left: 230px;
   align-self: center;
