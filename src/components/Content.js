@@ -34,7 +34,7 @@ export default class Content extends Component {
         <div className='canal-youtube--text'>Para mais vídeos, acesse: </div>
         <div className='canal-youtube'>
           <Youtube /> 
-          <div className='canal-youtube--text'> Otávio Riberio Júnior</div>
+          <div className='canal-youtube--text'> Octávio Riberio Júnior</div>
          </div>
         </div>
       </div>

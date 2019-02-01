@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import './Youtube.css'
 
 export default class Youtube extends Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-  handleClick(event) {
+  handleClick = event => {
+    event.preventDefault();
     window.open('https://www.youtube.com/channel/UC_jv2lcttlRTPPhNR39-c7g')
   }
   render() {

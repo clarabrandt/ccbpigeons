@@ -15,7 +15,7 @@ export default class Pombos extends Component {
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
-          <div class="card--text">
+          <div className="card--text">
             <p>Descrição</p> 
           </div>
         </div>
@@ -24,7 +24,7 @@ export default class Pombos extends Component {
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
-          <div class="card--text">
+          <div className="card--text">
             <p>Descrição</p> 
           </div>
         </div>
@@ -33,7 +33,7 @@ export default class Pombos extends Component {
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
-          <div class="card--text">
+          <div className="card--text">
             <p>Descrição</p> 
           </div>
         </div>
@@ -42,7 +42,7 @@ export default class Pombos extends Component {
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
-          <div class="card--text">
+          <div className="card--text">
             <p>Descrição</p> 
           </div>
         </div>
@@ -51,7 +51,7 @@ export default class Pombos extends Component {
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
-          <div class="card--text">
+          <div className="card--text">
             <p>Descrição</p> 
           </div>
         </div>
@@ -60,7 +60,7 @@ export default class Pombos extends Component {
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
-          <div class="card--text">
+          <div className="card--text">
             <p>Descrição</p> 
           </div>
         </div>
@@ -69,7 +69,7 @@ export default class Pombos extends Component {
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
-          <div class="card--text">
+          <div className="card--text">
             <p>Descrição</p> 
           </div>
         </div>
@@ -78,7 +78,7 @@ export default class Pombos extends Component {
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
-          <div class="card--text">
+          <div className="card--text">
             <p>Descrição</p> 
           </div>
         </div>
@@ -87,7 +87,7 @@ export default class Pombos extends Component {
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
-          <div class="card--text">
+          <div className="card--text">
             <p>Descrição</p> 
           </div>
         </div>
@@ -96,7 +96,7 @@ export default class Pombos extends Component {
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
-          <div class="card--text">
+          <div className="card--text">
             <p>Descrição</p> 
           </div>
         </div>
@@ -105,7 +105,7 @@ export default class Pombos extends Component {
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
-          <div class="card--text">
+          <div className="card--text">
             <p>Descrição</p> 
           </div>
         </div>
@@ -114,7 +114,7 @@ export default class Pombos extends Component {
           <div className='card--pic'>
             <img src={pigeon} alt="" width='200px' height='200px' />
           </div>
-          <div class="card--text">
+          <div className="card--text">
             <p>Descrição</p> 
           </div>
         </div>

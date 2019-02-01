@@ -1,13 +1,10 @@
-.faixa {
-  
-  margin: 30px 0 20px 0;
+.grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(3, 180px 50px auto);
+  /* grid-template-areas:  */
+ 
 }
-  
+ 
 
-
-@media only screen and (max-width: 420px) {
-  .faixa{
-    display: none;
-  }
-
-}

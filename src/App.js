@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import Grid from './components/Grid.js';
+import Layout from './components/Layout.js';
 
 class App extends Component {
 
   render() {
     return (
       <div className='app'>
-        <div>
-          <Grid />
-        </div>
+        <Layout />
       </div>
     );
   }

@@ -1,5 +1,7 @@
 .menu {
-  margin: 50px 15px 0 15px;
+  margin: 30px 15px 0 15px;
+  position: sticky;
+  top: -2px;
   
 }
   .hamburger {

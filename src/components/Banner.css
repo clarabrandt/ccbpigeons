@@ -1,0 +1,16 @@
+.faixa {
+  margin: 20px 0 20px 0;
+}
+  .pigeon--pic{
+    width: 100%;
+    height: auto;
+  }
+  
+
+
+@media only screen and (max-width: 420px) {
+  .faixa{
+    display: none;
+  }
+
+}
