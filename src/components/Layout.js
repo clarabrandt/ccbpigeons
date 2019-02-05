@@ -1,71 +1,63 @@
 import React, { Component } from 'react';
-import Header from './Header';
-import Menu from './Menu';
+// import Header from './Header';
+// import Menu from './Menu';
 import Content from './Content';
 import Pombos from './Pombos';
 import Resultados from './Resultados';
 import Blog from './Blog';
-import Login from './Login';
+// import Login from './Login';
 import Footer from './Footer';
 import Banner from './Banner';
+import jump from 'jump.js';
 
 export default class Layout extends Component {
 
   constructor(props) {
     super(props)
     this.state= {
-      clicked: 'Home'
+      clicked: ''
     }
     this.handleClick = this.handleClick.bind(this);
+    this.layout = React.createRef();
+    this.pombos = React.createRef();
   }
 
-  handleClick(clickedItem) {
-    console.log('oioioi')
-    if (clickedItem === 'Home') {
-      this.setState({
-        clicked: 'Home'
-      })
+  handleClick(clicked) {
+    this.setState({
+      clicked
+    });
+    if (clicked === 'Leilões'){
+      window.open('http://www.ccbleiloes.com.br/') 
+    } else {
+      let position = this.getElementPosition(clicked);
+      // window.scrollTo(0, position);
+      jump(position, {
+        duration: 1000,
+        offset: 0,
+        callback: undefined,
+        a11y: false
+      } )
     }
-    if(clickedItem === 'Pombos'){
-      this.setState({
-        clicked: 'Pombos'
-      })
+  }
+
+  getElementPosition(clicked) {
+    if(clicked === 'Pombos'){
+      return this.pombos.current.offsetTop;
     } 
-    if(clickedItem === 'Resultados'){
-      this.setState({
-        clicked: 'Resultados'
-      })
-    } 
-    if(clickedItem === 'Leilões'){
-      window.open('http://www.ccbleiloes.com.br/')
-    } 
-    if(clickedItem === 'Blog'){
-      this.setState({
-        clicked: 'Blog'
-      })
-    } 
-    if(clickedItem === 'Login'){
-      this.setState({
-        clicked: 'Login'
-      })
-    } 
-    
   }
 
   render() {
     return (
-      <div>
-        <Header handleClick = { this.handleClick }/>
-
-        
-        <Menu handleClick = { this.handleClick } />
+      <div ref={this.layout}>
+        {/* <Header handleClick = { this.handleClick }/> 
+        <Menu handleClick = { this.handleClick } /> 
 
         {this.state.clicked === 'Login' &&
         <Login />
         }
 
         {this.state.clicked === 'Home' &&
-        <Banner />
+        <Banner handleClick = { this.handleClick }/>
         }
         {this.state.clicked === 'Home' && 
         <Content />
@@ -78,7 +70,12 @@ export default class Layout extends Component {
         }
         {this.state.clicked === 'Resultados' && 
         <Resultados />
-        }
+        } */}
+        <Banner handleClick={this.handleClick}/>
+        <Content />
+        <Pombos anchor={this.pombos}/>
+        <Resultados />
+        <Blog />
         <Footer />
       </div>
     )

@@ -5,6 +5,7 @@
   "homepage": "http://clarabrandt.github.io/ccbpigeons",
   "dependencies": {
     "gh-pages": "^2.0.1",
+    "jump.js": "^1.0.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3",

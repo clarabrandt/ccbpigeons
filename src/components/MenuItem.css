@@ -1,16 +1,21 @@
 .menu--item {
-  color: darkblue;
-  font-size: 20px;
+  font-family: 'Poppins', 'Roboto Condensed', 'Acme', 'Changa One';
+  color: rgb(19, 18, 18);
+  font-size: 18px;
   align-self: end;
   display: grid;
-  grid-template-columns: 35px auto;
+  grid-template-columns: auto;
+  font-weight: 550;
+  background-color: white;
+  padding: 15px;
+  position: sticky;
 
 }
 .menu--item:hover {
     text-decoration: underline;
-    transform: scale(1.1);
+    
     cursor: pointer;
-    font-weight: 550;
+    font-weight: 700;
   }
 
   .icon {

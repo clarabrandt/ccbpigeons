@@ -9,7 +9,7 @@ export default class Pombos extends Component {
     const pigeon = require("./images/pombo-correio.jpg")
     
     return (
-      <div className='card'>
+      <div className='card' ref={this.props.anchor}>
         <div className="card--grid">
           Pombo 1
           <div className='card--pic'>

@@ -1,11 +1,47 @@
 .faixa {
-  margin: 20px 0 20px 0;
+  margin: 0 0 20px 0;
 }
   .pigeon--pic{
     width: 100%;
     height: auto;
   }
-  
+  .title--over--pic {
+    font-family: 'Poppins', 'Roboto Condensed', 'Acme', 'Changa One';
+    font-size: 65px;
+    color: white;
+    position: absolute;
+    top: 230px;
+    left: 250px;
+    transform: translate(-50%, -50%);
+  }
+  .subtitle {
+    font-family: 'Poppins', 'Acme', 'Changa One';
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    top: 295px;
+    left: 230px;
+    transform: translate(-50%, -50%);
+  }
+  .arrow {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 340px;
+    left: 210px;
+    border-right: 4px solid white;
+    border-bottom: 4px solid white;
+    transform: rotate(45deg);
+    animation: animate 1.5s infinite;
+  }
+  /* @keyframes animate {
+    0% {opacity: 0};
+    50%{opacity: 1};
+    100%{opacity: 0};
+  } */
+  .arrow:hover {
+    cursor: pointer;
+  }
 
 
 @media only screen and (max-width: 420px) {

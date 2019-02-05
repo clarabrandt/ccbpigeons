@@ -6,7 +6,7 @@
   'left main main main right';
   /* grid-template-columns: 300px auto 300px;
   grid-template-rows: 100vh; */
-  overflow-y: scroll;
+  overflow-y: hide;
   
 }
   .content--left,
