@@ -1,15 +1,14 @@
 .menu--item {
   font-family: 'Poppins', 'Roboto Condensed', 'Acme', 'Changa One';
-  color: rgb(19, 18, 18);
+  color:white;
   font-size: 18px;
   align-self: end;
-  display: grid;
-  grid-template-columns: auto;
-  font-weight: 550;
-  background-color: white;
-  padding: 15px;
-  position: sticky;
-
+  display: flex;
+  /* display: grid;
+  grid-template-columns: auto; */
+  font-weight: 600;
+  /* background-color: white; */
+  padding: 10px 20px 10px 20px;
 }
 .menu--item:hover {
     text-decoration: underline;
@@ -32,8 +31,10 @@
       display: none;
     }
     .menu--item {
-      font-size: 18px;
-      margin: 1px 0 4px 0;
+      font-size: 16px;
+      color: black;
+      padding: 6px;
+      /* margin-top: 2px; */
       
     }
     .menu--item:hover {

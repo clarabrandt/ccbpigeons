@@ -6,7 +6,7 @@ export default class MenuItem extends Component {
 
   render() {
     return (
-      <div className='menu--item' onClick={() => this.props.handleClick(this.props.name)}>
+      <div className='menu--item' onClick={() => this.props.handleClick(this.props.anchor)}>
         {/* <div className='icon'>
         <Icon name={this.props.name}/>
         </div> */}

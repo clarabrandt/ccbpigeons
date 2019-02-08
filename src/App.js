@@ -3,7 +3,7 @@ import './App.css';
 import Layout from './components/Layout.js';
 
 class App extends Component {
-
+  
   render() {
     return (
       <div className='app'>

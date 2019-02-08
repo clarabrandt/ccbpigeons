@@ -1,9 +1,15 @@
 .faixa {
-  margin: 0 0 20px 0;
+  width: 100%;
+  height: 100vh;
+  /* overflow: hidden; */
+  position: relative;
+  background: url("./images/Overview_lofts.jpg");
+  background-attachment: scroll;
+  background-size: cover;
 }
   .pigeon--pic{
     width: 100%;
-    height: auto;
+    height: 100%;
   }
   .title--over--pic {
     font-family: 'Poppins', 'Roboto Condensed', 'Acme', 'Changa One';
@@ -13,6 +19,7 @@
     top: 230px;
     left: 250px;
     transform: translate(-50%, -50%);
+    /* overflow: hidden; */
   }
   .subtitle {
     font-family: 'Poppins', 'Acme', 'Changa One';
@@ -22,6 +29,7 @@
     top: 295px;
     left: 230px;
     transform: translate(-50%, -50%);
+    /* overflow: hidden; */
   }
   .arrow {
     position: absolute;
@@ -33,6 +41,7 @@
     border-bottom: 4px solid white;
     transform: rotate(45deg);
     animation: animate 1.5s infinite;
+    /* overflow: hidden; */
   }
   /* @keyframes animate {
     0% {opacity: 0};
@@ -45,8 +54,29 @@
 
 
 @media only screen and (max-width: 420px) {
-  .faixa{
-    display: none;
+  .title--over--pic {
+    font-size: 30px;
+    top: 30px;
+    left: 100px;
   }
-
+  .subtitle {
+    font-size: 12px;
+    top: 60px;
+    left: 95px;
+  }
+}
+@media only screen and (max-width: 620px) {
+  .faixa {
+    width: 100%;
+  }
+  .title--over--pic {
+    font-size: 30px;
+    top: 30px;
+    left: 100px;
+  }
+  .subtitle {
+    font-size: 12px;
+    top: 60px;
+    left: 95px;
+  }
 }

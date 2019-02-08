@@ -1,20 +1,20 @@
-.content--grid {
-  display: grid;
+.about {
+  background-color: white;
+  display: flex;
   width: 100%;
   height: 100vh;
-  grid-template-areas: 
-  'left main main main right';
+  /* grid-template-areas: 
+  'main right';
+  column-gap: 4em; */
   /* grid-template-columns: 300px auto 300px;
   grid-template-rows: 100vh; */
-  overflow-y: hide;
-  
+  /* overflow: hidden; */
 }
-  .content--left,
-  .content--main,
-  .content--right {
+  .content--about,
+  .content--about--right {
     height: 100vh;
   }
-  .content--left {
+  /* .content--left {
     grid-area: left;
   }
     .news {
@@ -24,7 +24,7 @@
       height: 40vh;
       font-weight: 550;
       
-    }
+    } */
     h3 {
       padding-top: 30px;
     }
@@ -37,28 +37,42 @@
     h4 {
       font-weight: normal;
     }
-    .content--main {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    .content--about {
       margin: 2rem;
-      grid-area: main;
+      flex: 1;
+     
+      /* grid-area: main; */
       
     }
       h1 {
         padding: 0 0 10px 20px;
+        font-size: 3em;
+        align-self: center;
+        margin-top: 100px;
+        color: #444649
       }
       p {
-        padding: 0 20px;
+        padding: 0 70px 0 20px;
         text-align: justify;
         line-height: 26px;
+       
       }
     
-      .content--right {
-        display: grid;
-        grid-template-rows: 35vh 5vh 5vh;
-        grid-area: right;
-        
+      .content--about--right {
+        background-color: rgb(87, 87, 87);
+        flex: 1.4;
+        /* margin-top: 5.2em; */
+        /* display: grid;
+        grid-template-rows: 50% 10% 15%;
+        grid-area: right; */
       } 
-        .videos {
+      .house--pic {
+        /* margin-top: 5.4em; */
+        margin-right: 50px;
+        width: 100%;
+        height: 100%;
+      }
+        /* .videos {
           margin-top: 35px;
         }
         
@@ -71,34 +85,34 @@
           grid-template-columns: 60px 220px;
           max-height: 50px;
           align-self: top;
-        }
+        } */
 
 
 
 @media only screen and (max-width: 420px) {
-  .content--grid {
-    display: grid;
-    grid-template-areas: 
-    'main'
-    'main'
-    'left'
-    'right';
+  .about {
+    display: flex;
+    flex-direction: column;
   }
-  .content--left,
+  /* .content--left,
   .content--right{
     height: 45vh;
     justify-self: center;
     width: 90%;
-   
+  } */
+  h1{
+    font-size: 22px;
+    padding: 10px 0 10px 10px;
+    margin: 0;
   }
-  .content--main{
+  .content--about{
     height: 100vh;
     margin: 10px;
+    overflow-y: visible;
+  }  
+  p {
+    padding: 0 20px 10px 10px;
   }
-    p {
-      padding: 0;
-    }
-  
   .news {
     margin: 10px 10px 0 0;
     width: 100%;
