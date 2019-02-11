@@ -8,7 +8,8 @@
   height: 100%;
 	margin: 0;
   font-family: 'Roboto Condensed', sans-serif;
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
+  overflow: scroll;
 }
     .grid {
       width: 100%;

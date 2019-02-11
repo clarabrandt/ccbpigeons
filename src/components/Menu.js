@@ -34,12 +34,12 @@ export default class Menu extends Component {
           <Hamburger />
         </div>
         <div className={`menu--dropdown ${this.state.open ? 'open' : 'closed' }`} >
-          <MenuItem name='Home' anchor='.layout' handleClick={this.props.handleClick} />
-          <MenuItem name='Sobre' anchor='.about' handleClick={this.props.handleClick} />
-          <MenuItem name='Resultados' anchor='.results' handleClick={this.props.handleClick} />
-          <MenuItem name='Leilões' anchor='.leiloes' handleClick={this.props.handleClick}/>
-          <MenuItem name='Blog' anchor='.blog' handleClick={this.props.handleClick}/>
-          <MenuItem name='Mídia' anchor='.midia' handleClick={this.props.handleClick} />
+          <MenuItem name='Home' anchor='home' handleClick={this.props.handleClick} />
+          <MenuItem name='Sobre' anchor='about' handleClick={this.props.handleClick} />
+          <MenuItem name='Resultados' anchor='results' handleClick={this.props.handleClick} />
+          <MenuItem name='Leilões' anchor='leiloes' handleClick={this.props.handleClick}/>
+          <MenuItem name='Blog' anchor='blog' handleClick={this.props.handleClick}/>
+          <MenuItem name='Mídia' anchor='midia' handleClick={this.props.handleClick} />
         </div>
       </div>
     )

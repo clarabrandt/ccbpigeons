@@ -4,7 +4,7 @@ import './Blog.css'
 export default class Blog extends Component {
   render() {
     return (
-      <div className='blog' ref={this.props.post}>
+      <div className='blog' ref={this.props.blog}>
         <div className='posts'>
         {/* <div className='posts--old'>
           <h3>Posts antigos</h3>

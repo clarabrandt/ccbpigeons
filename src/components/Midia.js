@@ -7,7 +7,7 @@ export default class Midia extends Component {
   render() {
     const pigeon = require("./images/pombo-correio.jpg")
     return (
-      <div className='midia' ref={this.props.midia}>
+      <div id='midia' className='midia' ref={this.props.midia}>
         <div className='midia--title'>Mídia</div>
         <div className='midia--content'>
         <div className='videos'>

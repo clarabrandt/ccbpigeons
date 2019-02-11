@@ -4,7 +4,7 @@ export default class Resultados extends Component {
   
   render() {
     return (
-      <div className='results' ref={this.props.result}>
+      <div className='results' ref={this.props.results}>
           <div className='results--title'>Resultados</div>
           <div className='results-list'>
             <ul>

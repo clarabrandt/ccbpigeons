@@ -1,6 +1,7 @@
 .results {
   height: 100vh;
   background-color: #f5f5f5;
+  overflow: hidden;
 }
   .results--title {
     font-size: 3em;
