@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// import { Link } from 'react-router-dom';
+// import { HashLink as Link } from 'react-router-hash-link'
+
 import About from './About';
 import Midia from './Midia';
 import Resultados from './Resultados';
@@ -15,7 +18,7 @@ export default class Layout extends Component {
   constructor(props) {
     super(props)
     this.state= {
-      clicked: 'Home',
+      clicked: '',
       sticky: false
     }
     this.handleClick = this.handleClick.bind(this);
@@ -28,19 +31,28 @@ export default class Layout extends Component {
     this.results = React.createRef();
     this.blog = React.createRef();
     this.menu = React.createRef();
-    
+    this.arrow = React.createRef();
   }
-
+  
 
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll);
+    this.navigateToPage();
   };
   
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll);
   };
+
+  navigateToPage() {
+    console.log(this.props.match)
+    if (this.props.match.path) {
+      this.handleClick(this.props.match.path.slice(1));
+    }
+  }
   
   smoothScroll(clicked) {
+    console.log('chamou smooothscroll');
     clicked.current.scrollIntoView({block: 'start', behavior: 'smooth'});
   }
   
@@ -52,12 +64,15 @@ export default class Layout extends Component {
       window.open('http://www.ccbleiloes.com.br/') 
     } 
     if (clicked === 'home') {
-      this.smoothScroll(this.top);
+      this.smoothScroll(this.top)
     }
     if (clicked === 'midia') {
       this.smoothScroll(this.midia);
     }
     if (clicked === 'about') {
+      this.smoothScroll(this.about); 
+    }
+    if (clicked === 'arrow') {
       this.smoothScroll(this.about);
     }
     if (clicked === 'results') {
@@ -66,7 +81,6 @@ export default class Layout extends Component {
     if (clicked === 'blog') {
       this.smoothScroll(this.blog);
     }
-
   }
 
   onScroll() {
@@ -75,7 +89,6 @@ export default class Layout extends Component {
         sticky: false
       })
     } else {
-     
       this.setState({
         sticky: true
 
@@ -84,6 +97,7 @@ export default class Layout extends Component {
   }
   
   render() {
+   
     return (
       <div id='layout' className='layout' ref={this.layout} onScroll={this.onScroll}>
         <div>

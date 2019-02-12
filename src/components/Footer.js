@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './Login'
 import './Footer.css'
 
 const Footer =() => (
@@ -10,7 +11,10 @@ const Footer =() => (
       <div className='address'>Tel: +55(31) 9 9772-2107 </div>
     </div>
     <div className='property'>
-    <div className= 'property--rights'>
+      <div className='Login' onClick={ () => this.props.handleClick('Login') } > 
+          Adm login
+      </div>
+      <div className= 'property--rights'>
       © 2019 CCB Pigeons
     </div>
     </div>

@@ -9,7 +9,7 @@ export default class Login extends Component {
         <div className='content--left'>
         </div>
         <div className='content--main'>
-          <form className= {`login--form ${this.state.open ? 'open' : 'closed' }`}>
+          <form className= 'login--form'>
             <label>
               Name:
               <input type="text" name="name"/>
