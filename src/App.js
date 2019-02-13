@@ -12,7 +12,7 @@ class App extends Component {
         <BrowserRouter basename={process.env.PUBLIC_URL}></BrowserRouter>
         <Switch>
           <Route path="/login" component={Login} /> 
-          <Route exact path='/' component={Layout}/>
+          <Route path= {process.env.PUBLIC_URL + '/'} component={Layout}/>
           <Route path='/home' component={Layout}/>
           <Route path="/sobre" component={Layout} /> 
           <Route path="/resultados" component={Layout} /> 
