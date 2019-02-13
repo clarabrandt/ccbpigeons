@@ -11,8 +11,8 @@ class App extends Component {
       <div className='app'>
         <Switch>
           <Route path="/login" component={Login} /> 
-          <Route exact path='/' component={Layout}/>
-          <Route exact path='/home' component={Layout}/>
+          <Route exact path='/ccbpigeons/' component={Layout}/>
+          <Route path='/home' component={Layout}/>
           <Route path="/sobre" component={Layout} /> 
           <Route path="/resultados" component={Layout} /> 
           <Route path="/blog" component={Layout} /> 
