@@ -13,13 +13,11 @@ class App extends Component {
           <Route path="/login" component={Login} /> 
           <Route exact path='/' component={Layout}/>
           <Route exact path='/home' component={Layout}/>
-          <Route path="/about" component={Layout} /> 
+          <Route path="/sobre" component={Layout} /> 
           <Route path="/resultados" component={Layout} /> 
           <Route path="/blog" component={Layout} /> 
           <Route path="/midia" component={Layout} /> 
         </Switch> 
-          {/* <Layout /> */}
-      
       </div>
     );
   }

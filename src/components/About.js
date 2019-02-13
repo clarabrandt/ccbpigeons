@@ -10,7 +10,7 @@ export default class About extends Component {
     const house = require("./images/pombal_interior.jpg")
     
     return (
-      <div className='about' ref={this.props.about} >
+      <div className='about' ref={this.props.sobre} >
         {/* <div className='content--left'>
         <div className='news'>
           <h3>Notícias</h3>
