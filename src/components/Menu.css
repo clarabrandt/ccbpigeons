@@ -20,6 +20,12 @@
   .hamburger {
     display: none;
   }
+  .cross {
+    display: none;
+  }
+  /* .hamburger.is-active {
+    display: none;
+  } */
   .menu--dropdown {
     /* justify-content: space-evenly; */
     justify-content: flex-start;
@@ -36,32 +42,49 @@
 
 @media only screen and (max-width: 420px) {
 .menu {
-  margin: 10px 15px 0 10px;
+  /* margin: 10px 15px 0 10px; */
   position: absolute;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  
+}
+.menu.sticky {
+  display: none;
 }
   .hamburger {
     display: flex;
     justify-content: flex-end;
+    margin: 8px 25px 0 0;
+    cursor: pointer;
+  }
+  .hamburger.open{
+    display: none
+  }
+  .cross {
+    display: flex;
+    position: absolute;
+    justify-content: flex-end;
     margin: 25px 32px 0 0;
     cursor: pointer;
-    color: black;
+  }
+  .cross.closed{
+    display: none
   }
   
     .menu--dropdown {
       grid-template-columns: 100%;
       grid-template-rows: repeat(5, auto);
       padding: 20px;
-      transition: height 2s;
+      transition: right ease-in-out 0.35s;
+      z-index: 10;
+      top: 0;
+      position: relative;
 
     }
 
     .menu--dropdown.open {
       height: 100%;
-      width: 120px;
+      width: 100%;
       padding: 0;
       padding-top: 10px;
       visibility: visible;
@@ -76,9 +99,67 @@
       display: none;  
       transition-timing-function: linear;
     }
-
-  
 }
- 
+
+@media only screen and (max-width: 620px) {
+  .menu {
+    /* margin: 10px 15px 0 10px; */
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .menu.sticky {
+    display: none;
+  }
+    .hamburger {
+      display: flex;
+      justify-content: flex-end;
+      margin: 8px 25px 0 0;
+      cursor: pointer;
+    }
+    .hamburger.open{
+      display: none
+    }
+    .cross {
+      display: flex;
+      position: absolute;
+      justify-content: flex-end;
+      margin: 25px 32px 0 0;
+      cursor: pointer;
+    }
+    .cross.closed{
+      display: none
+    }
+    
+      .menu--dropdown {
+        grid-template-columns: 100%;
+        grid-template-rows: repeat(5, auto);
+        padding: 20px;
+        transition: right ease-in-out 0.35s;
+        z-index: 10;
+        top: 0;
+        position: relative;
+  
+      }
+  
+      .menu--dropdown.open {
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        padding-top: 10px;
+        visibility: visible;
+        display: block;
+        background-color: #f9f9f9;
+        color: black;
+        z-index: 1;
+        transition-timing-function: linear;
+      }
+      .menu--dropdown.closed {
+        /* height: 0px; */
+        display: none;  
+        transition-timing-function: linear;
+      }
+  }
 
   

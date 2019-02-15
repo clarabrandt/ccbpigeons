@@ -5,7 +5,7 @@ export default class Resultados extends Component {
   render() {
     return (
       <div className='results' ref={this.props.resultados}>
-          <div className='results--title'>Resultados</div>
+          <div className='results--title'>Competições e Resultados</div>
           <div className='results-list'>
             <ul>
               <li>Resultados 6ª COPA MG</li>

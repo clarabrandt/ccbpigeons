@@ -110,7 +110,11 @@
     height: 100vh;
     margin: 10px;
     overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
   }  
+  .content--about--right {
+    display: none;
+  }
   p {
     padding: 0 20px 10px 10px;
   }

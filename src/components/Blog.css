@@ -1,54 +1,66 @@
+.blog--title {
+  font-size: 3em;
+  text-align: center;
+  padding: 40px 0 40px 0;
+  color:#444649;
+}
 .posts {
   display: grid;
-  grid-template-areas: 
-  "old new new . . ."
-  "old new new . . ." 
+  grid-template-columns: 350px auto
 }
+/* .articles--list {
 
-  .posts--old {
-    grid-area: old;
-    margin: 2em 2em 2em 1.7em;
-    max-width: 270px;
-    height: 40vh;
-    font-weight: 550;
-    color: #444649;
-
+} */
+  .post--subtitle {
+    font-size: 16px;
+    color:#444649;
+    font-weight: 600;
+    padding: 30px;
+    margin-left: 70px;
   }
-  .posts--new {
-    grid-area: new;
-    padding: 50px 0 50px 0;
-    /* margin: 2em 10em 2em 2em; */
+  .post--other {
+    font-size: 16px;
+    padding: 30px;
+    color:#444649;
+    margin-left: 70px;
+    border-bottom: 0.5px solid lightgrey;
+  }
+  
+  .post--other:hover {
+    text-decoration: underline;
+    color: rgb(36, 34, 34);
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .post--subtitle--new {
+    font-size: 16px;
+    color:#444649;
+    font-weight: 600;
+    padding: 30px;
+  }
+  .post--new {
+    margin: 0 120px 0 130px;
+  }
+  .post--title {
+    font-size: 18px;
+    padding: 30px 0 0 30px;
+    color:#444649;
+    font-weight: 600;
+  }
+  .post--date {
+    font-size: 14px;
+    padding: 5px 30px;
+    color:#444649;
+    font-weight: 600;
+    
+  }
+  .post--content {
+    padding: 0 10px;
     max-width: 100%;
     height: 100vh;
     color: #444649;
+    
   }
-    .articles {
-      font-size: 3em;
-      text-align: center;
-      padding-top: 40px;
-      color:#444649;
-    }
-    .articles--title {
-      font-size: 16px;
-      padding: 20px;
-    }
-
-    h3, h4 {
-      margin: 0 20px;
-      text-align: justify;
-      line-height: 20px;
-
-    }
-    h4 {
-      font-weight: normal;
-      padding-top: 25px;
-      cursor: pointer;
-    }
-
-    h4:hover {
-      text-decoration: underline;
-      color: darkblue;
-    }
 
 
 @media only screen and (max-width: 420px) {
@@ -60,14 +72,14 @@
     'new new new'
     'old old old';
   }
-  .articles {
+  .post {
     font-size: 22px;
     padding: 20px 0 10px 10px;
     color: #444649;
     text-align: initial;
     font-weight: bold;
   }
-  .articles--title {
+  .post--subtitle {
     padding: 20px 0 10px 10px;
     font-weight: bold;
   }
