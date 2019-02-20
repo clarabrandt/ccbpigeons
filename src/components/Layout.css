@@ -10,6 +10,9 @@
  
 
 @media only screen and (max-width: 420px) {
+  .layout {
+    overflow-x: hidden;
+  }
   .title--over--pic {
     font-size: 30px;
     top: 30px;

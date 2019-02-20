@@ -8,9 +8,10 @@ export default class Blog extends Component {
         <div className='blog--title'>Artigos</div>
         <div className='posts'>
           <div className='post--list'>
-            <div className='post--subtitle'>Outros</div>
+            <div className='post--subtitle'>Mais populares</div>
             <div className='post--other'>New Castle e a vacina La Sota</div>
             <div className='post--other'>Pombos urbanos: biologia, problemas, manejo e controle.</div>
+            <div className='post--other'>A columbofilia em Conselheiro Lafaiete.</div>
           </div>
           <div className='post--new'>
             <div className='post--subtitle--new'>Mais recente</div>
@@ -27,6 +28,11 @@ export default class Blog extends Component {
               </p>
             </div>
            </div> 
+          <div className='post--arquivo'>
+            <div className='post--subtitle--arquivo'> Arquivo</div>
+            <div className='post--arquivo--date'>2019</div>
+            <div className='post--arquivo--date'>2018</div>
+          </div>
         </div>
         </div>
         

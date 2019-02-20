@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import YouTube from 'react-youtube';
+import './Video.css'
 
 export default class Videos extends Component {
   videoOnReady (event) {
@@ -12,11 +13,13 @@ export default class Videos extends Component {
     }
     const {videoId} = this.props
     return (
+      <div className='video'>
         <YouTube
           videoId={videoId}
           opts={opts}
           onReady={this.videoOnReady}
         />
+      </div>
       );
     
   }

@@ -48,9 +48,12 @@
       h1 {
         padding: 0 0 10px 20px;
         font-size: 3em;
+        font-weight: normal;
         align-self: center;
         margin-top: 100px;
-        color: #444649
+        color: #444649;
+        text-decoration: underline;
+
       }
       p {
         padding: 0 70px 0 20px;
@@ -105,6 +108,7 @@
     font-size: 22px;
     padding: 10px 0 10px 10px;
     margin: 0;
+    font-weight: bold;
   }
   .content--about{
     height: 100vh;

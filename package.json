@@ -6,6 +6,7 @@
   "dependencies": {
     "gh-pages": "^2.0.1",
     "jump.js": "^1.0.2",
+    "re-base": "^4.0.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-jump": "^0.0.9",

@@ -2,7 +2,7 @@
   background-color: lightgray;
   width: 100%;
   height: 70px;
-  /* position: fixed; */
+  /* position: absolute; */
   bottom: 0;
 }
   .contato {
@@ -17,9 +17,11 @@
       letter-spacing: 0.5px;
       margin: 0;
       line-height: 15px;
-      margin: 0 0 20px 10px;
+      margin: 0;
     }
       .property--rights {
         display: inline-block;
         align-self: flex-end;
       }
+
+    
