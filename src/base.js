@@ -1,15 +1,18 @@
 import Rebase from 're-base';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/functions';
+import 'firebase/auth';
 
 const config = {
-    apiKey: "AIzaSyDyyqV4kh2IFRER9sdlLy0psfEttCFr5iQ",
-    authDomain: "pigeon-90548.firebaseapp.com",
-    databaseURL: "https://pigeon-90548.firebaseio.com",
-    projectId: "pigeon-90548",
-    storageBucket: "pigeon-90548.appspot.com",
-    messagingSenderId: "983255754117"
+    apiKey:process.env.REACT_APP_FIREBASE_KEY,
+    authDomain:process.env.REACT_APP_FIREBASE_DOMAIN,
+    databaseURL:process.env.REACT_APP_FIREBASE_DATABASE,
+    projectId:process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket:process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId:process.env.REACT_APP_FIREBASE_SENDER_ID,
 };
-
+console.log(process.env)
 const app = firebase.initializeApp(config)
 const base = Rebase.createClass(app.database())
 
