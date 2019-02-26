@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../utils/api.js';
 // import { Link } from 'react-router-dom';
 // import { HashLink as Link } from 'react-router-hash-link'
 
@@ -9,6 +10,8 @@ import Blog from './Blog';
 import Login from './Login';
 import Footer from './Footer';
 import Banner from './Banner';
+
+import { db, storage } from '../base';
 
 
 
@@ -23,22 +26,32 @@ export default class Layout extends Component {
     }
     this.handleClick = this.handleClick.bind(this);
     this.onScroll = this.onScroll.bind(this);
-
+    this.api = new api();
     this.layout = React.createRef();
     this.top = React.createRef();
     this.midia = React.createRef();
     this.sobre = React.createRef();
     this.resultados = React.createRef();
     this.blog = React.createRef();
-    this.menu = React.createRef();
-    this.arrow = React.createRef();
+    this.getResultados = this.getResultados.bind(this);
   }
   
 
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll);
     this.navigateToPage();
+    this.getResultados();
+    // this.getFiles();
   };
+
+  getResultados() {
+    const resultados = this.api.getResultados();
+    resultados.then((docs) =>{
+      this.setState({
+        resultados: docs.resultados,
+      })
+    })
+  }
   
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll);
@@ -107,12 +120,12 @@ export default class Layout extends Component {
       <div id='layout' className='layout' ref={this.layout} onScroll={this.onScroll}>
         <div>
           <div ref={this.top} />
-          <Banner handleClick={this.handleClick} menu={this.menu} sobre={this.sobre} sticky={this.state.sticky}/>
+          <Banner handleClick={this.handleClick} sobre={this.sobre} sticky={this.state.sticky}/>
           <About sobre={this.sobre}/>
-          <Resultados resultados={this.resultados}/>
           <Blog blog={this.blog}/>
+          <Resultados resultados={this.resultados} handleClick={this.handleClick} api={this.api}/>
           <Midia midia={this.midia}/>
-          <Footer handleClick={this.handleClick}/>
+          <Footer />
         </div>
       </div>
     )

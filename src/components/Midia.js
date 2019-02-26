@@ -8,22 +8,26 @@ export default class Midia extends Component {
     // const pigeon = require("./images/pombo-correio.jpg")
     return (
       <div id='midia' className='midia' ref={this.props.midia}>
-        <div className='midia--title'>Mídia</div>
-        <div className='midia--content'>
+        <div className='midia-title'>Mídia</div>
+        <div className='midia-content'>
           <div className='videos'>
-            <div className='midia--subtitle'>Vídeos</div>
-              <Videos videoId='OShgy4uv894'/>
-          <div className='canal-youtube--text'>Para mais vídeos, acesse: </div>
-          <div className='canal-youtube'>
-            <Youtube /> 
-            <div className='canal-youtube--text'> Octávio Ribeiro Júnior</div>
-          </div>
+            <div className='videos-subtitle'>Vídeos</div>
+            <div className='videos-text'>Mais populares no canal</div>
+            <div className='videos-content'>
+              <Videos videoId='2EfbpSfrHTY'/>
+              <Videos videoId='OnRJRoL89ME'/>
+            </div>
+            <div className='canal-youtube--text'>Para mais vídeos, acesse: </div>
+            <div className='canal-youtube'>
+              <Youtube /> 
+              <div className='canal-youtube--text'> Octávio Ribeiro Júnior</div>
+            </div>
           </div>
           <div className='news'>
-            <div className='midia--subtitle'>Notícias</div>
-            <div className='news--content'>Notícia 1</div>
-            <div className='news--content'>Notícia 2 </div>
-            <div className='news--content'>Notícia 3 </div>
+            <div className='news-subtitle'>Notícias</div>
+            <div className='news-content'>Próximo leilão será anunciado em breve!</div>
+            <div className='news-content'>Notícia 2 </div>
+            <div className='news-content'>Notícia 3 </div>
           </div>
           {/* <div className='foto' >
             <div className='midia--subtitle'>Fotos</div>

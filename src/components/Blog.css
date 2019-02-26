@@ -1,45 +1,60 @@
+.blog {
+  background-color: #f2f2f2;
+}
 .blog--title {
   font-size: 3em;
   text-align: center;
-  padding: 40px 0 40px 0;
+  padding: 90px 0 50px 0;
   color:#444649;
   text-decoration: underline;
 }
 .posts {
   display: grid;
   grid-template-areas: 
-  'list new new old'
-  'list new new old'
-  'list new new old'
+  'list new new new new old old'
+  'list new new new new old old'
+  'list new new new new old old'
 }
   .post--list {
     grid-area: list;
   }
   .post--subtitle {
     font-size: 1.3em;
-    color:#444649;
+    color: rgb(10, 10, 134);
     font-weight: 600;
     padding: 30px;
     margin-left: 50px;
   }
-  .post--other {
+  .post-keep--reading {
     font-size: 16px;
-    padding: 30px;
     color:#444649;
+    padding: 0 0 10px 30px;
     margin-left: 50px;
     border-bottom: 0.5px solid lightgrey;
+  }
+  .post-keep--reading:hover {
+    /* text-decoration: underline; */
+    /* color: black; */
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .post--other {
+    font-size: 1.1em;
+    padding: 30px 0 15px 30px;
+    color:#444649;
+    margin-left: 50px;
+    font-weight: 600;
     
   }
-    
-    .post--other:hover {
+    /* .post--other:hover {
       text-decoration: underline;
-      color: rgb(36, 34, 34);
+      color: black;
       cursor: pointer;
       font-weight: 600;
-    }
+    } */
     .post--subtitle--new {
-      font-size: 16px;
-      color:#444649;
+      font-size: 1.3em;
+      color:rgb(110, 9, 9);
       font-weight: 600;
       padding: 30px;
     }
@@ -47,7 +62,7 @@
       grid-area: new;
       margin: 0 20px 0 50px;
       padding-left: 50px;
-      border-left: 0.5px solid lightgrey;
+      /* border-left: 0.5px solid lightgrey; */
     }
       .post--title {
         font-size: 18px;
@@ -65,25 +80,33 @@
       .post--content {
         padding: 0 10px;
         max-width: 100%;
-        height: 100vh;
         color: #444649;
+        border-bottom: 0.5px solid lightgrey
       }
   .post--arquivo {
     grid-area: old;
     padding-left: 20px;
-    margin: 0 70px 0 0 ;
-    border-left: 0.5px solid lightgrey;
+    margin: 0 80px 0 0 ;
+    /* border-left: 0.5px solid lightgrey; */
   }
     .post--subtitle--arquivo {
-      font-size: 16px;
-      color:#444649;
+      font-size: 1.3em;
+      color:rgb(10, 10, 134);
       font-weight: 600;
       padding: 30px;
     }
     .post--arquivo--date {
       padding: 20px 0 0 30px;
       color:#444649;
+      font-size: 1.1em;
+      /* font-weight: 600; */
+    }
+    .post--arquivo--date:hover {
+      text-decoration: underline;
+      /* color: black; */
+      cursor: pointer;
       font-weight: 600;
+      
     }
 
 
@@ -95,7 +118,7 @@
     max-width: 100%;
   }
   .blog--title {
-    font-size: 22px;
+    font-size: 24px;
     padding: 20px 0 10px 10px;
     margin-left: 10px;
     color: #444649;
@@ -111,18 +134,20 @@
   }
   
   .post--subtitle--new {
-    display: none;
+    /* display: none; */
+    /* margin-left: 0; */
+    padding: 3px 0 10px 10px;
   } 
   .post-content{
     max-height: none;
   }
   .post--list {
-    padding-left: 10px; 
+    display: none;
   }
   .post--subtitle,
   .post--title,
   .post--subtitle--arquivo {
-    font-size: 16px;
+    font-size: 18px;
     margin-left: 0;
     padding: 20px 0 10px 10px;
     font-weight: bold;
@@ -135,11 +160,11 @@
     p {
       padding: 5px 0 10px 0;
     }
-  .post--other {
+  /* .post--other {
     margin-left: 0;
     padding: 20px 0 10px 10px;
     
-  }
+  } */
   .post--new {
     padding-left: 0;
     margin: 10px;
@@ -152,8 +177,9 @@
 
   }
   .post--arquivo--date {
-    font-size: 14px;
+    font-size: 16px;
     padding: 10px 0 10px 10px;
+    font-weight: 600;
     
   }
   

@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from './Login'
+// import Login from './Login'
 import './Footer.css'
 
 const Footer =() => (
@@ -11,9 +11,9 @@ const Footer =() => (
       <div className='address'>Tel: +55(31) 9 9772-2107 </div>
     </div>
     <div className='property'>
-      <div className='Login' onClick={ () => this.props.handleClick('login') } > 
+      {/* <div className='Login' onClick={ () => this.props.handleClick('login') } > 
           Adm login
-      </div>
+      </div> */}
       <div className= 'property--rights'>
       © 2019 CCB Pigeons
     </div>
