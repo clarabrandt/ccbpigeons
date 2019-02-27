@@ -1,6 +1,6 @@
 .menu--item {
   font-family: 'Poppins', 'Roboto Condensed', 'Acme', 'Changa One';
-  color:white;
+  color: white;
   font-size: 18px;
   align-self: end;
   display: flex;
@@ -31,18 +31,40 @@
       display: none;
     }
     .menu--item {
-      font-size: 16px;
+      font-size: 18px;
       color: black;
       padding: 6px;
       /* margin-top: 2px; */
       
     }
     .menu--item:hover {
-      color: white;
+      color: black;
       text-decoration: none;
       transform: initial;
       cursor: pointer;
-      background-color: grey;
+      /* background-color: grey; */
+    }
+    .name {
+      margin: 1px solid black;
+    }
+  }
+  @media only screen and (max-width: 620px) {
+    .icon {
+      display: none;
+    }
+    .menu--item {
+      font-size: 18px;
+      color: #444649;
+      padding: 6px;
+      /* margin-top: 2px; */
+      
+    }
+    .menu--item:hover {
+      font-weight: 600;
+      text-decoration: none;
+      transform: initial;
+      cursor: pointer;
+      /* background-color: grey; */
     }
     .name {
       margin: 1px solid black;

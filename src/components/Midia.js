@@ -4,6 +4,25 @@ import Videos from './Videos.js';
 import Youtube from './Youtube.js'
 
 export default class Midia extends Component {
+
+
+  componentDidMount() {
+    console.log(this.promessa.then(
+      (x) => console.log(x)
+    ).catch(err => console.log(err))
+    );
+  }
+
+  promessa = new Promise((resolve, reject) =>  {
+    const x = 2;
+    if (x > 5 ){
+      resolve('Maior');
+    }else {
+      reject('O numero e menor que 5');
+    }
+  })
+
+
   render() {
     // const pigeon = require("./images/pombo-correio.jpg")
     return (

@@ -11,40 +11,42 @@ import Login from './Login';
 import Footer from './Footer';
 import Banner from './Banner';
 
-import { db, storage } from '../base';
-
-
-
 import './Layout.css';
-export default class Layout extends Component {
+
+
+class Layout extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
+
     this.state= {
       clicked: '',
       sticky: false
     }
+
     this.handleClick = this.handleClick.bind(this);
     this.onScroll = this.onScroll.bind(this);
+    
     this.api = new api();
+    
     this.layout = React.createRef();
     this.top = React.createRef();
     this.midia = React.createRef();
     this.sobre = React.createRef();
     this.resultados = React.createRef();
     this.blog = React.createRef();
-    this.getResultados = this.getResultados.bind(this);
+    this.showResultados = this.showResultados.bind(this);
   }
   
 
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll);
     this.navigateToPage();
-    this.getResultados();
-    // this.getFiles();
+    this.showResultados();
+
   };
 
-  getResultados() {
+  showResultados() {
     const resultados = this.api.getResultados();
     resultados.then((docs) =>{
       this.setState({
@@ -52,6 +54,15 @@ export default class Layout extends Component {
       })
     })
   }
+
+  // getCopaMG() {
+  //   const copaMG = this.api.getCopaMG();
+  //   copaMG.then((docs) =>{
+  //     this.setState({
+  //       copaMG: docs.copaMG,
+  //     })
+  //   })
+  // }
   
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll);
@@ -67,7 +78,6 @@ export default class Layout extends Component {
   }
   
   smoothScroll(clicked) {
-    console.log('chamou smooothscroll');
     clicked.current.scrollIntoView({block: 'start', behavior: 'smooth'});
   }
   
@@ -109,18 +119,17 @@ export default class Layout extends Component {
     } else {
       this.setState({
         sticky: true
-
       })
     }
   }
   
   render() {
-   
+    
     return (
       <div id='layout' className='layout' ref={this.layout} onScroll={this.onScroll}>
         <div>
           <div ref={this.top} />
-          <Banner handleClick={this.handleClick} sobre={this.sobre} sticky={this.state.sticky}/>
+          <Banner handleClick={this.handleClick} sobre={this.sobre} sticky={this.state.sticky} clicked={this.state.clicked}/>
           <About sobre={this.sobre}/>
           <Blog blog={this.blog}/>
           <Resultados resultados={this.resultados} handleClick={this.handleClick} api={this.api}/>
@@ -131,3 +140,4 @@ export default class Layout extends Component {
     )
   }
 }
+export default Layout;

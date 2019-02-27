@@ -154,6 +154,8 @@
 @media only screen and (max-width: 620px) {
   .midia {
     padding: 0;
+    height: 100vh;
+    width: 100%;
   }
   .midia-title {
     font-size: 22px;
@@ -192,6 +194,9 @@
     }
     .canal-youtube {
       margin: 0 10px 30px 10px;
+    }
+    .video {
+      margin-left: 20px;
     }
     .videos-text {
       margin-left: 20px;

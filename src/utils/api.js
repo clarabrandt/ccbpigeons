@@ -15,11 +15,11 @@ class api {
     return this._baseUrl;
   }
 
-  /**
-   * Get all addresses assigned to user
-   */
+ 
+  //  * Get all addresses assigned to user
+  
   getResultados() {
-    const endpoint = `${this.baseUrl}resultados`;
+    let endpoint = `${this.baseUrl}resultados`;
 
     return restCall(endpoint, {
       method: 'GET',
@@ -29,6 +29,31 @@ class api {
       .then(res => res.json())  // translate to json
       .catch(err => console.log(err));
   }
+  /**
+   * Get all addresses assigned to user
+   */
+  // getResultados() {
+  //   return fetch('https://us-central1-pigeon-90548.cloudfunctions.net/api/asd', {
+  //     method: 'GET',
+  //     credentials: 'omit',
+  //   })
+  //     .then(checkFetchReturnStatus)
+  //     .then(res => res.json())
+  //     .catch(err => console.log(err));
+  // }
+
+  // getCopaMG() {
+  //   let endpoint = `${this.baseUrl}copamg`;
+
+  //   return restCall(endpoint, {
+  //     method: 'GET',
+  //     credentials: 'omit',
+  //   })
+  //     .then(checkFetchReturnStatus)       // status check
+  //     .then(res => res.json())  // translate to json
+  //     .catch(err => console.log(err));
+  // }
 }
+
 
 export default api;

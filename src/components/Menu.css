@@ -60,44 +60,50 @@
   .hamburger.open{
     display: none
   }
-  .cross {
+  .cross.open {
     display: flex;
     position: absolute;
-    justify-content: flex-end;
+    align-self: baseline;
     margin: 25px 32px 0 0;
     cursor: pointer;
+    z-index: 1;
   }
-  .cross.closed{
+  /* .cross.closed{
     display: none
-  }
+  } */
   
     .menu--dropdown {
+      max-height: 100%;
       grid-template-columns: 100%;
       grid-template-rows: repeat(5, auto);
       padding: 20px;
       transition: right ease-in-out 0.35s;
-      z-index: 10;
+      z-index: -1;
       top: 0;
       position: relative;
-
+      background-color: white;
     }
 
     .menu--dropdown.open {
-      height: 100%;
+      max-height: 100%;
       width: 100%;
-      padding: 0;
+      position: relative;
       padding-top: 10px;
       visibility: visible;
       display: block;
-      background-color: #f9f9f9;
-      color: black;
-      z-index: 1;
+      
+      z-index: -1;
+      transition: all .3s ease;
       transition-timing-function: linear;
     }
     .menu--dropdown.closed {
       /* height: 0px; */
-      display: none;  
+      max-height: 0;
+      /* display: none;   */
       transition-timing-function: linear;
+    }
+    .menu--dropdown.off {
+      display: none;
     }
 }
 
@@ -121,12 +127,20 @@
     .hamburger.open{
       display: none
     }
-    .cross {
+    /* .cross {
       display: flex;
       position: absolute;
       justify-content: flex-end;
       margin: 25px 32px 0 0;
       cursor: pointer;
+    } */
+    .cross.open {
+      display: flex;
+      position: absolute;
+      align-self: baseline;
+      margin: 25px 32px 0 0;
+      cursor: pointer;
+      z-index: 1;
     }
     .cross.closed{
       display: none
@@ -140,6 +154,7 @@
         z-index: 10;
         top: 0;
         position: relative;
+        
   
       }
   
@@ -150,10 +165,11 @@
         padding-top: 10px;
         visibility: visible;
         display: block;
-        background-color: #f9f9f9;
-        color: black;
+        background-color: white;
+ 
         z-index: 1;
         transition-timing-function: linear;
+        
       }
       .menu--dropdown.closed {
         /* height: 0px; */
