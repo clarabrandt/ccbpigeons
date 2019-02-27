@@ -20,15 +20,15 @@ self.__precacheManifest = [
     "url": "/ccbpigeons/static/js/main.7e21aad0.chunk.js"
   },
   {
-    "revision": "fc817062faaa3ff5cfe7",
-    "url": "/ccbpigeons/static/js/1.fc817062.chunk.js"
+    "revision": "647dae941e8e3f6130d3",
+    "url": "/ccbpigeons/static/js/1.647dae94.chunk.js"
   },
   {
     "revision": "7e21aad0e2cf06431e60",
     "url": "/ccbpigeons/static/css/main.ed6c9b66.chunk.css"
   },
   {
-    "revision": "280851a5242ffe2dba61745146c810b9",
+    "revision": "33817f0640c536a94af5b7fff5d26f34",
     "url": "/ccbpigeons/index.html"
   }
 ];
