@@ -14,7 +14,7 @@ export default class Banner extends Component {
         <div className='new--title'>
           <div className='title--over--pic'>CCB Pigeons</div>
           <div className='subtitle'>Centro de Criação Brasil</div>
-          <div className='arrow' ref={this.props.sobre} anchor='arrow'onClick={() => this.props.handleClick('arrow')} ></div>
+          <div className='arrow' ref={this.props.sobre} anchor='arrow' onClick={() => this.props.handleClick('arrow')} ></div>
         </div>
       </div>
      

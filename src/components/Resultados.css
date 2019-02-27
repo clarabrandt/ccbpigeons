@@ -1,8 +1,3 @@
-.content-results {
-  height: 100vh;
-  overflow: hidden;
-  
-}
   .results-title {
     font-size: 3em;
     text-align: center;
@@ -94,6 +89,62 @@
     list-style: none;
   }
   @media only screen and (max-width: 420px) {
+    .results-title {
+      font-size: 22px;
+      padding: 20px 0 10px 10px;
+      margin-left: 10px;
+      color: #444649;
+      text-align: initial;
+      font-weight: bold;
+    }
+    .competitions {
+      display: grid;
+      /* grid-gap: 100px; */
+      grid-template-columns: 1fr;
+      /* grid-gap: 50px; */
+      grid-template-areas: 
+      'results results'
+      'next next'
+      'image image'
+    }
+    .competitions-results--title {
+      display: none;
+    }
+    .competitions-results{
+      padding: 0 20px; 
+      margin: 0
+    }
+    .competitions-results--list {
+      padding: 0;
+      
+    }
+    .competitions-next,
+    .competitions-last {
+      padding: 0;
+      margin: 0;
+    }
+    .competitions-next--title, 
+    .competitions-last--title {
+      font-size: 18px;
+      padding: 20px 20px;
+    }
+    .competitions-results--title {
+      padding: 20px 0 20px 0;
+      margin-top: 20px;
+    }
+    .competitions-next--list {
+      margin: 0;
+    }
+    .competitions-images {
+      padding: 0;
+      margin: 0;
+    }
+    .pigeon--pic {
+      margin: 10px;
+    }
+  }
+
+  @media only screen and (max-width: 780px) {
     .results-title {
       font-size: 22px;
       padding: 20px 0 10px 10px;

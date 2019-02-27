@@ -4,10 +4,7 @@
   font-size: 18px;
   align-self: end;
   display: flex;
-  /* display: grid;
-  grid-template-columns: auto; */
   font-weight: 600;
-  /* background-color: white; */
   padding: 10px 20px 10px 20px;
 }
 
@@ -17,19 +14,19 @@
     font-weight: 700;
   }
 
-  .icon {
+  /* .icon {
     align-self: start;
     justify-self: right;
     margin-right: 4px;
-  }
+  } */
   .name {
     align-self: center;
   }
 
   @media only screen and (max-width: 420px) {
-    .icon {
+    /* .icon {
       display: none;
-    }
+    } */
     .menu--item {
       font-size: 18px;
       color: black;
@@ -48,10 +45,10 @@
       margin: 1px solid black;
     }
   }
-  @media only screen and (max-width: 620px) {
-    .icon {
+  @media only screen and (max-width: 780px) {
+    /* .icon {
       display: none;
-    }
+    } */
     .menu--item {
       font-size: 18px;
       color: #444649;

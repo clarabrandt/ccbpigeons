@@ -100,6 +100,9 @@ class Layout extends Component {
     if (clicked === 'arrow') {
       this.smoothScroll(this.sobre);
     }
+    if (clicked === 'arrow2') {
+      this.smoothScroll(this.top);
+    }
     if (clicked === 'resultados') {
       this.smoothScroll(this.resultados);
     }
@@ -112,16 +115,23 @@ class Layout extends Component {
   }
 
   onScroll() {
-    if(this.layout.current.scrollTop === null || this.layout.current.scrollTop <= 0) {
-      this.setState({
-        sticky: false
-      })
-    } else {
-      this.setState({
-        sticky: true
-      })
-    }
+    const isTop = (this.layout.current.scrollTop === null || this.layout.current.scrollTop <= 0) ? false : true;
+    this.setState({
+      sticky: isTop
+    })
   }
+  
+  // onScroll() {
+  //   if(this.layout.current.scrollTop === null || this.layout.current.scrollTop <= 0) {
+  //     this.setState({
+  //       sticky: false
+  //     })
+  //   } else {
+  //     this.setState({
+  //       sticky: true
+  //     })
+  //   }
+  // }
   
   render() {
     
@@ -134,7 +144,7 @@ class Layout extends Component {
           <Blog blog={this.blog}/>
           <Resultados resultados={this.resultados} handleClick={this.handleClick} api={this.api}/>
           <Midia midia={this.midia}/>
-          <Footer />
+          <Footer top={this.top} handleClick={this.handleClick}/>
         </div>
       </div>
     )

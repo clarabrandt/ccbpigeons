@@ -1,28 +1,70 @@
-.footer{
+.footer {
+  display: flex;
+  flex-direction: row-reverse;
   background-color: lightgray;
   width: 100%;
-  height: 70px;
-  /* position: absolute; */
+  position: relative;
+  /* z-index: -1; */
   bottom: 0;
+  justify-content: space-between
+  
 }
   .contato {
     float: right;
     margin: 0 15px 0 0;
     font-size: 14px;
   }
-    .property{
-      display: flex;
-      height: 100%;
-      font-size: 12px;
-      letter-spacing: 0.5px;
-      margin: 0;
-      line-height: 15px;
-      margin: 0;
+  .property{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 40%;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    margin: 0;
+    line-height: 15px;
+    margin: 0;
+  }
+    .arrow-top {
+      margin: 10px 0 10px 15px;
+      cursor: pointer;
     }
-      .property--rights {
-        display: inline-block;
-        align-self: flex-end;
-        margin-left: 10px
-      }
 
+      .arrow2{
+        /* position: absolute; */
+        width: 20px;
+        height: 20px;
+        left: 20px;
+        bottom: 40px;
+        border-right: 4px solid black;
+        border-bottom: 4px solid black;
+        transform: rotate(225deg);
+        /* animation: animate 1.5s infinite; */
+        z-index: 1;
+      }
+      .arrow-top--text:hover {
+        cursor: pointer;
+      }
+      
+      .property--rights {
+        /* display: inline-block; */
+        margin-left: 10px;
+        justify-self: flex-end;
+      }
+  
+@media only screen and (max-width: 780px) {
+  .footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .contato {
+    margin-left: 5px;
+   }
+  .property {
+    margin-right: 5px;
+   }
+  
+}
     

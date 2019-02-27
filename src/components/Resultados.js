@@ -54,7 +54,7 @@ export default class Resultados extends Component {
   render() {
     const pigeon = require("./images/pombo-correio.jpg")
     return (
-      <div className='content-results' ref={this.props.resultados}>
+      <div className='results' ref={this.props.resultados}>
           <div className='results-title'>Resultados</div>
           <div className='competitions'>
             <div className='competitions-grid'>

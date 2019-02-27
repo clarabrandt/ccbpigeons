@@ -47,6 +47,8 @@ export default class Blog extends Component {
             <div className='post--subtitle--arquivo'> Arquivo</div>
             <div className='post--arquivo--date'>2019</div>
             <div className='post--arquivo--date'>2018</div>
+            <div className='post--arquivo--date'>2017</div>
+            <div className='post--arquivo--date'>2016</div>
           </div>
         </div>
         </div>

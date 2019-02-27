@@ -1,9 +1,8 @@
 .midia {
   padding: 0 100px 0 100px;
   background-color: #f2f2f2;
-  height: 100vh;
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 
 }
 .midia-content {
@@ -117,7 +116,6 @@
   .videos-subtitle {
     font-size: 18px;
     padding: 20px 0 10px 20px;
-    
     font-weight: 600;
   }
   .news {
@@ -151,10 +149,9 @@
     } */  
 }
 
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 780px) {
   .midia {
     padding: 0;
-    height: 100vh;
     width: 100%;
   }
   .midia-title {
@@ -176,6 +173,12 @@
     color:#444649;
     font-weight: 600;
   }
+  .news-subtitle,
+  .videos-subtitle {
+    font-size: 18px;
+    padding: 20px 0 10px 20px;
+    font-weight: 600;
+  }
   .news {
     flex: 1;
     margin: 10px;
@@ -185,6 +188,7 @@
   }
     .news-content {
       padding: 20px 0 10px 20px;
+      margin: 15px;
       color:#444649;
       border-bottom: 0.5px solid lightgrey;
     }
@@ -206,3 +210,5 @@
       flex-direction: column;
     }
   }
+
+ 

@@ -5,14 +5,14 @@
   /* display: grid;
   grid-template-rows: repeat(3, 180px 50px auto); */
   /* grid-template-areas:  */
- 
 }
  
 
 @media only screen and (max-width: 420px) {
-  .layout {
+  /* .layout,
+  .div-layout {
     overflow-x: hidden;
-  }
+  } */
   .title--over--pic {
     font-size: 30px;
     top: 30px;
