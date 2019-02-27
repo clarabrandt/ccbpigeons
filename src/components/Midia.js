@@ -44,7 +44,7 @@ export default class Midia extends Component {
           </div>
           <div className='news'>
             <div className='news-subtitle'>Notícias</div>
-            <div className='news-content'>Próximo leilão será anunciado em breve!</div>
+            <div className='news-content'>O próximo leilão será anunciado em breve!</div>
             <div className='news-content'>Notícia 2 </div>
             <div className='news-content'>Notícia 3 </div>
           </div>

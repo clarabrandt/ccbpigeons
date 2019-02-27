@@ -4,12 +4,6 @@
   width: 100%;
   overflow: hidden;
 }
-    .news {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      margin: 2em 1.7em 2em 1.7em;
-      width: 270px;
-      font-weight: 550;
-    } 
     h3 {
       padding-top: 30px;
     }
