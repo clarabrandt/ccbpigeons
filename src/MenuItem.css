@@ -13,6 +13,7 @@
 
 .menu--item--style:hover {
     text-decoration: underline;
+    text-decoration-color: white;
     cursor: pointer;
     font-weight: 700;
   }
