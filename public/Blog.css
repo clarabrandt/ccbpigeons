@@ -9,6 +9,8 @@
   text-decoration: underline;
 }
 .posts {
+  display: -webkit-box;
+  display: -webkit-flex;
   display: flex;
   /* display: grid;
   grid-template-areas: 
@@ -16,28 +18,30 @@
   'list new new new new old old'
   'list new new new new old old' */
 }
-  .post-list {
-    flex: 1.5;
+.post-list {
+    -webkit-box-flex: 1.5;
+    -webkit-flex: 1.5;
+            flex: 1.5;
   }
-  .post-subtitle {
+.post-subtitle {
     font-size: 1.3em;
     color: rgb(10, 10, 134);
     font-weight: 600;
     padding: 30px;
     margin-left: 50px;
   }
-  .post-keep-reading {
+.post-keep-reading {
     font-size: 16px;
     color:#444649;
     padding: 0 0 10px 30px;
     margin-left: 50px;
     border-bottom: 0.5px solid lightgrey;
   }
-  .post-keep-reading:hover {
+.post-keep-reading:hover {
     cursor: pointer;
     font-weight: 600;
   }
-  .post-other {
+.post-other {
     font-size: 1.1em;
     padding: 30px 0 15px 30px;
     color:#444649;
@@ -45,70 +49,73 @@
     font-weight: 600;
     
   }
-    .post-subtitle--new {
+.post-subtitle--new {
       font-size: 1.3em;
       color:rgb(110, 9, 9);
       font-weight: 600;
       padding: 30px;
     }
-    .post-new {
-      flex: 3.5;
+.post-new {
+      -webkit-box-flex: 3.5;
+      -webkit-flex: 3.5;
+              flex: 3.5;
       /* grid-area: new; */
       margin: 0 20px 0 50px;
       padding-left: 50px;
       /* border-left: 0.5px solid lightgrey; */
     }
-      .post-title {
+.post-title {
         font-size: 18px;
         padding: 30px 0 0 30px;
         color:#444649;
         font-weight: 600;
       }
-      .post-date {
+.post-date {
         font-size: 14px;
         padding: 5px 30px;
         color:#444649;
         font-weight: 600; 
       }
-      .post-content {
+.post-content {
         padding: 0 10px;
         max-width: 100%;
         color: #444649;
         border-bottom: 0.5px solid lightgrey
       }
-      .post-new--keep-reading {
+.post-new--keep-reading {
         padding:0 0 10px 20px;
       }
-      .post-new--keep-reading:hover {
+.post-new--keep-reading:hover {
         cursor: pointer;
         font-weight: 600;
       }
-  .post-arquivo {
-    flex: 1;
+.post-arquivo {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+            flex: 1;
     /* grid-area: old; */
     padding-left: 20px;
     /* margin-right: 80px; */
     /* border-left: 0.5px solid lightgrey; */
   }
-    .post-subtitle--arquivo {
+.post-subtitle--arquivo {
       font-size: 1.3em;
       color:rgb(10, 10, 134);
       font-weight: 600;
       padding: 30px;
     }
-    .post-arquivo--date {
+.post-arquivo--date {
       padding: 20px 0 0 30px;
       color:#444649;
       font-size: 1.1em;
       /* font-weight: 600; */
     }
-    .post-arquivo--date:hover {
+.post-arquivo--date:hover {
       text-decoration: underline;
       /* color: black; */
       cursor: pointer;
       font-weight: 600;
     }
-
 @media only screen and (max-width: 420px) {
   .blog {
     overflow-x: hidden;
@@ -121,6 +128,7 @@
     padding: 20px 0 10px 10px;
     margin-left: 10px;
     color: #444649;
+    text-align: left;
     text-align: initial;
     font-weight: bold;
   }
@@ -182,7 +190,6 @@
       grid-area: list;
     }
 }
-
 @media only screen and (max-width: 780px) {
   .blog {
   padding: 0;
@@ -193,6 +200,7 @@
   padding: 20px 0 10px 10px;
   margin-left: 10px;
   color: #444649;
+  text-align: left;
   text-align: initial;
   font-weight: bold;
 }

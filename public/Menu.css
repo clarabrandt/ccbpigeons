@@ -1,45 +1,55 @@
 .menu {
   display: flex;
   display: -webkit-box;
-  display: -ms-flexbox;
   display: -webkit-flex;
   margin: 30px 0 0 0;
   top: -30px;
   position: absolute;
-  align-self: center;
+  -webkit-align-self: center;
+          align-self: center;
   width: 100%;
 }
 .menu.sticky {
   position: fixed;
   background-color: rgb(9, 8, 24);
   opacity: 0.9;
+  -webkit-transition: 1s;
   transition: 1s;
   z-index: 10;
 }
-  .hamburger {
+.hamburger {
     display: none;
   }
-  .cross {
+.cross {
     display: none;
   }
-  
-  .menu--dropdown {
-    justify-content: flex-start;
+.menu--dropdown {
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+            justify-content: flex-start;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     /* display: grid;
     grid-template-columns: repeat(6, auto); */
     top: -1px;
     z-index: 9999;
+    -webkit-transition: height 2s;
     transition: height 2s;
     width: 100%;
   }
-
 @media only screen and (max-width: 420px) {
 .menu {
   position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
 }
 .menu.sticky {
   display: none;
@@ -47,9 +57,10 @@
   .hamburger {
     display: flex;
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
-    justify-content: flex-end;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+            justify-content: flex-end;
     margin: 8px 25px 0 0;
     cursor: pointer;
   }
@@ -59,10 +70,10 @@
   .cross.open {
     display: flex;
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     position: absolute;
-    align-self: baseline;
+    -webkit-align-self: baseline;
+            align-self: baseline;
     margin: 25px 32px 0 0;
     cursor: pointer;
     z-index: 1;
@@ -71,12 +82,12 @@
     .menu--dropdown {
       display: flex;
       display: -webkit-box;
-      display: -ms-flexbox;
       display: -webkit-flex;
       max-height: 100%;
       /* grid-template-columns: 100%;
       grid-template-rows: repeat(5, auto); */
       padding: 20px;
+      -webkit-transition: right ease-in-out 0.35s;
       transition: right ease-in-out 0.35s;
       z-index: -1;
       top: 0;
@@ -97,22 +108,25 @@
     }
     .menu--dropdown.closed {
       max-height: 0;
-      transition-timing-function: linear;
+      -webkit-transition-timing-function: linear;
+              transition-timing-function: linear;
     }
     .menu--dropdown.off {
       display: none;
     }
 }
-
 @media only screen and (max-width: 780px) {
   .menu {
     position: absolute;
     display: flex;
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
-    justify-content: flex-end;
-    align-items: center;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+            justify-content: flex-end;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center;
   }
   .menu.sticky {
     display: none;
@@ -120,9 +134,10 @@
     .hamburger {
       display: flex;
       display: -webkit-box;
-      display: -ms-flexbox;
       display: -webkit-flex;
-      justify-content: flex-end;
+      -webkit-box-pack: end;
+      -webkit-justify-content: flex-end;
+              justify-content: flex-end;
       margin: 8px 25px 0 0;
       cursor: pointer;
     }
@@ -132,10 +147,10 @@
     .cross.open {
       display: flex;
       display: -webkit-box;
-      display: -ms-flexbox;
       display: -webkit-flex;
       position: absolute;
-      align-self: baseline;
+      -webkit-align-self: baseline;
+              align-self: baseline;
       margin: 25px 32px 0 0;
       cursor: pointer;
       z-index: 1;
@@ -164,15 +179,15 @@
         display: block;
         background-color: white;
         z-index: 1;
-        transition-timing-function: linear;
+        -webkit-transition-timing-function: linear;
+                transition-timing-function: linear;
         
       }
       .menu--dropdown.closed {
         display: none;  
-        transition-timing-function: linear;
+        -webkit-transition-timing-function: linear;  
+                transition-timing-function: linear;
       }
   }
-
-  
 
   
