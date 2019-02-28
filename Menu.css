@@ -1,22 +1,18 @@
 .menu {
+  display: flex;
   display: -webkit-box;
   display: -webkit-flex;
-  display: flex;
   margin: 30px 0 0 0;
   top: -30px;
   position: absolute;
   -webkit-align-self: center;
           align-self: center;
-  /* left: 50%;
-  right: 50%; */
-  /* overflow: hidden; */
   width: 100%;
 }
 .menu.sticky {
   position: fixed;
   background-color: rgb(9, 8, 24);
   opacity: 0.9;
-  /* overflow: auto; */
   -webkit-transition: 1s;
   transition: 1s;
   z-index: 10;
@@ -27,20 +23,13 @@
 .cross {
     display: none;
   }
-/* .hamburger.is-active {
-    display: none;
-  } */
 .menu--dropdown {
-    /* justify-content: space-evenly; */
     -webkit-box-pack: start;
     -webkit-justify-content: flex-start;
             justify-content: flex-start;
     display: grid;
     grid-template-columns: repeat(6, auto);
-    /* position: sticky;
-    position: -webkit-sticky; */
     top: -1px;
-    /* background-color: #fff; */
     z-index: 9999;
     -webkit-transition: height 2s;
     transition: height 2s;
@@ -48,7 +37,6 @@
   }
 @media only screen and (max-width: 420px) {
 .menu {
-  /* margin: 10px 15px 0 10px; */
   position: absolute;
   display: -webkit-box;
   display: -webkit-flex;
@@ -64,9 +52,9 @@
   display: none;
 }
   .hamburger {
+    display: flex;
     display: -webkit-box;
     display: -webkit-flex;
-    display: flex;
     -webkit-box-pack: end;
     -webkit-justify-content: flex-end;
             justify-content: flex-end;
@@ -77,9 +65,9 @@
     display: none
   }
   .cross.open {
+    display: flex;
     display: -webkit-box;
     display: -webkit-flex;
-    display: flex;
     position: absolute;
     -webkit-align-self: baseline;
             align-self: baseline;
@@ -87,9 +75,6 @@
     cursor: pointer;
     z-index: 1;
   }
-  /* .cross.closed{
-    display: none
-  } */
   
     .menu--dropdown {
       max-height: 100%;
@@ -119,9 +104,7 @@
               transition-timing-function: linear;
     }
     .menu--dropdown.closed {
-      /* height: 0px; */
       max-height: 0;
-      /* display: none;   */
       -webkit-transition-timing-function: linear;
               transition-timing-function: linear;
     }
@@ -131,11 +114,10 @@
 }
 @media only screen and (max-width: 780px) {
   .menu {
-    /* margin: 10px 15px 0 10px; */
     position: absolute;
+    display: flex;
     display: -webkit-box;
     display: -webkit-flex;
-    display: flex;
     -webkit-box-pack: end;
     -webkit-justify-content: flex-end;
             justify-content: flex-end;
@@ -147,9 +129,9 @@
     display: none;
   }
     .hamburger {
+      display: flex;
       display: -webkit-box;
       display: -webkit-flex;
-      display: flex;
       -webkit-box-pack: end;
       -webkit-justify-content: flex-end;
               justify-content: flex-end;
@@ -159,17 +141,10 @@
     .hamburger.open{
       display: none
     }
-    /* .cross {
-      display: flex;
-      position: absolute;
-      justify-content: flex-end;
-      margin: 25px 32px 0 0;
-      cursor: pointer;
-    } */
     .cross.open {
+      display: flex;
       display: -webkit-box;
       display: -webkit-flex;
-      display: flex;
       position: absolute;
       -webkit-align-self: baseline;
               align-self: baseline;
@@ -180,7 +155,6 @@
     .cross.closed{
       display: none
     }
-    
       .menu--dropdown {
         grid-template-columns: 100%;
         grid-template-rows: repeat(5, auto);
@@ -190,10 +164,7 @@
         z-index: 10;
         top: 0;
         position: relative;
-        
-  
       }
-  
       .menu--dropdown.open {
         height: 100%;
         width: 100%;
@@ -202,14 +173,12 @@
         visibility: visible;
         display: block;
         background-color: white;
- 
         z-index: 1;
         -webkit-transition-timing-function: linear;
                 transition-timing-function: linear;
         
       }
       .menu--dropdown.closed {
-        /* height: 0px; */
         display: none;  
         -webkit-transition-timing-function: linear;  
                 transition-timing-function: linear;
