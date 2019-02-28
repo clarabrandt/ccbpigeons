@@ -1,10 +1,12 @@
 .footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   flex-direction: row-reverse;
   background-color: lightgray;
   width: 100%;
   position: relative;
-  /* z-index: -1; */
   bottom: 0;
   justify-content: space-between
   
@@ -16,6 +18,9 @@
   }
   .property{
     display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     flex-direction: column;
     height: 100%;
     width: 40%;
@@ -29,9 +34,7 @@
       margin: 10px 0 10px 15px;
       cursor: pointer;
     }
-
       .arrow2{
-        /* position: absolute; */
         width: 20px;
         height: 20px;
         left: 20px;
@@ -39,15 +42,12 @@
         border-right: 4px solid black;
         border-bottom: 4px solid black;
         transform: rotate(225deg);
-        /* animation: animate 1.5s infinite; */
         z-index: 1;
       }
       .arrow-top--text:hover {
         cursor: pointer;
       }
-      
       .property--rights {
-        /* display: inline-block; */
         margin-left: 10px;
         justify-self: flex-end;
       }
@@ -55,6 +55,9 @@
 @media only screen and (max-width: 780px) {
   .footer {
     display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     flex-direction: row;
     justify-content: space-between;
   }

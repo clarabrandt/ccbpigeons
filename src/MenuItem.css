@@ -2,11 +2,11 @@
   font-family: 'Poppins', 'Roboto Condensed', 'Acme', 'Changa One';
   color: white;
   font-size: 18px;
-  align-self: end;
-  display: flex;
+  -webkit-align-self: end;
+          align-self: end;
   display: -webkit-box;
-  display: -ms-flexbox;
   display: -webkit-flex;
+  display: flex;
   font-weight: 600;
   padding: 10px 20px 10px 20px;
 }
@@ -17,16 +17,18 @@
     font-weight: 700;
   }
 
-  /* .icon {
+/* .icon {
     align-self: start;
     justify-self: right;
     margin-right: 4px;
   } */
-  .name {
-    align-self: center;
+
+.name {
+    -webkit-align-self: center;
+            align-self: center;
   }
 
-  @media only screen and (max-width: 420px) {
+@media only screen and (max-width: 420px) {
     /* .icon {
       display: none;
     } */
@@ -40,7 +42,10 @@
     .menu--item:hover {
       color: black;
       text-decoration: none;
-      transform: initial;
+      -webkit-transform: none;
+              transform: none;
+      -webkit-transform: initial;
+              transform: initial;
       cursor: pointer;
       /* background-color: grey; */
     }
@@ -48,7 +53,8 @@
       margin: 1px solid black;
     }
   }
-  @media only screen and (max-width: 780px) {
+
+@media only screen and (max-width: 780px) {
     /* .icon {
       display: none;
     } */
@@ -62,7 +68,10 @@
     .menu--item:hover {
       font-weight: 600;
       text-decoration: none;
-      transform: initial;
+      -webkit-transform: none;
+              transform: none;
+      -webkit-transform: initial;
+              transform: initial;
       cursor: pointer;
       /* background-color: grey; */
     }

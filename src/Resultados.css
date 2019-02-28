@@ -7,7 +7,9 @@
   }
   .competitions {
     display: grid;
+    /* grid-gap: 100px; */
     grid-template-columns: repeat(8, 1fr);
+    /* grid-gap: 50px; */
     grid-template-areas: 
     'next next results results results results image image'
     'next next results results results results image image'
@@ -21,42 +23,42 @@
   .competitions-last {
     margin-top: 50px;
   }
-    .competitions-next--title,
+  .competitions-next--title,
     .competitions-last--title{
       font-size: 1.3em;
       color:rgb(10, 10, 134);
       padding: 30px 30px 20px 30px; 
       font-weight: 600;
     }
-    .competitions-next--list, 
+  .competitions-next--list, 
     .competitions-last--list {
       padding: 0 0 0 30px;
       cursor: pointer;
     }
-    .competitions-next--list:hover,
+  .competitions-next--list:hover,
     .competitions-last--list:hover {
       text-decoration: underline;
       color: rgb(36, 34, 34);
       cursor: pointer;
       font-weight: 600;
     }
-      .competitions-next--listItems {
+  .competitions-next--listItems {
         border-bottom: 0.5px solid lightgrey;
         margin-bottom: 10px;
         padding: 0 0 15px 0;
       }
-      .competitions-last--listItems {
+  .competitions-last--listItems {
         border-bottom: 0.5px solid lightgrey;
         margin-bottom: 10px;
         padding: 0 0 15px 0;
       }
-    .competitions-results {
+  .competitions-results {
       grid-area: results;
       margin: 0 20px 0 0;
       padding-left: 70px;
       
     }
-    .competitions-results--title {
+  .competitions-results--title {
       font-size: 1.3em;
       color:rgb(110, 9, 9);
       font-weight: 600;
@@ -92,12 +94,15 @@
       padding: 20px 0 10px 10px;
       margin-left: 10px;
       color: #444649;
+      text-align: left;
       text-align: initial;
       font-weight: bold;
     }
     .competitions {
       display: grid;
+      /* grid-gap: 100px; */
       grid-template-columns: 1fr;
+      /* grid-gap: 50px; */
       grid-template-areas: 
       'results results'
       'next next'
@@ -139,13 +144,13 @@
       margin: 10px;
     }
   }
-
   @media only screen and (max-width: 780px) {
     .results-title {
       font-size: 22px;
       padding: 20px 0 10px 10px;
       margin-left: 10px;
       color: #444649;
+      text-align: left;
       text-align: initial;
       font-weight: bold;
     }

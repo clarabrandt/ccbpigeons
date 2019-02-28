@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css?family=Changa+One");
+
+.title {
+  font-family: 'Acme', 'Changa One';
+  font-size: 75px;
+  padding-left: 230px;
+  -webkit-align-self: center;
+          align-self: center;
+  /* text-align: center; */
+  color: darkblue;
+}
+
+@media only screen and (max-width: 420px) {
+  .title{
+    -webkit-align-self: center;
+            align-self: center;
+    font-size: 40px;
+    padding-left: 30px;
+  }
+}

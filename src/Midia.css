@@ -7,7 +7,6 @@
 }
 .midia-content {
   display: -webkit-box;
-  display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
 }
@@ -34,11 +33,10 @@
       font-weight: 600;
       padding: 30px 0 20px 0;
   }
-.videos-content { 
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
+.videos-content {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
     }
 .news {
     -webkit-box-flex: 1;
@@ -111,7 +109,6 @@
   }
   .midia-content {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
@@ -174,7 +171,6 @@
   }
   .midia-content {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
@@ -231,3 +227,5 @@
               flex-direction: column;
     }
   }
+
+ 

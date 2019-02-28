@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-import { db, storage } from '../base';
 import './Resultados.css'
 
 export default class Resultados extends Component {
