@@ -7,7 +7,6 @@
 }
 .midia-content {
   display: -webkit-box;
-  display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
 }
@@ -36,7 +35,6 @@
   }
 .videos-content { 
   display: -webkit-box;
-  display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
     }
@@ -111,7 +109,6 @@
   }
   .midia-content {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
@@ -174,7 +171,6 @@
   }
   .midia-content {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
@@ -231,5 +227,3 @@
               flex-direction: column;
     }
   }
-
- 

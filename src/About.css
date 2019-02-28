@@ -23,7 +23,6 @@
       -webkit-box-flex: 1;
       -webkit-flex: 1;
               flex: 1;
-      
     }
     h1 {
         padding: 0 0 10px 20px;
@@ -48,10 +47,6 @@
         -webkit-box-flex: 1.4;
         -webkit-flex: 1.4;
                 flex: 1.4;
-        /* margin-top: 5.2em; */
-        /* display: grid;
-        grid-template-rows: 50% 10% 15%;
-        grid-area: right; */
       }
     .house--pic {
         /* margin-top: 5.4em; */
@@ -59,20 +54,6 @@
         width: 100%;
         height: 100%;
       }
-    /* .videos {
-          margin-top: 35px;
-        }
-        
-        .canal-youtube--text {
-          margin-top: 15px;
-          max-height: 50px;
-        }
-        .canal-youtube {
-          display: grid;
-          grid-template-columns: 60px 220px;
-          max-height: 50px;
-          align-self: top;
-        } */
     @media only screen and (max-width: 420px) {
   .about {
     display: -webkit-box;

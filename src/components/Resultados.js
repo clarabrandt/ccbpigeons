@@ -55,7 +55,7 @@ export default class Resultados extends Component {
       <div className='results' ref={this.props.resultados}>
           <div className='results-title'>Resultados</div>
           <div className='competitions'>
-            <div className='competitions-grid'>
+            <div className='competitions-calendar'>
               <div className='competitions-next'>
                 <div className='competitions-next--title'>Próximas competições</div>
                 <ul className='competitions-next--list'>

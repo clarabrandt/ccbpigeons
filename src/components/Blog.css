@@ -9,14 +9,15 @@
   text-decoration: underline;
 }
 .posts {
-  display: grid;
+  display: flex;
+  /* display: grid;
   grid-template-areas: 
   'list new new new new old old'
   'list new new new new old old'
-  'list new new new new old old'
+  'list new new new new old old' */
 }
   .post-list {
-    grid-area: list;
+    flex: 1.5;
   }
   .post-subtitle {
     font-size: 1.3em;
@@ -51,7 +52,8 @@
       padding: 30px;
     }
     .post-new {
-      grid-area: new;
+      flex: 3.5;
+      /* grid-area: new; */
       margin: 0 20px 0 50px;
       padding-left: 50px;
       /* border-left: 0.5px solid lightgrey; */
@@ -82,9 +84,10 @@
         font-weight: 600;
       }
   .post-arquivo {
-    grid-area: old;
+    flex: 1;
+    /* grid-area: old; */
     padding-left: 20px;
-    margin-right: 80px;
+    /* margin-right: 80px; */
     /* border-left: 0.5px solid lightgrey; */
   }
     .post-subtitle--arquivo {
@@ -122,6 +125,8 @@
     font-weight: bold;
   }
   .posts {
+    /* display: flex;
+    flex-direction: column; */
     display: grid;
     grid-template-areas: 
     'new new'
@@ -137,7 +142,9 @@
   .post-content{
     max-height: none;
   }
-  
+  .post-new--keep-reading {
+    padding-left: 0;
+  }
   .post-subtitle,
   .post-title,
   .post-subtitle--arquivo {
@@ -155,11 +162,13 @@
       padding: 5px 0 10px 0;
     }
     .post-new {
+      grid-area: new;
       padding-left: 0;
       margin: 10px;
       border: none;
     }
     .post-arquivo {
+      grid-area: old;
       border: none;
       padding: 0 0 0 40px;
       margin-right: 20px;
@@ -168,6 +177,9 @@
       font-size: 16px;
       padding: 10px 0 10px 10px;
       font-weight: 600;  
+    }
+    .post-list {
+      grid-area: list;
     }
 }
 
@@ -224,12 +236,17 @@
   padding: 10px 0 10px 10px;
   
 }
+.post-list {
+  grid-area: list;
+}
 .post-new {
+  grid-area: new;
   padding-left: 0;
   margin: 10px;
   border: none;
 }
 .post-arquivo {
+  grid-area: old;
   border: none;
   padding: 0 0 0 40px;
   margin-right: 20px;
@@ -239,7 +256,7 @@
   padding: 10px 0 10px 10px;
   font-weight: 600;  
 }
-.post-keep--reading {
+.post-keep-reading {
   font-size: 16px;
   color:#444649;
   padding: 0 0 10px 20px;

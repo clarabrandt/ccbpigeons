@@ -6,16 +6,18 @@
     text-decoration: underline;
   }
   .competitions {
-    display: grid;
+    display: flex;
+    /* display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-areas: 
     'next next results results results results image image'
     'next next results results results results image image'
-    'next next results results results results image image'
+    'next next results results results results image image' */
   }
   .competitions-next,
   .competitions-last {
-    grid-area: next;
+    flex: 1.5;
+    /* grid-area: next; */
     margin-left: 50px;
   }
   .competitions-last {
@@ -51,7 +53,8 @@
         padding: 0 0 15px 0;
       }
     .competitions-results {
-      grid-area: results;
+      flex: 3.5;
+      /* grid-area: results; */
       margin: 0 20px 0 0;
       padding-left: 70px;
       
@@ -80,7 +83,8 @@
     max-width: 100px;
   }
   .competitions-images {
-    grid-area: image;
+    flex: 1;
+    /* grid-area: image; */
     margin-left: 100px;
   }
   ul{
@@ -107,6 +111,7 @@
       display: none;
     }
     .competitions-results{
+      grid-area: results;
       padding: 0 20px; 
       margin: 0
     }
@@ -116,6 +121,7 @@
     }
     .competitions-next,
     .competitions-last {
+      grid-area: next;
       padding: 0;
       margin: 0;
     }
@@ -132,6 +138,7 @@
       margin: 0;
     }
     .competitions-images {
+      grid-area: image;
       padding: 0;
       margin: 0;
     }
