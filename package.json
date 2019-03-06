@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://clarabrandt.github.io/ccbpigeons",
   "dependencies": {
+    "firebase": "^5.8.5",
     "gh-pages": "^2.0.1",
     "react": "^16.7.0",
     "react-app-polyfill": "^0.2.1",
@@ -14,17 +15,17 @@
     "react-youtube": "^7.8.0"
   },
   "scripts": {
-		"build:css": "postcss src/**/*.css --dir public",
-		"watch:css": "postcss /src/Layout.css -o build/index.css -w",
-		"start": "npm-run-all -p watch:css start-js",
-		"start-js": "react-scripts start",
-		"build-js": "react-scripts build",
-		"build": "npm-run-all build:css build-js",
+    "build:css": "postcss src/**/*.css --dir public",
+    "watch:css": "postcss /src/Layout.css -o build/index.css -w",
+    "start": "npm-run-all -p watch:css start-js",
+    "start-js": "react-scripts start",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build:css build-js",
     "test": "react-scripts test --env=jsdom",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-		"eject": "react-scripts eject"
-	},
+    "eject": "react-scripts eject"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },

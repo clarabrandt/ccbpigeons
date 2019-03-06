@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
 import './Login.css'
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props)
+    this.authWithEmailAndPassword = this.authWithEmailAndPassword.bind(this)
+  }
+
+  authWithEmailAndPassword(event) {
+    event.preventDefault();
+    console.log('auth with email');
+
+  }
+
   render() {
     return (
-      
-      <div className='content--grid'>
-        <div className='content--left'>
-        </div>
-        <div className='content--main'>
-          <form className= 'login--form'>
-            <label>
-              Name:
-              <input type="text" name="name"/>
-            </label>
-            <label>
-              Password:
-              <input type="text" name="password"/>
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
-        <div className='content--right'>
-        </div>
+      <div className='login'>
+        <form className= 'login--form'>
+          <label>
+            Email:
+            <input type="email" name="email" ref={(input) => { this.emailInput = input }}/>
+          </label>
+          <label>
+            Password:
+            <input type="text" name="password" ref={(input) => { this.passwordInput = input }}/>
+          </label>
+          <input type="submit" value="Log in" onClick={this.authWithEmailAndPassword} />
+        </form>
       </div>     
     )
   }

@@ -49,6 +49,16 @@ export default class Resultados extends Component {
     })
   }
 
+  showList() {
+    const list = this.props.api.getList();
+    list.then((docs) => {
+      this.setState({
+        list: Object.values(docs.list)
+      })
+    })
+  } 
+
+
   render() {
     const pigeon = require("./images/pombo-correio.jpg")
     return (

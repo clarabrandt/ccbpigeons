@@ -1,0 +1,10 @@
+.admin {
+  width: 100%;
+  padding: 150px 150px 150px 150px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  justify-content: space-around;
+
+
+}

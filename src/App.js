@@ -3,6 +3,7 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Layout from './components/Layout.js';
 import Login from './components/Login.js';
+import Admin from './components/Admin.js';
 
 class App extends Component {
   
@@ -12,6 +13,7 @@ class App extends Component {
         <BrowserRouter basename={process.env.PUBLIC_URL}></BrowserRouter>
         <Switch>
           <Route path="/login" component={Login} /> 
+          <Route path="/admin" component={Admin} /> 
           <Route path= {process.env.PUBLIC_URL + '/'} component={Layout}/>
           <Route path='/home' component={Layout}/>
           <Route path="/sobre" component={Layout} /> 

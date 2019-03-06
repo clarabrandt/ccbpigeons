@@ -29,6 +29,10 @@ class api {
       .then(res => res.json())  // translate to json
       .catch(err => console.log(err));
   }
+
+  getList() {
+    
+  }
   /**
    * Get all addresses assigned to user
    */

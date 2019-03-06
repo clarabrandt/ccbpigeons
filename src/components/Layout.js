@@ -7,7 +7,6 @@ import About from './About';
 import Midia from './Midia';
 import Resultados from './Resultados';
 import Blog from './Blog';
-import Login from './Login';
 import Footer from './Footer';
 import Banner from './Banner';
 
@@ -108,9 +107,6 @@ class Layout extends Component {
     }
     if (clicked === 'blog') {
       this.smoothScroll(this.blog);
-    }
-    if (clicked === 'login') {
-      window.open(<Login />)
     }
   }
 
