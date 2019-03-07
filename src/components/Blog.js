@@ -2,6 +2,31 @@ import React, { Component } from 'react';
 import './Blog.css'
 
 export default class Blog extends Component {
+  constructor(props) {
+    super(props)
+    this.state= {
+      blog: [],
+      open: false
+    }
+    
+    this.showPosts = this.showPosts.bind(this);
+   
+  }
+
+  componentDidMount() {
+    this.showPosts();
+   
+  };
+
+  showPosts() {
+    const blog = this.props.api.getBlog();
+    blog.then((docs) =>{
+      this.setState({
+        blog: Object.values(docs.blog),
+      })
+    })
+  }
+
   render() {
     return (
       <div className='blog' ref={this.props.blog}>
@@ -18,7 +43,19 @@ export default class Blog extends Component {
           </div>
           <div className='post-new'>
             <div className='post-subtitle--new'>Mais recentes</div>
-            <div className='post-title'>A columbofilia em Conselheiro Lafaiete</div>
+            {
+                      this.state.blog.map((res, index) => {
+                        return (
+                          <div key={index} className={`post-new--content ${this.state.open ? 'open' : 'closed' }`} onClick={ this.toggleList }>
+                            <div className='post-title'>{res.titulo} </div>
+                            <div className='post-content'>
+                              <p>{res.conteudo}</p> 
+                            </div>
+                          </div>
+                        )
+                      })
+                    }
+            {/* <div className='post-title'>A columbofilia em Conselheiro Lafaiete</div>
             <div className='post-date'>25/02/2019</div>
             <div className='post-content'>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
@@ -30,7 +67,7 @@ export default class Blog extends Component {
                 deserunt mollit anim id est laborum.
               </p>
               <div className='post-new--keep-reading'>continuar lendo --></div>
-            </div>
+            </div> */}
             <div className='post-title'>Como vacinar seus pombos</div>
             <div className='post-date'>15/02/2019</div>
             <div className='post-content'>

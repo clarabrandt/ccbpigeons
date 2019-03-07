@@ -30,8 +30,16 @@ class api {
       .catch(err => console.log(err));
   }
 
-  getList() {
-    
+  getBlog() {
+    let endpoint = `${this.baseUrl}blog`;
+
+    return restCall(endpoint, {
+      method: 'GET',
+      credentials: 'omit',
+    })
+      .then(checkFetchReturnStatus)       // status check
+      .then(res => res.json())  // translate to json
+      .catch(err => console.log(err));
   }
   /**
    * Get all addresses assigned to user

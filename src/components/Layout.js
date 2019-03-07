@@ -54,6 +54,15 @@ class Layout extends Component {
     })
   }
 
+  showBlog() {
+    const blog = this.api.getBlog();
+    blog.then((docs) => {
+      this.setState({
+        blog: docs.blog,
+      })
+    })
+  }
+
   // getCopaMG() {
   //   const copaMG = this.api.getCopaMG();
   //   copaMG.then((docs) =>{
@@ -137,7 +146,7 @@ class Layout extends Component {
           <div ref={this.top} />
           <Banner handleClick={this.handleClick} sobre={this.sobre} sticky={this.state.sticky} clicked={this.state.clicked}/>
           <About sobre={this.sobre}/>
-          <Blog blog={this.blog}/>
+          <Blog blog={this.blog} api={this.api}/>
           <Resultados resultados={this.resultados} handleClick={this.handleClick} api={this.api}/>
           <Midia midia={this.midia}/>
           <Footer top={this.top} handleClick={this.handleClick}/>
