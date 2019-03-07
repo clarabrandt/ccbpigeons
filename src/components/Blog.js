@@ -5,20 +5,17 @@ export default class Blog extends Component {
   constructor(props) {
     super(props)
     this.state= {
-      blog: [],
-      open: false
+      blog: []
     }
     
-    this.showPosts = this.showPosts.bind(this);
-   
+    this.showBlog = this.showBlog.bind(this);
   }
 
   componentDidMount() {
-    this.showPosts();
-   
+    this.showBlog();
   };
 
-  showPosts() {
+  showBlog() {
     const blog = this.props.api.getBlog();
     blog.then((docs) =>{
       this.setState({
@@ -46,7 +43,7 @@ export default class Blog extends Component {
             {
                       this.state.blog.map((res, index) => {
                         return (
-                          <div key={index} className={`post-new--content ${this.state.open ? 'open' : 'closed' }`} onClick={ this.toggleList }>
+                          <div key={index} className= 'post-new--content' onClick={ this.toggleList }>
                             <div className='post-title'>{res.titulo} </div>
                             <div className='post-content'>
                               <p>{res.conteudo}</p> 

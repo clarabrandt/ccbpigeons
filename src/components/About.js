@@ -5,7 +5,32 @@ import './About.css';
 
 
 export default class About extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state= {
+      sobre:[]
+    }
+    
+    this.showSobre = this.showSobre.bind(this);
+    // this.getCopaMG = this.getCopaMG.bind(this);
+  }
   
+
+  componentDidMount() {
+    this.showSobre();
+   
+  };
+
+  showSobre() {
+    const sobre = this.props.api.getSobre();
+    sobre.then((docs) =>{
+      this.setState({
+        sobre: Object.values(docs.sobre),
+      })
+    })
+  }
+
   render() {
     const house = require("./images/pombal_interior.jpg")
     
@@ -20,22 +45,17 @@ export default class About extends Component {
         </div> */}
         <div className='content--about'>
         <h1>Sobre o CCB Pigeons</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
-            deserunt mollit anim id est laborum.
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
-            deserunt mollit anim id est laborum.
-        </p>
+          {
+            this.state.sobre.map((res, index) => {
+              return (
+                <div key={index} className= 'post-new--content'>
+                  <div className='about-content'>
+                    <p>{res.sobre}</p> 
+                  </div>
+                </div>
+              )
+            })
+          }
         </div>
         <div className='content--about--right'>
           <img src={house} className='house--pic' alt=""  />

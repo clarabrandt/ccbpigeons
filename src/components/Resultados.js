@@ -89,7 +89,6 @@ export default class Resultados extends Component {
                         return (
                           <div key={index} className={`competitions-results--listItems ${this.state.open ? 'open' : 'closed' }`} onClick={ this.toggleList }>
                             <div>{res.name} </div>
-                            
                           </div>
                         )
                       })

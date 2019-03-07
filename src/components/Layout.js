@@ -42,6 +42,9 @@ class Layout extends Component {
     window.addEventListener('scroll', this.onScroll);
     this.navigateToPage();
     this.showResultados();
+    this.showBlog();
+    this.showSobre();
+
 
   };
 
@@ -59,6 +62,14 @@ class Layout extends Component {
     blog.then((docs) => {
       this.setState({
         blog: docs.blog,
+      })
+    })
+  }
+  showSobre() {
+    const sobre = this.api.getSobre();
+    sobre.then((docs) => {
+      this.setState({
+        sobre: docs.sobre,
       })
     })
   }
@@ -145,7 +156,7 @@ class Layout extends Component {
         <div>
           <div ref={this.top} />
           <Banner handleClick={this.handleClick} sobre={this.sobre} sticky={this.state.sticky} clicked={this.state.clicked}/>
-          <About sobre={this.sobre}/>
+          <About sobre={this.sobre} api={this.api}/>
           <Blog blog={this.blog} api={this.api}/>
           <Resultados resultados={this.resultados} handleClick={this.handleClick} api={this.api}/>
           <Midia midia={this.midia}/>
