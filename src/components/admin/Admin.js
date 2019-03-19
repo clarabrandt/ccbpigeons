@@ -28,19 +28,47 @@ export default class Admin extends Component {
   render() {
     return (
       <div className='admin'>
-        <div className='menu'>
-          < AdminAbout />
+        <div className='admin-content'>
+
+          <div className='sobrelink' onClick={this.goToComponent}> 
+            Sobre
+          </div>
+          <div className='admin-sobre--content'>
+            {
+              this.state.clicked === 'sobrelink' &&
+                <AdminAbout />
+            }
+          </div>
+          
           <div className='bloglink' onClick={this.goToComponent}> 
             Blog
           </div>
-          < AdminResultados />
-          < AdminMidia />
-        <div className= 'content'>
+          <div className='admin-blog--content'>
+            {
+              this.state.clicked === 'bloglink' &&
+                <AdminBlog />
+            }
+          </div>
+
+          <div className='resultadoslink' onClick={this.goToComponent}> 
+            Resultados
+          </div>
+          <div className='admin-resultados--content'>
+            {
+              this.state.clicked === 'resultadoslink' &&
+                <AdminResultados />
+            }
+          </div>
+
+          <div className='midialink' onClick={this.goToComponent}> 
+            Midia
+          </div>
+          <div className='admin-midia--content'>
           {
-            this.state.clicked === 'bloglink' &&
-              <AdminBlog />
+            this.state.clicked === 'midialink' &&
+              <AdminMidia />
           }
-        </div>
+          </div>
         </div>
       </div>
 

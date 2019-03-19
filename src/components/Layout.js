@@ -9,6 +9,7 @@ import Resultados from './Resultados';
 import Blog from './Blog';
 import Footer from './Footer';
 import Banner from './Banner';
+import Login from './Login';
 
 import './Layout.css';
 
@@ -29,6 +30,7 @@ class Layout extends Component {
     this.api = new api();
     
     this.layout = React.createRef();
+    this.login = React.createRef();
     this.top = React.createRef();
     this.midia = React.createRef();
     this.sobre = React.createRef();
@@ -44,6 +46,8 @@ class Layout extends Component {
     this.showResultados();
     this.showBlog();
     this.showSobre();
+    this.showMidia();
+    console.log(this.midia)
 
 
   };
@@ -73,6 +77,14 @@ class Layout extends Component {
       })
     })
   }
+  showMidia() {
+    const midia = this.api.getMidia();
+    midia.then((docs) => {
+      this.setState({
+        midia: docs.midia,
+      })
+    })
+  }
 
   // getCopaMG() {
   //   const copaMG = this.api.getCopaMG();
@@ -90,6 +102,7 @@ class Layout extends Component {
   navigateToPage() {
     if (this.props.match.path) {
       this.handleClick(this.props.match.path.slice(1));
+      
     }
     if (this.props.match.path.slice(1) === 'leiloes') {
       console.log(this.props.match)
@@ -128,6 +141,10 @@ class Layout extends Component {
     if (clicked === 'blog') {
       this.smoothScroll(this.blog);
     }
+    if (clicked === 'login') {
+      return(this.login);
+      
+    }
   }
 
   onScroll() {
@@ -159,8 +176,8 @@ class Layout extends Component {
           <About sobre={this.sobre} api={this.api}/>
           <Blog blog={this.blog} api={this.api}/>
           <Resultados resultados={this.resultados} handleClick={this.handleClick} api={this.api}/>
-          <Midia midia={this.midia}/>
-          <Footer top={this.top} handleClick={this.handleClick}/>
+          <Midia midia={this.midia} api={this.api}/>
+          <Footer top={this.top} handleClick={this.handleClick} login={this.login}/>
         </div>
       </div>
     )

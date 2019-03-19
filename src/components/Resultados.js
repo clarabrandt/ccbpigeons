@@ -11,11 +11,14 @@ export default class Resultados extends Component {
     this.toggleList = this.toggleList.bind(this);
     this.showResultados = this.showResultados.bind(this);
     // this.getCopaMG = this.getCopaMG.bind(this);
+  
   }
+
 
   componentDidMount() {
     this.showResultados();
     // this.getCopaMG();
+    
   };
 
   toggleList() {

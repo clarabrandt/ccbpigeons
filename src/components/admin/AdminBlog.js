@@ -27,6 +27,7 @@ export default class AdminBlog extends Component {
     event.preventDefault();
     const data = { titulo: this.state.titulo, conteudo: this.state.conteudo };
     
+    console.log(this.state.titulo, this.state.conteudo)
     fetch(endpoint, {
       method: 'POST',
       headers: {
@@ -35,18 +36,16 @@ export default class AdminBlog extends Component {
       },
       body: JSON.stringify(data),
     });
-    console.log(this.state.titulo, this.state.conteudo)
   }
 
   render() {
     return (
       <Fragment>
-        <form id='postData'>
-          <input type='text' id='titulo' name='titulo' onChange={ this.handleChange } />
-          <textarea type='text' id='conteudo' name='conteudo' onChange={ this.handleChange }/>
-          <button onClick={ this.handleClick }>Enviar</button>
+        <form className='postData'>
+          <input type='text' id='titulo' name='titulo' placeholder='título' onChange={ this.handleChange } />
+          <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' onChange={ this.handleChange }/>
+          <button onClick={ this.handleClick }>Postar</button>
         </form>
-        
       </Fragment>
 
     )

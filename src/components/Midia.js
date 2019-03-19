@@ -4,23 +4,32 @@ import Videos from './Videos.js';
 import Youtube from './Youtube.js'
 
 export default class Midia extends Component {
-
-
-  componentDidMount() {
-    console.log(this.promessa.then(
-      (x) => console.log(x)
-    ).catch(err => console.log(err))
-    );
+  constructor(props) {
+    super(props)
+    this.state= {
+      midia: []
+    }
+    
+    this.showMidia = this.showMidia.bind(this);
   }
 
-  promessa = new Promise((resolve, reject) =>  {
-    const x = 2;
-    if (x > 5 ){
-      resolve('Maior');
-    }else {
-      reject('O numero e menor que 5');
-    }
-  })
+  componentDidMount() {
+    this.showMidia();
+  };
+
+  showMidia() {
+    const midia = this.props.api.getMidia();
+    console.log(midia)
+    midia.then((docs) =>{
+      this.setState({
+        midia: Object.values(docs.midia),
+        
+      })
+      console.log(docs.midia)
+    })
+  }
+
+  
 
 
   render() {
@@ -44,9 +53,19 @@ export default class Midia extends Component {
           </div>
           <div className='news'>
             <div className='news-subtitle'>Notícias</div>
-            <div className='news-content'>O próximo leilão será anunciado em breve!</div>
-            <div className='news-content'>Notícia 2 </div>
-            <div className='news-content'>Notícia 3 </div>
+          
+              {
+                this.state.midia.map((res, index) => {
+                  return (
+                    <div key={index} className= 'news-new--content'>
+                      <div className='news-title'>{res.titulo} </div>
+                      <div className='news-content'>
+                        <p>{res.conteudo}</p> 
+                      </div>
+                    </div>
+                  )
+                })
+                }
           </div>
           {/* <div className='foto' >
             <div className='midia--subtitle'>Fotos</div>

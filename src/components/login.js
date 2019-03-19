@@ -6,17 +6,21 @@ export default class Login extends Component {
   constructor(props) {
     super(props)
     this.authWithEmailAndPassword = this.authWithEmailAndPassword.bind(this)
+    
   }
-
   authWithEmailAndPassword(event) {
     event.preventDefault();
     console.log('auth with email');
 
   }
+  componentDidMount() {
+    console.log(this.props.login)
+  }
 
   render() {
     return (
-      <div className='login'>
+      <div className='login' anchor='login' ref={this.props.login}>
+      
         <form className= 'login--form'>
           <label>
             Email:
