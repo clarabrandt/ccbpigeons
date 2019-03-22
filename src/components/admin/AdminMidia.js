@@ -42,6 +42,7 @@ export default class AdminMidia extends Component {
     return (
       <Fragment>
         <form className='postNews'>
+          <div>Nova notícia</div>
           <textarea type='text' id='noticia' name='noticia' placeholder='texto' onChange={ this.handleChange }/>
           <button onClick={ this.handleClick }>Postar</button>
         </form>

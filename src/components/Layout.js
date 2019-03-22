@@ -47,9 +47,6 @@ class Layout extends Component {
     this.showBlog();
     this.showSobre();
     this.showMidia();
-    console.log(this.midia)
-
-
   };
 
   showResultados() {

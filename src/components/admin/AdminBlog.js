@@ -42,6 +42,7 @@ export default class AdminBlog extends Component {
     return (
       <Fragment>
         <form className='postData'>
+          <div>Novo post para o blog</div>
           <input type='text' id='titulo' name='titulo' placeholder='título' onChange={ this.handleChange } />
           <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' onChange={ this.handleChange }/>
           <button onClick={ this.handleClick }>Postar</button>
