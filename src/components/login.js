@@ -1,20 +1,44 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
 import './Login.css'
 
 export default class Login extends Component {
+
+  baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
+
   constructor(props) {
-    super(props)
-    this.authWithEmailAndPassword = this.authWithEmailAndPassword.bind(this)
-    
+    super(props);
+
+    this.state={
+      email:'',
+      password:''
+    }  
   }
-  authWithEmailAndPassword(event) {
+
+  authWithEmailAndPassword = (event) => {
     event.preventDefault();
     console.log('auth with email');
-
   }
-  componentDidMount() {
-    console.log(this.props.login)
+
+  handleClick = (event) => {
+    const endpoint = `${this.baseUrl}login`;
+    event.preventDefault();
+    const data = { email: this.state.email, password: this.state.password };
+    
+    console.log(this.state.email, this.state.password)
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data),
+    });
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    })
   }
 
   render() {
@@ -24,13 +48,13 @@ export default class Login extends Component {
         <form className= 'login--form'>
           <label>
             Email:
-            <input type="email" name="email" ref={(input) => { this.emailInput = input }}/>
+            <input type="email" name="email" ref={(input) => { this.emailInput = input }} onChange={ this.handleChange }/>
           </label>
           <label>
             Password:
-            <input type="text" name="password" ref={(input) => { this.passwordInput = input }}/>
+            <input type="text" name="password" ref={(input) => { this.passwordInput = input }} onChange={ this.handleChange }/>
           </label>
-          <input type="submit" value="Log in" onClick={this.authWithEmailAndPassword} />
+          <button type="submit" value="Log in" onSubmit={this.authWithEmailAndPassword} onClick={ this.handleClick }>Log in </button>
         </form>
       </div>     
     )
