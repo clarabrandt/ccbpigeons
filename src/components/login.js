@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './Login.css'
+import './Login.css';
+import { FirebaseContext } from './firebase'
 
 export default class Login extends Component {
 
@@ -43,20 +44,25 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className='login' anchor='login' ref={this.props.login}>
-      
-        <form className= 'login--form'>
-          <label>
-            Email:
-            <input type="email" name="email" ref={(input) => { this.emailInput = input }} onChange={ this.handleChange }/>
-          </label>
-          <label>
-            Password:
-            <input type="text" name="password" ref={(input) => { this.passwordInput = input }} onChange={ this.handleChange }/>
-          </label>
-          <button type="submit" value="Log in" onSubmit={this.authWithEmailAndPassword} onClick={ this.handleClick }>Log in </button>
-        </form>
-      </div>     
+      <FirebaseContext.Consumer>
+        {firebase => {
+          return (
+            <div className='login' anchor='login' ref={this.props.login}>
+              <form className= 'login--form'>
+                <label>
+                  Email:
+                  <input type="email" name="email" ref={(input) => { this.emailInput = input }} onChange={ this.handleChange }/>
+                </label>
+                <label>
+                  Password:
+                  <input type="text" name="password" ref={(input) => { this.passwordInput = input }} onChange={ this.handleChange }/>
+                </label>
+                <button type="submit" value="Log in" onSubmit={this.authWithEmailAndPassword} onClick={ this.handleClick }>Log in </button>
+              </form>
+            </div> 
+          ) 
+        }}
+      </FirebaseContext.Consumer>
     )
   }
 }
