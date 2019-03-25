@@ -9,11 +9,34 @@ export default class AdminBlog extends Component {
     super(props);
     this.state = {
       titulo: '',
-      conteudo: ''
+      conteudo: '',
+      items: {},
+
     }
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount(){
+    this.fetchData()
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          items: data.blog
+        })
+      })
+  }
+
+  fetchData() {
+    const endpoint = `${this.baseUrl}blog`;
+    return fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    });
   }
 
   handleChange(event) {
@@ -26,8 +49,6 @@ export default class AdminBlog extends Component {
     const endpoint = `${this.baseUrl}blog`;
     event.preventDefault();
     const data = { titulo: this.state.titulo, conteudo: this.state.conteudo };
-    
-    console.log(this.state.titulo, this.state.conteudo)
     fetch(endpoint, {
       method: 'POST',
       headers: {
@@ -56,28 +77,19 @@ export default class AdminBlog extends Component {
   }
 
   renderList(){
+    const { items } = this.state;
     return(
       <div className='admin-panel--list'>
-        <div className='admin-panel--item'>
-          <div className='admin-panel--item--title'>Title</div>
-          <div className='admin-panel--item--edit'>Edit</div>
-          <div className='admin-panel--item--delete'>Delete</div>
-        </div>
-        <div className='admin-panel--item'>
-          <div className='admin-panel--item--title'>Title</div>
-          <div className='admin-panel--item--edit'>Edit</div>
-          <div className='admin-panel--item--delete'>Delete</div>
-        </div>
-        <div className='admin-panel--item'>
-          <div className='admin-panel--item--title'>Title</div>
-          <div className='admin-panel--item--edit'>Edit</div>
-          <div className='admin-panel--item--delete'>Delete</div>
-        </div>
-        <div className='admin-panel--item'>
-          <div className='admin-panel--item--title'>Title</div>
-          <div className='admin-panel--item--edit'>Edit</div>
-          <div className='admin-panel--item--delete'>Delete</div>
-        </div>
+        { 
+          Object.keys(items).map((key) => {
+            return (
+            <div key={ key } className='admin-panel--item'>
+              <div className='admin-panel--item--title'>{items[key].titulo}</div>
+              <div className='admin-panel--item--edit'>Edit</div>
+              <div className='admin-panel--item--delete'>Delete</div>
+            </div>
+          )})
+        }  
       </div>
     )
   }
