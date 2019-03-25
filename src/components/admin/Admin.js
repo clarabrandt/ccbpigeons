@@ -42,18 +42,33 @@ export default class Admin extends Component {
   render() {
     return (
       <div className='admin'>
+        <div>
+        <div>Essa área é de uso exclusivo do Dr. Octávio Ribeiro Jr, para edição do CCb Pigeons.</div>
+        <div>Por favor, clique na área que deseja modificar.</div>
+        </div>
         <div className= {`admin-items ${this.state.visible? 'invisible' : 'visible' }`} onClick={ this.toggleAdminItems } >
           <div className='sobrelink' onClick={this.goToComponent}> 
-            Sobre
+            <div className='sobrelink-title'>Sobre</div>
+            <div className='sobrelink-item sobre-edit'>Editar Conteúdo</div>
+            <div className='sobrelink-item sobre-delete'>Deletar Conteúdo</div>
           </div>
-          <div className='bloglink' onClick={this.goToComponent}> 
-            Blog
+          <div className='bloglink' > 
+            <div className='bloglink-title'>Blog</div>
+            <div className='bloglink-item blog-add' onClick={this.goToComponent}>Adicionar Post</div>
+            <div className='bloglink-item blog-edit'>Editar Post</div>
+            <div className='bloglink-item blog-delete'>Deletar Post</div>
           </div>
           <div className='resultadoslink' onClick={this.goToComponent}> 
-            Resultados
+            <div className='resultadoslink-title'>Resultados</div>
+            <div className='resultadoslink-item resultados-add'>Adicionar Resultado</div>
+            <div className='resultadoslink-item resultados-edit'>Editar Resultado</div>
+            <div className='resultadoslink-item resultados-delete'>Deletar Resultado</div>
           </div>
           <div className='midialink' onClick={this.goToComponent}> 
-            Midia
+            <div className='midialink-title'>Midia</div>
+            <div className='midialink-item midia-add'>Adicionar Notícia</div>
+            <div className='midialink-item midia-edit'>Editar Notícia</div>
+            <div className='midialink-item midia-delete'>Deletar Notícia</div>
           </div>
         </div>
 
@@ -65,7 +80,7 @@ export default class Admin extends Component {
             }
           
             {
-              this.state.clicked === 'bloglink' &&
+              this.state.clicked === 'bloglink-item blog-add' &&
               <AdminBlog />
             }
             {
@@ -74,7 +89,7 @@ export default class Admin extends Component {
             }
           
             {
-              this.state.clicked === 'midialink' &&
+              this.state.clicked === 'midialink-item midia-add' &&
                 <AdminMidia />
             }
             </div>

@@ -50,6 +50,7 @@ baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
     return (
       <Fragment>
         <form className='postData'>
+          <div>Alterar texto sobre o CCB Pigeons</div>
           <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' onChange={ this.handleChange }/>
           <button onClick={ this.handleClick }>Postar</button>
         </form>
