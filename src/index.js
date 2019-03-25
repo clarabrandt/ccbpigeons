@@ -9,11 +9,11 @@ import Firebase, { FirebaseContext } from './components/firebase';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render((
-  <FirebaseContext.Provider value={new Firebase()}>
     <BrowserRouter>
-      <App />
+      <FirebaseContext.Provider value={new Firebase()}>
+        <App />
+      </FirebaseContext.Provider>
     </BrowserRouter>
-  </FirebaseContext.Provider>
 ), document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

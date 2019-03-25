@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 import './Login.css';
-import { FirebaseContext } from './firebase'
+import { withFirebase } from './firebase';
 
-export default class Login extends Component {
+class Login extends Component {
 
   baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
 
@@ -11,7 +13,8 @@ export default class Login extends Component {
 
     this.state={
       email:'',
-      password:''
+      password:'',
+      error: null,
     }  
   }
 
@@ -21,19 +24,15 @@ export default class Login extends Component {
   }
 
   handleClick = (event) => {
-    const endpoint = `${this.baseUrl}login`;
+    const { email, password } = this.state;
+    this.props.firebase
+      .doSignInWithEmailAndPassword(email, password)
+      .then(response => console.log(response))
+      .catch(error => {
+        this.setState({ error });
+      });
+
     event.preventDefault();
-    const data = { email: this.state.email, password: this.state.password };
-    
-    console.log(this.state.email, this.state.password)
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data),
-    });
   }
 
   handleChange = (event) => {
@@ -44,25 +43,28 @@ export default class Login extends Component {
 
   render() {
     return (
-      <FirebaseContext.Consumer>
-        {firebase => {
-          return (
-            <div className='login' anchor='login' ref={this.props.login}>
-              <form className= 'login--form'>
-                <label>
-                  Email:
-                  <input type="email" name="email" ref={(input) => { this.emailInput = input }} onChange={ this.handleChange }/>
-                </label>
-                <label>
-                  Password:
-                  <input type="text" name="password" ref={(input) => { this.passwordInput = input }} onChange={ this.handleChange }/>
-                </label>
-                <button type="submit" value="Log in" onSubmit={this.authWithEmailAndPassword} onClick={ this.handleClick }>Log in </button>
-              </form>
-            </div> 
-          ) 
-        }}
-      </FirebaseContext.Consumer>
-    )
+      <div className='login' anchor='login' ref={this.props.login}>
+        <form className= 'login--form'>
+          <label>
+            Email:
+            <input type="email" name="email" ref={(input) => { this.emailInput = input }} onChange={ this.handleChange }/>
+          </label>
+          <label>
+            Password:
+            <input type="text" name="password" ref={(input) => { this.passwordInput = input }} onChange={ this.handleChange }/>
+          </label>
+          <button type="submit" value="Log in" onSubmit={this.authWithEmailAndPassword} onClick={ this.handleClick }>Log in </button>
+        </form>
+      </div> 
+    ) 
   }
 }
+
+const LoginPage = compose(
+  withRouter,
+  withFirebase,
+)(Login);
+
+export default Login;
+
+export { LoginPage };
