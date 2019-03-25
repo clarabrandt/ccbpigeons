@@ -38,7 +38,7 @@ export default class AdminBlog extends Component {
     });
   }
 
-  render() {
+  renderForm() {
     return (
       <Fragment>
         <form className='postData'>
@@ -52,6 +52,46 @@ export default class AdminBlog extends Component {
         </form>
       </Fragment>
 
+    )
+  }
+
+  renderList(){
+    return(
+      <div className='admin-panel--list'>
+        <div className='admin-panel--item'>
+          <div className='admin-panel--item--title'>Title</div>
+          <div className='admin-panel--item--edit'>Edit</div>
+          <div className='admin-panel--item--delete'>Delete</div>
+        </div>
+        <div className='admin-panel--item'>
+          <div className='admin-panel--item--title'>Title</div>
+          <div className='admin-panel--item--edit'>Edit</div>
+          <div className='admin-panel--item--delete'>Delete</div>
+        </div>
+        <div className='admin-panel--item'>
+          <div className='admin-panel--item--title'>Title</div>
+          <div className='admin-panel--item--edit'>Edit</div>
+          <div className='admin-panel--item--delete'>Delete</div>
+        </div>
+        <div className='admin-panel--item'>
+          <div className='admin-panel--item--title'>Title</div>
+          <div className='admin-panel--item--edit'>Edit</div>
+          <div className='admin-panel--item--delete'>Delete</div>
+        </div>
+      </div>
+    )
+  }
+
+  render() {
+    return(
+      <div className='admin-panel'>
+        <div className='admin-panel--title'>Blog</div>
+        <div className='admin-panel--content'>
+          {
+            this.renderList()
+          }
+        </div>
+      </div>
     )
   }
 }
