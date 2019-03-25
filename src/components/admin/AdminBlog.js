@@ -39,6 +39,19 @@ export default class AdminBlog extends Component {
     });
   }
 
+  deleteData(key) {
+    const endpoint = `${this.baseUrl}blog`;
+    return fetch(endpoint, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({key}),
+    });
+  }
+
+
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
@@ -86,7 +99,9 @@ export default class AdminBlog extends Component {
             <div key={ key } className='admin-panel--item'>
               <div className='admin-panel--item--title'>{items[key].titulo}</div>
               <div className='admin-panel--item--edit'>Edit</div>
-              <div className='admin-panel--item--delete'>Delete</div>
+              <div className='admin-panel--item--delete'>
+                <button className='delete-button' onClick={ () => this.deleteData(key) }>Delete</button>
+              </div>
             </div>
           )})
         }  
