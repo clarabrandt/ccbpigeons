@@ -41,15 +41,25 @@ export default class AdminBlog extends Component {
 
   deleteData(key) {
     const endpoint = `${this.baseUrl}blog`;
-    return fetch(endpoint, {
+    fetch(endpoint, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({key}),
-    });
-  }
+    })
+        .then(response => response.json())
+        .then(data => {
+          const result = this.state.items;
+          delete result[data.key];
+          this.setState({
+            items: result,
+          });
+        }) 
+      }
+      
+  
 
 
   handleChange(event) {
@@ -114,6 +124,9 @@ export default class AdminBlog extends Component {
       <div className='admin-panel'>
         <div className='admin-panel--title'>Blog</div>
         <div className='admin-panel--content'>
+        {/* {
+          this.renderForm()
+        } */}
           {
             this.renderList()
           }
