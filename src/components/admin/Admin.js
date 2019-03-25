@@ -11,11 +11,11 @@ export default class Admin extends Component {
     super(props);
     this.state = {
       clicked: 'admin',
-      visible: false,
+      visible: true,
     };
     this.blog = React.createRef();
     this.goToComponent = this.goToComponent.bind(this);
-    this.toggleAdminItems = this.toggleAdminItems.bind(this);
+    // this.toggleAdminItems = this.toggleAdminItems.bind(this);
 
     this.api = new api();
   }
@@ -23,52 +23,35 @@ export default class Admin extends Component {
   goToComponent(e) {
     this.setState({
       clicked: e.target.className,
-      visible: false
+      visible: false,
     })
   }
 
-  toggleAdminItems() {
-    if(this.state.visible === true) {
-      this.setState({
-        visible: false
-      })
-    } else {
-      this.setState({
-        visible: true
-      })
-    }
+  goBack(e) {
+    this.setState({
+      visible: true,
+    })
   }
 
   render() {
     return (
       <div className='admin'>
         <div>
-        <div>Essa área é de uso exclusivo do Dr. Octávio Ribeiro Jr, para edição do CCb Pigeons.</div>
+        <div>Essa área é de uso exclusivo do Dr. Octávio Ribeiro Jr., para edição do CCb Pigeons.</div>
         <div>Por favor, clique na área que deseja modificar.</div>
         </div>
-        <div className= {`admin-items ${this.state.visible? 'invisible' : 'visible' }`} onClick={ this.toggleAdminItems } >
+        <div className= {`admin-items ${this.state.visible? 'visible' : 'invisible' }`} >
           <div className='sobrelink' onClick={this.goToComponent}> 
-            <div className='sobrelink-title'>Sobre</div>
-            <div className='sobrelink-item sobre-edit'>Editar Conteúdo</div>
-            <div className='sobrelink-item sobre-delete'>Deletar Conteúdo</div>
+            Sobre
           </div>
-          <div className='bloglink' > 
-            <div className='bloglink-title'>Blog</div>
-            <div className='bloglink-item blog-add' onClick={this.goToComponent}>Adicionar Post</div>
-            <div className='bloglink-item blog-edit'>Editar Post</div>
-            <div className='bloglink-item blog-delete'>Deletar Post</div>
+          <div className='bloglink' onClick={this.goToComponent}> 
+            Blog
           </div>
           <div className='resultadoslink' onClick={this.goToComponent}> 
-            <div className='resultadoslink-title'>Resultados</div>
-            <div className='resultadoslink-item resultados-add'>Adicionar Resultado</div>
-            <div className='resultadoslink-item resultados-edit'>Editar Resultado</div>
-            <div className='resultadoslink-item resultados-delete'>Deletar Resultado</div>
+            Resultados
           </div>
           <div className='midialink' onClick={this.goToComponent}> 
-            <div className='midialink-title'>Midia</div>
-            <div className='midialink-item midia-add'>Adicionar Notícia</div>
-            <div className='midialink-item midia-edit'>Editar Notícia</div>
-            <div className='midialink-item midia-delete'>Deletar Notícia</div>
+            Midia
           </div>
         </div>
 
@@ -76,29 +59,25 @@ export default class Admin extends Component {
           <div className='admin-content'>
             {
               this.state.clicked === 'sobrelink' &&
-                <AdminAbout />
+                <AdminAbout goBack={ this.goBack }/>
             }
           
             {
-              this.state.clicked === 'bloglink-item blog-add' &&
-              <AdminBlog />
+              this.state.clicked === 'bloglink' &&
+                <AdminBlog goBack={ this.goBack }/>
             }
             {
               this.state.clicked === 'resultadoslink' &&
-                <AdminResultados />
+                <AdminResultados goBack={ this.goBack }/>
             }
           
             {
-              this.state.clicked === 'midialink-item midia-add' &&
-                <AdminMidia />
+              this.state.clicked === 'midialink' &&
+                <AdminMidia goBack={ this.goBack }/>
             }
             </div>
-          
-        
           </div>
       </div>
-     
-
     )
   }
 }
