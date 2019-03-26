@@ -59,9 +59,6 @@ export default class AdminBlog extends Component {
         }) 
   }
       
-  
-
-
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,

@@ -17,7 +17,46 @@ export default class AdminMidia extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
+  componentDidMount(){
+    this.fetchData()
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          items: data.midia
+        })
+      })
+  }
 
+  fetchData() {
+    const endpoint = `${this.baseUrl}midia`;
+    return fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    });
+  }
+
+  deleteData(key) {
+    const endpoint = `${this.baseUrl}midia`;
+    fetch(endpoint, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({key}),
+    })
+        .then(response => response.json())
+        .then(data => {
+          const result = this.state.items;
+          delete result[data.key];
+          this.setState({
+            items: result,
+          });
+        }) 
+  }
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
@@ -39,7 +78,7 @@ export default class AdminMidia extends Component {
     console.log(data)
   }
 
-  render() {
+  renderForm() {
     return (
       <Fragment>
         <form className='postNews'>
@@ -53,6 +92,41 @@ export default class AdminMidia extends Component {
         </form>
       </Fragment>
 
+    )
+  }
+  renderList(){
+    const { items } = this.state;
+    return(
+      <div className='admin-panel--list'>
+        { 
+          Object.keys(items).map((key) => {
+            return (
+            <div key={ key } className='admin-panel--item'>
+              <div className='admin-panel--item--title'>{items[key].titulo}</div>
+              <div className='admin-panel--item--edit'>Edit</div>
+              <div className='admin-panel--item--delete'>
+                <button className='delete-button' onClick={ () => this.deleteData(key) }>Delete</button>
+              </div>
+            </div>
+          )})
+        }  
+      </div>
+    )
+  }
+
+  render() {
+    return(
+      <div className='admin-panel'>
+        <div className='admin-panel--title'>Midia</div>
+        <div className='admin-panel--content'>
+        {/* {
+          this.renderForm()
+        } */}
+          {
+            this.renderList()
+          }
+        </div>
+      </div>
     )
   }
 }
