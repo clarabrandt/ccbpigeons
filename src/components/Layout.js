@@ -173,8 +173,8 @@ class Layout extends Component {
           <About sobre={this.sobre} api={this.api}/>
           <Blog blog={this.blog} api={this.api}/>
           <Resultados resultados={this.resultados} handleClick={this.handleClick} api={this.api}/>
-          <Midia midia={this.midia} api={this.api}/>
           <Footer top={this.top} handleClick={this.handleClick} login={this.login}/>
+          <Midia midia={this.midia} api={this.api}/>
         </div>
       </div>
     )
