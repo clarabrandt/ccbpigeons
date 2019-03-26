@@ -36,6 +36,8 @@
     padding: 80px 100px;
     margin: auto;
     z-index: 999;
+    cursor: pointer;
+    
   }
 
   .admin-content {

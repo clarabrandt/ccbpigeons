@@ -9,7 +9,9 @@ export default class AdminMidia extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      noticia: ''
+      titulo: '',
+      conteudo: '',
+      items: {},
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -25,8 +27,7 @@ export default class AdminMidia extends Component {
   handleClick(event) {
     const endpoint = `${this.baseUrl}midia`;
     event.preventDefault();
-    const data = { noticia: this.state.noticia };
-    
+    const data = { titulo: this.state.titulo, conteudo: this.state.conteudo };
     fetch(endpoint, {
       method: 'POST',
       headers: {
@@ -35,7 +36,7 @@ export default class AdminMidia extends Component {
       },
       body: JSON.stringify(data),
     });
-    console.log(this.state.noticia)
+    console.log(data)
   }
 
   render() {
@@ -43,7 +44,8 @@ export default class AdminMidia extends Component {
       <Fragment>
         <form className='postNews'>
           <div>Nova notícia</div>
-          <textarea type='text' id='noticia' name='noticia' placeholder='texto' onChange={ this.handleChange }/>
+          <input type='text' id='titulo' name='titulo' placeholder='título' onChange={ this.handleChange } />
+          <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' onChange={ this.handleChange }/>
           <div className='buttons'>
             <button onClick={ this.props.goBack }>Voltar</button>
             <button onClick={ this.handleClick }>Postar</button>

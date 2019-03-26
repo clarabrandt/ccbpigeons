@@ -57,7 +57,7 @@ export default class AdminBlog extends Component {
             items: result,
           });
         }) 
-      }
+  }
       
   
 
