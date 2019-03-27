@@ -12,10 +12,13 @@ export default class AdminMidia extends Component {
       titulo: '',
       conteudo: '',
       items: {},
+      opcao: null,
+      clicado: null,
     }
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.addMidia = this.addMidia.bind(this)
   }
   componentDidMount(){
     this.fetchData()
@@ -78,20 +81,42 @@ export default class AdminMidia extends Component {
     console.log(data)
   }
 
-  renderForm() {
-    return (
-      <Fragment>
-        <form className='postNews'>
-          <div>Nova notícia</div>
-          <input type='text' id='titulo' name='titulo' placeholder='título' onChange={ this.handleChange } />
-          <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' onChange={ this.handleChange }/>
-          <div className='buttons'>
-            <button onClick={ this.props.goBack }>Voltar</button>
-            <button onClick={ this.handleClick }>Postar</button>
-          </div>
-        </form>
-      </Fragment>
+  addMidia() {
+    this.setState({
+      opcao: 'adicionar'
+    })
+  }
 
+  editPost(key) {
+    const { items } = this.state
+    this.setState({
+      opcao: 'editar',
+      clicado: key,
+      titulo: items[key].titulo,
+      conteudo: items[key].conteudo,
+    })
+  }
+
+  closeForm() {
+    this.setState({
+      opcao: null
+    })
+  }
+
+  renderForm() {
+    const editTitle = this.state.titulo;
+    const editConteudo = this.state.conteudo;
+
+    return (
+      <form className='postData'>
+        <div>Nova notícia</div>
+        <input type='text' id='titulo' name='titulo' placeholder='título' value={editTitle} onChange={ this.handleChange } />
+        <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' value={editConteudo} onChange={ this.handleChange }/>
+        <div className='buttons'>
+          <button type ='button' onClick={ this.closeForm }>Cancelar</button>
+          <button type ='button' onClick={ this.handleClick }>Postar</button>
+        </div>
+      </form>
     )
   }
   renderList(){
@@ -103,9 +128,11 @@ export default class AdminMidia extends Component {
             return (
             <div key={ key } className='admin-panel--item'>
               <div className='admin-panel--item--title'>{items[key].titulo}</div>
-              <div className='admin-panel--item--edit'>Edit</div>
+              <div className='admin-panel--item--edit' >
+                <button type ='button' className='edit-button' onClick={ () => this.editPost(key) }>Edit</button>
+              </div>
               <div className='admin-panel--item--delete'>
-                <button className='delete-button' onClick={ () => this.deleteData(key) }>Delete</button>
+                <button type ='button' className='delete-button' onClick={ () => this.deleteData(key) }>Delete</button>
               </div>
             </div>
           )})
@@ -116,17 +143,25 @@ export default class AdminMidia extends Component {
 
   render() {
     return(
-      <div className='admin-panel'>
-        <div className='admin-panel--title'>Midia</div>
+      <div className= 'admin-panel'>
+        <div className='admin-panel--title'>Mídia</div>
+        
         <div className='admin-panel--content'>
-        {/* {
-          this.renderForm()
-        } */}
           {
-            this.renderList()
+            !this.state.opcao && 
+              this.renderList()
           }
+          {
+            (this.state.opcao === 'adicionar' || this.state.opcao === 'editar') && 
+              this.renderForm()
+          }
+          <div className='buttons'>
+            <button type ='button' onClick={ this.props.goBack }>Voltar</button>
+            <button type ='button' onClick={ this.addPost }>Novo post</button>
+          </div>
         </div>
       </div>
+      
     )
   }
 }

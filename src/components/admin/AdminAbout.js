@@ -53,8 +53,8 @@ baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
           <div>Alterar texto sobre o CCB Pigeons</div>
           <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' onChange={ this.handleChange }/>
           <div className='buttons'>
-            <button onClick={ this.props.goBack }>Voltar</button>
-            <button onClick={ this.handleClick }>Postar</button>
+            <button type ='button' onClick={ this.props.goBack }>Voltar</button>
+            <button type ='button' onClick={ this.handleClick }>Postar</button>
           </div>
         </form>
       </Fragment>

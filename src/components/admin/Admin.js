@@ -15,6 +15,7 @@ export default class Admin extends Component {
     };
     this.blog = React.createRef();
     this.goToComponent = this.goToComponent.bind(this);
+    this.goBack = this.goBack.bind(this);
     // this.toggleAdminItems = this.toggleAdminItems.bind(this);
 
     this.api = new api();

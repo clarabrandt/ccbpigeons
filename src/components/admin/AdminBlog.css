@@ -101,18 +101,21 @@
       .admin-panel--item--edit,
       .admin-panel--item--delete {
         width: 80px;
-        cursor: pointer;
+        
       }
         .delete-button {
           background-color: rgb(163, 24, 24);
           color: white;
+          cursor: pointer;
+          padding: 5px 10px;
+          font-size: 12px;
+          font-weight: 600;
         }
-
-
-
-  .postData {
-    width: 100%;
-    height: 50%;
-    z-index: 9999;
-    position: absolute
-}
+        .edit-button {
+          background-color: rgb(79, 97, 201);
+          color: white;
+          cursor: pointer;
+          padding: 5px 10px;
+          font-size: 12px;
+          font-weight: 600;
+        }
