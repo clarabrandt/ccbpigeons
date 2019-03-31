@@ -17,11 +17,11 @@ baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
   constructor(props) {
     super(props);
     this.state = {
-      conteudo: ''
+      sobre: ''
     }
 
-    // this.handleClick = this.handleClick.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
@@ -30,28 +30,32 @@ baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
     })
   }
 
-  // handleClick(event) {
-  //   const endpoint = `${this.baseUrl}blog`;
-  //   event.preventDefault();
-  //   const data = { conteudo: this.state.conteudo };
+  handleClick(event) {
+    const endpoint = `${this.baseUrl}sobre`;
+    event.preventDefault();
+    const data = { sobre: this.state.sobre };
     
-  //   console.log(this.state.conteudo)
-  //   fetch(endpoint, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(data),
-  //   });
-  // }
+    console.log(this.state.sobre)
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data),
+    });
+  }
 
   render() {
     return (
       <Fragment>
         <form className='postData'>
+          <div>Alterar texto sobre o CCB Pigeons</div>
           <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' onChange={ this.handleChange }/>
-          <button onClick={ this.handleClick }>Postar</button>
+          <div className='buttons'>
+            <button onClick={ this.props.goBack }>Voltar</button>
+            <button onClick={ this.handleClick }>Postar</button>
+          </div>
         </form>
       </Fragment>
 

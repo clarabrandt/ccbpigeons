@@ -11,11 +11,11 @@ export default class Admin extends Component {
     super(props);
     this.state = {
       clicked: 'admin',
-      visible: false,
+      visible: true,
     };
     this.blog = React.createRef();
     this.goToComponent = this.goToComponent.bind(this);
-    this.toggleAdminItems = this.toggleAdminItems.bind(this);
+    // this.toggleAdminItems = this.toggleAdminItems.bind(this);
 
     this.api = new api();
   }
@@ -23,26 +23,24 @@ export default class Admin extends Component {
   goToComponent(e) {
     this.setState({
       clicked: e.target.className,
-      visible: false
+      visible: false,
     })
   }
 
-  toggleAdminItems() {
-    if(this.state.visible === true) {
-      this.setState({
-        visible: false
-      })
-    } else {
-      this.setState({
-        visible: true
-      })
-    }
+  goBack(e) {
+    this.setState({
+      visible: true,
+    })
   }
 
   render() {
     return (
       <div className='admin'>
-        <div className= {`admin-items ${this.state.visible? 'invisible' : 'visible' }`} onClick={ this.toggleAdminItems } >
+        <div>
+        <div>Essa área é de uso exclusivo do Dr. Octávio Ribeiro Jr., para edição do CCb Pigeons.</div>
+        <div>Por favor, clique na área que deseja modificar.</div>
+        </div>
+        <div className= {`admin-items ${this.state.visible? 'visible' : 'invisible' }`} >
           <div className='sobrelink' onClick={this.goToComponent}> 
             Sobre
           </div>
@@ -61,29 +59,25 @@ export default class Admin extends Component {
           <div className='admin-content'>
             {
               this.state.clicked === 'sobrelink' &&
-                <AdminAbout />
+                <AdminAbout goBack={ this.goBack }/>
             }
           
             {
               this.state.clicked === 'bloglink' &&
-              <AdminBlog />
+                <AdminBlog goBack={ this.goBack }/>
             }
             {
               this.state.clicked === 'resultadoslink' &&
-                <AdminResultados />
+                <AdminResultados goBack={ this.goBack }/>
             }
           
             {
               this.state.clicked === 'midialink' &&
-                <AdminMidia />
+                <AdminMidia goBack={ this.goBack }/>
             }
             </div>
-          
-        
           </div>
       </div>
-     
-
     )
   }
 }

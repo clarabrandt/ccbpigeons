@@ -29,21 +29,15 @@
   .midialink,
   .sobrelink,
   .resultadoslink {
-    display: flex;
+    font-size: 22px;
     box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
     max-width: 50%;
     max-height: 50%;
-    padding: 100px;
+    padding: 80px 100px;
     margin: auto;
     z-index: 999;
-  }
-  
-  .bloglink:hover,
-  .midialink:hover,
-  .sobrelink:hover,
-  .resultadoslink:hover {
     cursor: pointer;
-    text-decoration: underline
+    
   }
 
   .admin-content {

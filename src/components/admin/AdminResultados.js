@@ -7,6 +7,7 @@ export default class AdminResultados extends Component {
       <div className='adminresultados'>
         Resultados
       </div>
+      
     )
   }
 }
