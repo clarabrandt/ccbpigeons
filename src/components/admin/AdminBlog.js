@@ -11,13 +11,17 @@ export default class AdminBlog extends Component {
       titulo: '',
       conteudo: '',
       items: {},
-      visible: true,
-
+      opcao: null,
+      clicado: null,
+      resposta: null,
     }
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.renderForm = this.renderForm.bind(this)
+    this.addPost = this.addPost.bind(this)
+    this.changeData = this.changeData.bind(this)
+    this.editPost = this.editPost.bind(this)
+    this.closeForm = this.closeForm.bind(this)
   }
 
   componentDidMount(){
@@ -27,8 +31,7 @@ export default class AdminBlog extends Component {
         this.setState({
           items: data.blog
         })
-      })
-      
+      })   
   }
 
   fetchData() {
@@ -42,7 +45,32 @@ export default class AdminBlog extends Component {
     });
   }
 
-  deleteData(key) {
+  changeData(e, key) {
+    e.preventDefault()
+    const titulo = this.state.titulo
+    const conteudo = this.state.conteudo
+    const endpoint = `${this.baseUrl}blog`;
+    fetch(endpoint, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({key, titulo, conteudo}),
+    })
+      .then(response => response.json())
+      .then(data => {
+        const result = this.state.items;
+        console.log(result[data.key])
+        this.setState({
+          titulo,
+          conteudo
+        });
+    }) 
+  }
+
+  deleteData(e, key) {
+    e.preventDefault()
     const endpoint = `${this.baseUrl}blog`;
     fetch(endpoint, {
       method: 'DELETE',
@@ -56,6 +84,7 @@ export default class AdminBlog extends Component {
         .then(data => {
           const result = this.state.items;
           delete result[data.key];
+          console.log([data.key])
           this.setState({
             items: result,
           });
@@ -66,12 +95,11 @@ export default class AdminBlog extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     })
-    
   }
 
-  handleClick(event) {
+  handleClick(e) {
     const endpoint = `${this.baseUrl}blog`;
-    event.preventDefault();
+    e.preventDefault();
     const data = { titulo: this.state.titulo, conteudo: this.state.conteudo };
     fetch(endpoint, {
       method: 'POST',
@@ -80,50 +108,51 @@ export default class AdminBlog extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data),
-      
     });
+    this.setState({
+      opcao: null,
+    })
+  }
+
+  addPost() {
+    this.setState({
+      opcao: 'adicionar'
+    })
+  }
+
+  editPost(e, key) {
+    e.preventDefault()
+    const { items } = this.state
+    this.setState({
+      opcao: 'editar',
+      clicado: key,
+      titulo: items[key].titulo,
+      conteudo: items[key].conteudo,
+    })
+  }
+
+  closeForm(e) {
+    e.preventDefault()
+    this.setState({
+      opcao: null
+    })
   }
 
   renderForm() {
-    this.setState({
-      visible: false
-    })
+    const editTitle = this.state.titulo;
+    const editConteudo = this.state.conteudo;
+    const { clicado } = this.state;
+    
     return (
-      <Fragment>
-        <form className='postData'>
-          <div>Novo post para o blog</div>
-          <input type='text' id='titulo' name='titulo' placeholder='título' onChange={ this.handleChange } />
-          <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' onChange={ this.handleChange }/>
-          <div className='buttons'>
-            <button onClick={ this.props.goBack }>Voltar</button>
-            <button onClick={ this.handleClick }>Postar</button>
-          </div>
-        </form>
-      
-      </Fragment>
-    )
-  }
-
-  renderFormEdit() {
-    const { items } = this.state;
-    return (
-      <Fragment>
-        { 
-          Object.keys(items).map((key) => {
-            return (
-              <form className='postData' key={ key }>
-                <div>Editar conteúdo post</div>
-                <input type='text' id='titulo' name='titulo' placeholder='título'>{items[key].titulo}</input>
-                <textarea type='text' id='conteudo' name='conteudo' placeholder='texto'>{items[key].conteudo}</textarea>
-                <div className='buttons'>
-                  <button onClick={ this.props.goBack }>Voltar</button>
-                  <button onClick={ this.handleClick }>Postar</button>
-                </div>
-            </form>
-          )})
-          
-        }  
-      </Fragment>
+      <form className='postData'>
+        <div>Novo post para o blog</div>
+        <input type='text' id='titulo' name='titulo' placeholder='título' value={editTitle} onChange={ this.handleChange } />
+        <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' value={editConteudo} onChange={ this.handleChange }/>
+        <div className='buttons'>
+          <button type ='button' onClick={ this.closeForm }>Cancelar</button>
+          <button type ='button' onClick={ (e) => this.state.opcao === 'adicionar' ? this.handleClick(e) : this.changeData(e, clicado) }>Postar</button>
+        </div>
+      </form>
     )
   }
 
@@ -131,19 +160,19 @@ export default class AdminBlog extends Component {
     const { items } = this.state;
     return(
       <div className= 'admin-panel--list'>
-      
         { 
           Object.keys(items).map((key) => {
             return (
             <div key={ key } className='admin-panel--item'>
               <div className='admin-panel--item--title'>{items[key].titulo}</div>
-              <div className='admin-panel--item--edit' onClick={()=>this.renderFormEdit(key)}>Edit</div>
+              <div className='admin-panel--item--edit' >
+                <button type ='button' className='edit-button' onClick={ (e) => this.editPost(e, key) }>Edit</button>
+              </div>
               <div className='admin-panel--item--delete'>
-                <button className='delete-button' onClick={ () => this.deleteData(key) }>Delete</button>
+                <button type ='button' className='delete-button' onClick={ (e) => this.deleteData(e, key) }>Delete</button>
               </div>
             </div>
           )})
-          
         }  
       </div>
     )
@@ -153,22 +182,20 @@ export default class AdminBlog extends Component {
     return(
       <div className= 'admin-panel'>
         <div className='admin-panel--title'>Blog</div>
-        <div className='admin-panel--item--new'>
-          <div className='admin-panel--item--write'>
-            <button className='add-button' onClick={ () => this.renderForm() }>Escrever novo post</button>
-          </div>
-        </div>
+        
         <div className='admin-panel--content'>
-        {/* {
-          this.renderForm()
-        } */}
-        {/* {
-          this.renderFormEdit()
-        } */}
           {
-            this.renderList()
+            !this.state.opcao && 
+              this.renderList()
           }
-          
+          {
+            (this.state.opcao === 'adicionar' || this.state.opcao === 'editar') && 
+              this.renderForm()
+          }
+          <div className='buttons'>
+            <button onClick={ this.props.goBack }>Voltar</button>
+            <button onClick={ this.addPost }>Novo post</button>
+          </div>
         </div>
       </div>
       

@@ -12,11 +12,19 @@ export default class AdminMidia extends Component {
       titulo: '',
       conteudo: '',
       items: {},
+      opcao: null,
+      clicado: null,
+      resposta: null,
     }
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.addMidia = this.addMidia.bind(this)
+    this.changeData = this.changeData.bind(this)
+    this.editMidia = this.editMidia.bind(this)
+    this.closeForm = this.closeForm.bind(this)
   }
+
   componentDidMount(){
     this.fetchData()
       .then(response => response.json())
@@ -38,7 +46,34 @@ export default class AdminMidia extends Component {
     });
   }
 
-  deleteData(key) {
+
+  changeData(e, key) {
+    e.preventDefault()
+    const titulo = this.state.titulo
+    const conteudo = this.state.conteudo
+    console.log(key)
+    const endpoint = `${this.baseUrl}midia`;
+    fetch(endpoint, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({key, titulo, conteudo}),
+    })
+      .then(response => response.json())
+      .then(data => {
+        const result = this.state.items;
+        console.log(result[data.key])
+        this.setState({
+          titulo,
+          conteudo
+        });
+    }) 
+  }
+
+  deleteData(e, key) {
+    e.preventDefault()
     const endpoint = `${this.baseUrl}midia`;
     fetch(endpoint, {
       method: 'DELETE',
@@ -57,6 +92,7 @@ export default class AdminMidia extends Component {
           });
         }) 
   }
+ 
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
@@ -75,37 +111,67 @@ export default class AdminMidia extends Component {
       },
       body: JSON.stringify(data),
     });
-    console.log(data)
+    this.setState({
+      opcao: null,
+    })
+  }
+
+  addMidia() {
+    this.setState({
+      opcao: 'adicionar'
+    })
+  }
+
+  editMidia(e, key) {
+    e.preventDefault()
+    const { items } = this.state
+    this.setState({
+      opcao: 'editar',
+      clicado: key,
+      titulo: items[key].titulo,
+      conteudo: items[key].conteudo,
+    })
+  }
+
+  closeForm(e) {
+    e.preventDefault()
+    this.setState({
+      opcao: null
+    })
   }
 
   renderForm() {
+    const editTitle = this.state.titulo;
+    const editConteudo = this.state.conteudo;
+    const { clicado } = this.state;
+    
     return (
-      <Fragment>
-        <form className='postNews'>
-          <div>Nova notícia</div>
-          <input type='text' id='titulo' name='titulo' placeholder='título' onChange={ this.handleChange } />
-          <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' onChange={ this.handleChange }/>
-          <div className='buttons'>
-            <button onClick={ this.props.goBack }>Voltar</button>
-            <button onClick={ this.handleClick }>Postar</button>
-          </div>
-        </form>
-      </Fragment>
-
+      <form className='postData'>
+        <div>Nova notícia</div>
+        <input type='text' id='titulo' name='titulo' placeholder='título' value={editTitle} onChange={ this.handleChange } />
+        <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' value={editConteudo} onChange={ this.handleChange }/>
+        <div className='buttons'>
+          <button type ='button' onClick={ this.closeForm }>Cancelar</button>
+          <button type ='button' onClick={ (e) => this.state.opcao === 'adicionar' ? this.handleClick(e) : this.changeData(e, clicado) }>Postar</button>
+        </div>
+      </form>
     )
   }
+
   renderList(){
     const { items } = this.state;
     return(
-      <div className='admin-panel--list'>
+      <div className= 'admin-panel--list'>
         { 
           Object.keys(items).map((key) => {
             return (
             <div key={ key } className='admin-panel--item'>
               <div className='admin-panel--item--title'>{items[key].titulo}</div>
-              <div className='admin-panel--item--edit'>Edit</div>
+              <div className='admin-panel--item--edit' >
+                <button type ='button' className='edit-button' onClick={ (e) => this.editMidia(e, key) }>Edit</button>
+              </div>
               <div className='admin-panel--item--delete'>
-                <button className='delete-button' onClick={ () => this.deleteData(key) }>Delete</button>
+                <button type ='button' className='delete-button' onClick={ (e) => this.deleteData(e, key) }>Delete</button>
               </div>
             </div>
           )})
@@ -116,17 +182,25 @@ export default class AdminMidia extends Component {
 
   render() {
     return(
-      <div className='admin-panel'>
+      <div className= 'admin-panel'>
         <div className='admin-panel--title'>Midia</div>
+        
         <div className='admin-panel--content'>
-        {/* {
-          this.renderForm()
-        } */}
           {
-            this.renderList()
+            !this.state.opcao && 
+              this.renderList()
           }
+          {
+            (this.state.opcao === 'adicionar' || this.state.opcao === 'editar') && 
+              this.renderForm()
+          }
+          <div className='buttons'>
+            <button onClick={ this.props.goBack }>Voltar</button>
+            <button onClick={ this.addMidia }>Nova notícia</button>
+          </div>
         </div>
       </div>
+      
     )
   }
 }
