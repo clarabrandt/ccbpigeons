@@ -39,23 +39,29 @@ export default class Admin extends Component {
      { /**
        * NAVBAR
        */}
-      <nav className="navbar is-white">
+      <nav class="navbar has-shadow">
         <div className="container">
           <div className="navbar-brand">
             <a className="navbar-item brand-text" href="/admin">CCBPigeons</a>
             <div className="navbar-burger burger" data-target="navMenu">
-              <span>Home</span>
-              <span>Blog</span>
-              <span>Resultados</span>
-              <span>Sobre</span>
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
           </div>
           <div id="navMenu" className="navbar-menu">
-            <div className="navbar-start">
-              <a className="navbar-item" href="/">Home</a>
-              <a className="navbar-item" href="/blog">Blog</a>
-              <a className="navbar-item" href="/resultados">Resultados</a>
-              <a className="navbar-item" href="/sobre">Sobre</a>
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                  <a class="navbar-link" href="/admin">Account</a>
+
+                  <div class="navbar-dropdown">
+                    <a class="navbar-item" href="/admin">Dashboard</a>
+                    <a class="navbar-item" href="/admin">Profile</a>
+                    <a class="navbar-item" href="/admin">Settings</a>
+                    <hr class="navbar-divider"/>
+                    <div class="navbar-item" href="/admin">Logout</div>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -69,20 +75,18 @@ export default class Admin extends Component {
        * MAIN CONTAINER
        */}
 
-      <div className="container">
-        <div className="columns">
-          <div className="column is-3 ">
-          </div>
-          <div class="column is-9 is-warning">
-            <nav class="breadcrumb" aria-label="breadcrumbs">
-              <ul>
-                <li><a href="/">CCBPigeons</a></li>
-                <li><a href="/admin">Admin</a></li>
-                <li class="is-active"><a href="#" aria-current="page">Home</a></li>
-              </ul>
-            </nav>
-          </div>
+      <div className="columns" id="admin">
+        <aside className="column is-2 aside hero is-fullheight">
+          a
+        </aside>
+        <div class="column is-4 messages hero is-fullheight" id="message-feed">
+          b
         </div>
+        <div class="column is-6 message hero is-fullheight is-hidden" id="message-pane">
+          c
+        </div>
+        <footer class="footer">
+        </footer>
       </div>
 
       {/**
