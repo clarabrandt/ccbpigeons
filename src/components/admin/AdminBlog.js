@@ -180,8 +180,8 @@ export default class AdminBlog extends Component {
 
   render() {
     return(
-      <div className= 'admin-panel'>
-        <div className='admin-panel--title'>Blog</div>
+      // <div className= 'admin-panel'>
+        // <div className='admin-panel--title'>Blog</div>
         
         <div className='admin-panel--content'>
           {
@@ -197,7 +197,7 @@ export default class AdminBlog extends Component {
             <button onClick={ this.addPost }>Novo post</button>
           </div>
         </div>
-      </div>
+      // </div>
       
     )
   }

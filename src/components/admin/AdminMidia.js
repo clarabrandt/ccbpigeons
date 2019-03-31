@@ -182,8 +182,8 @@ export default class AdminMidia extends Component {
 
   render() {
     return(
-      <div className= 'admin-panel'>
-        <div className='admin-panel--title'>Midia</div>
+      // <div className= 'admin-panel'>
+      //   <div className='admin-panel--title'>Midia</div>
         
         <div className='admin-panel--content'>
           {
@@ -199,7 +199,7 @@ export default class AdminMidia extends Component {
             <button onClick={ this.addMidia }>Nova notícia</button>
           </div>
         </div>
-      </div>
+      // </div>
       
     )
   }
