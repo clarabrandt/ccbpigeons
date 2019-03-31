@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://clarabrandt.github.io/ccbpigeons",
   "dependencies": {
+    "bulma": "^0.7.4",
     "firebase": "^5.8.5",
     "gh-pages": "^2.0.1",
     "react": "^16.7.0",
@@ -18,10 +19,10 @@
   "scripts": {
     "build:css": "postcss src/**/*.css --dir public",
     "watch:css": "postcss /src/Layout.css -o build/index.css -w",
-    "start": "npm-run-all -p watch:css start-js",
+    "start": "npm-run-all -p start-js",
     "start-js": "react-scripts start",
     "build-js": "react-scripts build",
-    "build": "npm-run-all build:css build-js",
+    "build": "npm-run-all build-js",
     "test": "react-scripts test --env=jsdom",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
