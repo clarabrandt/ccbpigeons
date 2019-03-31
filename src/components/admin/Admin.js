@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './Admin.css';
 import api from '../../utils/api.js';
 import AdminAbout from './AdminAbout'
@@ -35,6 +35,10 @@ export default class Admin extends Component {
 
   render() {
     return (
+      <Fragment>
+     { /**
+       * NAVBAR
+       */}
       <nav className="navbar is-white">
         <div className="container">
           <div className="navbar-brand">
@@ -56,7 +60,32 @@ export default class Admin extends Component {
           </div>
         </div>
       </nav>
+
+      {/**
+       * END OF NAVBAR
+       */
+
       /**
+       * MAIN CONTAINER
+       */}
+
+      <div className="container">
+        <div className="columns">
+          <div className="column is-3 ">
+          </div>
+          <div class="column is-9 is-warning">
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+              <ul>
+                <li><a href="/">CCBPigeons</a></li>
+                <li><a href="/admin">Admin</a></li>
+                <li class="is-active"><a href="#" aria-current="page">Home</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      {/**
        * <div className='admin'>
         <div>
         <div>Essa área é de uso exclusivo do Dr. Octávio Ribeiro Jr., para edição do CCb Pigeons.</div>
@@ -100,7 +129,8 @@ export default class Admin extends Component {
             </div>
           </div>
       </div>
-       */
+       */}
+      </Fragment>
     )
   }
 }
