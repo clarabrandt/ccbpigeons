@@ -43,20 +43,49 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className='login' anchor='login' ref={this.props.login}>
-      
-        <form className= 'login--form'>
-          <label>
-            Email:
-            <input type="email" name="email" ref={(input) => { this.emailInput = input }} onChange={ this.handleChange }/>
-          </label>
-          <label>
-            Password:
-            <input type="text" name="password" ref={(input) => { this.passwordInput = input }} onChange={ this.handleChange }/>
-          </label>
-          <button type="submit" value="Log in" onSubmit={this.authWithEmailAndPassword} onClick={ this.handleClick }>Log in </button>
-        </form>
-      </div>     
+      <section className="hero is-white is-fullheight">
+        <div className="hero-body">
+          <div className="container has-text-centered">
+            <div className="column is-4 is-offset-4">
+              <div className="box">
+                <figure className="avatar">
+                  <img src="https://placehold.it/128x128" alt="" />
+                </figure>
+                <form>
+                  <div className="field">
+                    <div className="control">
+                      <input className="input is-large" 
+                        type="email" 
+                        placeholder="Your Email" 
+                        autoFocus="" 
+                        ref={(input) => { this.emailInput = input }} 
+                        onChange={this.handleChange} 
+                      />
+                    </div>
+                    </div>
+                    <div className="field">
+                      <div className="control">
+                      <input className="input is-large" 
+                        type="password" 
+                        placeholder="Your Password" 
+                        ref={(input) => { this.passwordInput = input }} 
+                        onChange={this.handleChange} 
+                      />
+                      </div>
+                    </div>
+                    <div className="field">
+                      <label className="checkbox"> <input type="checkbox" />Remember me </label>
+                    </div>
+                  <button className="button is-block is-info is-large is-fullwidth" 
+                    type="submit" value="Log in" 
+                    onSubmit={this.authWithEmailAndPassword} 
+                    onClick={this.handleClick}>Login</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     )
   }
 }
