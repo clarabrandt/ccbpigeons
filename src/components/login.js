@@ -18,16 +18,10 @@ class Login extends Component {
     }  
   }
 
-  authWithEmailAndPassword = (event) => {
-    event.preventDefault();
-    console.log('auth with email');
-  }
-
   handleClick = (event) => {
     const { email, password } = this.state;
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
-      .then(response => console.log(response))
       .catch(error => {
         this.setState({ error });
       });
@@ -42,6 +36,7 @@ class Login extends Component {
   }
 
   render() {
+    const { error } = this.state;
     return (
       <section className="hero is-white is-fullheight">
         <div className="hero-body">
@@ -56,6 +51,7 @@ class Login extends Component {
                     <div className="control">
                       <input className="input is-large" 
                         type="email" 
+                        name="email" 
                         placeholder="Your Email" 
                         autoFocus="" 
                         ref={(input) => { this.emailInput = input }} 
@@ -66,6 +62,7 @@ class Login extends Component {
                     <div className="field">
                       <div className="control">
                       <input className="input is-large" 
+                        name="password"
                         type="password" 
                         placeholder="Your Password" 
                         ref={(input) => { this.passwordInput = input }} 
@@ -73,12 +70,14 @@ class Login extends Component {
                       />
                       </div>
                     </div>
+                    <div className="error-message">
+                      { error && error.message }
+                    </div>
                     <div className="field">
                       <label className="checkbox"> <input type="checkbox" />Remember me </label>
                     </div>
                   <button className="button is-block is-info is-large is-fullwidth" 
                     type="submit" value="Log in" 
-                    onSubmit={this.authWithEmailAndPassword} 
                     onClick={this.handleClick}>Login</button>
                 </form>
               </div>
