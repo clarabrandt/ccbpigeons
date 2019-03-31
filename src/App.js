@@ -4,6 +4,8 @@ import './App.css';
 import Layout from './components/Layout.js';
 import Login from './components/Login.js'
 import Admin from './components/admin/Admin.js';
+import 'bulma/css/bulma.css'
+
 
 class App extends Component {
   
