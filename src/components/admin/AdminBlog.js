@@ -31,7 +31,7 @@ export default class AdminBlog extends Component {
         this.setState({
           items: data.blog
         })
-      })   
+      })  
   }
 
   fetchData() {
@@ -84,7 +84,6 @@ export default class AdminBlog extends Component {
         .then(data => {
           const result = this.state.items;
           delete result[data.key];
-          console.log([data.key])
           this.setState({
             items: result,
           });

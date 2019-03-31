@@ -152,7 +152,7 @@ export default class AdminMidia extends Component {
         <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' value={editConteudo} onChange={ this.handleChange }/>
         <div className='buttons'>
           <button type ='button' onClick={ this.closeForm }>Cancelar</button>
-          <button type ='button' onClick={ (e) => this.state.opcao === 'adicionar' ? this.handleClick(e) : this.changeData(e, clicado) }>Postar</button>
+          <button type ='button' onClick={ (e) => this.state.opcao === 'adicionar' ? this.handleClick(e) : this.changeData(e, clicado)}>Postar</button>
         </div>
       </form>
     )
