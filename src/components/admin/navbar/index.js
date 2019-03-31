@@ -1,6 +1,12 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
+import { withFirebase } from '../../firebase';
+class Navbar extends React.Component {
 
-export class Navbar extends React.Component {
+  signOut = () => {
+    this.props.firebase.auth.signOut();
+  }
   render() {
     return (<nav className="navbar has-shadow">
       <div className="container">
@@ -22,7 +28,7 @@ export class Navbar extends React.Component {
                 <a className="navbar-item" href="/admin">Profile</a>
                 <a className="navbar-item" href="/admin">Settings</a>
                 <hr className="navbar-divider" />
-                <div className="navbar-item" href="/admin">Logout</div>
+                <div className="navbar-item" onClick={this.signOut}>Logout</div>
               </div>
             </div>
           </div>
@@ -31,3 +37,12 @@ export class Navbar extends React.Component {
     </nav>);
   }
 }
+
+const NavbarComponent = compose(
+  withRouter,
+  withFirebase,
+)(Navbar);
+
+export default Navbar;
+
+export { NavbarComponent };

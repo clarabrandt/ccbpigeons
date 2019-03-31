@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import './Login.css'
+import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
+import './Login.css';
+import { withFirebase } from './firebase';
 
-export default class Login extends Component {
+class Login extends Component {
 
   baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
 
@@ -10,29 +13,20 @@ export default class Login extends Component {
 
     this.state={
       email:'',
-      password:''
+      password:'',
+      error: null,
     }  
   }
 
-  authWithEmailAndPassword = (event) => {
-    event.preventDefault();
-    console.log('auth with email');
-  }
-
   handleClick = (event) => {
-    const endpoint = `${this.baseUrl}login`;
+    const { email, password } = this.state;
+    this.props.firebase
+      .doSignInWithEmailAndPassword(email, password)
+      .catch(error => {
+        this.setState({ error });
+      });
+
     event.preventDefault();
-    const data = { email: this.state.email, password: this.state.password };
-    
-    console.log(this.state.email, this.state.password)
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data),
-    });
   }
 
   handleChange = (event) => {
@@ -42,6 +36,7 @@ export default class Login extends Component {
   }
 
   render() {
+    const { error } = this.state;
     return (
       <section className="hero is-white is-fullheight">
         <div className="hero-body">
@@ -56,6 +51,7 @@ export default class Login extends Component {
                     <div className="control">
                       <input className="input is-large" 
                         type="email" 
+                        name="email" 
                         placeholder="Your Email" 
                         autoFocus="" 
                         ref={(input) => { this.emailInput = input }} 
@@ -66,6 +62,7 @@ export default class Login extends Component {
                     <div className="field">
                       <div className="control">
                       <input className="input is-large" 
+                        name="password"
                         type="password" 
                         placeholder="Your Password" 
                         ref={(input) => { this.passwordInput = input }} 
@@ -73,12 +70,14 @@ export default class Login extends Component {
                       />
                       </div>
                     </div>
+                    <div className="error-message">
+                      { error && error.message }
+                    </div>
                     <div className="field">
                       <label className="checkbox"> <input type="checkbox" />Remember me </label>
                     </div>
                   <button className="button is-block is-info is-large is-fullwidth" 
                     type="submit" value="Log in" 
-                    onSubmit={this.authWithEmailAndPassword} 
                     onClick={this.handleClick}>Login</button>
                 </form>
               </div>
@@ -89,3 +88,12 @@ export default class Login extends Component {
     )
   }
 }
+
+const LoginPage = compose(
+  withRouter,
+  withFirebase,
+)(Login);
+
+export default Login;
+
+export { LoginPage };

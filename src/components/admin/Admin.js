@@ -1,23 +1,36 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 import './Admin.css';
 import api from '../../utils/api.js';
 import AdminAbout from './AdminAbout'
 import AdminBlog from './AdminBlog'
 import AdminResultados from './AdminResultados'
 import AdminMidia from './AdminMidia'
-import { Navbar } from './navbar';
+import { NavbarComponent } from './navbar';
 import { Menu } from './menu';
+import { withFirebase } from '../firebase';
+import { LoginPage } from '../Login.js';
 
 
-
-export default class Admin extends Component {
+class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
       clicked: 'admin',
+      authUser: null,
+      fetchingAuth: true,
     };
     this.goToComponent = this.goToComponent.bind(this);
     this.api = new api();
+  }
+
+  componentDidMount() {
+    this.props.firebase.auth.onAuthStateChanged(authUser => {
+      authUser
+        ? this.setState({ fetchingAuth: false, authUser })
+        : this.setState({ fetchingAuth: false, authUser: null });
+    });
   }
 
   goToComponent(e) {
@@ -27,30 +40,44 @@ export default class Admin extends Component {
   }
 
   render() {
+    const { authUser, fetchingAuth } = this.state;
+    
+    if (fetchingAuth && !authUser) {
+      return (
+        <div>Loading</div>
+      )
+    };
+    
+    if (!fetchingAuth && !authUser) {
+      return (
+        <LoginPage />
+      )
+    };
+
     return (
       <Fragment>
     
-        <Navbar/>
+        <NavbarComponent/>
         <div className="columns" id="admin">
           <Menu goToComponent={this.goToComponent} />
           <div className="column is-4 messages hero is-fullheight" id="list">
             {
               this.state.clicked === 'sobre' &&
-              <AdminAbout goBack={this.goBack} />
+              <AdminAbout />
             }
 
             {
               this.state.clicked === 'blog' &&
-              <AdminBlog goBack={this.goBack} />
+              <AdminBlog />
             }
             {
               this.state.clicked === 'resultados' &&
-              <AdminResultados goBack={this.goBack} />
+              <AdminResultados />
             }
 
             {
               this.state.clicked === 'midia' &&
-              <AdminMidia goBack={this.goBack} />
+              <AdminMidia />
             }
         </div>
           <div className="column is-6 message hero is-fullheight is-hidden" id="detail">
@@ -63,3 +90,13 @@ export default class Admin extends Component {
     )
   }
 }
+
+
+const AdminPage = compose(
+  withRouter,
+  withFirebase,
+)(Admin);
+
+export default Admin;
+
+export { AdminPage };

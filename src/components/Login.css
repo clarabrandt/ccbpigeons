@@ -33,3 +33,6 @@ p {
 p.subtitle {
   padding-top: 1rem;
 }
+.error-message {
+  color: #ac2121;
+}

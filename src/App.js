@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Layout from './components/Layout.js';
-import Login from './components/Login.js'
-import Admin from './components/admin/Admin.js';
+import { LoginPage } from './components/Login.js';
+import { AdminPage } from './components/admin/Admin.js';
 import 'bulma/css/bulma.css'
 
 
@@ -14,8 +14,8 @@ class App extends Component {
       <div className='app'>
         <BrowserRouter basename={process.env.PUBLIC_URL}></BrowserRouter>
         <Switch>
-          <Route path="/login" component={Login} /> 
-          <Route path="/admin" component={Admin} /> 
+          <Route path="/login" component={LoginPage} /> 
+          <Route path="/admin" component={AdminPage} /> 
           <Route path= {process.env.PUBLIC_URL + '/'} component={Layout}/>
           <Route path='/home' component={Layout}/>
           <Route path="/sobre" component={Layout} /> 
