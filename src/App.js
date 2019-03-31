@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Layout from './components/Layout.js';
-import Login from './components/Login.js';
+import Login from './components/Login.js'
 import Admin from './components/admin/Admin.js';
 
 class App extends Component {
