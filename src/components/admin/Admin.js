@@ -35,22 +35,44 @@ export default class Admin extends Component {
 
   render() {
     return (
-      <div className='admin'>
+      <nav className="navbar is-white">
+        <div className="container">
+          <div className="navbar-brand">
+            <a className="navbar-item brand-text" href="/admin">CCBPigeons</a>
+            <div className="navbar-burger burger" data-target="navMenu">
+              <span>Home</span>
+              <span>Blog</span>
+              <span>Resultados</span>
+              <span>Sobre</span>
+            </div>
+          </div>
+          <div id="navMenu" className="navbar-menu">
+            <div className="navbar-start">
+              <a className="navbar-item" href="/">Home</a>
+              <a className="navbar-item" href="/blog">Blog</a>
+              <a className="navbar-item" href="/resultados">Resultados</a>
+              <a className="navbar-item" href="/sobre">Sobre</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      /**
+       * <div className='admin'>
         <div>
         <div>Essa área é de uso exclusivo do Dr. Octávio Ribeiro Jr., para edição do CCb Pigeons.</div>
         <div>Por favor, clique na área que deseja modificar.</div>
         </div>
         <div className= {`admin-items ${this.state.visible? 'visible' : 'invisible' }`} >
-          <div className='sobrelink' onClick={this.goToComponent}> 
+          <div className='sobrelink' onClick={this.goToComponent}>
             Sobre
           </div>
-          <div className='bloglink' onClick={this.goToComponent}> 
+          <div className='bloglink' onClick={this.goToComponent}>
             Blog
           </div>
-          <div className='resultadoslink' onClick={this.goToComponent}> 
+          <div className='resultadoslink' onClick={this.goToComponent}>
             Resultados
           </div>
-          <div className='midialink' onClick={this.goToComponent}> 
+          <div className='midialink' onClick={this.goToComponent}>
             Midia
           </div>
         </div>
@@ -61,7 +83,7 @@ export default class Admin extends Component {
               this.state.clicked === 'sobrelink' &&
                 <AdminAbout goBack={ this.goBack }/>
             }
-          
+
             {
               this.state.clicked === 'bloglink' &&
                 <AdminBlog goBack={ this.goBack }/>
@@ -70,7 +92,7 @@ export default class Admin extends Component {
               this.state.clicked === 'resultadoslink' &&
                 <AdminResultados goBack={ this.goBack }/>
             }
-          
+
             {
               this.state.clicked === 'midialink' &&
                 <AdminMidia goBack={ this.goBack }/>
@@ -78,6 +100,7 @@ export default class Admin extends Component {
             </div>
           </div>
       </div>
+       */
     )
   }
 }
