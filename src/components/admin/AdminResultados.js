@@ -9,13 +9,15 @@ export default class AdminResultados extends Component {
     super(props);
     this.state = {
       items: {},
+      subitems: [],
       key: null,
     }
     this.handleClick = this.handleClick.bind(this);
+    this.displayDetails = this.displayDetails.bind(this);
   }
 
   componentDidMount(){
-    this.fetchData()
+    this.fetchEventos()
       .then(response => response.json())
       .then(data => {
         this.setState({
@@ -24,8 +26,30 @@ export default class AdminResultados extends Component {
       })
   }
 
-  fetchData() {
+  fetchEventos() {
     const endpoint = `${this.baseUrl}resultados`;
+    return fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    });
+  }
+
+  displayDetails() {
+    this.fetchArquivos()
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          subitems: data,
+        })
+      })
+  }
+
+  fetchArquivos() {
+    const { key }  = this.state
+    const endpoint = `${this.baseUrl}resultados/${key}`;
     return fetch(endpoint, {
       method: 'GET',
       headers: {
@@ -39,7 +63,7 @@ export default class AdminResultados extends Component {
     const key = e.target.id;
     this.setState({
       key
-    })
+    }, this.displayDetails)
   }
 
   renderList(){
@@ -74,7 +98,13 @@ export default class AdminResultados extends Component {
         </div>
         <div className="column is-6 messages hero is-fullheight" id="arquivos">
           <div className='admin-panel--content'>
-            {this.state.key}
+            {this.state.subitems.map((subitem) => {
+              return (
+                <div>
+                  <a href={subitem.url} target="_blank">{subitem.nome}</a>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>
