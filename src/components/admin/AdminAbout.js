@@ -151,7 +151,6 @@ constructor(props) {
 
   renderList(){
     const { items } = this.state;
-    console.log(this.state.items)
     return(
       <div className= 'admin-panel--list'>
         { 
