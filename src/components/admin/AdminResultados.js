@@ -9,7 +9,9 @@ export default class AdminResultados extends Component {
     super(props);
     this.state = {
       items: {},
+      key: null,
     }
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount(){
@@ -33,6 +35,13 @@ export default class AdminResultados extends Component {
     });
   }
 
+  handleClick(e) {
+    const key = e.target.id;
+    this.setState({
+      key
+    })
+  }
+
   renderList(){
     const { items } = this.state;
     return(
@@ -40,8 +49,8 @@ export default class AdminResultados extends Component {
         { 
           Object.keys(items).map((key) => {
             return (
-              <div key={ key } className='admin-panel--item'>
-                <div className='admin-panel--item--title'>{items[key].nome}</div>
+              <div key={ key } className='admin-panel--item' onClick={this.handleClick}>
+                <div className='admin-panel--item--title' id={ key }>{items[key].nome}</div>
               </div>
             )
           })
@@ -53,11 +62,20 @@ export default class AdminResultados extends Component {
 
   render() {
     return( 
-      <div className='admin-panel--content'>
-        {this.renderList()}
-        <div className='buttons'>
-          <button onClick={ this.props.goBack }>Voltar</button>
-          <button onClick={ this.addResultados }>Nova notícia</button>
+      <div className="columns" id="resultados">
+        <div className="column is-6 messages hero is-fullheight" id="eventos">
+          <div className='admin-panel--content'>
+            {this.renderList()}
+            <div className='buttons'>
+              <button onClick={ this.props.goBack }>Voltar</button>
+              <button onClick={ this.addResultados }>Nova notícia</button>
+            </div>
+          </div>
+        </div>
+        <div className="column is-6 messages hero is-fullheight" id="arquivos">
+          <div className='admin-panel--content'>
+            {this.state.key}
+          </div>
         </div>
       </div>
     )
