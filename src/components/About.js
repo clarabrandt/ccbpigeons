@@ -43,8 +43,8 @@ export default class About extends Component {
           <h4>>> 05/01/2019 Peça seu catálogo para o próximo leilão da CCB Pigeons</h4>
         </div>
         </div> */}
-        <div className='content--about'>
-        <h1>Sobre o CCB Pigeons</h1>
+        <div className='content-about'>
+          <div className='about-title'>Sobre o CCB Pigeons</div>
           {
             this.state.sobre.map((res, index) => {
               return (
@@ -57,8 +57,8 @@ export default class About extends Component {
             })
           }
         </div>
-        <div className='content--about--right'>
-          <img src={house} className='house--pic' alt=""  />
+        <div className='content-about--right'>
+          <img src={house} className='house-pic' alt=""  />
          {/* <div className='videos'>
           <Videos videoId='OShgy4uv894'/>
          </div>

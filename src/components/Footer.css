@@ -8,13 +8,19 @@
   width: 100%;
   position: relative;
   bottom: 0;
-  justify-content: space-between
-  
+  justify-content: space-between;
+  font-size: 16px;
+  padding: 1.5rem;
 }
+  .footer-title {
+    font-size: 16px;
+    font-weight: 600;
+  }
   .contato {
     float: right;
     margin: 0 15px 0 0;
-    font-size: 14px;
+    /* font-size: 14px; */
+    
   }
   .admin-login {
     display: flex;
@@ -30,35 +36,38 @@
     display: -ms-flexbox;
     display: -webkit-flex;
     flex-direction: column;
-    /* height: 100%;
-    width: 40%; */
     font-size: 12px;
     letter-spacing: 0.5px;
     margin: 0;
     line-height: 15px;
     margin: 0;
+    font-weight: 600;
   }
-    .arrow-top {
-      margin: 10px 0 10px 15px;
+   .arrow-top {
+      /* margin: 10px 0 10px 15px; */
       cursor: pointer;
     }
-      .arrow2{
+      .arrow-top--draw{
+        margin: 0 0 5px 40px;
         width: 20px;
         height: 20px;
-        left: 20px;
-        bottom: 40px;
         border-right: 4px solid black;
         border-bottom: 4px solid black;
         transform: rotate(225deg);
         z-index: 1;
       }
+      .arrow-top--text {
+        font-size: 15px;
+      }
       .arrow-top--text:hover {
         cursor: pointer;
+        
       }
       .property--rights {
-        margin-left: 10px;
+        margin-top: 15px;
         justify-self: flex-end;
-      }
+        bottom: -10px;
+      } 
   
 @media only screen and (max-width: 780px) {
   .footer {
@@ -68,6 +77,7 @@
     display: -webkit-flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-top: 0;
   }
 
   .contato {
@@ -78,4 +88,4 @@
    }
   
 }
-    
+     
