@@ -99,10 +99,8 @@ class Layout extends Component {
   navigateToPage() {
     if (this.props.match.path) {
       this.handleClick(this.props.match.path.slice(1));
-      
     }
     if (this.props.match.path.slice(1) === 'leiloes') {
-      console.log(this.props.match)
     }
   }
   
@@ -139,8 +137,7 @@ class Layout extends Component {
       this.smoothScroll(this.blog);
     }
     if (clicked === 'login') {
-      return(this.login);
-      
+      console.log(this.props.match.path);
     }
   }
 
@@ -173,8 +170,8 @@ class Layout extends Component {
           <About sobre={this.sobre} api={this.api}/>
           <Blog blog={this.blog} api={this.api}/>
           <Resultados resultados={this.resultados} handleClick={this.handleClick} api={this.api}/>
-          <Footer top={this.top} handleClick={this.handleClick} login={this.login}/>
           <Midia midia={this.midia} api={this.api}/>
+          <Footer top={this.top} handleClick={this.handleClick} login={this.login}/>
         </div>
       </div>
     )

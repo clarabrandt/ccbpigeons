@@ -19,13 +19,11 @@ export default class Midia extends Component {
 
   showMidia() {
     const midia = this.props.api.getMidia();
-    console.log(midia)
     midia.then((docs) =>{
       this.setState({
         midia: Object.values(docs.midia),
         
       })
-      console.log(docs.midia)
     })
   }
 
