@@ -27,33 +27,35 @@ export default class Blog extends Component {
   render() {
     return (
       <div className='blog' ref={this.props.blog}>
-        <div className='blog-title'>Blog</div>
-        <div className='posts'>
-          <div className='post-arquivo'>
-              <div className='post-subtitle--arquivo'> Arquivo</div>
-              <div className='post-arquivo--date'>2019</div>
-              <div className='post-arquivo--date'>2018</div>
-              <div className='post-arquivo--date'>2017</div>
-              <div className='post-arquivo--date'>2016</div>
-            </div>
-          <div className='post-new'>
-            <div className='post-subtitle--new'>Mais recentes</div>
-            {
-                      this.state.blog.map((res, index) => {
-                        return (
-                          <div key={index} className= 'post-new--content' onClick={ this.toggleList }>
-                            <div className='post-title'>{res.titulo} </div>
-                            <div className='post-content'>
-                              <div>{res.conteudo}</div> 
-                            </div>
-                          </div>
-                        )
-                      })
-                    }
-           </div> 
-           <div className='artigos'>Artigos</div>
-         
+        <div className='blog-content'>
+            <div className='blog-title'>Blog</div>
+            <div className='posts'>
+              <div className='post-arquivo'>
+                  <div className='post-subtitle--arquivo'> Arquivo</div>
+                  <div className='post-arquivo--date'>2019</div>
+                  <div className='post-arquivo--date'>2018</div>
+                  <div className='post-arquivo--date'>2017</div>
+                  <div className='post-arquivo--date'>2016</div>
+                </div>
+              <div className='post-new'>
+                <div className='post-subtitle--new'>Mais recentes</div>
+                {
+                          this.state.blog.map((res, index) => {
+                            return (
+                              <div key={index} className= 'post-new--content' onClick={ this.toggleList }>
+                                <div className='post-title'>{res.titulo} </div>
+                                <div className='post-date'>{res.data} </div>
+                                <div className='post-content'>
+                                  <div>{res.conteudo}</div> 
+                                </div>
+                              </div>
+                            )
+                          })
+                        }
+              </div> 
+              </div>
         </div>
+        <div className='artigos'>Artigos</div>
         </div>
         
      
