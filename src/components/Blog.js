@@ -36,7 +36,7 @@ export default class Blog extends Component {
                   <div className='post-arquivo--date'>2018</div>
                   <div className='post-arquivo--date'>2017</div>
                   <div className='post-arquivo--date'>2016</div>
-                </div>
+              </div>
               <div className='post-new'>
                 <div className='post-subtitle--new'>Mais recentes</div>
                 {
@@ -53,12 +53,10 @@ export default class Blog extends Component {
                           })
                         }
               </div> 
-              </div>
+            </div>
         </div>
         <div className='artigos'>Artigos</div>
         </div>
-        
-     
     )
   }
 }

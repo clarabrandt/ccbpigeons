@@ -14,17 +14,17 @@ class Footer extends Component {
     
   }
   
-  setRedirect = () => {
-    this.setState({
-      redirect: true
-    })
-  }
+  // setRedirect = () => {
+  //   this.setState({
+  //     redirect: true
+  //   })
+  // }
 
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to='/login' />
-    }
-  }
+  // renderRedirect = () => {
+  //   if (this.state.redirect) {
+  //     return <Redirect to='/login' />
+  //   }
+  // }
  
   
   render() {
@@ -41,10 +41,10 @@ class Footer extends Component {
             <div className='arrow-top--draw'></div>
             <div className='arrow-top--text'>Volta para o início</div>
           </div>
-          {this.renderRedirect()}
+          {/* {this.renderRedirect()}
           <div className= 'admin-login' anchor='login' onClick={this.setRedirect} ref={this.login}>
             <div className='footer-title'>Private</div>
-          </div>
+          </div> */}
           <div className= 'property--rights'>
             © 2019 CCB Pigeons
           </div>

@@ -66,6 +66,7 @@ export default class Resultados extends Component {
     const pigeon = require("./images/pombo-correio.jpg")
     return (
       <div className='results' ref={this.props.resultados}>
+        <div className='results-content'>
           <div className='results-title'>Resultados</div>
           <div className='competitions'>
             <div className='competitions-calendar'>
@@ -98,26 +99,12 @@ export default class Resultados extends Component {
                     }
                   </ul>
               </div>
-              <div className='competitions-images'>
-                <div className='competitions-next--title'>Fotos</div>
-                <img src={pigeon} className='pigeon--pic' alt=""  />
-              </div>
-               
-             {/* <ul>
-              {
-                this.state.resultados.map((res) => {
-                  return (
-                    <div>
-                      <div className="teamo">{res.nome}</div>
-                      <div>
-                        <a href={`http://${res.url}`}>{res.nome}</a>
-                      </div>
-                    </div>
-                  )
-                })
-              }
-            </ul> */}
+            </div>
           </div>
+        <div className='competitions-images'>
+          <div className='competitions-next--title'>Fotos</div>
+          <img src={pigeon} className='pigeon--pic' alt=""  />
+        </div>
       </div>
     )
   }

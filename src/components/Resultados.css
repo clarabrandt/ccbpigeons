@@ -1,3 +1,10 @@
+.results {
+  display: flex;
+}
+  .results-content{
+    flex-direction: column;
+    flex: 5.5;
+  }
   .results-title {
     font-size: 3em;
     text-align: center;
@@ -82,11 +89,14 @@
     -webkit-box-flex: 1;
         -webkit-flex: 1;
                 flex: 1;
-    margin-left: 100px;
+    /* margin-left: 100px; */
+    text-align: center;
+    color: rgb(10, 10, 134);
+    padding: 30px 30px 20px 30px;
+    font-weight: 600;
+    margin-right: 30px;
   }
-  ul{
-    list-style: none;
-  }
+  
   @media only screen and (max-width: 420px) {
     .results-title {
       font-size: 22px;

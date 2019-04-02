@@ -1,101 +1,93 @@
 .midia {
-  padding: 0 100px 0 100px;
+  padding-left: 100px;
   background-color: #f2f2f2;
   width: 100%;
   overflow-x: hidden;
+  display: flex;
 
 }
-.midia-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-}
-.midia-title {
-    font-size: 3em;
-    text-align: center;
-    padding: 70px 0;
-    color:#444649;
-    text-decoration: underline;
+  .midia-content{
+    display: flex;
+    flex-direction: column;
+    flex: 6;
   }
-.videos-subtitle {
+  .midias {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+  }
+    .midia-title {
+        font-size: 3em;
+        text-align: center;
+        padding: 70px 0;
+        color:#444649;
+        text-decoration: underline;
+      }
+    .videos-subtitle {
+        font-size: 1.3em;
+        color:rgb(110, 9, 9);
+        font-weight: 600;
+      }
+    .videos {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+                flex: 1;
+      }
+    .videos-text{
+          font-size: 16px;
+          color:#444649;
+          font-weight: 600;
+          padding: 30px 0 20px 0;
+      }
+    .videos-content { 
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+        }
+    .news {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+                flex: 1;
+        margin-left: 50px;
+        padding: 0 40px;
+      }
+    .news-subtitle {
+          font-size: 1.3em;
+          padding-bottom: 65px;
+          color:rgb(110, 9, 9);
+          font-weight: 600;
+        }
+    .news-content {
+          font-size: 18px;
+          margin-bottom: 30px;
+          padding: 30px;
+          color:#444649;
+          /* margin-left: 70px; */
+          /* border-bottom: 0.5px solid lightgrey; */
+          box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+        }
+    .canal-youtube--text {
+          margin-top: 15px;
+          max-height: 50px;
+          color:#444649;
+        }
+    .canal-youtube {
+          display: grid;
+          grid-template-columns: 60px 220px;
+          max-height: 50px;
+          align-self: top;
+        }
+  .anuncios {
+    background-color: white;
+    flex: 1.5;
     font-size: 1.3em;
-    color:rgb(110, 9, 9);
+    text-align: center;
+    color: rgb(10, 10, 134);
+    padding: 30px 30px 20px 30px;
     font-weight: 600;
   }
-.videos {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-            flex: 1;
-  }
-.videos-text{
-      font-size: 16px;
-      color:#444649;
-      font-weight: 600;
-      padding: 30px 0 20px 0;
-  }
-.videos-content { 
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-    }
-.news {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-            flex: 1;
-    margin-left: 50px;
-    padding: 0 40px;
-  }
-.news-subtitle {
-      font-size: 1.3em;
-      padding-bottom: 65px;
-      color:rgb(110, 9, 9);
-      font-weight: 600;
-    }
-.news-content {
-      font-size: 18px;
-      margin-bottom: 30px;
-      padding: 30px;
-      color:#444649;
-      /* margin-left: 70px; */
-      /* border-bottom: 0.5px solid lightgrey; */
-      box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-    }
-/* .card {
-    flex: 1;
-    display: flex;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 40px;
-    grid-template-rows: repeat(3, auto);
-    padding: 20px;
-    max-width: 100%;
-    justify-content: space-around;
-  }
-    .card--grid {
-      display: grid;
-      grid-template-rows: 30px auto 50px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      height: 50vh;
-      width: 100%;
-      margin: 5px;
-    } */
-/* .card--text {
-        justify-items: center;
-      } */
-.canal-youtube--text {
-      margin-top: 15px;
-      max-height: 50px;
-      color:#444649;
-    }
-.canal-youtube {
-      display: grid;
-      grid-template-columns: 60px 220px;
-      max-height: 50px;
-      align-self: top;
-    }
 @media only screen and (max-width: 420px) {
   .midia {
     padding: 0;
@@ -109,7 +101,7 @@
     text-align: initial;
     font-weight: bold;
   }
-  .midia-content {
+  .midias {
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -172,7 +164,7 @@
     text-align: initial;
     font-weight: bold;
   }
-  .midia-content {
+  .midias {
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;

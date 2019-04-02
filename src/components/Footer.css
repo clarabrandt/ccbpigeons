@@ -10,7 +10,7 @@
   bottom: 0;
   justify-content: space-between;
   font-size: 16px;
-  padding: 1.5rem;
+  padding: 20px;
 }
   .footer-title {
     font-size: 16px;
@@ -64,9 +64,9 @@
         
       }
       .property--rights {
-        margin-top: 15px;
+        margin-top: 40px;
         justify-self: flex-end;
-        bottom: -10px;
+       
       } 
   
 @media only screen and (max-width: 780px) {
