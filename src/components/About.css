@@ -72,7 +72,7 @@
             flex-direction: column;
   }
   
-  h1{
+  .about-title{
     font-size: 24px;
     padding: 10px 0 10px 0;
     margin: 0;
@@ -103,7 +103,7 @@
     -webkit-flex-direction: column;
             flex-direction: column;
   }
-  h1{
+  .about-title{
     font-size: 24px;
     padding: 10px 0 10px 0;
     margin: 0;
