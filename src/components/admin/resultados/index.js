@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './AdminResultados.css'
+import './style.css'
 
-export default class AdminResultados extends Component {
+export default class Resultados extends Component {
 
   baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
 

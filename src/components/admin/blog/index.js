@@ -1,40 +1,41 @@
-import React, { Component, Fragment } from 'react';
-import './AdminAbout.css'
+import React, { Component } from 'react';
+import './style.css'
 
-export default class AdminAbout extends Component {
+export default class Blog extends Component {
 
-baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
+  baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
 
-constructor(props) {
-  super(props);
-  this.state = {
-    sobre: '',
-    items: {},
-    opcao: null,
-    clicado: null,
-    resposta: null,
+  constructor(props) {
+    super(props);
+    this.state = {
+      titulo: '',
+      conteudo: '',
+      items: {},
+      opcao: null,
+      clicado: null,
+      resposta: null,
+    }
+
+    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.addPost = this.addPost.bind(this)
+    this.changeData = this.changeData.bind(this)
+    this.editPost = this.editPost.bind(this)
+    this.closeForm = this.closeForm.bind(this)
   }
-
-  this.handleClick = this.handleClick.bind(this);
-  this.handleChange = this.handleChange.bind(this);
-  this.addAbout = this.addAbout.bind(this)
-  this.changeData = this.changeData.bind(this)
-  this.editConteudo = this.editConteudo.bind(this)
-  this.closeForm = this.closeForm.bind(this)
-}
 
   componentDidMount(){
     this.fetchData()
       .then(response => response.json())
       .then(data => {
         this.setState({
-          items: data.sobre
+          items: data.blog
         })
-      })   
+      })  
   }
 
   fetchData() {
-    const endpoint = `${this.baseUrl}sobre`;
+    const endpoint = `${this.baseUrl}blog`;
     return fetch(endpoint, {
       method: 'GET',
       headers: {
@@ -46,29 +47,31 @@ constructor(props) {
 
   changeData(e, key) {
     e.preventDefault()
-    const sobre = this.state.sobre
-    const endpoint = `${this.baseUrl}sobre`;
+    const titulo = this.state.titulo
+    const conteudo = this.state.conteudo
+    const endpoint = `${this.baseUrl}blog`;
     fetch(endpoint, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({key, sobre}),
+      body: JSON.stringify({key, titulo, conteudo}),
     })
       .then(response => response.json())
       .then(data => {
         const result = this.state.items;
         console.log(result[data.key])
         this.setState({
-          sobre,
+          titulo,
+          conteudo
         });
     }) 
   }
 
   deleteData(e, key) {
     e.preventDefault()
-    const endpoint = `${this.baseUrl}sobre`;
+    const endpoint = `${this.baseUrl}blog`;
     fetch(endpoint, {
       method: 'DELETE',
       headers: {
@@ -86,7 +89,7 @@ constructor(props) {
           });
         }) 
   }
-
+      
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
@@ -94,9 +97,9 @@ constructor(props) {
   }
 
   handleClick(e) {
-    const endpoint = `${this.baseUrl}sobre`;
+    const endpoint = `${this.baseUrl}blog`;
     e.preventDefault();
-    const data = { sobre: this.state.sobre };
+    const data = { titulo: this.state.titulo, conteudo: this.state.conteudo };
     fetch(endpoint, {
       method: 'POST',
       headers: {
@@ -110,19 +113,20 @@ constructor(props) {
     })
   }
 
-  addAbout() {
+  addPost() {
     this.setState({
       opcao: 'adicionar'
     })
   }
 
-  editConteudo(e, key) {
+  editPost(e, key) {
     e.preventDefault()
     const { items } = this.state
     this.setState({
       opcao: 'editar',
       clicado: key,
-      sobre: items[key].sobre,
+      titulo: items[key].titulo,
+      conteudo: items[key].conteudo,
     })
   }
 
@@ -134,13 +138,15 @@ constructor(props) {
   }
 
   renderForm() {
-    const editConteudo = this.state.sobre;
+    const editTitle = this.state.titulo;
+    const editConteudo = this.state.conteudo;
     const { clicado } = this.state;
     
     return (
       <form className='postData'>
-        <div>Nova informação sobre o CCB Pigeons</div>
-        <textarea type='text' id='sobre' name='sobre' placeholder='texto' value={editConteudo} onChange={ this.handleChange }/>
+        <div>Novo post para o blog</div>
+        <input type='text' id='titulo' name='titulo' placeholder='título' value={editTitle} onChange={ this.handleChange } />
+        <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' value={editConteudo} onChange={ this.handleChange }/>
         <div className='buttons'>
           <button type ='button' onClick={ this.closeForm }>Cancelar</button>
           <button type ='button' onClick={ (e) => this.state.opcao === 'adicionar' ? this.handleClick(e) : this.changeData(e, clicado) }>Postar</button>
@@ -157,9 +163,9 @@ constructor(props) {
           Object.keys(items).map((key) => {
             return (
             <div key={ key } className='admin-panel--item'>
-              <div className='admin-panel--item--title'>{items[key].sobre}</div>
+              <div className='admin-panel--item--title'>{items[key].titulo}</div>
               <div className='admin-panel--item--edit' >
-                <button type ='button' className='edit-button' onClick={ (e) => this.editConteudo(e, key) }>Edit</button>
+                <button type ='button' className='edit-button' onClick={ (e) => this.editPost(e, key) }>Edit</button>
               </div>
               <div className='admin-panel--item--delete'>
                 <button type ='button' className='delete-button' onClick={ (e) => this.deleteData(e, key) }>Delete</button>
@@ -174,7 +180,7 @@ constructor(props) {
   render() {
     return(
       // <div className= 'admin-panel'>
-        // <div className='admin-panel--title'>Sobre</div>
+        // <div className='admin-panel--title'>Blog</div>
         
         <div className='admin-panel--content'>
           {
@@ -187,7 +193,7 @@ constructor(props) {
           }
           <div className='buttons'>
             <button onClick={ this.props.goBack }>Voltar</button>
-            <button onClick={ this.addAbout }>Adicionar conteúdo</button>
+            <button onClick={ this.addPost }>Novo post</button>
           </div>
         </div>
       // </div>
