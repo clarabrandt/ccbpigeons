@@ -96,7 +96,7 @@ export default class AdminResultados extends Component {
             </div>
           </div>
         </div>
-        <div className="column is-6 messages hero is-fullheight" id="arquivos">
+        <div className="column is-6 messages hero is-fullheight is-fullwidth" id="arquivos">
           <div className='admin-panel--content'>
             {this.state.subitems.map((subitem) => {
               return (
@@ -105,6 +105,11 @@ export default class AdminResultados extends Component {
                 </div>
               )
             })}
+
+            <div>
+              <input type="file" />
+              <button type="button">Enviar</button>
+            </div>
           </div>
         </div>
       </div>
