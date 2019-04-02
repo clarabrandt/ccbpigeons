@@ -44,7 +44,7 @@ export default class Blog extends Component {
                             return (
                               <div key={index} className= 'post-new--content' onClick={ this.toggleList }>
                                 <div className='post-title'>{res.titulo} </div>
-                                <div className='post-date'>{res.data} </div>
+                                <div className='post-date'>{res.date} </div>
                                 <div className='post-content'>
                                   <div>{res.conteudo}</div> 
                                 </div>
