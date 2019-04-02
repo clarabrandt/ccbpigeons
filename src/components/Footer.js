@@ -29,7 +29,7 @@ class Footer extends Component {
   
   render() {
     return (   
-      <div className='footer'>
+      <div className='foot'>
         <div className='contato'>
           <div className='footer-title'>Contato </div>
           <div className='address'>Condomínio São João Batista </div>

@@ -46,7 +46,7 @@ export default class Blog extends Component {
                                 <div className='post-title'>{res.titulo} </div>
                                 <div className='post-date'>{res.date} </div>
                                 <div className='post-content'>
-                                  <div>{res.conteudo}</div> 
+                                  {res.conteudo} 
                                 </div>
                               </div>
                             )
@@ -55,7 +55,11 @@ export default class Blog extends Component {
               </div> 
             </div>
         </div>
-        <div className='artigos'>Artigos</div>
+          <div className='artigos'>
+            <div className='artigos-titulo'>Artigos</div>
+            <div className='artigos-conteudo'> Artigo um</div>
+            <div className='artigos-conteudo'> Artigo dois</div>
+          </div>
         </div>
     )
   }

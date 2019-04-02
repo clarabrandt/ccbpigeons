@@ -15,6 +15,9 @@
   .competitions {
     display: flex;
   }
+  .competitions-calendar {
+    margin-right: 20px;
+  }
   .competitions-next,
   .competitions-last {
     -webkit-box-flex: 1.5;
@@ -27,7 +30,7 @@
   }
     .competitions-next--title,
     .competitions-last--title{
-      font-size: 1.3em;
+      font-size: 1.5em;
       color:rgb(10, 10, 134);
       padding: 30px 30px 20px 30px; 
       font-weight: 600;
@@ -48,9 +51,11 @@
         border-bottom: 0.5px solid lightgrey;
         margin-bottom: 10px;
         padding: 0 0 15px 0;
+        font-size: 18px;
       }
       .competitions-last--listItems {
         border-bottom: 0.5px solid lightgrey;
+        font-size: 18px;
         margin-bottom: 10px;
         padding: 0 0 15px 0;
       }
@@ -63,7 +68,7 @@
       
     }
     .competitions-results--title {
-      font-size: 1.3em;
+      font-size: 1.5em;
       color:rgb(110, 9, 9);
       font-weight: 600;
       padding: 30px 30px 20px 50px;
@@ -75,6 +80,7 @@
   }
   .competitions-results--listItems {
     border: 0.5px solid lightgray;
+    font-size: 20px;
     padding: 30px 30px 30px 80px;
     margin-bottom: 10px;
     box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
@@ -98,6 +104,10 @@
   }
   
   @media only screen and (max-width: 420px) {
+    .results {
+      display: flex;
+      flex-direction: column;
+    }
     .results-title {
       font-size: 22px;
       padding: 20px 0 10px 10px;
@@ -137,6 +147,10 @@
       font-size: 18px;
       padding: 20px 20px;
     }
+    .competitions-last--list,
+    .competitions-next--list {
+      padding: 0 0 0 20px;
+    } 
     .competitions-results--title {
       padding: 20px 0 20px 0;
       margin-top: 20px;
@@ -180,7 +194,10 @@
     }
     .competitions-results--list {
       padding: 0;
-      
+    }
+    .competitions-last--list,
+    .competitions-next--list {
+      padding: 0 0 0 20px;
     }
     .competitions-next,
     .competitions-last {
@@ -191,19 +208,19 @@
     .competitions-last--title {
       font-size: 18px;
       padding: 20px 20px;
+      text-align: left;
     }
     .competitions-results--title {
       padding: 20px 0 20px 0;
       margin-top: 20px;
     }
-    .competitions-next--list {
-      margin: 0;
-    }
+   
     .competitions-images {
-      padding: 0;
+      padding: 0 5px;
       margin: 0;
     }
     .pigeon--pic {
       margin: 10px;
+      align-self: left;
     }
   }

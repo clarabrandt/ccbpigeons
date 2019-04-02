@@ -10,15 +10,11 @@ export default class Resultados extends Component {
     }
     this.toggleList = this.toggleList.bind(this);
     this.showResultados = this.showResultados.bind(this);
-    // this.getCopaMG = this.getCopaMG.bind(this);
-  
   }
 
 
   componentDidMount() {
     this.showResultados();
-    // this.getCopaMG();
-    
   };
 
   toggleList() {
@@ -32,16 +28,6 @@ export default class Resultados extends Component {
       })
     }
   }
-  // getCopaMG() {
-  //   const copa = this.props.api.getCopaMG();
-  //   console.log(copa)
-  //   copa.then((docs) =>{
-  //     this.setState({
-  //       copa: Object.values(docs.copa),
-  //     })
-  //   })
-  // }
-
 
   showResultados() {
     const resultados = this.props.api.getResultados();
@@ -60,7 +46,6 @@ export default class Resultados extends Component {
       })
     })
   } 
-
 
   render() {
     const pigeon = require("./images/pombo-correio.jpg")
@@ -103,6 +88,9 @@ export default class Resultados extends Component {
           </div>
         <div className='competitions-images'>
           <div className='competitions-next--title'>Fotos</div>
+          <img src={pigeon} className='pigeon--pic' alt=""  />
+          <img src={pigeon} className='pigeon--pic' alt=""  />
+          <img src={pigeon} className='pigeon--pic' alt=""  />
           <img src={pigeon} className='pigeon--pic' alt=""  />
         </div>
       </div>
