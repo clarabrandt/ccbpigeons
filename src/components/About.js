@@ -50,7 +50,7 @@ export default class About extends Component {
               return (
                 <div key={index} className= 'post-new--content'>
                   <div className='about-content'>
-                    <p>{res.sobre}</p> 
+                    {res.sobre}
                   </div>
                 </div>
               )

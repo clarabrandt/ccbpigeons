@@ -24,28 +24,21 @@
       -webkit-box-flex: 1;
       -webkit-flex: 1;
               flex: 1;
+      padding: 0 50px;
     }
     .about-title {
-        /* padding: 0 0 10px 20px;
-        font-size: 3em;
-        font-weight: normal;
-        -webkit-align-self: center;
-                align-self: center;
-        margin-top: 100px;
-        color: #444649;
-        text-decoration: underline; */
         font-size: 3em;
         text-align: center;
         padding: 50px 0 50px 0;
         color:#444649;
         text-decoration: underline;
-
       }
-    p {
-        padding: 0 20px 0 20px;
-        text-align: justify;
-        line-height: 26px;
-        margin-right: 10px;
+    .about-content {
+      font-size: 20px;
+      padding: 0 20px 0 20px;
+      text-align: justify;
+      line-height: 26px;
+      margin-right: 10px;
        
       }
     .content-about--right {
@@ -71,29 +64,27 @@
     -webkit-flex-direction: column;
             flex-direction: column;
   }
-  
-  .about-title{
-    font-size: 24px;
-    padding: 10px 0 10px 0;
-    margin: 0;
-    font-weight: bold;
-    
+    .about-title{
+      font-size: 22px;
+      /* padding: 20px 0 10px 10px; */
+      /* margin-left: 10px; */
+      color: #444649;
+      text-align: initial;
+      font-weight: bold;
+      
+    }
+    .content-about{
+      margin: 0;
+      padding: 0;
+      overflow-y: visible;
+      -webkit-overflow-scrolling: touch;
+    }  
+    .content-about--right {
+      display: none;
+    }
   }
-  .content-about{
-    margin: 20px;
-    overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
-  }  
-  .content-about--right {
-    display: none;
-  }
-  p {
-    padding: 0 20px 10px 10px;
-  }
-}
-    @media only screen and (max-width: 780px) {
+  @media only screen and (max-width: 780px) {
   .about {
-    
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -104,13 +95,16 @@
             flex-direction: column;
   }
   .about-title{
-    font-size: 24px;
-    padding: 10px 0 10px 0;
-    margin: 0;
+    font-size: 22px;
+    padding: 20px 0 20px 10px;
+    margin-left: 10px;
+    color: #444649;
+    text-align: initial;
     font-weight: bold;
   }
   .content-about{
-    margin: 20px;
+    margin: 0 0 10px 0;
+    padding: 0;
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
   }  
@@ -120,5 +114,4 @@
   p {
     padding: 0 20px 10px 10px;
   }
-  
 }

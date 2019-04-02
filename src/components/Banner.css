@@ -32,12 +32,12 @@
   }
   .arrow {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     top: 310px;
     left: 210px;
-    border-right: 4px solid white;
-    border-bottom: 4px solid white;
+    border-right: 6px solid white;
+    border-bottom: 6px solid white;
     transform: rotate(45deg);
     animation: animate 1.5s infinite;
   }
