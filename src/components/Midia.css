@@ -80,14 +80,24 @@
           align-self: top;
         }
   .anuncios {
+    display: flex;
+    flex-direction: column;
     background-color: white;
     flex: 1.5;
-    font-size: 1.3em;
-    text-align: center;
-    color: rgb(10, 10, 134);
     padding: 30px 30px 20px 30px;
-    font-weight: 600;
+    
   }
+    .anuncios-title {
+      font-size: 1.3em;
+      text-align: center;
+      color: rgb(10, 10, 134);
+      font-weight: 600;
+    }
+    .anuncios-content {
+      border: 1px solid black;
+      height: 20vh;
+      margin: 40px 0;
+    }
 @media only screen and (max-width: 420px) {
   .midia {
     padding: 0;
