@@ -116,7 +116,7 @@
       cursor: pointer;
       font-weight: 600;
     }
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 620px) {
   .blog {
     overflow-x: hidden;
     /* margin: 10px; */

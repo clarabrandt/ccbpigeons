@@ -100,7 +100,7 @@
         height: 20vh;
         margin: 40px 0;
       }
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 620px) {
   .midia {
     padding: 0;
     display: flex;
@@ -244,7 +244,7 @@
     }
     .anuncios-title {
       text-align: left;
-      font-size: 16px;
+      font-size: 18px;
     }
     .anuncios-content {
       flex-direction: row;

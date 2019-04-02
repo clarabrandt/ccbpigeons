@@ -103,7 +103,7 @@
     margin-right: 30px;
   }
   
-  @media only screen and (max-width: 420px) {
+  @media only screen and (max-width: 620px) {
     .results {
       display: flex;
       flex-direction: column;

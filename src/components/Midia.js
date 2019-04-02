@@ -70,7 +70,7 @@ export default class Midia extends Component {
         </div>
         <div className='anuncios'>
           <div>
-          <div className='anuncios-title'>Anúncios</div>
+          <div className='anuncios-title'>Anuncios</div>
           </div>
           <div className='anuncios-content'>
             <div className='anuncios-content--'>Anuncie aqui!</div>
