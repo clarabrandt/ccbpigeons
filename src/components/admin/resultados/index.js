@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import {DetalhesComponent} from './_detalhes.js'
 import './style.css'
 
 export default class Resultados extends Component {
@@ -10,8 +11,9 @@ export default class Resultados extends Component {
     this.state = {
       items: {},
       subitems: [],
-      key: null,
+      selecionado: null,
     }
+
     this.handleClick = this.handleClick.bind(this);
     this.displayDetails = this.displayDetails.bind(this);
   }
@@ -21,8 +23,9 @@ export default class Resultados extends Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          items: data.resultados
-        })
+          items: data.resultados,
+          selecionado: Object.keys(data.resultados)[0],
+        }, this.displayDetails)
       })
   }
 
@@ -48,8 +51,8 @@ export default class Resultados extends Component {
   }
 
   fetchArquivos() {
-    const { key }  = this.state
-    const endpoint = `${this.baseUrl}resultados/${key}`;
+    const { selecionado }  = this.state
+    const endpoint = `${this.baseUrl}resultados/${selecionado}`;
     return fetch(endpoint, {
       method: 'GET',
       headers: {
@@ -60,22 +63,25 @@ export default class Resultados extends Component {
   }
 
   handleClick(e) {
-    const key = e.target.id;
+    const selecionado = e.target.id;
     this.setState({
-      key
+      selecionado
     }, this.displayDetails)
   }
 
   renderList(){
-    const { items } = this.state;
+    const { items, selecionado, subitems } = this.state;
     return(
       <div className= 'admin-panel--list'>
         { 
           Object.keys(items).map((key) => {
             return (
-              <div key={ key } className='admin-panel--item' onClick={this.handleClick}>
-                <div className='admin-panel--item--title' id={ key }>{items[key].nome}</div>
-              </div>
+              <Fragment key={key}>
+                <div className='admin-panel--item'  onClick={this.handleClick}>
+                  <div id={key} className='admin-panel--item--title' >{items[key].nome}</div>
+                </div>
+                <DetalhesComponent id={key}  open={key===selecionado ? 'open':''} subitems={subitems} />
+              </Fragment>
             )
           })
         }  
@@ -83,32 +89,15 @@ export default class Resultados extends Component {
     )
   }
 
-
   render() {
     return( 
       <div className="columns" id="resultados">
-        <div className="column is-6 messages hero is-fullheight" id="eventos">
+        <div className="column is-12 messages hero is-fullheight" id="eventos">
           <div className='admin-panel--content'>
             {this.renderList()}
             <div className='buttons'>
               <button onClick={ this.props.goBack }>Voltar</button>
               <button onClick={ this.addResultados }>Nova notícia</button>
-            </div>
-          </div>
-        </div>
-        <div className="column is-6 messages hero is-fullheight is-fullwidth" id="arquivos">
-          <div className='admin-panel--content'>
-            {this.state.subitems.map((subitem) => {
-              return (
-                <div>
-                  <a href={subitem.url} target="_blank">{subitem.nome}</a>
-                </div>
-              )
-            })}
-
-            <div>
-              <input type="file" />
-              <button type="button">Enviar</button>
             </div>
           </div>
         </div>
