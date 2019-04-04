@@ -111,6 +111,7 @@
     padding: 0;
     display: flex;
     flex-direction: column;
+    margin: 0 0 50px 0;
   }
   .midia-title {
     font-size: 24px;
@@ -131,6 +132,7 @@
     -webkit-flex-direction: column-reverse;
             flex-direction: column-reverse;
     overflow: hidden;
+    margin-bottom: 20px;
   }
   .news-subtitle,
   .videos-subtitle {
@@ -163,6 +165,7 @@
     .anuncios-content {
       flex-direction: row;
       margin: 0;
+      padding: 20px;
     }
       .anuncios-content--{
         margin: 10px 10px 10px 0;
@@ -174,6 +177,7 @@
     flex-direction: column;
     padding: 0;
     width: 100%;
+    margin: 0 0 50px 0;
   }
   .midia-title {
     font-size: 22px;
@@ -194,6 +198,7 @@
     -webkit-flex-direction: column-reverse;
             flex-direction: column-reverse;
     overflow: hidden;
+    margin: 0;
   }
   .midia-subtitle {
     font-size: 16px;
@@ -256,6 +261,7 @@
       flex-direction: row;
       width: 80vw;
       margin: 0;
+      padding: 20px;
     }
       .anuncios-content--{
         margin: 10px 20px 10px 0;

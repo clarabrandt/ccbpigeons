@@ -98,6 +98,7 @@
     overflow-x: hidden;
     padding: 0;
     max-width: 100%;
+    margin-bottom: 20px;
   }
   .blog-title {
     font-size: 24px;
@@ -178,6 +179,7 @@
     flex-direction: column;
     padding: 0;
     max-width: 100%;
+    margin: 0 0 50px 0;
 }
 .blog-title {
   font-size: 24px;

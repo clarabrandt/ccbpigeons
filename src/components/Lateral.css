@@ -49,8 +49,7 @@
       }
 
   .artigos {
-    /* display: flex;
-    flex-direction: row; */
+    
     background-color: white;
     flex: 1;
     padding: 30px 20px 20px 30px;
@@ -71,3 +70,15 @@
       font-size: 18px;
     }
 
+@media only screen and (max-width: 620px) {
+  .lateral {
+    margin: 0;
+    max-width: 100%;
+  }
+} 
+@media only screen and (max-width: 780px) {
+  .lateral {
+    margin: 0;
+    max-width: 100%;
+  }
+}

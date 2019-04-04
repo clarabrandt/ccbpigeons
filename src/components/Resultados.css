@@ -113,7 +113,7 @@
     padding: 30px 20px 20px 30px;
     font-weight: 600;
     background-color: white;
-    border-top: 10px solid #f4f4f4;
+    border-top: 30px solid #f4f4f4;
     border-bottom: 30px solid #f4f4f4;
     
   }
@@ -122,6 +122,7 @@
     .results {
       display: flex;
       flex-direction: column;
+      margin: 0 0 50px 0;
     }
     .results-title {
       font-size: 22px;
@@ -175,8 +176,12 @@
     }
     .competitions-images {
       grid-area: image;
-      padding: 0;
+      padding: 20px;
       margin: 0;
+
+    }
+    .competitios-pics--title {
+      font-size: 18px;
     }
     .pigeon--pic {
       margin: 10px;
@@ -184,6 +189,9 @@
   }
 
   @media only screen and (max-width: 780px) {
+    .results {
+      margin: 0 0 50px 0;
+    }
     .results-title {
       font-size: 22px;
       padding: 20px 0 10px 10px;
@@ -229,9 +237,11 @@
       padding: 20px 0 20px 0;
       margin-top: 20px;
     }
-   
+    .competitios-pics--title {
+      font-size: 18px;
+    }
     .competitions-images {
-      padding: 0 5px;
+      padding: 20px;
       margin: 0;
     }
     .pigeon--pic {
