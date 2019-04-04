@@ -9,14 +9,15 @@ class Detalhes extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      subitems: [],
-    }
+    // this.state = {
+    //   subitems: {},
+    // }
 
     this.storageRef = props.firebase.storage.ref();
     this.fileSelector = React.createRef();
     this.uploadNewFiles = this.uploadNewFiles.bind(this);
     this.createDBRecord = this.createDBRecord.bind(this);
+    this.deleteFile = this.deleteFile.bind(this);
   }
 
   uploadNewFiles() {
@@ -28,6 +29,32 @@ class Detalhes extends Component {
         this.uploadFile(file);
       })
     }
+  }
+
+  deleteFile(id, url) {
+    const fileRef = this.storageRef.child(url);
+    fileRef.delete().then(() => {
+    }).catch(function (error) {
+      // Uh-oh, an error occurred!
+    }).finally(() => {
+      this.deleteDBRecord(id)
+        .then(response => response.json())
+        .then(json => this.props.displayDetails(json.id))
+        .catch(err => console.log(err))
+    });
+  }
+
+  deleteDBRecord(fileid) {
+    const { id } = this.props;
+    const endpoint = `${this.baseUrl}resultados/${id}/${fileid}`;
+    return fetch(endpoint, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({id, fileid}),
+    });
   }
 
   uploadFile(file) {
@@ -43,16 +70,13 @@ class Detalhes extends Component {
     error => {
       console.error('Error while uploading new file', error);
     }, () => {
-      console.log('New file uploaded. Size:', uploadTask.snapshot.totalBytes, 'bytes.');
+      // console.log('New file uploaded. Size:', uploadTask.snapshot.totalBytes, 'bytes.');
       const url = uploadTask.snapshot.metadata;
-      console.log('File available at', url);
+      // console.log('File available at', url);
       this.createDBRecord({ name: url.name, url: url.fullPath })
         .then(response => response.json())
         .then(json => this.props.displayDetails(json.id))
-    });
-
-    //Create file entry in firestore
-    
+    }); 
   }
 
   createDBRecord(newDBrecord) {
@@ -85,15 +109,18 @@ class Detalhes extends Component {
       <div className={`admin-panel--details ${open}`}>
         <div className={`admin-panel--details-drawer`}>
           {
-            (subitems && subitems.length) <= 0 ?
+            (subitems && Object.keys(subitems).length) <= 0 ?
               <div>
                 Loading...
               </div>
             :
-              subitems.map((subitem, i) => {
+              Object.keys(subitems).map((id) => {
                 return (
-                  <div key={subitem.id}>
-                    <a href={subitem.data.url} target="_blank" rel="noopener noreferrer">{subitem.data.name}</a>
+                  <div key={id}>
+                    <a href={subitems[id].url} target="_blank" rel="noopener noreferrer">{subitems[id].name}</a>
+                    <span className="icon has-text-danger delete-file" onClick={() => this.deleteFile(id, subitems[id].url)}>
+                      <i className="fas fa-trash" id={subitems[id]} name={subitems[id]['name']}></i>
+                    </span>
                   </div>
                 )
               })
