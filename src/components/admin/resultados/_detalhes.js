@@ -4,59 +4,68 @@ import { compose } from 'recompose';
 import { withFirebase } from "../../firebase/";
 
 class Detalhes extends Component {
+  baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
+
   constructor(props) {
     super(props);
 
+    this.state = {
+      subitems: [],
+    }
+
     this.storageRef = props.firebase.storage.ref();
     this.fileSelector = React.createRef();
-    this.handleFileSelection = this.handleFileSelection.bind(this);
+    this.uploadNewFiles = this.uploadNewFiles.bind(this);
+    this.createDBRecord = this.createDBRecord.bind(this);
   }
 
-  handleFileSelection() {
-    const { id } = this.props;
+  uploadNewFiles() {
+    //If at least one file is selected, start the upload.
     if (this.fileSelector.current.files.length > 0) {
       const { files } = this.fileSelector.current;
-      Object.keys(files).map(i => {
+      Object.keys(files).map((i) => {
         const file = files[i];
-        let { name } = file;
-        const newFileRef = this.storageRef.child(`${id}/${name}`);
-        const uploadTask = newFileRef.put(file)
-        
-        uploadTask.on('state_changed', function (snapshot) {
-        
-        }, function (error) {
-            console.log(error);
-        }, function () {
-          // Handle successful uploads on complete
-          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-          uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-            // newFileRef.updateMetadata(metadata);
-            const newDBrecord = {
-              nome: name,
-              url: downloadURL,
-            }
-            this.createDBRecord(newDBrecord);
-            
-          });
-        });  
+        this.uploadFile(file);
       })
     }
   }
 
+  uploadFile(file) {
+    const { id } = this.props;
+    let { name, ...metadata } = file;
+    const newFileRef = this.storageRef.child(`resultados/${id}/${name}`);
+    const uploadTask = newFileRef.put(file, { customMetadata: metadata });
+
+    //Upload the file to cloud storage
+    uploadTask.on('state_changed', snapshot => {
+      console.log("Snapchat --> ", snapshot)
+    },
+    error => {
+      console.error('Error while uploading new file', error);
+    }, () => {
+      console.log('New file uploaded. Size:', uploadTask.snapshot.totalBytes, 'bytes.');
+      const url = uploadTask.snapshot.metadata;
+      console.log('File available at', url);
+      this.createDBRecord({ name: url.name, url: url.fullPath })
+        .then(response => response.json())
+        .then(json => this.props.displayDetails(json.id))
+    });
+
+    //Create file entry in firestore
+    
+  }
+
   createDBRecord(newDBrecord) {
-    const endpoint = `${this.baseUrl}blog`;
-    const data = { titulo: this.state.titulo, conteudo: this.state.conteudo };
-    fetch(endpoint, {
+    const { id } = this.props;
+    const endpoint = `${this.baseUrl}resultados/${id}`;
+    return fetch(endpoint, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(newDBrecord),
     });
-    this.setState({
-      opcao: null,
-    })
   }
 
   handleClick = (event) => {
@@ -81,10 +90,10 @@ class Detalhes extends Component {
                 Loading...
               </div>
             :
-              subitems.map((subitem) => {
+              subitems.map((subitem, i) => {
                 return (
-                  <div key={subitem.nome}>
-                    <a href={subitem.url} target="_blank" rel="noopener noreferrer">{subitem.nome}</a>
+                  <div key={subitem.id}>
+                    <a href={subitem.data.url} target="_blank" rel="noopener noreferrer">{subitem.data.name}</a>
                   </div>
                 )
               })
@@ -92,7 +101,7 @@ class Detalhes extends Component {
           <div className="field">
             <div className="file is-primary">
               <label className="file-label">
-                <input className="file-input" type="file" name="resume" ref={this.fileSelector} onChange={this.handleFileSelection} multiple/>
+                <input className="file-input" type="file" name="resume" ref={this.fileSelector} onChange={this.uploadNewFiles} multiple/>
                 <span className="file-cta">
                   <span className="file-icon">
                     <i className="fas fa-upload"></i>

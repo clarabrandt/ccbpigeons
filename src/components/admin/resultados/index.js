@@ -16,6 +16,7 @@ export default class Resultados extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.displayDetails = this.displayDetails.bind(this);
+    this.fetchArquivos = this.fetchArquivos.bind(this);
   }
 
   componentDidMount(){
@@ -80,7 +81,12 @@ export default class Resultados extends Component {
                 <div className='admin-panel--item'  onClick={this.handleClick}>
                   <div id={key} className='admin-panel--item--title' >{items[key].nome}</div>
                 </div>
-                <DetalhesComponent id={key}  open={key===selecionado ? 'open':''} subitems={subitems} />
+                <DetalhesComponent 
+                  id={key} 
+                  open={key === selecionado ? 'open' : ''} 
+                  subitems={subitems} 
+                  displayDetails={this.displayDetails} 
+                />
               </Fragment>
             )
           })
