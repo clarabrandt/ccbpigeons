@@ -70,16 +70,13 @@ class Detalhes extends Component {
     error => {
       console.error('Error while uploading new file', error);
     }, () => {
-      console.log('New file uploaded. Size:', uploadTask.snapshot.totalBytes, 'bytes.');
+      // console.log('New file uploaded. Size:', uploadTask.snapshot.totalBytes, 'bytes.');
       const url = uploadTask.snapshot.metadata;
-      console.log('File available at', url);
+      // console.log('File available at', url);
       this.createDBRecord({ name: url.name, url: url.fullPath })
         .then(response => response.json())
         .then(json => this.props.displayDetails(json.id))
-    });
-
-    //Create file entry in firestore
-    
+    }); 
   }
 
   createDBRecord(newDBrecord) {
