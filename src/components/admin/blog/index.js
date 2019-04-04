@@ -1,8 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import './AdminMidia.css'
+import React, { Component } from 'react';
+import './style.css'
 
-
-export default class AdminMidia extends Component {
+export default class Blog extends Component {
 
   baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
 
@@ -10,6 +9,7 @@ export default class AdminMidia extends Component {
     super(props);
     this.state = {
       titulo: '',
+      date:'',
       conteudo: '',
       items: {},
       opcao: null,
@@ -19,9 +19,9 @@ export default class AdminMidia extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.addMidia = this.addMidia.bind(this)
+    this.addPost = this.addPost.bind(this)
     this.changeData = this.changeData.bind(this)
-    this.editMidia = this.editMidia.bind(this)
+    this.editPost = this.editPost.bind(this)
     this.closeForm = this.closeForm.bind(this)
   }
 
@@ -30,13 +30,13 @@ export default class AdminMidia extends Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          items: data.midia
+          items: data.blog
         })
-      })
+      })  
   }
 
   fetchData() {
-    const endpoint = `${this.baseUrl}midia`;
+    const endpoint = `${this.baseUrl}blog`;
     return fetch(endpoint, {
       method: 'GET',
       headers: {
@@ -46,20 +46,19 @@ export default class AdminMidia extends Component {
     });
   }
 
-
   changeData(e, key) {
     e.preventDefault()
     const titulo = this.state.titulo
+    const date = this.state.date
     const conteudo = this.state.conteudo
-    console.log(key)
-    const endpoint = `${this.baseUrl}midia`;
+    const endpoint = `${this.baseUrl}blog`;
     fetch(endpoint, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({key, titulo, conteudo}),
+      body: JSON.stringify({key, titulo, date, conteudo}),
     })
       .then(response => response.json())
       .then(data => {
@@ -67,6 +66,7 @@ export default class AdminMidia extends Component {
         console.log(result[data.key])
         this.setState({
           titulo,
+          date,
           conteudo
         });
     }) 
@@ -74,7 +74,7 @@ export default class AdminMidia extends Component {
 
   deleteData(e, key) {
     e.preventDefault()
-    const endpoint = `${this.baseUrl}midia`;
+    const endpoint = `${this.baseUrl}blog`;
     fetch(endpoint, {
       method: 'DELETE',
       headers: {
@@ -92,17 +92,18 @@ export default class AdminMidia extends Component {
           });
         }) 
   }
- 
+      
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     })
+    console.log(event.target.value)
   }
 
-  handleClick(event) {
-    const endpoint = `${this.baseUrl}midia`;
-    event.preventDefault();
-    const data = { titulo: this.state.titulo, conteudo: this.state.conteudo };
+  handleClick(e) {
+    const endpoint = `${this.baseUrl}blog`;
+    e.preventDefault();
+    const data = { titulo: this.state.titulo, date: this.state.date, conteudo: this.state.conteudo };
     fetch(endpoint, {
       method: 'POST',
       headers: {
@@ -116,19 +117,20 @@ export default class AdminMidia extends Component {
     })
   }
 
-  addMidia() {
+  addPost() {
     this.setState({
       opcao: 'adicionar'
     })
   }
 
-  editMidia(e, key) {
+  editPost(e, key) {
     e.preventDefault()
     const { items } = this.state
     this.setState({
       opcao: 'editar',
       clicado: key,
       titulo: items[key].titulo,
+      date: items[key].date,
       conteudo: items[key].conteudo,
     })
   }
@@ -142,17 +144,19 @@ export default class AdminMidia extends Component {
 
   renderForm() {
     const editTitle = this.state.titulo;
+    const editDate = this.state.date;
     const editConteudo = this.state.conteudo;
     const { clicado } = this.state;
     
     return (
       <form className='postData'>
-        <div>Nova notícia</div>
-        <input type='text' id='titulo' name='titulo' placeholder='título' value={editTitle} onChange={ this.handleChange } />
+        <div>Novo post para o blog</div>
+        <input type='text' id='titulo' name='titulo' placeholder='titulo' value={editTitle} onChange={ this.handleChange } />
+        <input type='text' id='date' name='date' placeholder='dd/mm/yyyy' value={editDate} onChange={ this.handleChange } />
         <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' value={editConteudo} onChange={ this.handleChange }/>
         <div className='buttons'>
           <button type ='button' onClick={ this.closeForm }>Cancelar</button>
-          <button type ='button' onClick={ (e) => this.state.opcao === 'adicionar' ? this.handleClick(e) : this.changeData(e, clicado)}>Postar</button>
+          <button type ='button' onClick={ (e) => this.state.opcao === 'adicionar' ? this.handleClick(e) : this.changeData(e, clicado) }>Postar</button>
         </div>
       </form>
     )
@@ -168,7 +172,7 @@ export default class AdminMidia extends Component {
             <div key={ key } className='admin-panel--item'>
               <div className='admin-panel--item--title'>{items[key].titulo}</div>
               <div className='admin-panel--item--edit' >
-                <button type ='button' className='edit-button' onClick={ (e) => this.editMidia(e, key) }>Edit</button>
+                <button type ='button' className='edit-button' onClick={ (e) => this.editPost(e, key) }>Edit</button>
               </div>
               <div className='admin-panel--item--delete'>
                 <button type ='button' className='delete-button' onClick={ (e) => this.deleteData(e, key) }>Delete</button>
@@ -183,7 +187,7 @@ export default class AdminMidia extends Component {
   render() {
     return(
       // <div className= 'admin-panel'>
-      //   <div className='admin-panel--title'>Midia</div>
+        // <div className='admin-panel--title'>Blog</div>
         
         <div className='admin-panel--content'>
           {
@@ -196,7 +200,7 @@ export default class AdminMidia extends Component {
           }
           <div className='buttons'>
             <button onClick={ this.props.goBack }>Voltar</button>
-            <button onClick={ this.addMidia }>Nova notícia</button>
+            <button onClick={ this.addPost }>Novo post</button>
           </div>
         </div>
       // </div>
@@ -204,4 +208,3 @@ export default class AdminMidia extends Component {
     )
   }
 }
-

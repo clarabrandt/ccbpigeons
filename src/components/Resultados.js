@@ -10,15 +10,11 @@ export default class Resultados extends Component {
     }
     this.toggleList = this.toggleList.bind(this);
     this.showResultados = this.showResultados.bind(this);
-    // this.getCopaMG = this.getCopaMG.bind(this);
-  
   }
 
 
   componentDidMount() {
     this.showResultados();
-    // this.getCopaMG();
-    
   };
 
   toggleList() {
@@ -32,16 +28,6 @@ export default class Resultados extends Component {
       })
     }
   }
-  // getCopaMG() {
-  //   const copa = this.props.api.getCopaMG();
-  //   console.log(copa)
-  //   copa.then((docs) =>{
-  //     this.setState({
-  //       copa: Object.values(docs.copa),
-  //     })
-  //   })
-  // }
-
 
   showResultados() {
     const resultados = this.props.api.getResultados();
@@ -61,11 +47,11 @@ export default class Resultados extends Component {
     })
   } 
 
-
   render() {
     const pigeon = require("./images/pombo-correio.jpg")
     return (
       <div className='results' ref={this.props.resultados}>
+        <div className='results-content'>
           <div className='results-title'>Resultados</div>
           <div className='competitions'>
             <div className='competitions-calendar'>
@@ -98,26 +84,15 @@ export default class Resultados extends Component {
                     }
                   </ul>
               </div>
-              <div className='competitions-images'>
-                <div className='competitions-next--title'>Fotos</div>
-                <img src={pigeon} className='pigeon--pic' alt=""  />
-              </div>
-               
-             {/* <ul>
-              {
-                this.state.resultados.map((res) => {
-                  return (
-                    <div>
-                      <div className="teamo">{res.nome}</div>
-                      <div>
-                        <a href={`http://${res.url}`}>{res.nome}</a>
-                      </div>
-                    </div>
-                  )
-                })
-              }
-            </ul> */}
+            </div>
           </div>
+        {/* <div className='competitions-images'>
+          <div className='competitions-next--title'>Fotos</div>
+          <img src={pigeon} className='pigeon--pic' alt=""  />
+          <img src={pigeon} className='pigeon--pic' alt=""  />
+          <img src={pigeon} className='pigeon--pic' alt=""  />
+          <img src={pigeon} className='pigeon--pic' alt=""  />
+        </div> */}
       </div>
     )
   }

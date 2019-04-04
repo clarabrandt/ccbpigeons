@@ -3,10 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import './Admin.css';
 import api from '../../utils/api.js';
-import AdminAbout from './AdminAbout'
-import AdminBlog from './AdminBlog'
-import AdminResultados from './AdminResultados'
-import AdminMidia from './AdminMidia'
+import About from './about'
+import Blog from './blog'
+import Resultados from './resultados'
+import Midia from './midia'
 import { NavbarComponent } from './navbar';
 import { Menu } from './menu';
 import { withFirebase } from '../firebase';
@@ -60,29 +60,26 @@ class Admin extends Component {
         <NavbarComponent/>
         <div className="columns" id="admin">
           <Menu goToComponent={this.goToComponent} />
-          <div className="column is-4 messages hero is-fullheight" id="list">
+          <div className="column is-10 messages hero is-fullheight" id="list">
             {
               this.state.clicked === 'sobre' &&
-              <AdminAbout />
+              <About />
             }
 
             {
               this.state.clicked === 'blog' &&
-              <AdminBlog />
+              <Blog />
             }
             {
               this.state.clicked === 'resultados' &&
-              <AdminResultados />
+              <Resultados />
             }
 
             {
               this.state.clicked === 'midia' &&
-              <AdminMidia />
+              <Midia />
             }
-        </div>
-          <div className="column is-6 message hero is-fullheight is-hidden" id="detail">
-            details
-        </div>
+          </div>
           <footer className="footer">
           </footer>
         </div>

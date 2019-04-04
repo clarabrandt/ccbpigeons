@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Footer.css';
-import Login from './Login'
+import { LoginPage } from './Login';
+import { Redirect } from 'react-router-dom' 
 
 class Footer extends Component {
 
@@ -8,44 +9,48 @@ class Footer extends Component {
     super(props);
     this.state = {
       clicked: 'login',
+      redirect: false,
     };
-    this.goToLogin = this.goToLogin.bind(this);
-  }
-  goToLogin(e) {
     
-    this.setState({
-      clicked: e.target.className,
-    });
   }
   
+  // setRedirect = () => {
+  //   this.setState({
+  //     redirect: true
+  //   })
+  // }
+
+  // renderRedirect = () => {
+  //   if (this.state.redirect) {
+  //     return <Redirect to='/login' />
+  //   }
+  // }
+ 
+  
   render() {
-    return (
-      <div className='footer'>
+    return (   
+      <div className='foot'>
         <div className='contato'>
-          <div>Contato </div>
+          <div className='footer-title'>Contato </div>
           <div className='address'>Condomínio São João Batista </div>
           <div className='address'>Entre Rios de Minas - MG - Brazil </div>
           <div className='address'>Tel: +55(31) 9 9772-2107 </div>
         </div>
-          <div className= 'admin-login' anchor='login' onClick={this.goToLogin}>
-            admin log in
-          </div>
-          <div className= 'admin-login--page'>
-          {
-            this.state.clicked === 'admin-login' &&
-              <Login />
-          }
-        </div>
         <div className='property'>
           <div className='arrow-top' anchor='arrow2' onClick={() => this.props.handleClick('arrow2')}>
-            <div className='arrow2'></div>
-            <div className='arrow-top--text'>back to top</div>
+            <div className='arrow-top--draw'></div>
+            <div className='arrow-top--text'>Volta para o início</div>
           </div>
+          {/* {this.renderRedirect()}
+          <div className= 'admin-login' anchor='login' onClick={this.setRedirect} ref={this.login}>
+            <div className='footer-title'>Private</div>
+          </div> */}
           <div className= 'property--rights'>
             © 2019 CCB Pigeons
           </div>
         </div>
     </div>
+    
     )
   }
 }
