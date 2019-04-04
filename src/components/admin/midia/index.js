@@ -1,7 +1,8 @@
-import React, { Component, Fragment } from 'react';
-import './AdminBlog.css'
+import React, { Component } from 'react';
+import './style.css'
 
-export default class AdminBlog extends Component {
+
+export default class Midia extends Component {
 
   baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
 
@@ -13,14 +14,13 @@ export default class AdminBlog extends Component {
       items: {},
       opcao: null,
       clicado: null,
-      resposta: null,
     }
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.addPost = this.addPost.bind(this)
+    this.addMidia = this.addMidia.bind(this)
     this.changeData = this.changeData.bind(this)
-    this.editPost = this.editPost.bind(this)
+    this.editMidia = this.editMidia.bind(this)
     this.closeForm = this.closeForm.bind(this)
   }
 
@@ -29,13 +29,13 @@ export default class AdminBlog extends Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          items: data.blog
+          items: data.midia
         })
-      })  
+      })
   }
 
   fetchData() {
-    const endpoint = `${this.baseUrl}blog`;
+    const endpoint = `${this.baseUrl}midia`;
     return fetch(endpoint, {
       method: 'GET',
       headers: {
@@ -45,11 +45,13 @@ export default class AdminBlog extends Component {
     });
   }
 
+
   changeData(e, key) {
     e.preventDefault()
     const titulo = this.state.titulo
     const conteudo = this.state.conteudo
-    const endpoint = `${this.baseUrl}blog`;
+    console.log(key)
+    const endpoint = `${this.baseUrl}midia`;
     fetch(endpoint, {
       method: 'PUT',
       headers: {
@@ -71,7 +73,7 @@ export default class AdminBlog extends Component {
 
   deleteData(e, key) {
     e.preventDefault()
-    const endpoint = `${this.baseUrl}blog`;
+    const endpoint = `${this.baseUrl}midia`;
     fetch(endpoint, {
       method: 'DELETE',
       headers: {
@@ -89,16 +91,16 @@ export default class AdminBlog extends Component {
           });
         }) 
   }
-      
+ 
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     })
   }
 
-  handleClick(e) {
-    const endpoint = `${this.baseUrl}blog`;
-    e.preventDefault();
+  handleClick(event) {
+    const endpoint = `${this.baseUrl}midia`;
+    event.preventDefault();
     const data = { titulo: this.state.titulo, conteudo: this.state.conteudo };
     fetch(endpoint, {
       method: 'POST',
@@ -113,13 +115,13 @@ export default class AdminBlog extends Component {
     })
   }
 
-  addPost() {
+  addMidia() {
     this.setState({
       opcao: 'adicionar'
     })
   }
 
-  editPost(e, key) {
+  editMidia(e, key) {
     e.preventDefault()
     const { items } = this.state
     this.setState({
@@ -144,12 +146,12 @@ export default class AdminBlog extends Component {
     
     return (
       <form className='postData'>
-        <div>Novo post para o blog</div>
+        <div>Nova notícia</div>
         <input type='text' id='titulo' name='titulo' placeholder='título' value={editTitle} onChange={ this.handleChange } />
         <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' value={editConteudo} onChange={ this.handleChange }/>
         <div className='buttons'>
           <button type ='button' onClick={ this.closeForm }>Cancelar</button>
-          <button type ='button' onClick={ (e) => this.state.opcao === 'adicionar' ? this.handleClick(e) : this.changeData(e, clicado) }>Postar</button>
+          <button type ='button' onClick={ (e) => this.state.opcao === 'adicionar' ? this.handleClick(e) : this.changeData(e, clicado)}>Postar</button>
         </div>
       </form>
     )
@@ -165,7 +167,7 @@ export default class AdminBlog extends Component {
             <div key={ key } className='admin-panel--item'>
               <div className='admin-panel--item--title'>{items[key].titulo}</div>
               <div className='admin-panel--item--edit' >
-                <button type ='button' className='edit-button' onClick={ (e) => this.editPost(e, key) }>Edit</button>
+                <button type ='button' className='edit-button' onClick={ (e) => this.editMidia(e, key) }>Edit</button>
               </div>
               <div className='admin-panel--item--delete'>
                 <button type ='button' className='delete-button' onClick={ (e) => this.deleteData(e, key) }>Delete</button>
@@ -180,7 +182,7 @@ export default class AdminBlog extends Component {
   render() {
     return(
       // <div className= 'admin-panel'>
-        // <div className='admin-panel--title'>Blog</div>
+      //   <div className='admin-panel--title'>Midia</div>
         
         <div className='admin-panel--content'>
           {
@@ -193,7 +195,7 @@ export default class AdminBlog extends Component {
           }
           <div className='buttons'>
             <button onClick={ this.props.goBack }>Voltar</button>
-            <button onClick={ this.addPost }>Novo post</button>
+            <button onClick={ this.addMidia }>Nova notícia</button>
           </div>
         </div>
       // </div>
@@ -201,3 +203,4 @@ export default class AdminBlog extends Component {
     )
   }
 }
+
