@@ -1,8 +1,8 @@
 {
   "name": "ccb-pigeons",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "homepage": "http://clarabrandt.github.io/ccbpigeons",
+  "homepage": "https://www.ccbpigeons.com.br",
   "dependencies": {
     "bulma": "^0.7.4",
     "firebase": "^5.8.5",
