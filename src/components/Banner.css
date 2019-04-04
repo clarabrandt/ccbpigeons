@@ -2,42 +2,36 @@
   width: 100%;
   height: 100vh;
   position: relative;
-  background: url("./images/Overview_lofts.jpg");
+  /* background: url("./images/Overview_lofts.jpg"); */
+  background: url("./images/Overview_pombal2.jpg");
   background-attachment: scroll;
   background-size: cover;
+  margin-bottom: 150px;
 }
   .pigeon--pic{
     width: 100%;
     height: 100%;
   }
   .title--over--pic {
-    font-family: 'Poppins', 'Roboto Condensed', 'Acme', 'Changa One';
-    font-size: 65px;
-    color: white;
+    font-family:'Poppins', 'Roboto Condensed', 'Acme', 'Changa One';
+    font-size: 75px;
+    color: #f5f5f5;
     position: absolute;
-    top: 200px;
+    top: 220px;
     left: 250px;
     transform: translate(-50%, -50%);
+    font-weight: 600;
 
   }
-  .subtitle {
-    font-family: 'Poppins', 'Acme', 'Changa One';
-    font-size: 20px;
-    color: white;
-    position: absolute;
-    top: 265px;
-    left: 230px;
-    transform: translate(-50%, -50%);
-
-  }
+  
   .arrow {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 310px;
+    width: 35px;
+    height: 35px;
+    top: 330px;
     left: 210px;
-    border-right: 4px solid white;
-    border-bottom: 4px solid white;
+    border-right: 6px solid white;
+    border-bottom: 6px solid white;
     transform: rotate(45deg);
     animation: animate 1.5s infinite;
   }
@@ -47,11 +41,14 @@
   }
 
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 620px) {
+  .faixa {
+    margin-bottom: 50px;
+  }
   .title--over--pic {
     font-size: 30px;
     top: 30px;
-    left: 100px;
+    left: 120px;
   }
   .subtitle {
     font-size: 12px;
@@ -67,17 +64,19 @@
     width: 100%;
     background-position: 30% 75%;
     background-size: cover;
-    /* background-position-x: 33.333%;
-    zoom: 1.3; */
+    margin-bottom: 50px;
   }
   .title--over--pic {
-    font-size: 30px;
-    top: 30px;
-    left: 100px;
+    font-size: 40px;
+    top: 40px;
+    left: 140px;
   }
   .subtitle {
     font-size: 12px;
     top: 60px;
     left: 95px;
+  }
+  .arrow {
+    display: none;
   }
 }

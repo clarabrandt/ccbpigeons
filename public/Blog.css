@@ -12,11 +12,6 @@
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  /* display: grid;
-  grid-template-areas: 
-  'list new new new new old old'
-  'list new new new new old old'
-  'list new new new new old old' */
 }
 .post-list {
     -webkit-box-flex: 1.5;
@@ -116,7 +111,7 @@
       cursor: pointer;
       font-weight: 600;
     }
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 620px) {
   .blog {
     overflow-x: hidden;
     /* margin: 10px; */

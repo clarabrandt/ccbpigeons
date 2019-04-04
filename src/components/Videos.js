@@ -8,8 +8,8 @@ export default class Videos extends Component {
   }
   render() {
     const opts = {
-      height: '150',
-      width: '200',
+      height: '200',
+      width: '250',
     }
     const {videoId} = this.props
     return (

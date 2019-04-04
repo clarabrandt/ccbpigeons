@@ -89,7 +89,7 @@
   ul{
     list-style: none;
   }
-  @media only screen and (max-width: 420px) {
+  @media only screen and (max-width: 620px) {
     .results-title {
       font-size: 22px;
       padding: 20px 0 10px 10px;

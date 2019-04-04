@@ -9,6 +9,7 @@ export default class AdminBlog extends Component {
     super(props);
     this.state = {
       titulo: '',
+      date:'',
       conteudo: '',
       items: {},
       opcao: null,
@@ -48,6 +49,7 @@ export default class AdminBlog extends Component {
   changeData(e, key) {
     e.preventDefault()
     const titulo = this.state.titulo
+    const date = this.state.date
     const conteudo = this.state.conteudo
     const endpoint = `${this.baseUrl}blog`;
     fetch(endpoint, {
@@ -56,7 +58,7 @@ export default class AdminBlog extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({key, titulo, conteudo}),
+      body: JSON.stringify({key, titulo, date, conteudo}),
     })
       .then(response => response.json())
       .then(data => {
@@ -64,6 +66,7 @@ export default class AdminBlog extends Component {
         console.log(result[data.key])
         this.setState({
           titulo,
+          date,
           conteudo
         });
     }) 
@@ -94,12 +97,13 @@ export default class AdminBlog extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     })
+    console.log(event.target.value)
   }
 
   handleClick(e) {
     const endpoint = `${this.baseUrl}blog`;
     e.preventDefault();
-    const data = { titulo: this.state.titulo, conteudo: this.state.conteudo };
+    const data = { titulo: this.state.titulo, date: this.state.date, conteudo: this.state.conteudo };
     fetch(endpoint, {
       method: 'POST',
       headers: {
@@ -126,6 +130,7 @@ export default class AdminBlog extends Component {
       opcao: 'editar',
       clicado: key,
       titulo: items[key].titulo,
+      date: items[key].date,
       conteudo: items[key].conteudo,
     })
   }
@@ -139,13 +144,15 @@ export default class AdminBlog extends Component {
 
   renderForm() {
     const editTitle = this.state.titulo;
+    const editDate = this.state.date;
     const editConteudo = this.state.conteudo;
     const { clicado } = this.state;
     
     return (
       <form className='postData'>
         <div>Novo post para o blog</div>
-        <input type='text' id='titulo' name='titulo' placeholder='título' value={editTitle} onChange={ this.handleChange } />
+        <input type='text' id='titulo' name='titulo' placeholder='titulo' value={editTitle} onChange={ this.handleChange } />
+        <input type='text' id='date' name='date' placeholder='dd/mm/yyyy' value={editDate} onChange={ this.handleChange } />
         <textarea type='text' id='conteudo' name='conteudo' placeholder='texto' value={editConteudo} onChange={ this.handleChange }/>
         <div className='buttons'>
           <button type ='button' onClick={ this.closeForm }>Cancelar</button>
