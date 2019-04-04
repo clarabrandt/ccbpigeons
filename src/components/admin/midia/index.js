@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
-import './AdminMidia.css'
+import React, { Component } from 'react';
+import './style.css'
 
 
-export default class AdminMidia extends Component {
+export default class Midia extends Component {
 
   baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
 

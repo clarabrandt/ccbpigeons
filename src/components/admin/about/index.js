@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import './AdminAbout.css'
+import React, { Component } from 'react';
+import './style.css'
 
-export default class AdminAbout extends Component {
+export default class About extends Component {
 
 baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
 
