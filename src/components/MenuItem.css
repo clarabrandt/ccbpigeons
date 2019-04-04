@@ -17,37 +17,34 @@
     cursor: pointer;
     font-weight: 700;
   }
-
-  /* .icon {
-    align-self: start;
-    justify-self: right;
-    margin-right: 4px;
-  } */
-  .name {
+  .menu-item--name {
     align-self: center;
+   
   }
 
   @media only screen and (max-width: 620px) {
-    /* .icon {
-      display: none;
-    } */
     .menu--item {
-      font-size: 18px;
       color: black;
       padding: 6px;
-      /* margin-top: 2px; */
-      
     }
     .menu--item:hover {
       color: black;
-      text-decoration: none;
       transform: initial;
       cursor: pointer;
-      /* background-color: grey; */
+      background-color: aqua;
+
     }
     .name {
-      margin: 1px solid black;
+      font-size: 24px;
+      margin: 20px;
     }
+    .menu--item--style:hover {
+      text-decoration-color: lightgray;
+      cursor: pointer;
+      font-weight: 700;
+      background-color: aqua;
+    }
+    
   }
   @media only screen and (max-width: 780px) {
     /* .icon {
@@ -67,7 +64,7 @@
       cursor: pointer;
       /* background-color: grey; */
     }
-    .name {
+    .menu-item--name {
       margin: 1px solid black;
     }
   }

@@ -12,11 +12,6 @@
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  /* display: grid;
-  grid-template-areas: 
-  'list new new new new old old'
-  'list new new new new old old'
-  'list new new new new old old' */
 }
 .post-list {
     -webkit-box-flex: 1.5;
