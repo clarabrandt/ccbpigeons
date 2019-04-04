@@ -5,6 +5,7 @@
   background: url("./images/Overview_lofts.jpg");
   background-attachment: scroll;
   background-size: cover;
+  margin-bottom: 150px;
 }
   .pigeon--pic{
     width: 100%;

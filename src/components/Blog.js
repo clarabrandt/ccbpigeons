@@ -26,18 +26,18 @@ export default class Blog extends Component {
 
   render() {
     return (
-      <div className='blog' ref={this.props.blog}>
-        <div className='blog-content'>
-            <div className='blog-title'>Blog</div>
-            <div className='posts'>
-              <div className='post-arquivo'>
+      <div className='blog section-layout'  ref={this.props.blog}>
+        <div className='blog-content '>
+            <div className='blog-title box-title'>Blog</div>
+            <div className='posts box-content'>
+              <div className='post-arquivo box-inside--left'>
                   <div className='post-subtitle--arquivo'> Arquivo</div>
                   <div className='post-arquivo--date'>2019</div>
                   <div className='post-arquivo--date'>2018</div>
                   <div className='post-arquivo--date'>2017</div>
                   <div className='post-arquivo--date'>2016</div>
               </div>
-              <div className='post-new'>
+              <div className='post-new box-inside--right'>
                 <div className='post-subtitle--new'>Mais recentes</div>
                 {
                           this.state.blog.map((res, index) => {
@@ -55,12 +55,7 @@ export default class Blog extends Component {
               </div> 
             </div>
         </div>
-          <div className='artigos'>
-            <div className='artigos-titulo'>Artigos</div>
-            <div className='artigos-conteudo'> Artigo um</div>
-            <div className='artigos-conteudo'> Artigo dois</div>
-          </div>
-        </div>
+      </div>
     )
   }
 }

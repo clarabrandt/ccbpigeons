@@ -86,13 +86,13 @@ export default class Resultados extends Component {
               </div>
             </div>
           </div>
-        <div className='competitions-images'>
+        {/* <div className='competitions-images'>
           <div className='competitions-next--title'>Fotos</div>
           <img src={pigeon} className='pigeon--pic' alt=""  />
           <img src={pigeon} className='pigeon--pic' alt=""  />
           <img src={pigeon} className='pigeon--pic' alt=""  />
           <img src={pigeon} className='pigeon--pic' alt=""  />
-        </div>
+        </div> */}
       </div>
     )
   }

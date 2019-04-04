@@ -32,7 +32,8 @@ export default class About extends Component {
   }
 
   render() {
-    const house = require("./images/pombal_interior.jpg")
+    // const house = require("./images/pombal_interior.jpg")
+    const house = require("./images/ccbpombinho.jpg")
     
     return (
       <div className='about' ref={this.props.sobre} >
@@ -44,7 +45,7 @@ export default class About extends Component {
         </div>
         </div> */}
         <div className='content-about'>
-          <div className='about-title'>Sobre o CCB Pigeons</div>
+          {/* <div className='about-title'>Sobre o CCB Pigeons</div> */}
           {
             this.state.sobre.map((res, index) => {
               return (

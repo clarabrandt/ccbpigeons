@@ -1,11 +1,12 @@
 .blog {
-  background-color: #f2f2f2;
+  background-color: white;
   display: flex;
+  margin: 0 100px;
 }
 .blog-title {
   font-size: 3em;
-  text-align: center;
-  padding: 70px;
+  text-align: left;
+  padding: 60px 70px 50px 80px;
   color:#444649;
   text-decoration: underline;
 }
@@ -13,6 +14,7 @@
   display: flex;
   flex-direction: column;
   flex: 3.5;
+  /* margin-right: 25px; */
   
 }
 .posts {
@@ -22,7 +24,7 @@
     font-size: 1.5em;
     color:rgb(110, 9, 9);
     font-weight: 600;
-    padding: 30px 0 30px 0;
+    /* padding: 30px 0 30px 0; */
   }
   .post-new {
     flex: 3.5;
@@ -30,7 +32,6 @@
   }
     .post-title {
       font-size: 20px;
-      padding-top: 20px;
       color:#444649;
       font-weight: 600;
     }
@@ -54,7 +55,7 @@
       font-size: 1.5em;
       color:rgb(10, 10, 134);
       font-weight: 600;
-      padding: 30px;
+      padding: 0 30px;
     }
     .post-arquivo--date {
       padding: 20px 0 0 30px;
@@ -72,14 +73,16 @@
     /* display: flex;
     flex-direction: row; */
     background-color: white;
-    flex: 0.7;
-    padding: 30px 30px 20px 30px;
+    flex: 1;
+    padding: 30px 20px 20px 30px;
     font-weight: 600;
+    text-align: left;
+
   }
     .artigos-titulo{
       font-size: 1.4em;
       color: rgb(10, 10, 134);
-      text-align: center;
+      text-align: left;
       padding-bottom: 20px;
     }
     .artigos-conteudo {

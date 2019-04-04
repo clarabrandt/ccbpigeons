@@ -1,33 +1,34 @@
 .midia {
-  padding-left: 100px;
-  background-color: #f2f2f2;
-  width: 100%;
-  overflow-x: hidden;
+  margin: 140px 100px;
+  background-color: white;
   display: flex;
 
 }
+  .midia-title {
+    font-size: 3em;
+    text-align: left;
+    padding: 60px 70px 50px 80px;
+    color:#444649;
+    text-decoration: underline;
+    }
   .midia-content{
     display: flex;
     flex-direction: column;
     flex: 6;
+    /* padding: 0 30px 30px 30px; */
   }
   .midias {
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
+    margin-left: 80px;
   }
-    .midia-title {
-      font-size: 3em;
-      text-align: center;
-      padding: 70px 0;
-      color:#444649;
-      text-decoration: underline;
-      }
     .videos-subtitle {
       font-size: 1.5em;
       color:rgb(110, 9, 9);
       font-weight: 600;
+      /* padding-bottom: 30px; */
       }
     .videos {
       -webkit-box-flex: 1;
@@ -45,6 +46,7 @@
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
+      flex-direction: column;
         }
     .news {
       -webkit-box-flex: 1;
@@ -55,9 +57,11 @@
       }
     .news-subtitle {
       font-size: 1.5em;
-      padding-bottom: 65px;
       color:rgb(110, 9, 9);
       font-weight: 600;
+    }
+    .news-new--content {
+      padding-top: 30px;
     }
     .news-content {
       font-size: 20px;
@@ -82,13 +86,15 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-    flex: 1.5;
-    padding: 30px 30px 20px 30px; 
+    flex: 0.7;
+    padding: 30px 30px 20px 30px;
+    
   }
     .anuncios-title {
       font-size: 1.4em;
-      text-align: center;
       color: rgb(10, 10, 134);
+      text-align: left;
+      padding-bottom: 20px;
       font-weight: 600;
     }
     .anuncios-content{

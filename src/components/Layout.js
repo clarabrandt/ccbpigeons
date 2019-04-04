@@ -10,6 +10,7 @@ import Blog from './Blog';
 import Footer from './Footer';
 import Banner from './Banner';
 import Login from './Login';
+import Lateral from './Lateral';
 
 import './Layout.css';
 
@@ -166,13 +167,23 @@ class Layout extends Component {
       <div id='layout' className='layout' ref={this.layout} onScroll={this.onScroll}>
         <div>
           <div ref={this.top} />
-          <Banner handleClick={this.handleClick} sobre={this.sobre} sticky={this.state.sticky} clicked={this.state.clicked}/>
-          <About sobre={this.sobre} api={this.api}/>
-          <Blog blog={this.blog} api={this.api}/>
-          <Resultados resultados={this.resultados} handleClick={this.handleClick} api={this.api}/>
-          <Midia midia={this.midia} api={this.api}/>
-          <Footer top={this.top} handleClick={this.handleClick} login={this.login}/>
+          <div>
+            <Banner handleClick={this.handleClick} sobre={this.sobre} sticky={this.state.sticky} clicked={this.state.clicked}/>
+            <About sobre={this.sobre} api={this.api}/>
+          </div>
+          <div className='layout-content'>
+            <div className='layout-content-left'>
+            <Blog blog={this.blog} api={this.api}/>
+            <Resultados resultados={this.resultados} handleClick={this.handleClick} api={this.api}/>
+            <Midia midia={this.midia} api={this.api}/>
+            </div>
+            <div className='layout-content-right'>
+              <Lateral />
+            </div>
+          </div>
+            <Footer top={this.top} handleClick={this.handleClick} login={this.login}/>
         </div>
+          
       </div>
     )
   }
