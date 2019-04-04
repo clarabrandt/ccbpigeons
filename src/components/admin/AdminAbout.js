@@ -151,7 +151,6 @@ constructor(props) {
 
   renderList(){
     const { items } = this.state;
-    console.log(this.state.items)
     return(
       <div className= 'admin-panel--list'>
         { 
@@ -174,8 +173,8 @@ constructor(props) {
 
   render() {
     return(
-      <div className= 'admin-panel'>
-        <div className='admin-panel--title'>Sobre</div>
+      // <div className= 'admin-panel'>
+        // <div className='admin-panel--title'>Sobre</div>
         
         <div className='admin-panel--content'>
           {
@@ -191,7 +190,7 @@ constructor(props) {
             <button onClick={ this.addAbout }>Adicionar conteúdo</button>
           </div>
         </div>
-      </div>
+      // </div>
       
     )
   }

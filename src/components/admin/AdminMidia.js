@@ -14,7 +14,6 @@ export default class AdminMidia extends Component {
       items: {},
       opcao: null,
       clicado: null,
-      resposta: null,
     }
 
     this.handleClick = this.handleClick.bind(this);
