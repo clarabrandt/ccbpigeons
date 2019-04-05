@@ -10,7 +10,7 @@ export default class Resultados extends Component {
     super(props);
     this.state = {
       items: {},
-      subitems: [],
+      subitems: {},
       selecionado: null,
     }
 
@@ -44,9 +44,14 @@ export default class Resultados extends Component {
   displayDetails() {
     this.fetchArquivos()
       .then(response => response.json())
-      .then(data => {
+      .then(subitems => {
+        const result = {};
+        subitems.map((file) => {
+          result[file.id] = file.data;
+        })
+
         this.setState({
-          subitems: data,
+          subitems: result,
         })
       })
   }
@@ -72,6 +77,7 @@ export default class Resultados extends Component {
 
   renderList(){
     const { items, selecionado, subitems } = this.state;
+    console.log('subitems : ', subitems)
     return(
       <div className= 'admin-panel--list'>
         { 
