@@ -26,7 +26,8 @@ class Detalhes extends Component {
       const { files } = this.fileSelector.current;
       Object.keys(files).map((i) => {
         const file = files[i];
-        this.uploadFile(file);
+        this.props.updateSubitem(i, file);
+        this.uploadFile(i, file);
       })
     }
   }
@@ -57,7 +58,7 @@ class Detalhes extends Component {
     });
   }
 
-  uploadFile(file) {
+  uploadFile(i, file) {
     const { id } = this.props;
     let { name, ...metadata } = file;
     const newFileRef = this.storageRef.child(`resultados/${id}/${name}`);
@@ -65,17 +66,18 @@ class Detalhes extends Component {
 
     //Upload the file to cloud storage
     uploadTask.on('state_changed', snapshot => {
-      console.log("Snapchat --> ", snapshot)
+      this.props.updateSubitem(i, file, false, snapshot);
     },
     error => {
       console.error('Error while uploading new file', error);
     }, () => {
-      // console.log('New file uploaded. Size:', uploadTask.snapshot.totalBytes, 'bytes.');
       const url = uploadTask.snapshot.metadata;
-      // console.log('File available at', url);
       this.createDBRecord({ name: url.name, url: url.fullPath })
         .then(response => response.json())
-        .then(json => this.props.displayDetails(json.id))
+        .then(json => {
+          this.props.updateSubitem(json.id, file, true);
+          this.props.displayDetails(json.id)
+        })
     }); 
   }
 
@@ -115,13 +117,19 @@ class Detalhes extends Component {
               </div>
             :
               Object.keys(subitems).map((id) => {
+                const file = subitems[id];
+
                 return (
-                  <div key={id}>
-                    <a href={subitems[id].url} target="_blank" rel="noopener noreferrer">{subitems[id].name}</a>
-                    <span className="icon has-text-danger delete-file" onClick={() => this.deleteFile(id, subitems[id].url)}>
-                      <i className="fas fa-trash" id={subitems[id]} name={subitems[id]['name']}></i>
-                    </span>
-                  </div>
+                  file.done === false ?
+                    <progress key={id} className="progress is-primary" value={file.snapshot.bytesTransferred} max={file.snapshot.totalBytes}>15%</progress>
+                  :
+                    <div key={id}>
+                      <a href={subitems[id].url} target="_blank" rel="noopener noreferrer">{subitems[id].name}</a>
+                      <span className="icon has-text-danger delete-file" onClick={() => this.deleteFile(id, subitems[id].url)}>
+                        <i className="fas fa-trash" id={subitems[id]} name={subitems[id]['name']}></i>
+                      </span>
+                    </div>
+                  
                 )
               })
           }
