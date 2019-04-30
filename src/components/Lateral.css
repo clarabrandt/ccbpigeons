@@ -19,7 +19,7 @@
   color: rgb(10, 10, 134);
   padding: 30px 20px 20px 30px;
   font-weight: 600;
-
+  cursor: pointer;
 }
 
 .pigeon--pic {
@@ -33,7 +33,6 @@
   background-color: white;
   flex: 0.7;
   padding: 70px 30px 20px 30px;
-
 }
 
 .anuncios-title {
@@ -55,14 +54,12 @@
 }
 
 .artigos {
-
   background-color: white;
   flex: 1;
   padding: 30px 20px 20px 30px;
   font-weight: 600;
   border: 1px solid black;
   text-align: left;
-
 }
 
 .artigos-titulo {
@@ -71,11 +68,11 @@
   text-align: left;
   padding-bottom: 20px;
 }
-
 .artigos-conteudo {
   border-bottom: 0.5px solid lightgrey;
   padding-bottom: 20px;
   font-size: 18px;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 620px) {
