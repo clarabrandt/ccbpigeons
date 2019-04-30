@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import './Lateral.css';
-import "./Layout.css";
+import "./Lateral.css";
 
 export default class Lateral extends Component {
   constructor(props) {

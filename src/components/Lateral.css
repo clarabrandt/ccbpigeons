@@ -1,16 +1,13 @@
 .lateral {
   display: flex;
-  height: 100%;
+  height: calc(100% - 140px);
   background-color: white;
-  padding: 50px 80px;
-  max-width: 20%;
+  margin-bottom: 140px;
 }
-
 .lateral-content {
   display: flex;
   flex-direction: column;
 }
-
 .competitions-images {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
@@ -58,7 +55,6 @@
   flex: 1;
   padding: 30px 20px 20px 30px;
   font-weight: 600;
-  border: 1px solid black;
   text-align: left;
 }
 
@@ -84,15 +80,30 @@
   .anuncios-content {
     padding: 20px 0;
   }
+  .anuncios-content-- {
+    margin: 10px 0;
+  }
+  .artigos-titulo {
+    font-size: 18px;
+  }
 }
 
-@media only screen and (max-width: 780px) {
+@media only screen and (max-width: 1024px) {
   .lateral {
     margin: 0;
     max-width: 100%;
   }
-
+  .anuncios-content-- {
+    margin: 10px 0;
+  }
   .anuncios-content {
     padding: 20px 0;
+  }
+  .artigos-titulo {
+    font-size: 18px;
+  }
+  .anuncios-title {
+    font-size: 18px;
+    padding: 0;
   }
 }
