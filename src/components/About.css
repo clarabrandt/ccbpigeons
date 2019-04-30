@@ -31,9 +31,10 @@
   text-align: justify;
   line-height: 26px;
   margin-right: 10px;
-
 }
-
+.house-pic {
+  max-width: 100%;
+}
 .content-about--right {
   background-color: rgb(87, 87, 87);
   -webkit-box-flex: 1.4;
@@ -60,7 +61,6 @@
     color: #444649;
     text-align: initial;
     font-weight: bold;
-
   }
 
   .content-about {
