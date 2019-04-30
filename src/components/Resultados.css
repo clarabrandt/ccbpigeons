@@ -2,12 +2,12 @@
   background-color: white;
   display: flex;
   margin: 140px 100px;
-
 }
 
 .results-content {
   flex-direction: column;
   flex: 5.5;
+  padding-bottom: 30px;
 }
 
 .results-title {
@@ -92,7 +92,6 @@
   flex: 3.5;
   margin: 0 60px 0 0;
   padding-left: 70px;
-
 }
 
 .competitions-results--title {
@@ -110,7 +109,7 @@
 
 .competitions-results--listItems {
   font-size: 20px;
-  padding: 20px 30px 30px 80px;
+  padding: 20px 30px 30px 10px;
   margin-bottom: 30px;
   color: #444649;
   border-bottom: 0.5px solid lightgrey;
@@ -133,7 +132,10 @@
   background-color: white;
   border-top: 30px solid #f4f4f4;
   border-bottom: 30px solid #f4f4f4;
-
+}
+ul,
+li {
+  list-style: none;
 }
 
 @media only screen and (max-width: 620px) {
@@ -156,9 +158,9 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
-      'results results'
-      'next next'
-      'image image'
+      "results results"
+      "next next"
+      "image image";
   }
 
   .competitions-results--title {
@@ -168,12 +170,11 @@
   .competitions-results {
     grid-area: results;
     padding: 0 20px;
-    margin: 0
+    margin: 0;
   }
 
   .competitions-results--list {
     padding: 0;
-
   }
 
   .competitions-next,
@@ -211,7 +212,6 @@
     grid-area: image;
     padding: 20px;
     margin: 0;
-
   }
 
   .competitios-pics--title {
@@ -241,9 +241,9 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
-      'results results'
-      'next next'
-      'image image'
+      "results results"
+      "next next"
+      "image image";
   }
 
   .competitions-results--title {
@@ -252,7 +252,7 @@
 
   .competitions-results {
     padding: 0 20px;
-    margin: 0
+    margin: 0;
   }
 
   .competitions-results--list {

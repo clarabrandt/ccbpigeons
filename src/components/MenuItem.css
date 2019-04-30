@@ -1,7 +1,7 @@
 .menu--item {
-  font-family: 'Poppins', 'Roboto Condensed', 'Acme', 'Changa One';
+  font-family: "Poppins", "Roboto Condensed", "Acme", "Changa One";
   color: white;
-  font-size: 18px;
+  font-size: 20px;
   align-self: end;
   display: flex;
   display: -webkit-box;
@@ -12,59 +12,55 @@
 }
 
 .menu--item--style:hover {
-    text-decoration: underline;
-    text-decoration-color: white;
+  text-decoration: underline;
+  text-decoration-color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+.menu-item--name {
+  align-self: center;
+}
+
+@media only screen and (max-width: 620px) {
+  .menu--item {
+    color: black;
+    padding: 6px;
+  }
+  .menu--item:hover {
+    color: black;
+    transform: initial;
+    cursor: pointer;
+    background-color: aqua;
+  }
+  .name {
+    font-size: 24px;
+    margin: 20px;
+  }
+  .menu--item--style:hover {
+    text-decoration-color: lightgray;
     cursor: pointer;
     font-weight: 700;
+    background-color: aqua;
   }
-  .menu-item--name {
-    align-self: center;
-   
-  }
-
-  @media only screen and (max-width: 620px) {
-    .menu--item {
-      color: black;
-      padding: 6px;
-    }
-    .menu--item:hover {
-      color: black;
-      transform: initial;
-      cursor: pointer;
-      background-color: aqua;
-
-    }
-    .name {
-      font-size: 24px;
-      margin: 20px;
-    }
-    .menu--item--style:hover {
-      text-decoration-color: lightgray;
-      cursor: pointer;
-      font-weight: 700;
-      background-color: aqua;
-    }
-    
-  }
-  @media only screen and (max-width: 780px) {
-    /* .icon {
+}
+@media only screen and (max-width: 780px) {
+  /* .icon {
       display: none;
     } */
-    .menu--item {
-      font-size: 18px;
-      color: #444649;
-      padding: 6px;
-      /* margin-top: 2px; */
-      
-    }
-    .menu--item:hover {
-      font-weight: 600;
-      text-decoration: none;
-      transform: initial;
-      cursor: pointer;
-      /* background-color: grey; */
-    }
-    .menu-item--name {
-      margin: 1px solid black;
-    }
+  .menu--item {
+    font-size: 18px;
+    color: #444649;
+    padding: 6px;
+    /* margin-top: 2px; */
   }
+  .menu--item:hover {
+    font-weight: 600;
+    text-decoration: none;
+    transform: initial;
+    cursor: pointer;
+    /* background-color: grey; */
+  }
+  .menu-item--name {
+    margin: 1px solid black;
+  }
+}
