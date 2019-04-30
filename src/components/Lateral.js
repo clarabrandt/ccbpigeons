@@ -16,12 +16,12 @@ export default class Lateral extends Component {
   }
 
   showFotos() {
-    // const fotos = this.props.api.getFotos();
-    // fotos.then(docs => {
-    //   this.setState({
-    //     fotos: docs
-    //   });
-    // });
+    const fotos = this.props.api.getFotos();
+    fotos.then(docs => {
+      this.setState({
+        fotos: Object.values(docs.fotos)
+      });
+    });
   }
 
   render() {
@@ -36,6 +36,7 @@ export default class Lateral extends Component {
           </div>
           <div className="competitions-images">
             <div className="competitios-pics--title "> Fotos </div>
+
             {this.state.fotos.map((res, index) => {
               return (
                 <div key={index} className="pics-content">
@@ -43,6 +44,7 @@ export default class Lateral extends Component {
                 </div>
               );
             })}
+
             <img src={pigeon} className="pigeon--pic" alt="" />
             <img src={pigeon} className="pigeon--pic" alt="" />
             <img src={pigeon} className="pigeon--pic" alt="" />

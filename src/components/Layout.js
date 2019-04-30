@@ -41,6 +41,7 @@ class Layout extends Component {
     this.showBlog();
     this.showSobre();
     this.showMidia();
+    this.showFotos();
   }
 
   showResultados() {
@@ -73,6 +74,14 @@ class Layout extends Component {
     midia.then(docs => {
       this.setState({
         midia: docs.midia
+      });
+    });
+  }
+  showFotos() {
+    const fotos = this.api.getFotos();
+    fotos.then(docs => {
+      this.setState({
+        fotos: docs.fotos
       });
     });
   }
@@ -182,7 +191,7 @@ class Layout extends Component {
               <Midia midia={this.midia} api={this.api} />
             </div>
             <div className="layout-content-right">
-              <Lateral />
+              <Lateral api={this.api} />
             </div>
           </div>
           <Footer
