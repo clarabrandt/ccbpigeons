@@ -1,7 +1,7 @@
 .video {
   margin-right: 30px;
 }
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 620px) {
   .video {
     padding: 20px 0 0 20px;
     margin: 0 0 20px 0;

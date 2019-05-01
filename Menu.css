@@ -38,7 +38,7 @@
     transition: height 2s;
     width: 100%;
   }
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 620px) {
 .menu {
   position: absolute;
   display: -webkit-box;
