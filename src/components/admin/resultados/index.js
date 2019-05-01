@@ -11,16 +11,18 @@ export default class Resultados extends Component {
     this.state = {
       items: {},
       subitems: {},
+      snapshot: {},
       selecionado: null,
     }
 
     this.handleClick = this.handleClick.bind(this);
     this.displayDetails = this.displayDetails.bind(this);
     this.fetchArquivos = this.fetchArquivos.bind(this);
+    this.updateSubitem = this.updateSubitem.bind(this);
   }
 
   componentDidMount(){
-    this.fetchEventos()
+    this.fetchData()
       .then(response => response.json())
       .then(data => {
         this.setState({
@@ -30,7 +32,7 @@ export default class Resultados extends Component {
       })
   }
 
-  fetchEventos() {
+  fetchData() {
     const endpoint = `${this.baseUrl}resultados`;
     return fetch(endpoint, {
       method: 'GET',
@@ -54,6 +56,15 @@ export default class Resultados extends Component {
           subitems: result,
         })
       })
+  }
+
+  updateSubitem(i, file, done = false, snapshot = {}) {
+    this.setState({
+      subitems: {
+        ...this.state.subitems,
+        [i]: {done, snapshot, name: file.name},
+      }
+    });
   }
 
   fetchArquivos() {
@@ -92,6 +103,7 @@ export default class Resultados extends Component {
                   open={key === selecionado ? 'open' : ''} 
                   subitems={subitems} 
                   displayDetails={this.displayDetails} 
+                  updateSubitem={this.updateSubitem} 
                 />
               </Fragment>
             )
