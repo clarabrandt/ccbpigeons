@@ -13,7 +13,7 @@
 }
 .layout-content-right {
   width: 25%;
-  margin-right: 100px;
+  margin-right: 70px;
 }
 
 @media only screen and (max-width: 620px) {

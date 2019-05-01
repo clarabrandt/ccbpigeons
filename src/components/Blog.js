@@ -5,10 +5,12 @@ export default class Blog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blog: []
+      blog: [],
+      open: false
     };
 
     this.showBlog = this.showBlog.bind(this);
+    this.toggleList = this.toggleList.bind(this);
   }
 
   componentDidMount() {
@@ -23,6 +25,17 @@ export default class Blog extends Component {
       });
     });
   }
+  toggleList() {
+    if (this.state.open === false) {
+      this.setState({
+        open: true
+      });
+    } else {
+      this.setState({
+        open: false
+      });
+    }
+  }
 
   render() {
     return (
@@ -32,7 +45,21 @@ export default class Blog extends Component {
           <div className="posts box-content">
             <div className="post-arquivo box-inside--left">
               <div className="post-subtitle--arquivo"> Arquivo</div>
-              <div className="post-arquivo--date">2019</div>
+              <div className="post-arquivo--date" onClick={this.toggleList}>
+                2019
+              </div>
+              {this.state.blog.map((res, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={`post-date--content ${
+                      this.state.open ? "open" : "closed"
+                    }`}
+                  >
+                    <div className="post-title--date">{res.titulo} </div>
+                  </div>
+                );
+              })}
               <div className="post-arquivo--date">2018</div>
               <div className="post-arquivo--date">2017</div>
               <div className="post-arquivo--date">2016</div>
