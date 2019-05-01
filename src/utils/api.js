@@ -73,8 +73,19 @@ class api {
       .then(res => res.json()) // translate to json
       .catch(err => console.log(err));
   }
+  getArtigos() {
+    let endpoint = `${this.baseUrl}artigos`;
+
+    return restCall(endpoint, {
+      method: "GET",
+      credentials: "omit"
+    })
+      .then(checkFetchReturnStatus) // status check
+      .then(res => res.json()) // translate to json
+      .catch(err => console.log(err));
+  }
   getFotos() {
-    let endpoint = `${this.baseUrl}home`;
+    let endpoint = `${this.baseUrl}fotos`;
 
     return restCall(endpoint, {
       method: "GET",

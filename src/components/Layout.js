@@ -42,6 +42,7 @@ class Layout extends Component {
     this.showSobre();
     this.showMidia();
     this.showFotos();
+    this.showArtigos();
   }
 
   showResultados() {
@@ -82,6 +83,14 @@ class Layout extends Component {
     fotos.then(docs => {
       this.setState({
         fotos: docs.fotos
+      });
+    });
+  }
+  showArtigos() {
+    const artigos = this.api.getArtigos();
+    artigos.then(docs => {
+      this.setState({
+        artigos: docs.artigos
       });
     });
   }
