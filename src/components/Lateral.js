@@ -6,13 +6,16 @@ export default class Lateral extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fotos: []
+      fotos: [],
+      artigos: []
     };
 
     this.showFotos = this.showFotos.bind(this);
+    this.showArtigos = this.showArtigos.bind(this);
   }
   componentDidMount() {
     this.showFotos();
+    this.showArtigos();
   }
 
   showFotos() {
@@ -20,6 +23,14 @@ export default class Lateral extends Component {
     fotos.then(docs => {
       this.setState({
         fotos: Object.values(docs.fotos)
+      });
+    });
+  }
+  showArtigos() {
+    const artigos = this.props.api.getArtigos();
+    artigos.then(docs => {
+      this.setState({
+        artigos: Object.values(docs.artigos)
       });
     });
   }
@@ -31,8 +42,13 @@ export default class Lateral extends Component {
         <div className="lateral-content">
           <div className="artigos">
             <div className="artigos-titulo"> Artigos </div>
-            <div className="artigos-conteudo"> Artigo um </div>
-            <div className="artigos-conteudo"> Artigo dois </div>
+            {this.state.artigos.map((res, index) => {
+              return (
+                <div key={index} className="artigos-conteudo">
+                  <div className="post-title">{res.title} </div>
+                </div>
+              );
+            })}
           </div>
           <div className="competitions-images">
             <div className="competitios-pics--title "> Fotos </div>
