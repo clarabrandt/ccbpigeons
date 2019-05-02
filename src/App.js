@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Route, Switch, HashRouter } from "react-router-dom";
 import "./App.css";
 import Layout from "./components/Layout.js";
 import { LoginPage } from "./components/login.js";
@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <BrowserRouter basename={process.env.PUBLIC_URL} />
+        <HashRouter basename={process.env.PUBLIC_URL} />
         <Switch>
           <Route path="/login" component={LoginPage} />
           <Route path="/admin" component={AdminPage} />
