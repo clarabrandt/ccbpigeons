@@ -6,7 +6,7 @@ export class Menu extends React.Component {
     return (
       <div className="menu">
         <div className="menu-content">
-          <div id="sobre" className="item">
+          <div id="sobre" className="item" onClick={this.props.goToComponent}>
             <div className="icon">
               <i className="fa fa-inbox" />
             </div>

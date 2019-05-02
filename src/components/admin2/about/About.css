@@ -1,0 +1,68 @@
+.admin-layout--content1 {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid lightgrey;
+  padding: 20px;
+}
+.admin-layout--item {
+  display: flex;
+  margin-bottom: 10px;
+  border-bottom: 1px solid lightgrey;
+}
+.admin-layout--item--title {
+  flex-grow: 1;
+  font-weight: 600;
+  font-size: 18px;
+}
+.admin-layout--item--edit,
+.admin-layout--item--delete {
+  width: 80px;
+  cursor: pointer;
+}
+.admin-layout--delete--button {
+  background-color: rgb(163, 24, 24);
+  color: white;
+  height: 22px;
+  font-size: 12px;
+}
+.admin-layout--edit--button {
+  height: 22px;
+  font-size: 12px;
+}
+.postData {
+  display: flex;
+  flex-direction: column;
+}
+.postData-title {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.text-area {
+  max-width: 600px;
+  height: 600px;
+  font-size: 16px;
+}
+.admin-buttons.display {
+  display: none;
+}
+.admin-post--buttons {
+  display: flex;
+  font-size: 14px;
+  height: 22px;
+  width: auto;
+  margin-top: 10px;
+}
+
+.admin-post--button {
+  margin-right: 50px;
+  height: 22px;
+  font-size: 14px;
+  color: white;
+}
+.admin-post--button.cancel {
+  background-color: rgb(163, 27, 27);
+}
+.admin-post--button.post {
+  background-color: rgb(63, 182, 63);
+}

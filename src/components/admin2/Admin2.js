@@ -2,27 +2,49 @@ import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { withFirebase } from "../firebase";
+import api from "../../utils/api.js";
 import "./Admin2.css";
 import { Menu } from "./menu/Menu";
+import About from "./about/About";
 
 class Admin2 extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      clicked: "sobre",
+      authUser: null,
+      fetchingAuth: true
+    };
+    this.goToComponent = this.goToComponent.bind(this);
+    this.api = new api();
+  }
+
+  componentDidMount() {
+    this.props.firebase.auth.onAuthStateChanged(authUser => {
+      authUser
+        ? this.setState({ fetchingAuth: false, authUser })
+        : this.setState({ fetchingAuth: false, authUser: null });
+    });
+  }
+
+  goToComponent(e) {
+    this.setState({
+      clicked: e.target.id
+    });
+  }
+
   render() {
     return (
       <Fragment>
         <div className="admin">
           <div className="admin-menu">
             <div className="admin-menu--content">
-              <Menu />
+              <Menu goToComponent={this.goToComponent} />
             </div>
           </div>
           <div className="admin-layout">
-            <div class="admin-layout--content">
-              <div>a</div>
-              <div>b</div>
-              <div>c</div>
-              <div>d</div>
-              <div>r</div>
-              <div>d</div>
+            <div className="admin-layout--content">
+              {this.state.clicked === "sobre" && <About />}
             </div>
           </div>
         </div>
