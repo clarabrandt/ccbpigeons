@@ -6,7 +6,7 @@
     "public": "public",
     "rewrites": [
       {
-        "source": "**/!(*.js|*.html|*.css|*.json|*.svg|*.png|*.jpg|*.jpeg)",
+        "source": "!{/bower_components,/elements}/**",
         "destination": "/index.html"
       }
     ]
