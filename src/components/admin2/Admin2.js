@@ -6,12 +6,13 @@ import api from "../../utils/api.js";
 import "./Admin2.css";
 import { Menu } from "./menu/Menu";
 import About from "./about/About";
+import Blog from "./blog/Blog";
 
 class Admin2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicked: "sobre",
+      clicked: "blog",
       authUser: null,
       fetchingAuth: true
     };
@@ -45,6 +46,7 @@ class Admin2 extends Component {
           <div className="admin-layout">
             <div className="admin-layout--content">
               {this.state.clicked === "sobre" && <About />}
+              {this.state.clicked === "blog" && <Blog />}
             </div>
           </div>
         </div>

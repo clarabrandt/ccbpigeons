@@ -219,7 +219,6 @@ export default class About extends Component {
           </button>
         </div>
       </div>
-      // </div>
     );
   }
 }
