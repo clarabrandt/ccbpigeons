@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { withFirebase } from "../../firebase/";
+import "./style.css";
 
 class Detalhes extends Component {
-  baseUrl = 'https://us-central1-pigeon-90548.cloudfunctions.net/api/';
+  baseUrl = "https://us-central1-pigeon-90548.cloudfunctions.net/api/";
 
   constructor(props) {
     super(props);
@@ -24,37 +25,40 @@ class Detalhes extends Component {
     //If at least one file is selected, start the upload.
     if (this.fileSelector.current.files.length > 0) {
       const { files } = this.fileSelector.current;
-      Object.keys(files).map((i) => {
+      Object.keys(files).map(i => {
         const file = files[i];
         this.props.updateSubitem(i, file);
         this.uploadFile(i, file);
-      })
+      });
     }
   }
 
   deleteFile(id, url) {
     const fileRef = this.storageRef.child(url);
-    fileRef.delete().then(() => {
-    }).catch(function (error) {
-      // Uh-oh, an error occurred!
-    }).finally(() => {
-      this.deleteDBRecord(id)
-        .then(response => response.json())
-        .then(json => this.props.displayDetails(json.id))
-        .catch(err => console.log(err))
-    });
+    fileRef
+      .delete()
+      .then(() => {})
+      .catch(function(error) {
+        // Uh-oh, an error occurred!
+      })
+      .finally(() => {
+        this.deleteDBRecord(id)
+          .then(response => response.json())
+          .then(json => this.props.displayDetails(json.id))
+          .catch(err => console.log(err));
+      });
   }
 
   deleteDBRecord(fileid) {
     const { id } = this.props;
     const endpoint = `${this.baseUrl}resultados/${id}/${fileid}`;
     return fetch(endpoint, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({id, fileid}),
+      body: JSON.stringify({ id, fileid })
     });
   }
 
@@ -65,36 +69,40 @@ class Detalhes extends Component {
     const uploadTask = newFileRef.put(file, { customMetadata: metadata });
 
     //Upload the file to cloud storage
-    uploadTask.on('state_changed', snapshot => {
-      this.props.updateSubitem(i, file, false, snapshot);
-    },
-    error => {
-      console.error('Error while uploading new file', error);
-    }, () => {
-      const url = uploadTask.snapshot.metadata;
-      this.createDBRecord({ name: url.name, url: url.fullPath })
-        .then(response => response.json())
-        .then(json => {
-          this.props.updateSubitem(json.id, file, true);
-          this.props.displayDetails(json.id)
-        })
-    }); 
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        this.props.updateSubitem(i, file, false, snapshot);
+      },
+      error => {
+        console.error("Error while uploading new file", error);
+      },
+      () => {
+        const url = uploadTask.snapshot.metadata;
+        this.createDBRecord({ name: url.name, url: url.fullPath })
+          .then(response => response.json())
+          .then(json => {
+            this.props.updateSubitem(json.id, file, true);
+            this.props.displayDetails(json.id);
+          });
+      }
+    );
   }
 
   createDBRecord(newDBrecord) {
     const { id } = this.props;
     const endpoint = `${this.baseUrl}resultados/${id}`;
     return fetch(endpoint, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(newDBrecord),
+      body: JSON.stringify(newDBrecord)
     });
   }
 
-  handleClick = (event) => {
+  handleClick = event => {
     const { email, password } = this.state;
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
@@ -103,61 +111,80 @@ class Detalhes extends Component {
       });
 
     event.preventDefault();
-  }
+  };
 
   render() {
     const { open, subitems } = this.props;
     return (
       <div className={`admin-panel--details ${open}`}>
         <div className={`admin-panel--details-drawer`}>
-          {
-            (subitems && Object.keys(subitems).length) <= 0 ?
-              <div>
-                Loading...
-              </div>
-            :
-              Object.keys(subitems).map((id) => {
-                const file = subitems[id];
+          {(subitems && Object.keys(subitems).length) <= 0 ? (
+            <div>Loading...</div>
+          ) : (
+            Object.keys(subitems).map(id => {
+              const file = subitems[id];
 
-                return (
-                  file.done === false ?
-                    <progress key={id} className="progress is-primary" value={file.snapshot.bytesTransferred} max={file.snapshot.totalBytes}>15%</progress>
-                  :
-                    <div key={id}>
-                      <a href={subitems[id].url} target="_blank" rel="noopener noreferrer">{subitems[id].name}</a>
-                      <span className="icon has-text-danger delete-file" onClick={() => this.deleteFile(id, subitems[id].url)}>
-                        <i className="fas fa-trash" id={subitems[id]} name={subitems[id]['name']}></i>
-                      </span>
-                    </div>
-                  
-                )
-              })
-          }
+              return file.done === false ? (
+                <progress
+                  key={id}
+                  className="progress is-primary"
+                  value={file.snapshot.bytesTransferred}
+                  max={file.snapshot.totalBytes}
+                >
+                  15%
+                </progress>
+              ) : (
+                <div key={id}>
+                  <a
+                    href={subitems[id].url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {subitems[id].name}
+                  </a>
+                  <button
+                    className="delete-button"
+                    onClick={() => this.deleteFile(id, subitems[id].url)}
+                  >
+                    <i
+                      className="fas fa-trash"
+                      id={subitems[id]}
+                      name={subitems[id]["name"]}
+                    />
+                  </button>
+                </div>
+              );
+            })
+          )}
           <div className="field">
             <div className="file is-primary">
               <label className="file-label">
-                <input className="file-input" type="file" name="resume" ref={this.fileSelector} onChange={this.uploadNewFiles} multiple/>
+                <input
+                  className="file-input"
+                  type="file"
+                  name="resume"
+                  ref={this.fileSelector}
+                  onChange={this.uploadNewFiles}
+                  multiple
+                />
                 <span className="file-cta">
                   <span className="file-icon">
-                    <i className="fas fa-upload"></i>
+                    <i className="fas fa-upload" />
                   </span>
-                  <span className="file-label">
-                    Primary file…
-                  </span>
+                  <span className="file-label">Primary file…</span>
                 </span>
               </label>
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-
 const DetalhesComponent = compose(
   withRouter,
-  withFirebase,
+  withFirebase
 )(Detalhes);
 
 export default Detalhes;

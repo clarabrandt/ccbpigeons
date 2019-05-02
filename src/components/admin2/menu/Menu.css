@@ -1,0 +1,17 @@
+.menu {
+  width: 260px;
+}
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  color: #6f7b7e;
+}
+.item {
+  display: flex;
+  padding: 10px 0;
+  font-size: 18px;
+}
+.name {
+  padding-left: 10px;
+}

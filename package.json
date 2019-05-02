@@ -4,7 +4,6 @@
   "private": true,
   "homepage": "https://www.ccbpigeons.com.br",
   "dependencies": {
-    "bulma": "^0.7.4",
     "firebase": "^5.8.5",
     "gh-pages": "^2.0.1",
     "react": "^16.7.0",
