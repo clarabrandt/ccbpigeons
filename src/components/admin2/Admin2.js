@@ -24,10 +24,6 @@ class Admin2 extends Component {
               <div>r</div>
               <div>d</div>
             </div>
-            <div className="admin-buttons">
-              <button className="admin-button">Voltar</button>
-              <button className="admin-button">Novo conteúdo</button>
-            </div>
           </div>
         </div>
       </Fragment>
