@@ -2,19 +2,11 @@ import React from "react";
 import "./Menu.css";
 
 export class Menu extends React.Component {
-  changeClass() {
-    document.getElementById("item").className = "active";
-  }
   render() {
     return (
       <div className="menu">
         <div className="menu-content">
-          <div
-            id="sobre"
-            className="item"
-            onClick={this.props.goToComponent}
-            onmouseover={this.changeClass}
-          >
+          <div id="sobre" className="item">
             <div className="icon">
               <i className="fa fa-inbox" />
             </div>

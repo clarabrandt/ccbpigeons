@@ -9,13 +9,26 @@ class Admin2 extends Component {
   render() {
     return (
       <Fragment>
-        <div class="admin">
-          <div class="admin-menu">
-            <div class="admin-menu--content">
+        <div className="admin">
+          <div className="admin-menu">
+            <div className="admin-menu--content">
               <Menu />
             </div>
           </div>
-          <div class="admin-layout" />
+          <div className="admin-layout">
+            <div class="admin-layout--content">
+              <div>a</div>
+              <div>b</div>
+              <div>c</div>
+              <div>d</div>
+              <div>r</div>
+              <div>d</div>
+            </div>
+            <div className="admin-buttons">
+              <button className="admin-button">Voltar</button>
+              <button className="admin-button">Novo conteúdo</button>
+            </div>
+          </div>
         </div>
       </Fragment>
     );
