@@ -37,15 +37,15 @@ class Login extends Component {
   render() {
     const { error } = this.state;
     return (
-      <div className="box">
+      <div className="login">
         <figure className="avatar">
           <img src="https://placehold.it/128x128" alt="" />
         </figure>
         <form>
-          <div className="field">
-            <div className="control">
+          <div className="login-field">
+            <div className="login-control">
               <input
-                className="input is-large"
+                className="login-input"
                 type="email"
                 name="email"
                 placeholder="Your Email"
@@ -57,10 +57,10 @@ class Login extends Component {
               />
             </div>
           </div>
-          <div className="field">
-            <div className="control">
+          <div className="login-field">
+            <div className="login-control">
               <input
-                className="input is-large"
+                className="login-input"
                 name="password"
                 type="password"
                 placeholder="Your Password"
@@ -72,8 +72,8 @@ class Login extends Component {
             </div>
           </div>
           <div className="error-message">{error && error.message}</div>
-          <div className="field">
-            <label className="checkbox">
+          <div className="login-checkbox">
+            <label className="login-checkbox">
               {" "}
               <input type="checkbox" />
               Remember me{" "}

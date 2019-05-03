@@ -4,20 +4,12 @@ body {
   font-size: 14px;
   font-weight: 300;
 }
-.hero.is-success {
-  background: #f2f6fa;
-}
-.hero .nav,
-.hero.is-success .nav {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.box {
-  margin-top: 5rem;
+
+.login {
+  margin-top: 7rem;
   display: flex;
   flex-direction: column;
   text-align: center;
-  background-color: lightgrey;
 }
 .avatar {
   margin-top: -70px;
@@ -31,25 +23,32 @@ body {
     0 0 0 1px rgba(10, 10, 10, 0.1);
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 }
-input {
+.login-control {
+  margin-bottom: 10px;
+}
+.login-input {
   font-weight: 300;
+  border: 3px solid lightgrey;
+  height: 25px;
+  font-size: 13px;
+  width: 200px;
 }
-p {
-  font-weight: 700;
-}
-p.subtitle {
-  padding-top: 1rem;
-}
+
 .error-message {
   color: #ac2121;
 }
-.field {
+.login-field {
   height: 30px;
+
+  margin-top: 10px;
 }
 .button-submit {
   width: 130px;
   height: 30px;
   background-color: rgb(67, 187, 67);
   margin: 10px 0 20px 0;
-  font-size: 12px;
+  font-size: 14px;
+}
+.login-checkbox {
+  margin-top: 15px;
 }
