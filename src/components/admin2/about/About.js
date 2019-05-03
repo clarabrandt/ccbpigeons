@@ -164,6 +164,7 @@ export default class About extends Component {
                 ? this.handleClick(e)
                 : this.changeData(e, clicado)
             }
+            onChange={this.handleChange}
           >
             Postar
           </button>
