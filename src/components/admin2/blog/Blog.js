@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./style.css";
+import "./Blog.css";
 
 export default class Blog extends Component {
   baseUrl = "https://us-central1-pigeon-90548.cloudfunctions.net/api/";
@@ -32,6 +32,7 @@ export default class Blog extends Component {
           items: data.blog
         });
       });
+    console.log("dados chegando");
   }
 
   fetchData() {
@@ -153,16 +154,18 @@ export default class Blog extends Component {
 
     return (
       <form className="postData">
-        <div>Novo post para o blog</div>
+        <div className="postData-title">Novo post para o blog</div>
         <input
+          className="text-area"
           type="text"
           id="titulo"
           name="titulo"
-          placeholder="titulo"
+          placeholder="Título"
           value={editTitle}
           onChange={this.handleChange}
         />
         <input
+          className="date-area"
           type="text"
           id="date"
           name="date"
@@ -171,6 +174,7 @@ export default class Blog extends Component {
           onChange={this.handleChange}
         />
         <textarea
+          className="text-area"
           type="text"
           id="conteudo"
           name="conteudo"
@@ -178,11 +182,16 @@ export default class Blog extends Component {
           value={editConteudo}
           onChange={this.handleChange}
         />
-        <div className="buttons">
-          <button type="button" onClick={this.closeForm}>
+        <div className="admin-post--buttons">
+          <button
+            className="admin-post--button cancel"
+            type="button"
+            onClick={this.closeForm}
+          >
             Cancelar
           </button>
           <button
+            className="admin-post--button post"
             type="button"
             onClick={e =>
               this.state.opcao === "adicionar"
@@ -196,30 +205,29 @@ export default class Blog extends Component {
       </form>
     );
   }
-
   renderList() {
     const { items } = this.state;
     return (
-      <div className="admin-panel--list">
+      <div className="admin-layout--content1">
         {Object.keys(items).map(key => {
           return (
-            <div key={key} className="admin-panel--item">
-              <div className="admin-panel--item--title">
+            <div key={key} className="admin-layout--item">
+              <div className="admin-layout--item--title">
                 {items[key].titulo}
               </div>
-              <div className="admin-panel--item--edit">
+              <div className="admin-layout--item--edit">
                 <button
                   type="button"
-                  className="edit-button"
-                  onClick={e => this.editPost(e, key)}
+                  className="admin-layout--edit--button"
+                  onClick={e => this.editConteudo(e, key)}
                 >
                   Edit
                 </button>
               </div>
-              <div className="admin-panel--item--delete">
+              <div className="admin-layout--item--delete">
                 <button
                   type="button"
-                  className="delete-button"
+                  className="admin-layout--delete--button"
                   onClick={e => this.deleteData(e, key)}
                 >
                   Delete
@@ -234,23 +242,16 @@ export default class Blog extends Component {
 
   render() {
     return (
-      // <div className= 'admin-panel'>
-      // <div className='admin-panel--title'>Blog</div>
-
-      <div className="admin-panel--content">
+      <div>
         {!this.state.opcao && this.renderList()}
         {(this.state.opcao === "adicionar" || this.state.opcao === "editar") &&
           this.renderForm()}
-        <div className="buttons">
-          <button className="button" onClick={this.props.goBack}>
-            Voltar
-          </button>
-          <button className="button" onClick={this.addPost}>
-            Novo post
+        <div className={`admin-buttons ${this.state.opcao && "display"}`}>
+          <button className="admin-button" onClick={this.addPost}>
+            Adicionar post
           </button>
         </div>
       </div>
-      // </div>
     );
   }
 }

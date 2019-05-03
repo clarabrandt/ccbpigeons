@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import "./style.css";
+import "./About.css";
 
-export default class Blog extends Component {
+export default class About extends Component {
   baseUrl = "https://us-central1-pigeon-90548.cloudfunctions.net/api/";
 
   constructor(props) {
     super(props);
     this.state = {
-      titulo: "",
-      date: "",
-      conteudo: "",
+      sobre: "",
       items: {},
       opcao: null,
       clicado: null,
@@ -18,9 +16,9 @@ export default class Blog extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.addPost = this.addPost.bind(this);
+    this.addAbout = this.addAbout.bind(this);
     this.changeData = this.changeData.bind(this);
-    this.editPost = this.editPost.bind(this);
+    this.editConteudo = this.editConteudo.bind(this);
     this.closeForm = this.closeForm.bind(this);
   }
 
@@ -29,13 +27,13 @@ export default class Blog extends Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          items: data.blog
+          items: data.sobre
         });
       });
   }
 
   fetchData() {
-    const endpoint = `${this.baseUrl}blog`;
+    const endpoint = `${this.baseUrl}sobre`;
     return fetch(endpoint, {
       method: "GET",
       headers: {
@@ -47,33 +45,29 @@ export default class Blog extends Component {
 
   changeData(e, key) {
     e.preventDefault();
-    const titulo = this.state.titulo;
-    const date = this.state.date;
-    const conteudo = this.state.conteudo;
-    const endpoint = `${this.baseUrl}blog`;
+    const sobre = this.state.sobre;
+    const endpoint = `${this.baseUrl}sobre`;
     fetch(endpoint, {
       method: "PUT",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ key, titulo, date, conteudo })
+      body: JSON.stringify({ key, sobre })
     })
       .then(response => response.json())
       .then(data => {
         const result = this.state.items;
         console.log(result[data.key]);
         this.setState({
-          titulo,
-          date,
-          conteudo
+          sobre
         });
       });
   }
 
   deleteData(e, key) {
     e.preventDefault();
-    const endpoint = `${this.baseUrl}blog`;
+    const endpoint = `${this.baseUrl}sobre`;
     fetch(endpoint, {
       method: "DELETE",
       headers: {
@@ -96,17 +90,12 @@ export default class Blog extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
-    console.log(event.target.value);
   }
 
   handleClick(e) {
-    const endpoint = `${this.baseUrl}blog`;
+    const endpoint = `${this.baseUrl}sobre`;
     e.preventDefault();
-    const data = {
-      titulo: this.state.titulo,
-      date: this.state.date,
-      conteudo: this.state.conteudo
-    };
+    const data = { sobre: this.state.sobre };
     fetch(endpoint, {
       method: "POST",
       headers: {
@@ -120,21 +109,19 @@ export default class Blog extends Component {
     });
   }
 
-  addPost() {
+  addAbout() {
     this.setState({
       opcao: "adicionar"
     });
   }
 
-  editPost(e, key) {
+  editConteudo(e, key) {
     e.preventDefault();
     const { items } = this.state;
     this.setState({
       opcao: "editar",
       clicado: key,
-      titulo: items[key].titulo,
-      date: items[key].date,
-      conteudo: items[key].conteudo
+      sobre: items[key].sobre
     });
   }
 
@@ -146,49 +133,38 @@ export default class Blog extends Component {
   }
 
   renderForm() {
-    const editTitle = this.state.titulo;
-    const editDate = this.state.date;
-    const editConteudo = this.state.conteudo;
+    const editConteudo = this.state.sobre;
     const { clicado } = this.state;
 
     return (
       <form className="postData">
-        <div>Novo post para o blog</div>
-        <input
-          type="text"
-          id="titulo"
-          name="titulo"
-          placeholder="titulo"
-          value={editTitle}
-          onChange={this.handleChange}
-        />
-        <input
-          type="text"
-          id="date"
-          name="date"
-          placeholder="dd/mm/yyyy"
-          value={editDate}
-          onChange={this.handleChange}
-        />
+        <div className="postData-title"> Texto sobre o CCB Pigeons</div>
         <textarea
+          className="text-area"
           type="text"
-          id="conteudo"
-          name="conteudo"
+          id="sobre"
+          name="sobre"
           placeholder="texto"
           value={editConteudo}
           onChange={this.handleChange}
         />
-        <div className="buttons">
-          <button type="button" onClick={this.closeForm}>
+        <div className="admin-post--buttons">
+          <button
+            className="admin-post--button cancel"
+            type="button"
+            onClick={this.closeForm}
+          >
             Cancelar
           </button>
           <button
+            className="admin-post--button post"
             type="button"
             onClick={e =>
               this.state.opcao === "adicionar"
                 ? this.handleClick(e)
                 : this.changeData(e, clicado)
             }
+            onChange={this.handleChange}
           >
             Postar
           </button>
@@ -200,26 +176,26 @@ export default class Blog extends Component {
   renderList() {
     const { items } = this.state;
     return (
-      <div className="admin-panel--list">
+      <div className="admin-layout--content1">
         {Object.keys(items).map(key => {
           return (
-            <div key={key} className="admin-panel--item">
-              <div className="admin-panel--item--title">
-                {items[key].titulo}
+            <div key={key} className="admin-layout--item">
+              <div className="admin-layout--item--title">
+                {items[key].sobre}
               </div>
-              <div className="admin-panel--item--edit">
+              <div className="admin-layout--item--edit">
                 <button
                   type="button"
-                  className="edit-button"
-                  onClick={e => this.editPost(e, key)}
+                  className="admin-layout--edit--button"
+                  onClick={e => this.editConteudo(e, key)}
                 >
                   Edit
                 </button>
               </div>
-              <div className="admin-panel--item--delete">
+              <div className="admin-layout--item--delete">
                 <button
                   type="button"
-                  className="delete-button"
+                  className="admin-layout--delete--button"
                   onClick={e => this.deleteData(e, key)}
                 >
                   Delete
@@ -234,23 +210,16 @@ export default class Blog extends Component {
 
   render() {
     return (
-      // <div className= 'admin-panel'>
-      // <div className='admin-panel--title'>Blog</div>
-
-      <div className="admin-panel--content">
+      <div>
         {!this.state.opcao && this.renderList()}
         {(this.state.opcao === "adicionar" || this.state.opcao === "editar") &&
           this.renderForm()}
-        <div className="buttons">
-          <button className="button" onClick={this.props.goBack}>
-            Voltar
-          </button>
-          <button className="button" onClick={this.addPost}>
-            Novo post
+        <div className={`admin-buttons ${this.state.opcao && "display"}`}>
+          <button className="admin-button" onClick={this.addAbout}>
+            Adicionar conteúdo
           </button>
         </div>
       </div>
-      // </div>
     );
   }
 }

@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { withFirebase } from "../../firebase/";
-import "./style.css";
+import "./Resultados.css";
 
-class Detalhes extends Component {
+class Resultados extends Component {
   baseUrl = "https://us-central1-pigeon-90548.cloudfunctions.net/api/";
 
   constructor(props) {
@@ -14,6 +14,7 @@ class Detalhes extends Component {
     //   subitems: {},
     // }
 
+    console.log(props);
     this.storageRef = props.firebase.storage.ref();
     this.fileSelector = React.createRef();
     this.uploadNewFiles = this.uploadNewFiles.bind(this);
@@ -116,8 +117,8 @@ class Detalhes extends Component {
   render() {
     const { open, subitems } = this.props;
     return (
-      <div className={`admin-panel--details ${open}`}>
-        <div className={`admin-panel--details-drawer`}>
+      <div className={`admin-layout--details ${open}`}>
+        <div className={`admin-layout--details-drawer`}>
           {(subitems && Object.keys(subitems).length) <= 0 ? (
             <div>Loading...</div>
           ) : (
@@ -134,23 +135,21 @@ class Detalhes extends Component {
                   15%
                 </progress>
               ) : (
-                <div key={id}>
+                <div key={id} className="admin-layout--item resultados">
                   <a
+                    className="admin-layout--item--title"
                     href={subitems[id].url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {subitems[id].name}
                   </a>
+
                   <button
-                    className="delete-button"
+                    className="admin-layout--delete--button"
                     onClick={() => this.deleteFile(id, subitems[id].url)}
                   >
-                    <i
-                      className="fas fa-trash"
-                      id={subitems[id]}
-                      name={subitems[id]["name"]}
-                    />
+                    Delete
                   </button>
                 </div>
               );
@@ -158,9 +157,9 @@ class Detalhes extends Component {
           )}
           <div className="field">
             <div className="file is-primary">
-              <label className="file-label">
+              <label className="admin-buttons">
                 <input
-                  className="file-input"
+                  className="admin-button"
                   type="file"
                   name="resume"
                   ref={this.fileSelector}
@@ -169,9 +168,9 @@ class Detalhes extends Component {
                 />
                 <span className="file-cta">
                   <span className="file-icon">
-                    <i className="fas fa-upload" />
+                    <i className="fa fa-upload" />
                   </span>
-                  <span className="file-label">Primary file…</span>
+                  <span className="admin-button file">Primary file…</span>
                 </span>
               </label>
             </div>
@@ -182,11 +181,11 @@ class Detalhes extends Component {
   }
 }
 
-const DetalhesComponent = compose(
+const ResultadosComponent = compose(
   withRouter,
   withFirebase
-)(Detalhes);
+)(Resultados);
 
-export default Detalhes;
+export default Resultados;
 
-export { DetalhesComponent };
+export { ResultadosComponent };

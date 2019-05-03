@@ -1,17 +1,23 @@
-html,body {
-  font-family: 'Open Sans', serif;
+html,
+body {
+  font-family: "Open Sans", serif;
   font-size: 14px;
   font-weight: 300;
 }
 .hero.is-success {
-  background: #F2F6FA;
+  background: #f2f6fa;
 }
-.hero .nav, .hero.is-success .nav {
+.hero .nav,
+.hero.is-success .nav {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 .box {
   margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: lightgrey;
 }
 .avatar {
   margin-top: -70px;
@@ -21,8 +27,9 @@ html,body {
   padding: 5px;
   background: #fff;
   border-radius: 50%;
-  -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
-  box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+  -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.1);
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 }
 input {
   font-weight: 300;
@@ -35,4 +42,14 @@ p.subtitle {
 }
 .error-message {
   color: #ac2121;
+}
+.field {
+  height: 30px;
+}
+.button-submit {
+  width: 130px;
+  height: 30px;
+  background-color: rgb(67, 187, 67);
+  margin: 10px 0 20px 0;
+  font-size: 12px;
 }

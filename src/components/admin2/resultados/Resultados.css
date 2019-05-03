@@ -1,0 +1,30 @@
+.admin-layout--item--title.resultados {
+  width: auto;
+}
+a {
+  color: rgb(71, 69, 69);
+  text-decoration: none;
+  font-weight: normal;
+}
+/* .admin-layout--item.resultados {
+  width: 300px;
+} */
+.admin-layout--details {
+  /* display: none; */
+  visibility: hidden;
+  max-height: 0;
+  transition: all 130ms ease-in;
+}
+.admin-layout--details.open {
+  /* display: flex; */
+  visibility: visible;
+  max-height: 80%;
+  transition: all 130ms ease-in;
+}
+
+.admin-layout--pdf {
+  padding: 20px;
+}
+.admin-button.file {
+  padding-left: 10px;
+}

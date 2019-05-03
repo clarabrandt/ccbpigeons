@@ -54,7 +54,7 @@ class Admin extends Component {
         <NavbarComponent />
         <div className="columns" id="admin">
           <Menu goToComponent={this.goToComponent} />
-          <div className="column is-10 messages hero is-fullheight" id="list">
+          <div className="column is-10" id="list">
             {this.state.clicked === "sobre" && <About />}
 
             {this.state.clicked === "blog" && <Blog />}

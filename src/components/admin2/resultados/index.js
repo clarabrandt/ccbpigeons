@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { DetalhesComponent } from "./_detalhes.js";
-import "./style.css";
+import { ResultadosComponent } from "./Resultados.js";
+import "./Resultados.css";
 
 export default class Resultados extends Component {
   baseUrl = "https://us-central1-pigeon-90548.cloudfunctions.net/api/";
@@ -95,16 +95,16 @@ export default class Resultados extends Component {
     const { items, selecionado, subitems } = this.state;
     console.log("subitems : ", subitems);
     return (
-      <div className="admin-panel--list">
+      <div className="admin-layout--content1">
         {Object.keys(items).map(key => {
           return (
             <Fragment key={key}>
-              <div className="admin-panel--item" onClick={this.handleClick}>
-                <div id={key} className="admin-panel--item--title">
+              <div className="" onClick={this.handleClick}>
+                <div id={key} className="admin-layout--item--title">
                   {items[key].nome}
                 </div>
               </div>
-              <DetalhesComponent
+              <ResultadosComponent
                 id={key}
                 open={key === selecionado ? "open" : ""}
                 subitems={subitems}
@@ -120,20 +120,11 @@ export default class Resultados extends Component {
 
   render() {
     return (
-      <div className="columns" id="resultados">
-        <div className="column is-10" id="eventos">
-          <div className="admin-panel--content">
-            {this.renderList()}
-            <div className="buttons">
-              <button className="button" onClick={this.props.goBack}>
-                Voltar
-              </button>
-              <button className="button" onClick={this.addResultados}>
-                Novo item
-              </button>
-            </div>
-          </div>
-        </div>
+      <div>
+        {!this.state.opcao && this.renderList()}
+        {(this.state.opcao === "adicionar" || this.state.opcao === "editar") &&
+          this.renderForm()}
+        <div className={`admin-buttons ${this.state.opcao && "display"}`} />
       </div>
     );
   }
