@@ -7,12 +7,15 @@ import "./Admin2.css";
 import { Menu } from "./menu/Menu";
 import About from "./about/About";
 import Blog from "./blog/Blog";
+import Midia from "./midia/Midia";
+import Resultados from "./resultados";
 
 class Admin2 extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
-      clicked: "blog",
+      clicked: "resultados",
       authUser: null,
       fetchingAuth: true
     };
@@ -47,6 +50,8 @@ class Admin2 extends Component {
             <div className="admin-layout--content">
               {this.state.clicked === "sobre" && <About />}
               {this.state.clicked === "blog" && <Blog />}
+              {this.state.clicked === "midia" && <Midia />}
+              {this.state.clicked === "resultados" && <Resultados />}
             </div>
           </div>
         </div>
