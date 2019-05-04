@@ -4,8 +4,9 @@ import "./App.css";
 import Layout from "./components/Layout.js";
 import { LoginPage } from "./components/login.js";
 
-import { AdminPage } from "./components/admin/Admin.js";
+// import { AdminPage } from "./components/admin/Admin.js";
 import { AdminPage2 } from "./components/admin2/Admin2.js";
+import { AdminPage } from "./components/admin/Admin";
 
 class App extends Component {
   render() {

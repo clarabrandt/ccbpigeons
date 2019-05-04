@@ -1,8 +1,30 @@
 import React, { Component, Fragment } from "react";
 import { ResultadosComponent } from "./Resultados.js";
-import "./Resultados.css";
+import ExpansionPanel from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import withRoot from '../../../withRoot'
+// import "./Resultados.css";
 
-export default class Resultados extends Component {
+const styles = theme => ({
+  root: {
+    width: '100%',
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '33.33%',
+    flexShrink: 0,
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+  },
+});
+
+class Resultados extends Component {
   baseUrl = "https://us-central1-pigeon-90548.cloudfunctions.net/api/";
 
   constructor(props) {
@@ -11,7 +33,8 @@ export default class Resultados extends Component {
       items: {},
       subitems: {},
       snapshot: {},
-      selecionado: null
+      selecionado: null,
+      expanded: null
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -81,6 +104,12 @@ export default class Resultados extends Component {
     });
   }
 
+  handleChange = panel => (event, expanded) => {
+    this.setState({
+      expanded: expanded ? panel : false,
+    });
+  };
+
   handleClick(e) {
     const selecionado = e.target.id;
     this.setState(
@@ -91,27 +120,67 @@ export default class Resultados extends Component {
     );
   }
 
+  // renderList() {
+  //   const { items, selecionado, subitems } = this.state;
+  //   const { classes } = this.props;
+  //   return (
+  //     <div className={classes.root}>
+  //       <div className="admin-layout--content1">
+  //       <ExpansionPanel>
+  //         {
+  //             Object.keys(items).map((key) => {
+  //               return(
+  //                   <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+  //                     <Typography className={classes.heading}>Expansion Panel 1</Typography>
+  //                   </ExpansionPanelSummary>
+  //                   <ExpansionPanelDetails>
+  //                     <Typography>
+  //                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+  //                       sit amet blandit leo lobortis eget.
+  //                   </Typography>
+  //                   </ExpansionPanelDetails>
+  //               )
+  //           })
+  //         }
+  //       </ExpansionPanel>
+  //     </div>
+  //   </div>
+  //   )
+  // }
   renderList() {
-    const { items, selecionado, subitems } = this.state;
+    const { items, selecionado, subitems, expanded } = this.state;
+    const { classes } = this.props;
     console.log("subitems : ", subitems);
     return (
       <div className="admin-layout--content1">
         {Object.keys(items).map(key => {
           return (
-            <Fragment key={key}>
-              <div className="" onClick={this.handleClick}>
-                <div id={key} className="admin-layout--item--title">
-                  {items[key].nome}
-                </div>
-              </div>
-              <ResultadosComponent
-                id={key}
-                open={key === selecionado ? "open" : ""}
-                subitems={subitems}
-                displayDetails={this.displayDetails}
-                updateSubitem={this.updateSubitem}
-              />
-            </Fragment>
+            <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography className={classes.heading}>General settings</Typography>
+                <Typography className={classes.secondaryHeading}>I am an expansion panel</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Typography>
+                  Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
+                  maximus est, id dignissim quam.
+                </Typography>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+            // <Fragment key={key}>
+            //   <div className="" onClick={this.handleClick}>
+            //     <div id={key} className="admin-layout--item--title">
+            //       {items[key].nome}
+            //     </div>
+            //   </div>
+            //   <ResultadosComponent
+            //     id={key}
+            //     open={key === selecionado ? "open" : ""}
+            //     subitems={subitems}
+            //     displayDetails={this.displayDetails}
+            //     updateSubitem={this.updateSubitem}
+            //   />
+            // </Fragment>
           );
         })}
       </div>
@@ -128,4 +197,14 @@ export default class Resultados extends Component {
       </div>
     );
   }
+  // render() {
+  //   return (
+  //     <div>
+  //       <div>uai</div>
+  //       <ExpansionPanel />
+  //     </div>
+  //   )
+  // }
 }
+
+export default withRoot(withStyles(styles)(Resultados));
