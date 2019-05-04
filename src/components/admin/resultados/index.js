@@ -1,8 +1,17 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
+import { withStyles } from '@material-ui/core/styles';
 import { DetalhesComponent } from "./_detalhes.js";
 import "./style.css";
+import ControlledExpansionPanels from '../accordion'
 
-export default class Resultados extends Component {
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+  },
+});
+
+class Resultados extends Component {
   baseUrl = "https://us-central1-pigeon-90548.cloudfunctions.net/api/";
 
   constructor(props) {
@@ -46,6 +55,7 @@ export default class Resultados extends Component {
   }
 
   displayDetails() {
+    console.log('Display details')
     this.fetchArquivos()
       .then(response => response.json())
       .then(subitems => {
@@ -91,50 +101,30 @@ export default class Resultados extends Component {
     );
   }
 
-  renderList() {
-    const { items, selecionado, subitems } = this.state;
-    console.log("subitems : ", subitems);
-    return (
-      <div className="admin-panel--list">
-        {Object.keys(items).map(key => {
-          return (
-            <Fragment key={key}>
-              <div className="admin-panel--item" onClick={this.handleClick}>
-                <div id={key} className="admin-panel--item--title">
-                  {items[key].nome}
-                </div>
-              </div>
-              <DetalhesComponent
-                id={key}
-                open={key === selecionado ? "open" : ""}
-                subitems={subitems}
-                displayDetails={this.displayDetails}
-                updateSubitem={this.updateSubitem}
-              />
-            </Fragment>
-          );
-        })}
-      </div>
-    );
-  }
-
   render() {
+    const { classes } = this.props;
+    const { items, selecionado, subitems } = this.state;
     return (
-      <div className="columns" id="resultados">
-        <div className="column is-10" id="eventos">
-          <div className="admin-panel--content">
-            {this.renderList()}
-            <div className="buttons">
-              <button className="button" onClick={this.props.goBack}>
-                Voltar
-              </button>
-              <button className="button" onClick={this.addResultados}>
-                Novo item
-              </button>
-            </div>
-          </div>
-        </div>
+      <div className={classes.root}>
+        {
+          Object.keys(items).map((key) => {
+            return (
+              <ControlledExpansionPanels key={key} evento={items[key]} id={key} onClick={this.handleClick}>
+                <DetalhesComponent
+                  id={key}
+                  open={key === selecionado ? "open" : ""}
+                  subitems={subitems}
+                  displayDetails={this.displayDetails}
+                  updateSubitem={this.updateSubitem}
+                />
+              </ControlledExpansionPanels>
+            )
+          })
+        }
       </div>
-    );
+    )
+
   }
 }
+
+export default withStyles(styles)(Resultados);
