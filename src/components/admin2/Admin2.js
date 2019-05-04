@@ -16,7 +16,7 @@ class Admin2 extends Component {
     super(props);
     console.log(props);
     this.state = {
-      clicked: "resultados",
+      clicked: "sobre",
       authUser: null,
       fetchingAuth: true
     };
@@ -25,6 +25,7 @@ class Admin2 extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.firebase);
     this.props.firebase.auth.onAuthStateChanged(authUser => {
       authUser
         ? this.setState({ fetchingAuth: false, authUser })
