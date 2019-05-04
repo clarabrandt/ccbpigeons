@@ -9,6 +9,7 @@ import About from "./about/About";
 import Blog from "./blog/Blog";
 import Midia from "./midia/Midia";
 import Resultados from "./resultados";
+import { LoginPage } from "../login.js";
 
 class Admin2 extends Component {
   constructor(props) {
@@ -36,8 +37,21 @@ class Admin2 extends Component {
       clicked: e.target.id
     });
   }
+  signOut = () => {
+    this.props.firebase.auth.signOut();
+    this.props.history.push("/login");
+  };
 
   render() {
+    const { authUser, fetchingAuth } = this.state;
+
+    if (fetchingAuth && !authUser) {
+      return <div>Loading</div>;
+    }
+
+    if (!fetchingAuth && !authUser) {
+      return <LoginPage />;
+    }
     return (
       <Fragment>
         <div className="admin">
@@ -47,6 +61,9 @@ class Admin2 extends Component {
             </div>
           </div>
           <div className="admin-layout">
+            <div className="logout" onClick={this.signOut}>
+              Logout
+            </div>
             <div className="admin-layout--content">
               {this.state.clicked === "sobre" && <About />}
               {this.state.clicked === "blog" && <Blog />}

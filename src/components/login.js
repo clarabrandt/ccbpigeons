@@ -21,11 +21,15 @@ class Login extends Component {
     const { email, password } = this.state;
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
+
       .catch(error => {
         this.setState({ error });
       });
 
     event.preventDefault();
+    if (this.state.email && this.state.password) {
+      this.props.history.push("/admin2");
+    }
   };
 
   handleChange = event => {
