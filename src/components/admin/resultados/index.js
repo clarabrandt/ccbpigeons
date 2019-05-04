@@ -1,5 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { DetalhesComponent } from "./_detalhes.js";
+import ExpansionPanel from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import "./style.css";
 
 export default class Resultados extends Component {
@@ -120,21 +126,24 @@ export default class Resultados extends Component {
 
   render() {
     return (
-      <div className="columns" id="resultados">
-        <div className="column is-10" id="eventos">
-          <div className="admin-panel--content">
-            {this.renderList()}
-            <div className="buttons">
-              <button className="button" onClick={this.props.goBack}>
-                Voltar
-              </button>
-              <button className="button" onClick={this.addResultados}>
-                Novo item
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+      <ExpansionPanel />
+    )
+    // return (
+    //   <div className="columns" id="resultados">
+    //     <div className="column is-10" id="eventos">
+    //       <div className="admin-panel--content">
+    //         {this.renderList()}
+    //         <div className="buttons">
+    //           <button className="button" onClick={this.props.goBack}>
+    //             Voltar
+    //           </button>
+    //           <button className="button" onClick={this.addResultados}>
+    //             Novo item
+    //           </button>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // );
   }
 }

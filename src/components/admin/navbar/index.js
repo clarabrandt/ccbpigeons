@@ -2,46 +2,129 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withFirebase } from '../../firebase';
+import withRoot from "../../../withRoot";
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import MenuIcon from '@material-ui/icons/Menu';
+import Badge from '@material-ui/core/Badge';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import classNames from 'classnames';
+
+const drawerWidth = 240;
+
+const styles = theme => ({
+  root: {
+    display: 'flex',
+  },
+  toolbar: {
+    paddingRight: 24, // keep right padding when drawer closed
+  },
+  toolbarIcon: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: '0 8px',
+    ...theme.mixins.toolbar,
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginLeft: 12,
+    marginRight: 36,
+  },
+  menuButtonHidden: {
+    display: 'none',
+  },
+  title: {
+    flexGrow: 1,
+  },
+  drawerPaper: {
+    position: 'relative',
+    whiteSpace: 'nowrap',
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerPaperClose: {
+    overflowX: 'hidden',
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    width: theme.spacing.unit * 7,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing.unit * 9,
+    },
+  },
+  appBarSpacer: theme.mixins.toolbar,
+});
+
 class Navbar extends React.Component {
 
   signOut = () => {
     this.props.firebase.auth.signOut();
   }
   render() {
-    return (<nav className="navbar has-shadow">
-      <div className="container">
-        <div className="navbar-brand">
-          <a className="navbar-item brand-text" href="/admin">CCBPigeons</a>
-          <div className="navbar-burger burger" data-target="navMenu">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-        <div id="navMenu" className="navbar-menu">
-          <div className="navbar-end">
-            <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link" href="/admin">Account</a>
-
-              <div className="navbar-dropdown">
-                <a className="navbar-item" href="/admin">Dashboard</a>
-                <a className="navbar-item" href="/admin">Profile</a>
-                <a className="navbar-item" href="/admin">Settings</a>
-                <hr className="navbar-divider" />
-                <div className="navbar-item" onClick={this.signOut}>Logout</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>);
+    const { classes } = this.props;
+    return (
+      <AppBar
+        position="absolute"
+        className={classNames(classes.appBar, this.props.open && classes.appBarShift)}
+      >
+        <Toolbar disableGutters={!this.props.open} className={classes.toolbar}>
+          <IconButton
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={this.handleDrawerOpen}
+            className={classNames(
+              classes.menuButton,
+              this.props.open && classes.menuButtonHidden,
+            )}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            className={classes.title}
+          >
+            Dashboard
+              </Typography>
+          <IconButton color="inherit">
+            <Badge badgeContent={4} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    );
   }
 }
 
 const NavbarComponent = compose(
   withRouter,
   withFirebase,
-)(Navbar);
+)(withRoot(withStyles(styles)(Navbar)));
 
 export default Navbar;
 
