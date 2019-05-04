@@ -16,18 +16,8 @@ import classNames from 'classnames';
 const drawerWidth = 240;
 
 const styles = theme => ({
-  root: {
-    display: 'flex',
-  },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
-  },
-  toolbarIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -54,27 +44,6 @@ const styles = theme => ({
   title: {
     flexGrow: 1,
   },
-  drawerPaper: {
-    position: 'relative',
-    whiteSpace: 'nowrap',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerPaperClose: {
-    overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: theme.spacing.unit * 7,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9,
-    },
-  },
-  appBarSpacer: theme.mixins.toolbar,
 });
 
 class Navbar extends React.Component {
@@ -93,7 +62,7 @@ class Navbar extends React.Component {
           <IconButton
             color="inherit"
             aria-label="Open drawer"
-            onClick={this.handleDrawerOpen}
+            onClick={this.props.handleDrawerOpen}
             className={classNames(
               classes.menuButton,
               this.props.open && classes.menuButtonHidden,
@@ -108,7 +77,7 @@ class Navbar extends React.Component {
             noWrap
             className={classes.title}
           >
-            Dashboard
+            CCBPigeons Admin
               </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
