@@ -15,6 +15,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+import {FilesListComponent} from '../files-list';
 
 const styles = theme => ({
   tableContainer: {
@@ -45,7 +46,7 @@ class Resultados extends Component {
       open: false,
       files: {},
       newSection: null,
-
+      fetching: true,
     };
 
     this.storageRef = props.firebase.storage.ref();
@@ -146,7 +147,8 @@ class Resultados extends Component {
         });
 
         this.setState({
-          subitems: result
+          subitems: result,
+          fetching: false,
         });
       });
   }
@@ -229,7 +231,7 @@ class Resultados extends Component {
 
   render() {
     const { classes } = this.props;
-    const { items, selecionado, subitems } = this.state;
+    const { items, selecionado, subitems, fetching } = this.state;
     return (
       <PanelComponent title="Resultados">
         <Fragment>
@@ -251,20 +253,21 @@ class Resultados extends Component {
           <div className={classes.tableContainer}>
             <div className={classes.tableContainer}>
               {
-                !selecionado &&
+                !fetching && !selecionado &&
                 <div>
                   Você precisa selecionar ou criar um evento para então gerenciar seus arquivos
                 </div>
               }
               {
-                Object.keys(subitems).length < 1 &&
+                !fetching && Object.keys(subitems).length < 1 &&
                 <div>
                   Esse evento ainda não possui arquivos cadastrados
                 </div>
+              }{
+                !fetching && Object.keys(subitems).length > 0 &&
+                <FilesListComponent title={selecionado && items[selecionado].name || ""} files={subitems} />
               }
-              {Object.keys(subitems).map((subitem) => {
-                return <div key={subitem}>{subitem}</div>
-              })}
+
             </div>
           </div>
           <div className={classes.tableContainer}>
