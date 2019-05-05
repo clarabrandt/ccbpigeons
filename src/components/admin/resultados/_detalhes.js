@@ -2,40 +2,40 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { withFirebase } from "../../firebase/";
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import FolderIcon from '@material-ui/icons/Folder';
-import DeleteIcon from '@material-ui/icons/Delete';
+import Grid from "@material-ui/core/Grid";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import FolderIcon from "@material-ui/icons/Folder";
+import DeleteIcon from "@material-ui/icons/Delete";
 import withRoot from "../../../withRoot";
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 // import "./style.css";
 
-const generate = (element) => {
+const generate = element => {
   return [0, 1, 2].map(value =>
     React.cloneElement(element, {
-      key: value,
-    }),
+      key: value
+    })
   );
-}
+};
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    maxWidth: 752,
+    maxWidth: 752
   },
   demo: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   title: {
-    margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
-  },
+    margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`
+  }
 });
 
 class Detalhes extends Component {
@@ -141,49 +141,45 @@ class Detalhes extends Component {
 
   //   event.preventDefault();
   // };
-
-  // render() {
-  //   const { open, subitems, classes } = this.props;
-  //   console.log(subitems);
-  //   return (
-  //     (subitems && Object.keys(subitems).length) <= 0 ? (
-  //       <div>Loading...</div>
-  //     ) : (
-  //       Object.keys(subitems).map(id => {
-  //         const file = subitems[id];
-  //         return (
-  //           <Grid item xs={12} md={6}>
-  //             <Typography variant="h6" className={classes.title}>
-  //               Avatar with text and icon
-  //             </Typography>
-  //             <div className={classes.demo}>
-  //               <List dense={true}>
-  //                 {generate(
-  //                   <ListItem>
-  //                     <ListItemAvatar>
-  //                       <Avatar>
-  //                         <FolderIcon />
-  //                       </Avatar>
-  //                     </ListItemAvatar>
-  //                     <ListItemText
-  //                       primary="Single-line item"
-  //                       secondary={true ? 'Secondary text' : null}
-  //                     />
-  //                     <ListItemSecondaryAction>
-  //                       <IconButton aria-label="Delete">
-  //                         <DeleteIcon />
-  //                       </IconButton>
-  //                     </ListItemSecondaryAction>
-  //                   </ListItem>,
-  //                 )}
-  //               </List>
-  //             </div>
-  //           </Grid>
-  //         )
-  //       })  
-  //     )
-  //   )
-  // }
+  render() {
+    const { open, subitems, classes } = this.props;
+    return (subitems && Object.keys(subitems).length) <= 0 ? (
+      <div>Loading...</div>
+    ) : (
+      Object.keys(subitems).map(id => {
+        const file = subitems[id];
+        return (
+          <Grid item xs={12} md={6}>
+            <Typography variant="h6" className={classes.title}>
+              Avatar with text and icon
+            </Typography>
+            <div className={classes.demo}>
+              <List dense={true}>
+                {generate(
+                  <ListItem>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <FolderIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="Single-line item"
+                      secondary={true ? "Secondary text" : null}
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton aria-label="Delete">
+                        <DeleteIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                )}
+              </List>
+            </div>
+          </Grid>
+        );
+      })
+    );
+  }
   render() {
     const { open, subitems } = this.props;
     return (
