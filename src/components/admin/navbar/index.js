@@ -79,11 +79,7 @@ class Navbar extends React.Component {
           >
             CCBPigeons Admin
               </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          
         </Toolbar>
       </AppBar>
     );

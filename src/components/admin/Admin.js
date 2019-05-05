@@ -5,8 +5,8 @@ import "./Admin.css";
 import api from "../../utils/api.js";
 import About from "./about";
 import Blog from "./blog";
-import {ResultadosComponent} from "./resultados";
-import {BlogComponent} from "./blog";
+import { ResultadosComponent } from "./resultados";
+import { BlogComponent } from "./blog";
 import Midia from "./midia";
 import { NavbarComponent } from "./navbar";
 import { DrawerComponent } from "./navbar";
@@ -76,6 +76,8 @@ class Admin extends Component {
   handleDrawerClose = () => this.setState({ open: false });
 
   goToComponent(e) {
+    e.preventDefault();
+    e.stopPropagation()
     this.setState({
       clicked: e.target.id
     });
@@ -86,13 +88,13 @@ class Admin extends Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <NavbarComponent open={this.state.open} handleDrawerOpen={this.handleDrawerOpen}/>
-        <Menu open={this.state.open} handleDrawerClose={this.handleDrawerClose} />
+        <NavbarComponent open={this.state.open} handleDrawerOpen={this.handleDrawerOpen} />
+        <Menu open={this.state.open} handleDrawerClose={this.handleDrawerClose} goToComponent={this.goToComponent} />
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Paper className={classes.paper}>
             {
-              this.state.clicked === "sobre" && 
+              this.state.clicked === "sobre" &&
               <Fragment>
                 <Typography variant="h4" gutterBottom component="h2">
                   About
@@ -103,12 +105,12 @@ class Admin extends Component {
               </Fragment>
             }
             {
-              this.state.clicked === "resultados" && 
-                <ResultadosComponent/>
+              this.state.clicked === "resultados" &&
+              <ResultadosComponent />
             }
             {
-              this.state.clicked === "blog" && 
-                <BlogComponent />
+              this.state.clicked === "blog" &&
+              <BlogComponent />
               // <Fragment>
               //   <Typography variant="h4" gutterBottom component="h2">
               //     Blog
@@ -119,7 +121,7 @@ class Admin extends Component {
               // </Fragment>
             }
             {
-              this.state.clicked === "midia" && 
+              this.state.clicked === "midia" &&
               <Fragment>
                 <Typography variant="h4" gutterBottom component="h2">
                   Midia
