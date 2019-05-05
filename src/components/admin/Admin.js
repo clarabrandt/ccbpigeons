@@ -5,7 +5,7 @@ import "./Admin.css";
 import api from "../../utils/api.js";
 import About from "./about";
 import Blog from "./blog";
-import Resultados from "./resultados";
+import {ResultadosComponent} from "./resultados";
 import Midia from "./midia";
 import { NavbarComponent } from "./navbar";
 import { DrawerComponent } from "./navbar";
@@ -18,6 +18,12 @@ import withRoot from "../../withRoot";
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const drawerWidth = 240;
 
@@ -37,6 +43,10 @@ const styles = theme => ({
   },
   tableContainer: {
     height: '100%',
+  },
+  paper: {
+    padding: theme.spacing.unit * 3,
+    margin: theme.spacing.unit * 3,
   },
 });
 
@@ -79,50 +89,45 @@ class Admin extends Component {
         <Menu open={this.state.open} handleDrawerClose={this.handleDrawerClose} />
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          {
-            this.state.clicked === "sobre" && 
-            <Fragment>
-              <Typography variant="h4" gutterBottom component="h2">
-                About
-              </Typography>
-              <div className={classes.tableContainer}>
-                <About />
-              </div>
-            </Fragment>
-          }
-          {
-            this.state.clicked === "resultados" && 
-            <Fragment>
-              <Typography variant="h4" gutterBottom component="h2">
-                Resultados
-              </Typography>
-              <div className={classes.tableContainer}>
-                <Resultados />
-              </div>
-            </Fragment>
-          }
-          {
-            this.state.clicked === "blog" && 
-            <Fragment>
-              <Typography variant="h4" gutterBottom component="h2">
-                Blog
-              </Typography>
-              <div className={classes.tableContainer}>
-                <Blog />
-              </div>
-            </Fragment>
-          }
-          {
-            this.state.clicked === "midia" && 
-            <Fragment>
-              <Typography variant="h4" gutterBottom component="h2">
-                Midia
-              </Typography>
-              <div className={classes.tableContainer}>
-                <Midia />
-              </div>
-            </Fragment>
-          }
+          <Paper className={classes.paper}>
+            {
+              this.state.clicked === "sobre" && 
+              <Fragment>
+                <Typography variant="h4" gutterBottom component="h2">
+                  About
+                </Typography>
+                <div className={classes.tableContainer}>
+                  <About />
+                </div>
+              </Fragment>
+            }
+            {
+              this.state.clicked === "resultados" && 
+                <ResultadosComponent/>
+            }
+            {
+              this.state.clicked === "blog" && 
+              <Fragment>
+                <Typography variant="h4" gutterBottom component="h2">
+                  Blog
+                </Typography>
+                <div className={classes.tableContainer}>
+                  <Blog />
+                </div>
+              </Fragment>
+            }
+            {
+              this.state.clicked === "midia" && 
+              <Fragment>
+                <Typography variant="h4" gutterBottom component="h2">
+                  Midia
+                </Typography>
+                <div className={classes.tableContainer}>
+                  <Midia />
+                </div>
+              </Fragment>
+            }
+          </Paper>
         </main>
       </div>
     )

@@ -43,11 +43,6 @@ class Detalhes extends Component {
 
   constructor(props) {
     super(props);
-
-    // this.state = {
-    //   subitems: {},
-    // }
-
     this.storageRef = props.firebase.storage.ref();
     this.fileSelector = React.createRef();
     this.uploadNewFiles = this.uploadNewFiles.bind(this);
@@ -147,115 +142,115 @@ class Detalhes extends Component {
   //   event.preventDefault();
   // };
 
-  render() {
-    const { open, subitems, classes } = this.props;
-    console.log(subitems);
-    return (
-      (subitems && Object.keys(subitems).length) <= 0 ? (
-        <div>Loading...</div>
-      ) : (
-        Object.keys(subitems).map(id => {
-          const file = subitems[id];
-          return (
-            <Grid item xs={12} md={6}>
-              <Typography variant="h6" className={classes.title}>
-                Avatar with text and icon
-              </Typography>
-              <div className={classes.demo}>
-                <List dense={true}>
-                  {generate(
-                    <ListItem>
-                      <ListItemAvatar>
-                        <Avatar>
-                          <FolderIcon />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary="Single-line item"
-                        secondary={true ? 'Secondary text' : null}
-                      />
-                      <ListItemSecondaryAction>
-                        <IconButton aria-label="Delete">
-                          <DeleteIcon />
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>,
-                  )}
-                </List>
-              </div>
-            </Grid>
-          )
-        })  
-      )
-    )
-  }
   // render() {
-  //   const { open, subitems } = this.props;
+  //   const { open, subitems, classes } = this.props;
+  //   console.log(subitems);
   //   return (
-  //     <div className={`admin-panel--details ${open}`}>
-  //       <div className={`admin-panel--details-drawer`}>
-  //         {(subitems && Object.keys(subitems).length) <= 0 ? (
-  //           <div>Loading...</div>
-  //         ) : (
-  //           Object.keys(subitems).map(id => {
-  //             const file = subitems[id];
-
-  //             return file.done === false ? (
-  //               <progress
-  //                 key={id}
-  //                 className="progress is-primary"
-  //                 value={file.snapshot.bytesTransferred}
-  //                 max={file.snapshot.totalBytes}
-  //               >
-  //                 15%
-  //               </progress>
-  //             ) : (
-  //               <div key={id}>
-  //                 <a
-  //                   href={subitems[id].url}
-  //                   target="_blank"
-  //                   rel="noopener noreferrer"
-  //                 >
-  //                   {subitems[id].name}
-  //                 </a>
-  //                 <button
-  //                   className="delete-button"
-  //                   onClick={() => this.deleteFile(id, subitems[id].url)}
-  //                 >
-  //                   <i
-  //                     className="fas fa-trash"
-  //                     id={subitems[id]}
-  //                     name={subitems[id]["name"]}
-  //                   />
-  //                 </button>
-  //               </div>
-  //             );
-  //           })
-  //         )}
-  //         <div className="field">
-  //           <div className="file is-primary">
-  //             <label className="file-label">
-  //               <input
-  //                 className="file-input"
-  //                 type="file"
-  //                 name="resume"
-  //                 ref={this.fileSelector}
-  //                 onChange={this.uploadNewFiles}
-  //                 multiple
-  //               />
-  //               <span className="file-cta">
-  //                 <span className="file-icon">
-  //                   <i className="fas fa-upload" />
-  //                 </span>
-  //                 <span className="file-label">Primary file…</span>
-  //               </span>
-  //             </label>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
+  //     (subitems && Object.keys(subitems).length) <= 0 ? (
+  //       <div>Loading...</div>
+  //     ) : (
+  //       Object.keys(subitems).map(id => {
+  //         const file = subitems[id];
+  //         return (
+  //           <Grid item xs={12} md={6}>
+  //             <Typography variant="h6" className={classes.title}>
+  //               Avatar with text and icon
+  //             </Typography>
+  //             <div className={classes.demo}>
+  //               <List dense={true}>
+  //                 {generate(
+  //                   <ListItem>
+  //                     <ListItemAvatar>
+  //                       <Avatar>
+  //                         <FolderIcon />
+  //                       </Avatar>
+  //                     </ListItemAvatar>
+  //                     <ListItemText
+  //                       primary="Single-line item"
+  //                       secondary={true ? 'Secondary text' : null}
+  //                     />
+  //                     <ListItemSecondaryAction>
+  //                       <IconButton aria-label="Delete">
+  //                         <DeleteIcon />
+  //                       </IconButton>
+  //                     </ListItemSecondaryAction>
+  //                   </ListItem>,
+  //                 )}
+  //               </List>
+  //             </div>
+  //           </Grid>
+  //         )
+  //       })  
+  //     )
+  //   )
   // }
+  render() {
+    const { open, subitems } = this.props;
+    return (
+      <div className={`admin-panel--details ${open}`}>
+        <div className={`admin-panel--details-drawer`}>
+          {(subitems && Object.keys(subitems).length) <= 0 ? (
+            <div>Loading...</div>
+          ) : (
+            Object.keys(subitems).map(id => {
+              const file = subitems[id];
+
+              return file.done === false ? (
+                <progress
+                  key={id}
+                  className="progress is-primary"
+                  value={file.snapshot.bytesTransferred}
+                  max={file.snapshot.totalBytes}
+                >
+                  15%
+                </progress>
+              ) : (
+                <div key={id}>
+                  <a
+                    href={subitems[id].url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {subitems[id].name}
+                  </a>
+                  <button
+                    className="delete-button"
+                    onClick={() => this.deleteFile(id, subitems[id].url)}
+                  >
+                    <i
+                      className="fas fa-trash"
+                      id={subitems[id]}
+                      name={subitems[id]["name"]}
+                    />
+                  </button>
+                </div>
+              );
+            })
+          )}
+          <div className="field">
+            <div className="file is-primary">
+              <label className="file-label">
+                <input
+                  className="file-input"
+                  type="file"
+                  name="resume"
+                  ref={this.fileSelector}
+                  onChange={this.uploadNewFiles}
+                  multiple
+                />
+                <span className="file-cta">
+                  <span className="file-icon">
+                    <i className="fas fa-upload" />
+                  </span>
+                  <span className="file-label">Primary file…</span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 const DetalhesComponent = compose(
