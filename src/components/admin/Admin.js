@@ -5,7 +5,8 @@ import "./Admin.css";
 import api from "../../utils/api.js";
 import About from "./about";
 import Blog from "./blog";
-import Resultados from "./resultados";
+import {ResultadosComponent} from "./resultados";
+import {BlogComponent} from "./blog";
 import Midia from "./midia";
 import { NavbarComponent } from "./navbar";
 import { DrawerComponent } from "./navbar";
@@ -15,9 +16,16 @@ import { LoginPage } from "../login.js";
 import SimpleLineChart from "./SimpleLineChart";
 import SimpleTable from "./SimpleTable";
 import withRoot from "../../withRoot";
-import { withStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
+import { withStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 
 const drawerWidth = 240;
 
@@ -36,15 +44,19 @@ const styles = theme => ({
     overflow: "auto"
   },
   tableContainer: {
-    height: "100%"
-  }
+    height: '100%',
+  },
+  paper: {
+    padding: theme.spacing.unit * 3,
+    margin: theme.spacing.unit * 3,
+  },
 });
 
 class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicked: "resultados",
+      clicked: "blog",
       authUser: null,
       fetchingAuth: true,
       open: false

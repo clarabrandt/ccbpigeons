@@ -1,7 +1,37 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import withRoot from "../../../withRoot";
+import { withFirebase } from "../../firebase";
+import { withStyles } from '@material-ui/core/styles';
+import { compose } from "recompose";
+import PanelComponent from '../panel';
+import {FilesListComponent} from '../files-list';
 import "./style.css";
 
-export default class Blog extends Component {
+const styles = theme => ({
+  root: {
+    display: 'flex',
+  },
+  title: {
+    flexGrow: 1,
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  tableContainer: {
+    height: '100%',
+  },
+  paper: {
+    padding: theme.spacing.unit * 3,
+    margin: theme.spacing.unit * 3,
+  },
+});
+
+class Blog extends Component {
   baseUrl = "https://us-central1-pigeon-90548.cloudfunctions.net/api/";
 
   constructor(props) {
@@ -16,6 +46,7 @@ export default class Blog extends Component {
       resposta: null
     };
 
+    this.storageRef = props.firebase.storage.ref();
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.addPost = this.addPost.bind(this);
@@ -233,24 +264,60 @@ export default class Blog extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+    const { items, selecionado, subitems, fetching } = this.state;
     return (
+      <PanelComponent title="Blog">
+        <FilesListComponent id={selecionado} title={selecionado && items[selecionado].name || ""} files={items} deleteFile={this.deleteFile} displayDetails={this.displayDetails} />
+      </PanelComponent>
       // <div className= 'admin-panel'>
       // <div className='admin-panel--title'>Blog</div>
 
-      <div className="admin-panel--content">
-        {!this.state.opcao && this.renderList()}
-        {(this.state.opcao === "adicionar" || this.state.opcao === "editar") &&
-          this.renderForm()}
-        <div className="buttons">
-          <button className="button" onClick={this.props.goBack}>
-            Voltar
-          </button>
-          <button className="button" onClick={this.addPost}>
-            Novo post
-          </button>
-        </div>
-      </div>
+      // <div className="admin-panel--content">
+      //   {!this.state.opcao && this.renderList()}
+      //   {(this.state.opcao === "adicionar" || this.state.opcao === "editar") &&
+      //     this.renderForm()}
+      //   <div className="buttons">
+      //     <button className="button" onClick={this.props.goBack}>
+      //       Voltar
+      //     </button>
+      //     <button className="button" onClick={this.addPost}>
+      //       Novo post
+      //     </button>
+      //   </div>
+      // </div>
       // </div>
     );
   }
+  // render() {
+  //   return (
+  //     // <div className= 'admin-panel'>
+  //     // <div className='admin-panel--title'>Blog</div>
+
+  //     <div className="admin-panel--content">
+  //       {!this.state.opcao && this.renderList()}
+  //       {(this.state.opcao === "adicionar" || this.state.opcao === "editar") &&
+  //         this.renderForm()}
+  //       <div className="buttons">
+  //         <button className="button" onClick={this.props.goBack}>
+  //           Voltar
+  //         </button>
+  //         <button className="button" onClick={this.addPost}>
+  //           Novo post
+  //         </button>
+  //       </div>
+  //     </div>
+  //     // </div>
+  //   );
+  // }
 }
+
+const BlogComponent = compose(
+  withRouter,
+  withFirebase
+)(withRoot(withStyles(styles)(Blog)));
+
+// export default Blog;
+export default Blog;
+
+export { BlogComponent };
