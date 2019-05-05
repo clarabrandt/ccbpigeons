@@ -8,7 +8,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import withRoot from "../../../withRoot";
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PanelComponent from '../panel';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -16,6 +15,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import {FilesListComponent} from '../files-list';
+import { FileUploaderComponent } from '../file-uploader';
 
 const styles = theme => ({
   tableContainer: {
@@ -50,12 +50,10 @@ class Resultados extends Component {
     };
 
     this.storageRef = props.firebase.storage.ref();
-    this.fileSelector = React.createRef();
     this.handleChange = this.handleChange.bind(this);
     this.displayDetails = this.displayDetails.bind(this);
     this.fetchArquivos = this.fetchArquivos.bind(this);
     this.updateSubitem = this.updateSubitem.bind(this);
-    this.uploadNewFiles = this.uploadNewFiles.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
     this.addSection = this.addSection.bind(this);
   }
@@ -72,58 +70,6 @@ class Resultados extends Component {
           this.displayDetails
         );
       });
-  }
-
-  uploadNewFiles() {
-    //If at least one file is selected, start the upload.
-    if (this.fileSelector.current.files.length > 0) {
-      const { files } = this.fileSelector.current;
-      Object.keys(files).map(i => {
-        const file = files[i];
-        this.updateSubitem(i, file);
-        this.uploadFile(i, file);
-      });
-    }
-  }
-
-  createDBRecord(newDBrecord) {
-    const { selecionado } = this.state;
-    const endpoint = `${this.baseUrl}resultados/${selecionado}`;
-    return fetch(endpoint, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newDBrecord)
-    });
-  }
-
-  uploadFile(i, file) {
-    const { selecionado } = this.state;
-    let { name, ...metadata } = file;
-    const newFileRef = this.storageRef.child(`resultados/${selecionado}/${name}`);
-    const uploadTask = newFileRef.put(file, { customMetadata: metadata });
-
-    //Upload the file to cloud storage
-    uploadTask.on(
-      "state_changed",
-      snapshot => {
-        this.updateSubitem(i, file, false, snapshot);
-      },
-      error => {
-        console.error("Error while uploading new file", error);
-      },
-      () => {
-        const url = uploadTask.snapshot.metadata;
-        this.createDBRecord({ name: url.name, url: url.fullPath })
-          .then(response => response.json())
-          .then(json => {
-            this.updateSubitem(json.id, file, true);
-            this.displayDetails(json.id);
-          });
-      }
-    );
   }
 
   fetchData() {
@@ -228,7 +174,6 @@ class Resultados extends Component {
       })
   }
 
-
   render() {
     const { classes } = this.props;
     const { items, selecionado, subitems, fetching } = this.state;
@@ -265,33 +210,13 @@ class Resultados extends Component {
                 </div>
               }{
                 !fetching && Object.keys(subitems).length > 0 &&
-                <FilesListComponent title={selecionado && items[selecionado].name || ""} files={subitems} />
+                <FilesListComponent id={selecionado} title={selecionado && items[selecionado].name || ""} files={subitems} deleteFile={this.deleteFile} displayDetails={this.displayDetails} />
               }
 
             </div>
           </div>
           <div className={classes.tableContainer}>
-            <label htmlFor="outlined-button-file">
-              <input
-                id="raised-button-file"
-                style={{ display: 'none' }}
-                className="file-input"
-                type="file"
-                name="resume"
-                ref={this.fileSelector}
-                onChange={this.uploadNewFiles}
-                multiple
-              />
-              <label htmlFor="raised-button-file">
-                <Button variant="contained" component="span" className={classes.button}>
-                  Upload
-                    <CloudUploadIcon className={classes.rightIcon} />
-                </Button>
-              </label>
-            </label>
-          </div>
-          <div className={classes.tableContainer}>
-
+            <FileUploaderComponent id={selecionado} evento={items[selecionado]} updateSubitem={this.updateSubitem} displayDetails={this.displayDetails}/>
           </div>
           <Dialog
             disableBackdropClick
