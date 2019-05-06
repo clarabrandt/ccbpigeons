@@ -84,6 +84,15 @@ class Admin extends Component {
   }
 
   render() {
+    const { authUser, fetchingAuth } = this.state;
+
+    if (fetchingAuth && !authUser) {
+      return <div>Loading</div>;
+    }
+
+    if (!fetchingAuth && !authUser) {
+      return <LoginPage />;
+    }
     const { classes } = this.props;
     return (
       <div className={classes.root}>
