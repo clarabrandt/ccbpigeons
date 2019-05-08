@@ -20,8 +20,8 @@ import "./style.css";
 const styles = theme => ({
   root: {
     display: 'flex',
-
   },
+
   title: {
     flexGrow: 1,
   },
@@ -32,13 +32,11 @@ const styles = theme => ({
     height: '100vh',
     overflow: 'auto',
   },
-  tableContainer: {
-    height: '100%',
-  },
   paper: {
     padding: theme.spacing.unit * 3,
     margin: theme.spacing.unit * 3,
   },
+
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -68,7 +66,8 @@ class Blog extends Component {
       items: {},
       opcao: null,
       clicado: null,
-      resposta: null
+      resposta: null,
+      show: true
     };
 
     this.storageRef = props.firebase.storage.ref();
@@ -78,9 +77,14 @@ class Blog extends Component {
     this.changeData = this.changeData.bind(this);
     this.editPost = this.editPost.bind(this);
     this.closeForm = this.closeForm.bind(this);
+    this.getBlogPosts = this.getBlogPosts.bind(this);
   }
 
   componentDidMount() {
+    this.getBlogPosts();
+  }
+
+  getBlogPosts() {
     this.fetchData()
       .then(response => response.json())
       .then(data => {
@@ -88,7 +92,6 @@ class Blog extends Component {
           items: data.blog
         });
       });
-
   }
 
   fetchData() {
@@ -161,9 +164,9 @@ class Blog extends Component {
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
+  
   handleClick(e, key) {
     const endpoint = `${this.baseUrl}blog`;
-    console.log(key)
     e.preventDefault();
     const data = {
       titulo: this.state.titulo,
@@ -177,10 +180,13 @@ class Blog extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
-    });
-    this.setState({
-      opcao: null
-    });
+    })
+      .then(
+        this.setState({
+          opcao: null,
+          show: true,
+        }, this.getBlogPosts)
+      )
   }
 
   addPost() {
@@ -204,15 +210,25 @@ class Blog extends Component {
   closeForm(e) {
     e.preventDefault();
     this.setState({
-      opcao: null
+      opcao: null,
+      show: true
     });
   }
-
+  componentWillMount() {
+    this.setState({
+      items: this.state.items
+    })
+  }
   renderForm() {
+    if (this.state.show === true) {
+      this.setState({
+        show: false
+      })
+    }
     const { classes } = this.props;
     const { titulo } = this.state;
-    const editDate = this.state.date;
-    const editConteudo = this.state.conteudo;
+    const { date } = this.state;
+    const { conteudo } = this.state;
     const { clicado } = this.state;
 
     return (
@@ -229,9 +245,10 @@ class Blog extends Component {
           />
           <TextField
             id="standard-name"
+            type="date"
             placeholder="dd/mm/yyyy"
             className={classes.textField}
-            value={editDate}
+            value={date}
             onChange={this.handleChange('date')}
             margin="normal"
           />
@@ -240,68 +257,30 @@ class Blog extends Component {
             id="standard-name"
             label="Conteudo"
             placeholder="texto"
-            value={editConteudo}
+            value={conteudo}
             onChange={this.handleChange('conteudo')}
           />
           <div className="buttons">
             <Button type="button" onClick={this.closeForm}>
-              Cancelar
-          </Button>
+              <div className="button-post"> Cancelar</div>
+            </Button>
             <Button
               type="button"
+              color="secondary"
               onClick={e =>
                 this.state.opcao === "adicionar"
                   ? this.handleClick(e)
                   : this.changeData(e, clicado)
               }
             >
-              Postar
-          </Button>
+              <div className="button-post">Postar</div>
+            </Button>
           </div>
         </div>
       </form>
     );
   }
 
-  // renderList() {
-  //   const { items } = this.state;
-  //   return (
-  //     <div className="admin-panel--list">
-  //       {Object.keys(items).map(key => {
-  //         return (
-  //           <div key={key} className="admin-panel--item">
-  //             <div className="admin-panel--item--title">
-  //               {items[key].titulo}
-  //             </div>
-  //             <div className="admin-panel--item--edit">
-  //               <button
-  //                 type="button"
-  //                 className="edit-button"
-  //                 onClick={e => this.editPost(e, key)}
-  //               >
-  //                 Edit
-  //               </button>
-  //             </div>
-  //             <div className="admin-panel--item--delete">
-  //               <button
-  //                 type="button"
-  //                 className="delete-button"
-  //                 onClick={e => this.deleteData(e, key)}
-  //               >
-  //                 Delete
-  //               </button>
-  //             </div>
-  //           </div>
-  //         );
-  //       })}
-  //     </div>
-  //   );
-  // }
-  // componentWillMount() {
-  //   this.setState({
-  //     items: this.props.files
-  //   })
-  // }
   renderList() {
     const { classes } = this.props;
     const { items } = this.state;
@@ -312,17 +291,29 @@ class Blog extends Component {
             {
               Object.keys(items).map(item => {
                 return (
-                  <ListItem key={item} id={item} value={item} className='listItem'>
-                    <ListItemText className='listItem-text'>{items[item].titulo}</ListItemText>
-                    <IconButton key={item} aria-label="Delete" onClick={e => this.deleteData(e, item)}>
-                      <DeleteIcon />
-                    </IconButton>
-                    <ListItemSecondaryAction className='listItem-icon'>
-                      <IconButton key={item} aria-label="Edit" onClick={e => this.editConteudo(e, item)}>
-                        <EditIcon />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
+                  <div key={item} className='listItem'>
+                    <ListItem key={item} id={item} value={item}>
+                      <ListItemText className='listItem-text'>
+                        <div className='listItem-text--text'>
+                          {items[item].titulo}
+                        </div>
+                      </ListItemText>
+                      <div className='listItem-buttons'>
+                        <div className='listItem-button'>
+                          <IconButton key={item} aria-label="Delete" onClick={e => this.deleteData(e, item)}>
+                            <DeleteIcon />
+                          </IconButton>
+                        </div>
+                        <ListItemSecondaryAction className='listItem-icon'>
+                          <div className='listItem-button'>
+                            <IconButton key={item} aria-label="Edit" onClick={e => this.editConteudo(e, item)}>
+                              <EditIcon />
+                            </IconButton>
+                          </div>
+                        </ListItemSecondaryAction>
+                      </div>
+                    </ListItem>
+                  </div>
                 )
               })
             }
@@ -334,17 +325,15 @@ class Blog extends Component {
   }
   render() {
     return (
-      // <div className= 'admin-panel'>
-      // <div className='admin-panel--title'>Blog</div>
-
       <List className="admin-panel--content">
         {!this.state.opcao && this.renderList()}
         {(this.state.opcao === "adicionar" || this.state.opcao === "editar") &&
           this.renderForm()}
-
-        <Button className="button" onClick={this.addPost}>
-          Novo post
+        <div className="button-post" >
+          <Button onClick={this.addPost}>
+            <div className={`button-post--text ${this.state.show ? 'show' : 'noshow'}`}>Novo post</div>
           </Button>
+        </div>
 
       </List>
     );
