@@ -28,6 +28,8 @@
 .post-new {
   flex: 3.5;
   margin: 0 50px 0 60px;
+  overflow-y: scroll;
+  height: 300px;
 }
 .post-title {
   font-size: 22px;
@@ -46,6 +48,7 @@
   color: #444649;
   border-bottom: 0.5px solid lightgrey;
   font-weight: 400;
+  
 }
 .post-arquivo {
   flex: 1.5;

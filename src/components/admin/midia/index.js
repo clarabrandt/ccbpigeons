@@ -1,7 +1,44 @@
 import React, { Component } from "react";
 import "./style.css";
+import { withRouter } from "react-router-dom";
+import withRoot from "../../../withRoot";
+import { withFirebase } from "../../firebase";
+import { withStyles } from '@material-ui/core/styles';
+import { compose } from "recompose";
+import PanelComponent from '../panel';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import List from '@material-ui/core/List';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
+import Paper from '@material-ui/core/Paper';
 
-export default class Midia extends Component {
+const styles = theme => ({
+  root: {
+    display: 'flex',
+  },
+  title: {
+    flexGrow: 1,
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  tableContainer: {
+    height: '100%',
+  },
+  paper: {
+    padding: theme.spacing.unit * 3,
+    margin: theme.spacing.unit * 3,
+  },
+});
+
+class Midia extends Component {
   baseUrl = "https://us-central1-pigeon-90548.cloudfunctions.net/api/";
 
   constructor(props) {
@@ -11,7 +48,13 @@ export default class Midia extends Component {
       conteudo: "",
       items: {},
       opcao: null,
-      clicado: null
+      clicado: null,
+      selecionado: null,
+      open: false,
+      files: {},
+      newSection: null,
+      fetching: true,
+
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -181,6 +224,7 @@ export default class Midia extends Component {
 
   renderList() {
     const { items } = this.state;
+    console.log(items)
     return (
       <div className="admin-panel--list">
         {Object.keys(items).map(key => {
@@ -215,24 +259,46 @@ export default class Midia extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+    const { items } = this.state;
+    console.log(this.state.items)
     return (
-      // <div className= 'admin-panel'>
-      //   <div className='admin-panel--title'>Midia</div>
-
-      <div className="admin-panel--content">
-        {!this.state.opcao && this.renderList()}
-        {(this.state.opcao === "adicionar" || this.state.opcao === "editar") &&
-          this.renderForm()}
-        <div className="buttons">
-          <button className="button" onClick={this.props.goBack}>
-            Voltar
-          </button>
-          <button className="button" onClick={this.addMidia}>
-            Nova notícia
-          </button>
-        </div>
-      </div>
-      // </div>
+      <PanelComponent title="Midia">
+        <Paper className={classes.root}>
+          <List className='admin-list'>
+          {
+            Object.keys(items).map(item => {
+              return (
+                <ListItem key={item} id={item} value={item} className='listItem'>
+                  <ListItemText className='listItem-text'>{items[item].titulo}</ListItemText>
+                  <IconButton key={item} aria-label="Delete" onClick={e => this.deleteData(e, item)}>
+                    <DeleteIcon />
+                  </IconButton>
+                  <ListItemSecondaryAction className='listItem-icon'>
+                    <IconButton key={item} aria-label="Edit" onClick={e => this.editConteudo(e, item)}>
+                      <EditIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              )
+            })
+          }
+          </List>
+        </Paper>
+      </PanelComponent>
     );
   }
 }
+
+
+
+const MidiaComponent = compose(
+  withRouter,
+  withFirebase
+)(withRoot(withStyles(styles)(Midia)));
+
+// export default Midia;
+export default Midia;
+
+export { MidiaComponent };
+
