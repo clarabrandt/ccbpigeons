@@ -6,10 +6,12 @@ import { withFirebase } from "../../firebase";
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from "recompose";
 import PanelComponent from '../panel';
+import Button from '@material-ui/core/Button';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
@@ -37,6 +39,17 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
     margin: theme.spacing.unit * 3,
   },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  dense: {
+    marginTop: 19,
+  },
+  menu: {
+    width: 200,
+  },
 });
 
 class About extends Component {
@@ -49,7 +62,8 @@ class About extends Component {
       items: {},
       opcao: null,
       clicado: null,
-      resposta: null
+      resposta: null,
+      show: true
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -58,9 +72,14 @@ class About extends Component {
     this.changeData = this.changeData.bind(this);
     this.editConteudo = this.editConteudo.bind(this);
     this.closeForm = this.closeForm.bind(this);
+    this.getSobreUpdate = this.getSobreUpdate.bind(this);
   }
 
   componentDidMount() {
+    this.getSobreUpdate();
+  }
+
+  getSobreUpdate() {
     this.fetchData()
       .then(response => response.json())
       .then(data => {
@@ -68,8 +87,8 @@ class About extends Component {
           items: data.sobre
         });
       });
-  }
 
+  }
   fetchData() {
     const endpoint = `${this.baseUrl}sobre`;
     return fetch(endpoint, {
@@ -124,11 +143,9 @@ class About extends Component {
       });
   }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
+  };
 
   handleClick(e) {
     const endpoint = `${this.baseUrl}sobre`;
@@ -141,10 +158,13 @@ class About extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
-    });
-    this.setState({
-      opcao: null
-    });
+    })
+      .then(
+        this.setState({
+          opcao: null,
+          show: true,
+        }, this.getSobreUpdate)
+      )
   }
 
   addAbout() {
@@ -166,78 +186,60 @@ class About extends Component {
   closeForm(e) {
     e.preventDefault();
     this.setState({
-      opcao: null
+      opcao: null,
+      show: true
     });
   }
-
+  componentWillMount() {
+    this.setState({
+      items: this.state.items
+    })
+  }
   renderForm() {
+    if (this.state.show === true) {
+      this.setState({
+        show: false
+      })
+    }
+
+    const { classes } = this.props;
     const editConteudo = this.state.sobre;
     const { clicado } = this.state;
 
     return (
-      <form className="postData">
-        <div>Nova informação sobre o CCB Pigeons</div>
-        <textarea
-          type="text"
-          id="sobre"
-          name="sobre"
-          placeholder="texto"
-          value={editConteudo}
-          onChange={this.handleChange}
-        />
-        <div className="buttons">
-          <button type="button" onClick={this.closeForm}>
-            Cancelar
-          </button>
-          <button
+      <form className={classes.container} noValidate autoComplete="off">
+        <div className='postData-container'>
+          <div>Nova informação sobre o CCB Pigeons</div>
+          <TextField
+            id="standard-name"
+            label="Conteúdo"
+            className={classes.textField}
+            value={editConteudo}
+            onChange={this.handleChange('sobre')}
+            margin="normal"
+          />
+          <div className="buttons">
+          <Button type="button" onClick={this.closeForm}>
+            <div className="button-post"> Cancelar</div>
+          </Button>
+          <Button
             type="button"
+            color="secondary"
             onClick={e =>
               this.state.opcao === "adicionar"
                 ? this.handleClick(e)
                 : this.changeData(e, clicado)
             }
           >
-            Postar
-          </button>
+            <div className="button-post">Postar</div>
+          </Button>
+        </div>
         </div>
       </form>
     );
   }
 
   renderList() {
-    const { items } = this.state;
-    return (
-      <div className="admin-panel--list">
-        {Object.keys(items).map(key => {
-          return (
-            <div key={key} className="admin-panel--item">
-              <div className="admin-panel--item--title">{items[key].sobre}</div>
-              <div className="admin-panel--item--edit">
-                <button
-                  type="button"
-                  className="edit-button"
-                  onClick={e => this.editConteudo(e, key)}
-                >
-                  Edit
-                </button>
-              </div>
-              <div className="admin-panel--item--delete">
-                <button
-                  type="button"
-                  className="delete-button"
-                  onClick={e => this.deleteData(e, key)}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-
-  render() {
     const { classes } = this.props;
     const { items } = this.state;
     console.log(this.state.items)
@@ -245,26 +247,53 @@ class About extends Component {
       <PanelComponent title="Sobre">
         <Paper className={classes.root}>
           <List className='admin-list'>
-          {
-            Object.keys(items).map(item => {
-              return (
-                <ListItem key={item} id={item} value={item} className='listItem'>
-                  <ListItemText className='listItem-text'>{items[item].sobre}</ListItemText>
-                  <IconButton key={item} aria-label="Delete" onClick={e => this.deleteData(e, item)}>
-                    <DeleteIcon />
-                  </IconButton>
-                  <ListItemSecondaryAction className='listItem-icon'>
-                    <IconButton key={item} aria-label="Edit" onClick={e => this.editConteudo(e, item)}>
-                      <EditIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              )
-            })
-          }
+            {
+              Object.keys(items).map(item => {
+                return (
+                  <div key={item} className='listItem'>
+                    <ListItem key={item} id={item} value={item}>
+                      <ListItemText className='listItem-text'>
+                        <div className='listItem-text--text'>
+                          {items[item].sobre}
+                        </div>
+                      </ListItemText>
+                      <div className='listItem-buttons'>
+                        <div className='listItem-button'>
+                          <IconButton key={item} aria-label="Delete" onClick={e => this.deleteData(e, item)}>
+                            <DeleteIcon />
+                          </IconButton>
+                        </div>
+                        <ListItemSecondaryAction className='listItem-icon'>
+                          <div className='listItem-button'>
+                            <IconButton key={item} aria-label="Edit" onClick={e => this.editConteudo(e, item)}>
+                              <EditIcon />
+                            </IconButton>
+                          </div>
+                        </ListItemSecondaryAction>
+                      </div>
+                    </ListItem>
+                  </div>
+                )
+              })
+            }
           </List>
         </Paper>
       </PanelComponent>
+    );
+  }
+  render() {
+    return (
+      <List className="admin-panel--content">
+        {!this.state.opcao && this.renderList()}
+        {(this.state.opcao === "adicionar" || this.state.opcao === "editar") &&
+          this.renderForm()}
+        <div className="button-post" >
+          <Button onClick={this.addAbout}>
+            <div className={`button-post--text ${this.state.show ? 'show' : 'noshow'}`}>Novo conteúdo</div>
+          </Button>
+        </div>
+
+      </List>
     );
   }
 }
