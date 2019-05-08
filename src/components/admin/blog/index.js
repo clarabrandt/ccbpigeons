@@ -108,7 +108,7 @@ class Blog extends Component {
 
   changeData(e, key) {
     e.preventDefault();
-    const { titulo } = this.state;
+    const titulo = this.state.titulo;
     const date = this.state.date;
     const conteudo = this.state.conteudo;
     const endpoint = `${this.baseUrl}blog`;
@@ -121,15 +121,13 @@ class Blog extends Component {
       body: JSON.stringify({ key, titulo, date, conteudo })
     })
       .then(response => response.json())
-      .then(data => {
-        const result = this.state.items;
-        console.log(result[data.key]);
+      .then(
+        console.log(),
         this.setState({
-          titulo,
-          date,
-          conteudo
-        });
-      });
+          opcao: null,
+          show: true,
+        }, this.getBlogPosts)
+      )
   }
 
   deleteData(e, key) {
@@ -153,18 +151,10 @@ class Blog extends Component {
       });
   }
 
-  // handleChange(event) {
-  //   console.log(event.target.name)
-  //   console.log(event.target.value)
-  //   this.setState({
-  //     [event.target.name]: event.target.value
-  //   });
-  // }
-
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
-  
+
   handleClick(e, key) {
     const endpoint = `${this.baseUrl}blog`;
     e.preventDefault();
@@ -306,7 +296,7 @@ class Blog extends Component {
                         </div>
                         <ListItemSecondaryAction className='listItem-icon'>
                           <div className='listItem-button'>
-                            <IconButton key={item} aria-label="Edit" onClick={e => this.editConteudo(e, item)}>
+                            <IconButton key={item} aria-label="Edit" onClick={e => this.editPost(e, item)}>
                               <EditIcon />
                             </IconButton>
                           </div>

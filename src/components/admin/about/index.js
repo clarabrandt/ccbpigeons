@@ -113,13 +113,12 @@ class About extends Component {
       body: JSON.stringify({ key, sobre })
     })
       .then(response => response.json())
-      .then(data => {
-        const result = this.state.items;
-        console.log(result[data.key]);
+      .then(
         this.setState({
-          sobre
-        });
-      });
+          opcao: null,
+          show: true,
+        }, this.getSobreUpdate)
+      )
   }
 
   deleteData(e, key) {
@@ -201,7 +200,6 @@ class About extends Component {
         show: false
       })
     }
-
     const { classes } = this.props;
     const editConteudo = this.state.sobre;
     const { clicado } = this.state;
@@ -219,21 +217,21 @@ class About extends Component {
             margin="normal"
           />
           <div className="buttons">
-          <Button type="button" onClick={this.closeForm}>
-            <div className="button-post"> Cancelar</div>
-          </Button>
-          <Button
-            type="button"
-            color="secondary"
-            onClick={e =>
-              this.state.opcao === "adicionar"
-                ? this.handleClick(e)
-                : this.changeData(e, clicado)
-            }
-          >
-            <div className="button-post">Postar</div>
-          </Button>
-        </div>
+            <Button type="button" onClick={this.closeForm}>
+              <div className="button-post"> Cancelar</div>
+            </Button>
+            <Button
+              type="button"
+              color="secondary"
+              onClick={e =>
+                this.state.opcao === "adicionar"
+                  ? this.handleClick(e)
+                  : this.changeData(e, clicado)
+              }
+            >
+              <div className="button-post">Postar</div>
+            </Button>
+          </div>
         </div>
       </form>
     );
@@ -292,7 +290,6 @@ class About extends Component {
             <div className={`button-post--text ${this.state.show ? 'show' : 'noshow'}`}>Novo conteúdo</div>
           </Button>
         </div>
-
       </List>
     );
   }

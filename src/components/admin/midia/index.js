@@ -120,14 +120,12 @@ class Midia extends Component {
       body: JSON.stringify({ key, titulo, conteudo })
     })
       .then(response => response.json())
-      .then(data => {
-        const result = this.state.items;
-        console.log(result[data.key]);
+      .then(
         this.setState({
-          titulo,
-          conteudo
-        });
-      });
+          opcao: null,
+          show: true,
+        }, this.getMidiaNews)
+      )
   }
 
   deleteData(e, key) {
@@ -231,25 +229,25 @@ class Midia extends Component {
             id="standard-name"
             label="Conteudo"
             placeholder="texto"
-            value={ conteudo }
+            value={conteudo}
             onChange={this.handleChange('conteudo')}
           />
           <div className="buttons">
-          <Button type="button" onClick={this.closeForm}>
-            <div className="button-post"> Cancelar</div>
-          </Button>
-          <Button
-            type="button"
-            color="secondary"
-            onClick={e =>
-              this.state.opcao === "adicionar"
-                ? this.handleClick(e)
-                : this.changeData(e, clicado)
-            }
-          >
-            <div className="button-post">Postar</div>
-          </Button>
-        </div>
+            <Button type="button" onClick={this.closeForm}>
+              <div className="button-post"> Cancelar</div>
+            </Button>
+            <Button
+              type="button"
+              color="secondary"
+              onClick={e =>
+                this.state.opcao === "adicionar"
+                  ? this.handleClick(e)
+                  : this.changeData(e, clicado)
+              }
+            >
+              <div className="button-post">Postar</div>
+            </Button>
+          </div>
         </div>
       </form>
     );
@@ -258,7 +256,6 @@ class Midia extends Component {
   renderList() {
     const { classes } = this.props;
     const { items } = this.state;
-    console.log(this.state.items)
     return (
       <PanelComponent title="Midia">
         <Paper className={classes.root}>
@@ -281,7 +278,7 @@ class Midia extends Component {
                         </div>
                         <ListItemSecondaryAction className='listItem-icon'>
                           <div className='listItem-button'>
-                            <IconButton key={item} aria-label="Edit" onClick={e => this.editConteudo(e, item)}>
+                            <IconButton key={item} aria-label="Edit" onClick={e => this.editMidia(e, item)}>
                               <EditIcon />
                             </IconButton>
                           </div>
@@ -292,7 +289,6 @@ class Midia extends Component {
                 )
               })
             }
-
           </List>
         </Paper>
       </PanelComponent>
