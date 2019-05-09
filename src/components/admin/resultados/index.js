@@ -216,7 +216,7 @@ class Resultados extends Component {
             </div>
           </div>
           <div className={classes.tableContainer}>
-            <FileUploaderComponent id={selecionado} evento={items[selecionado]} updateSubitem={this.updateSubitem} displayDetails={this.displayDetails}/>
+            <FileUploaderComponent component="resultados" id={selecionado} evento={items[selecionado]} updateSubitem={this.updateSubitem} displayDetails={this.displayDetails}/>
           </div>
           <Dialog
             disableBackdropClick
