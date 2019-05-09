@@ -4,9 +4,9 @@ import { compose } from "recompose";
 import "./Admin.css";
 import api from "../../utils/api.js";
 import { AboutComponent } from "./about";
-import {ResultadosComponent} from "./resultados";
-import {FotosComponent} from "./fotos";
-import {BlogComponent} from "./blog";
+import { ResultadosComponent } from "./resultados";
+import { FotosComponent } from "./fotos";
+import { BlogComponent } from "./blog";
 import { MidiaComponent } from "./midia";
 import { NavbarComponent } from "./navbar";
 import Menu from "./menu";
@@ -46,7 +46,7 @@ class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicked: "fotos",
+      clicked: "sobre",
       authUser: null,
       fetchingAuth: true,
       open: false,
@@ -102,9 +102,13 @@ class Admin extends Component {
               <ResultadosComponent />
             }
             {
-              this.state.clicked === "fotos" && 
-                <FotosComponent/>
-            },
+              this.state.clicked === "blog" &&
+              <BlogComponent />
+            }
+            {
+              this.state.clicked === "fotos" &&
+              <FotosComponent />
+            }
             {
               this.state.clicked === "midia" &&
               <MidiaComponent />
