@@ -6,6 +6,7 @@ import api from "../../utils/api.js";
 import About from "./about";
 import Blog from "./blog";
 import {ResultadosComponent} from "./resultados";
+import {FotosComponent} from "./fotos";
 import {BlogComponent} from "./blog";
 import Midia from "./midia";
 import { NavbarComponent } from "./navbar";
@@ -55,7 +56,7 @@ class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicked: "blog",
+      clicked: "fotos",
       authUser: null,
       fetchingAuth: true,
       open: false,
@@ -105,6 +106,10 @@ class Admin extends Component {
             {
               this.state.clicked === "resultados" && 
                 <ResultadosComponent/>
+            }
+            {
+              this.state.clicked === "fotos" && 
+                <FotosComponent/>
             }
             {
               this.state.clicked === "blog" && 
