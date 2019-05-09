@@ -48,8 +48,8 @@ class FileUploader extends Component {
   }
 
   createDBRecord(newDBrecord) {
-    const { id } = this.props;
-    const endpoint = `${this.baseUrl}resultados/${id}`;
+    const { id, component } = this.props;
+    const endpoint = `${this.baseUrl}${component}/${id}`;
     return fetch(endpoint, {
       method: "POST",
       headers: {
@@ -61,9 +61,9 @@ class FileUploader extends Component {
   }
 
   uploadFile(i, file) {
-    const { id } = this.props;
+    const { id, component } = this.props;
     let { name, ...metadata } = file;
-    const newFileRef = this.storageRef.child(`resultados/${id}/${name}`);
+    const newFileRef = this.storageRef.child(`${component}/${id}/${name}`);
     const uploadTask = newFileRef.put(file, { customMetadata: metadata });
 
     //Upload the file to cloud storage
