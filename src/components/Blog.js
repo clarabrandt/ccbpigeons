@@ -54,15 +54,13 @@ export default class Blog extends Component {
                     key={index}
                     className={`post-date--content ${
                       this.state.open ? "open" : "closed"
-                    }`}
+                      }`}
                   >
                     <div className="post-title--date">{res.titulo} </div>
+                    <div className="post-date--left">{res.date} </div>
                   </div>
                 );
               })}
-              <div className="post-arquivo--date">2018</div>
-              <div className="post-arquivo--date">2017</div>
-              <div className="post-arquivo--date">2016</div>
             </div>
             <div className="post-new box-inside--right">
               <div className="post-subtitle--new">Mais recentes</div>

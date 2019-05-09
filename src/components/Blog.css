@@ -42,6 +42,11 @@
   padding: 5px 0 30px 0;
   color: #444649;
 }
+.post-date--left {
+  padding-left: 30px;
+  color: #444649;
+  font-size: 14px;
+}
 .post-content {
   font-size: 18px;
   max-width: 100%;
@@ -65,6 +70,9 @@
   color: #444649;
   font-size: 20px;
   /* font-weight: 600; */
+}
+.post-arquivo--date:hover {
+  cursor: pointer;
 }
 .post-arquivo--date:hover {
   text-decoration: underline;
@@ -98,6 +106,10 @@
   padding: 20px 20px 0 30px;
   color: #444649;
   font-weight: normal;
+}
+.post-title--date:hover{
+  cursor: pointer;
+  font-weight: 600;
 }
 .post-date--content.closed {
   display: none;

@@ -59,7 +59,7 @@ export default class Midia extends Component {
                   <div key={index} className="news-new--content">
                     <div className="news-title">{res.titulo} </div>
                     <div className="news-content">
-                      <p>{res.conteudo}</p>
+                      <div>{res.conteudo}</div>
                     </div>
                   </div>
                 );
