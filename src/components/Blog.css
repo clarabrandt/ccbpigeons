@@ -35,7 +35,7 @@
   font-size: 22px;
   color: #444649;
   font-weight: 600;
-  padding-top: 30px;
+
 }
 .post-date {
   font-size: 16px;
@@ -133,8 +133,6 @@
     font-weight: bold;
   }
   .posts {
-    /* display: flex;
-    flex-direction: column; */
     display: grid;
     grid-template-areas:
       "new new"
@@ -148,7 +146,7 @@
   }
   .post-content {
     max-height: none;
-    padding-left: 10px;
+    padding: 10px;
   }
   .post-new--keep-reading {
     padding-left: 0;
@@ -160,7 +158,6 @@
     margin-left: 0;
     padding: 20px 0 10px 10px;
     font-weight: bold;
-    /* text-decoration: underline; */
   }
   .post-date {
     margin-left: 0;
@@ -194,6 +191,12 @@
   .artigos-titulo {
     font-size: 18px;
   }
+  .post-title--date {
+    padding: 10px 10px 0 10px;
+  }
+  .post-date--left {
+    padding-left: 10px;
+  }
 }
 
 @media only screen and (max-width: 780px) {
@@ -226,7 +229,7 @@
   }
   .post-content {
     max-height: none;
-    padding-left: 10px;
+    padding: 10px;
   }
   .post-title,
   .post-subtitle--arquivo {
@@ -234,7 +237,6 @@
     margin-left: 0;
     padding: 10px 0 10px 10px;
     font-weight: bold;
-    /* text-decoration: underline; */
   }
   .post-subtitle {
     margin: 10px;
@@ -280,5 +282,11 @@
   }
   .artigos-titulo {
     text-align: left;
+  }
+  .post-title--date {
+    padding: 10px 10px 0 10px;
+  }
+  .post-date--left {
+    padding-left: 10px;
   }
 }
