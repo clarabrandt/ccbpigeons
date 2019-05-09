@@ -10,11 +10,12 @@
 
 .content-about {
   margin: 2rem;
-
+  color: #444649;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   flex: 1;
   padding: 70px 50px;
+  overflow: scroll;
 }
 
 .about-title {
@@ -64,27 +65,22 @@
   }
 
   .content-about {
-    margin: 0;
+    margin: 10px 0;
     padding: 0;
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
   }
+  .about-content {
+    font-size: 16px;
+  }
 
-  /* .house-pic {
-    max-width: 50%;
-  } */
+  .content-about--right {
+    max-height: 250px;
+}
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1022px) {
   .about {
-    /* display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    flex-direction: column; */
     margin: 0 0 50px 0;
   }
 
@@ -98,16 +94,19 @@
   }
 
   .content-about {
-    margin: 0 0 10px 0;
+    margin: 30px;
     padding: 0;
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
-    max-width: 50%;
+
+  }
+  .about-content {
+    font-size: 16px;
   }
 
-  /* .content-about--right {
-    display: none;
-  } */
+  .content-about--right {
+    max-height: 380px;
+}
 
   p {
     padding: 0 20px 10px 10px;

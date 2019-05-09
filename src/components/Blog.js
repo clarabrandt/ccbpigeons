@@ -63,7 +63,6 @@ export default class Blog extends Component {
               })}
             </div>
             <div className="post-new box-inside--right">
-              <div className="post-subtitle--new">Mais recentes</div>
               {this.state.blog.map((res, index) => {
                 return (
                   <div
