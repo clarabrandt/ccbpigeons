@@ -84,6 +84,20 @@ class api {
       .then(res => res.json()) // translate to json
       .catch(err => console.log(err));
   }
+  postArtigos() {
+    let endpoint = `${this.baseUrl}home`;
+
+    let foto = document.getElementById("title").value;
+
+    fetch(endpoint, {
+      method: "POST",
+      headers: new Headers(),
+      body: JSON.stringify({ foto: foto })
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
+  }
   getFotos() {
     let endpoint = `${this.baseUrl}fotos`;
 

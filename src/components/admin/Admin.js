@@ -6,6 +6,7 @@ import api from "../../utils/api.js";
 import { AboutComponent } from "./about";
 import { ResultadosComponent } from "./resultados";
 import { FotosComponent } from "./fotos";
+import { ArtigosComponent } from "./artigos";
 import { BlogComponent } from "./blog";
 import { MidiaComponent } from "./midia";
 import { NavbarComponent } from "./navbar";
@@ -106,12 +107,16 @@ class Admin extends Component {
               <BlogComponent />
             }
             {
+              this.state.clicked === "midia" &&
+              <MidiaComponent />
+            }
+            {
               this.state.clicked === "fotos" &&
               <FotosComponent />
             }
             {
-              this.state.clicked === "midia" &&
-              <MidiaComponent />
+              this.state.clicked === "artigos" &&
+              <ArtigosComponent />
             }
           </Paper>
         </main>
