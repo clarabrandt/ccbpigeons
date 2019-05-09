@@ -51,7 +51,7 @@
   -webkit-flex: 1;
   flex: 1;
   margin-left: 50px;
-  padding: 0 40px; 
+  padding: 0 60px 0 40px; 
   height: 300px;
 }
 .news-subtitle {
@@ -64,8 +64,12 @@
   overflow-y: scroll; 
  
 }
-.news-content {
+.news-title {
   font-size: 20px;
+  padding-bottom: 15px
+}
+.news-content {
+  font-size: 16px;
   margin-bottom: 30px;
   color: #444649;
   border-bottom: 0.5px solid lightgrey;
@@ -149,10 +153,12 @@
   }
   .news-title {
     padding-left: 20px;
+    font-size: 20px;
   }
   .news-content {
     color: #444649;
     border-bottom: 0.5px solid lightgrey;
+    font-size: 16px;
   }
   .canal-youtube--text {
     padding: 0 0 10px 20px;

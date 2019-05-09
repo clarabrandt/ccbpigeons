@@ -54,7 +54,6 @@
   padding: 0 0 0 30px;
 }
 
-.competitions-next--listItems:hover,
 .competitions-last--listItems:hover {
   text-decoration: underline;
   color: rgb(36, 34, 34);
@@ -66,12 +65,14 @@
   border-bottom: 0.5px solid lightgrey;
   margin-bottom: 10px;
   font-size: 20px;
+  color: #444649;
 }
 
 .competitions-last--listItems {
   font-size: 20px;
   margin-bottom: 10px;
   padding: 0 0 15px 0;
+  color: #444649;
 }
 
 .competitions-results {
