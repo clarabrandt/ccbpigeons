@@ -77,23 +77,34 @@ class Admin extends Component {
   handleDrawerClose = () => this.setState({ open: false });
 
   goToComponent(e) {
+    e.preventDefault();
+    e.stopPropagation()
     this.setState({
       clicked: e.target.id
     });
   }
 
   render() {
+    const { authUser, fetchingAuth } = this.state;
+
+    if (fetchingAuth && !authUser) {
+      return <div>Loading</div>;
+    }
+
+    if (!fetchingAuth && !authUser) {
+      return <LoginPage />;
+    }
     const { classes } = this.props;
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <NavbarComponent open={this.state.open} handleDrawerOpen={this.handleDrawerOpen}/>
-        <Menu open={this.state.open} handleDrawerClose={this.handleDrawerClose} />
+        <NavbarComponent open={this.state.open} handleDrawerOpen={this.handleDrawerOpen} />
+        <Menu open={this.state.open} handleDrawerClose={this.handleDrawerClose} goToComponent={this.goToComponent} />
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Paper className={classes.paper}>
             {
-              this.state.clicked === "sobre" && 
+              this.state.clicked === "sobre" &&
               <Fragment>
                 <Typography variant="h4" gutterBottom component="h2">
                   About
@@ -104,27 +115,15 @@ class Admin extends Component {
               </Fragment>
             }
             {
-              this.state.clicked === "resultados" && 
-                <ResultadosComponent/>
+              this.state.clicked === "resultados" &&
+              <ResultadosComponent />
             }
             {
               this.state.clicked === "fotos" && 
                 <FotosComponent/>
-            }
+            },
             {
-              this.state.clicked === "blog" && 
-                <BlogComponent />
-              // <Fragment>
-              //   <Typography variant="h4" gutterBottom component="h2">
-              //     Blog
-              //   </Typography>
-              //   <div className={classes.tableContainer}>
-              //     <Blog />
-              //   </div>
-              // </Fragment>
-            }
-            {
-              this.state.clicked === "midia" && 
+              this.state.clicked === "midia" &&
               <Fragment>
                 <Typography variant="h4" gutterBottom component="h2">
                   Midia

@@ -6,6 +6,7 @@ import withRoot from "../../../withRoot";
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -44,6 +45,12 @@ const styles = theme => ({
   title: {
     flexGrow: 1,
   },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
+  },
 });
 
 class Navbar extends React.Component {
@@ -79,11 +86,14 @@ class Navbar extends React.Component {
           >
             CCBPigeons Admin
               </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          <Button
+            type="submit"
+            value="Log out"
+            className={classes.submit}
+            onClick={this.signOut}
+          >
+            Log out
+          </Button>
         </Toolbar>
       </AppBar>
     );
