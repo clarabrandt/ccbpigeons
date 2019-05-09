@@ -1,33 +1,23 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import "./Admin.css";
 import api from "../../utils/api.js";
-import About from "./about";
-import Blog from "./blog";
+import { AboutComponent } from "./about";
 import {ResultadosComponent} from "./resultados";
 import {FotosComponent} from "./fotos";
 import {BlogComponent} from "./blog";
-import Midia from "./midia";
+import { MidiaComponent } from "./midia";
 import { NavbarComponent } from "./navbar";
-import { DrawerComponent } from "./navbar";
 import Menu from "./menu";
 import { withFirebase } from "../firebase";
 import { LoginPage } from "../login.js";
-import SimpleLineChart from './SimpleLineChart';
-import SimpleTable from './SimpleTable';
 import withRoot from "../../withRoot";
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 
-const drawerWidth = 240;
+
 
 const styles = theme => ({
   root: {
@@ -105,14 +95,7 @@ class Admin extends Component {
           <Paper className={classes.paper}>
             {
               this.state.clicked === "sobre" &&
-              <Fragment>
-                <Typography variant="h4" gutterBottom component="h2">
-                  About
-                </Typography>
-                <div className={classes.tableContainer}>
-                  <About />
-                </div>
-              </Fragment>
+              <AboutComponent />
             }
             {
               this.state.clicked === "resultados" &&
@@ -124,14 +107,7 @@ class Admin extends Component {
             },
             {
               this.state.clicked === "midia" &&
-              <Fragment>
-                <Typography variant="h4" gutterBottom component="h2">
-                  Midia
-                </Typography>
-                <div className={classes.tableContainer}>
-                  <Midia />
-                </div>
-              </Fragment>
+              <MidiaComponent />
             }
           </Paper>
         </main>

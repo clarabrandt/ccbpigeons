@@ -5,13 +5,23 @@ import { withFirebase } from "../../firebase";
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from "recompose";
 import PanelComponent from '../panel';
-import {FilesListComponent} from '../files-list';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItemText from '@material-ui/core/ListItemText';
+import TextField from '@material-ui/core/TextField';
+import ListItem from '@material-ui/core/ListItem';
+import Paper from '@material-ui/core/Paper';
 import "./style.css";
 
 const styles = theme => ({
   root: {
     display: 'flex',
   },
+
   title: {
     flexGrow: 1,
   },
@@ -22,12 +32,25 @@ const styles = theme => ({
     height: '100vh',
     overflow: 'auto',
   },
-  tableContainer: {
-    height: '100%',
-  },
   paper: {
     padding: theme.spacing.unit * 3,
     margin: theme.spacing.unit * 3,
+  },
+
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  dense: {
+    marginTop: 19,
+  },
+  menu: {
+    width: 200,
   },
 });
 
@@ -43,7 +66,8 @@ class Blog extends Component {
       items: {},
       opcao: null,
       clicado: null,
-      resposta: null
+      resposta: null,
+      show: true
     };
 
     this.storageRef = props.firebase.storage.ref();
@@ -53,9 +77,14 @@ class Blog extends Component {
     this.changeData = this.changeData.bind(this);
     this.editPost = this.editPost.bind(this);
     this.closeForm = this.closeForm.bind(this);
+    this.getBlogPosts = this.getBlogPosts.bind(this);
   }
 
   componentDidMount() {
+    this.getBlogPosts();
+  }
+
+  getBlogPosts() {
     this.fetchData()
       .then(response => response.json())
       .then(data => {
@@ -67,13 +96,14 @@ class Blog extends Component {
 
   fetchData() {
     const endpoint = `${this.baseUrl}blog`;
-    return fetch(endpoint, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    });
+    return fetch(endpoint,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      });
   }
 
   changeData(e, key) {
@@ -91,15 +121,13 @@ class Blog extends Component {
       body: JSON.stringify({ key, titulo, date, conteudo })
     })
       .then(response => response.json())
-      .then(data => {
-        const result = this.state.items;
-        console.log(result[data.key]);
+      .then(
+        console.log(),
         this.setState({
-          titulo,
-          date,
-          conteudo
-        });
-      });
+          opcao: null,
+          show: true,
+        }, this.getBlogPosts)
+      )
   }
 
   deleteData(e, key) {
@@ -123,14 +151,11 @@ class Blog extends Component {
       });
   }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-    console.log(event.target.value);
-  }
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
+  };
 
-  handleClick(e) {
+  handleClick(e, key) {
     const endpoint = `${this.baseUrl}blog`;
     e.preventDefault();
     const data = {
@@ -145,10 +170,13 @@ class Blog extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
-    });
-    this.setState({
-      opcao: null
-    });
+    })
+      .then(
+        this.setState({
+          opcao: null,
+          show: true,
+        }, this.getBlogPosts)
+      )
   }
 
   addPost() {
@@ -172,144 +200,134 @@ class Blog extends Component {
   closeForm(e) {
     e.preventDefault();
     this.setState({
-      opcao: null
+      opcao: null,
+      show: true
     });
   }
-
+  componentWillMount() {
+    this.setState({
+      items: this.state.items
+    })
+  }
   renderForm() {
-    const editTitle = this.state.titulo;
-    const editDate = this.state.date;
-    const editConteudo = this.state.conteudo;
+    if (this.state.show === true) {
+      this.setState({
+        show: false
+      })
+    }
+    const { classes } = this.props;
+    const { titulo } = this.state;
+    const { date } = this.state;
+    const { conteudo } = this.state;
     const { clicado } = this.state;
 
     return (
-      <form className="postData">
-        <div>Novo post para o blog</div>
-        <input
-          type="text"
-          id="titulo"
-          name="titulo"
-          placeholder="titulo"
-          value={editTitle}
-          onChange={this.handleChange}
-        />
-        <input
-          type="text"
-          id="date"
-          name="date"
-          placeholder="dd/mm/yyyy"
-          value={editDate}
-          onChange={this.handleChange}
-        />
-        <textarea
-          type="text"
-          id="conteudo"
-          name="conteudo"
-          placeholder="texto"
-          value={editConteudo}
-          onChange={this.handleChange}
-        />
-        <div className="buttons">
-          <button type="button" onClick={this.closeForm}>
-            Cancelar
-          </button>
-          <button
-            type="button"
-            onClick={e =>
-              this.state.opcao === "adicionar"
-                ? this.handleClick(e)
-                : this.changeData(e, clicado)
-            }
-          >
-            Postar
-          </button>
+      <form className={classes.container} noValidate autoComplete="off">
+        <div className='postData-container'>
+          <div>Novo post para o blog</div>
+          <TextField
+            id="standard-name"
+            label="Título"
+            className={classes.textField}
+            value={titulo}
+            onChange={this.handleChange('titulo')}
+            margin="normal"
+          />
+          <TextField
+            id="standard-name"
+            type="date"
+            placeholder="dd/mm/yyyy"
+            className={classes.textField}
+            value={date}
+            onChange={this.handleChange('date')}
+            margin="normal"
+          />
+
+          <TextField
+            id="standard-name"
+            label="Conteudo"
+            placeholder="texto"
+            value={conteudo}
+            onChange={this.handleChange('conteudo')}
+          />
+          <div className="buttons">
+            <Button type="button" onClick={this.closeForm}>
+              <div className="button-post"> Cancelar</div>
+            </Button>
+            <Button
+              type="button"
+              color="secondary"
+              onClick={e =>
+                this.state.opcao === "adicionar"
+                  ? this.handleClick(e)
+                  : this.changeData(e, clicado)
+              }
+            >
+              <div className="button-post">Postar</div>
+            </Button>
+          </div>
         </div>
       </form>
     );
   }
 
   renderList() {
+    const { classes } = this.props;
     const { items } = this.state;
     return (
-      <div className="admin-panel--list">
-        {Object.keys(items).map(key => {
-          return (
-            <div key={key} className="admin-panel--item">
-              <div className="admin-panel--item--title">
-                {items[key].titulo}
-              </div>
-              <div className="admin-panel--item--edit">
-                <button
-                  type="button"
-                  className="edit-button"
-                  onClick={e => this.editPost(e, key)}
-                >
-                  Edit
-                </button>
-              </div>
-              <div className="admin-panel--item--delete">
-                <button
-                  type="button"
-                  className="delete-button"
-                  onClick={e => this.deleteData(e, key)}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-
-  render() {
-    const { classes } = this.props;
-    const { items, selecionado, subitems, fetching } = this.state;
-    return (
       <PanelComponent title="Blog">
-        <FilesListComponent id={selecionado} title={selecionado && items[selecionado].name || ""} files={items} deleteFile={this.deleteFile} displayDetails={this.displayDetails} />
-      </PanelComponent>
-      // <div className= 'admin-panel'>
-      // <div className='admin-panel--title'>Blog</div>
+        <Paper className={classes.root}>
+          <List className='admin-list'>
+            {
+              Object.keys(items).map(item => {
+                return (
+                  <div key={item} className='listItem'>
+                    <ListItem key={item} id={item} value={item}>
+                      <ListItemText className='listItem-text'>
+                        <div className='listItem-text--text'>
+                          {items[item].titulo}
+                        </div>
+                      </ListItemText>
+                      <div className='listItem-buttons'>
+                        <div className='listItem-button'>
+                          <IconButton key={item} aria-label="Delete" onClick={e => this.deleteData(e, item)}>
+                            <DeleteIcon />
+                          </IconButton>
+                        </div>
+                        <ListItemSecondaryAction className='listItem-icon'>
+                          <div className='listItem-button'>
+                            <IconButton key={item} aria-label="Edit" onClick={e => this.editPost(e, item)}>
+                              <EditIcon />
+                            </IconButton>
+                          </div>
+                        </ListItemSecondaryAction>
+                      </div>
+                    </ListItem>
+                  </div>
+                )
+              })
+            }
 
-      // <div className="admin-panel--content">
-      //   {!this.state.opcao && this.renderList()}
-      //   {(this.state.opcao === "adicionar" || this.state.opcao === "editar") &&
-      //     this.renderForm()}
-      //   <div className="buttons">
-      //     <button className="button" onClick={this.props.goBack}>
-      //       Voltar
-      //     </button>
-      //     <button className="button" onClick={this.addPost}>
-      //       Novo post
-      //     </button>
-      //   </div>
-      // </div>
-      // </div>
+          </List>
+        </Paper>
+      </PanelComponent>
     );
   }
-  // render() {
-  //   return (
-  //     // <div className= 'admin-panel'>
-  //     // <div className='admin-panel--title'>Blog</div>
+  render() {
+    return (
+      <List className="admin-panel--content">
+        {!this.state.opcao && this.renderList()}
+        {(this.state.opcao === "adicionar" || this.state.opcao === "editar") &&
+          this.renderForm()}
+        <div className="button-post" >
+          <Button onClick={this.addPost}>
+            <div className={`button-post--text ${this.state.show ? 'show' : 'noshow'}`}>Novo post</div>
+          </Button>
+        </div>
 
-  //     <div className="admin-panel--content">
-  //       {!this.state.opcao && this.renderList()}
-  //       {(this.state.opcao === "adicionar" || this.state.opcao === "editar") &&
-  //         this.renderForm()}
-  //       <div className="buttons">
-  //         <button className="button" onClick={this.props.goBack}>
-  //           Voltar
-  //         </button>
-  //         <button className="button" onClick={this.addPost}>
-  //           Novo post
-  //         </button>
-  //       </div>
-  //     </div>
-  //     // </div>
-  //   );
-  // }
+      </List>
+    );
+  }
 }
 
 const BlogComponent = compose(

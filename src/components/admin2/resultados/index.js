@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from "react";
-import { ResultadosComponent } from "./Resultados.js";
+import React, { Component } from "react";
 import ExpansionPanel from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';

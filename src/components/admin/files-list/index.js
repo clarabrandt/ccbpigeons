@@ -1,16 +1,15 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { withFirebase } from "../../firebase";
 import withRoot from "../../../withRoot";
 import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import List from '@material-ui/core/List';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
-import DeleteIcon from '@material-ui/icons/Delete';
+
+
 
 const styles = theme => ({
   tableContainer: {
@@ -71,31 +70,29 @@ class FilesList extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { classes, files, title, deleteFile } = this.props;
-    console.log(files)
+
+    console.log('files --> ', files)
     return (
       <Paper className={classes.root}>
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell>Arquivos para {title}</TableCell>
-              <TableCell>Deletar</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {Object.keys(files).map(key => (
-              <TableRow key={key}>
-                <TableCell component="th" scope="row">
-                  {files[key].name}
-                </TableCell>
-                <TableCell >
-                  <DeleteIcon className={classes.delete} onClick={() => this.deleteFile(key, files[key].url)}/>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <List>
+          {
+            Object.keys(files).map((key) => {
+              const blogPost = files[key];
+              return (
+                <ListItem key={key}>
+                  {
+                    Object.keys(blogPost).map(postKey => {
+                      return (
+                        <ListItemText>opaa</ListItemText>
+                      )
+                    })
+                  }
+                </ListItem>
+              )
+            })
+          }
+        </List>
       </Paper>
     );
   }
@@ -109,3 +106,22 @@ const FilesListComponent = compose(
 export default FilesList;
 
 export { FilesListComponent };
+
+
+// Object.keys(blogPost).forEach(postKey => {
+//   console.log("Essa e uma chave do post --> ", postKey)
+//   console.log("Essa e uma chave do post --> ", blogPost[postKey])
+// })
+
+// {
+//   Object.keys(files).forEach(key => (
+//     <ListItem key={key}>
+//       <ListItemText component="th" scope="row">
+//         {files[key]}
+//       </ListItemText>
+//       <ListItemText >
+//         <DeleteIcon className={classes.delete} onClick={() => this.deleteFile(key, files[key].url)} />
+//       </ListItemText>
+//     </ListItem>
+//   ))
+// }
