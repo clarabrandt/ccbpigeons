@@ -210,13 +210,25 @@ class Resultados extends Component {
                 </div>
               }{
                 !fetching && Object.keys(subitems).length > 0 &&
-                <FilesListComponent id={selecionado} title={selecionado && items[selecionado].name || ""} files={subitems} deleteFile={this.deleteFile} displayDetails={this.displayDetails} />
+                <FilesListComponent 
+                  id={selecionado} 
+                  title={selecionado && items[selecionado].name || ""} 
+                  files={subitems} 
+                  deleteFile={this.deleteFile} 
+                  displayDetails={this.displayDetails} 
+                />
               }
 
             </div>
           </div>
           <div className={classes.tableContainer}>
-            <FileUploaderComponent component="resultados" id={selecionado} evento={items[selecionado]} updateSubitem={this.updateSubitem} displayDetails={this.displayDetails}/>
+            <FileUploaderComponent 
+              component="resultados" 
+              directory={selecionado} 
+              evento={items[selecionado]} 
+              updateSubitem={this.updateSubitem} 
+              displayDetails={this.displayDetails}
+            />
           </div>
           <Dialog
             disableBackdropClick

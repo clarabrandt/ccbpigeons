@@ -25,10 +25,11 @@ const styles = theme => ({
 
 class FileUploader extends Component {
   baseUrl = "https://us-central1-pigeon-90548.cloudfunctions.net/api/";
+  // baseUrl = "http://localhost:5001/pigeon-90548/us-central1/api/";
 
   constructor(props) {
     super(props);
-    
+
     this.storageRef = props.firebase.storage.ref();
     this.fileSelector = React.createRef();
     this.uploadFile = this.uploadFile.bind(this);
@@ -48,8 +49,10 @@ class FileUploader extends Component {
   }
 
   createDBRecord(newDBrecord) {
-    const { id, component } = this.props;
-    const endpoint = `${this.baseUrl}${component}/${id}`;
+    const { directory, component } = this.props;
+    const endpoint = `${this.baseUrl}${component}/${
+      directory ? directory : ""
+    }`;
     return fetch(endpoint, {
       method: "POST",
       headers: {
@@ -61,15 +64,17 @@ class FileUploader extends Component {
   }
 
   uploadFile(i, file) {
-    const { id, component } = this.props;
+    const { directory, component } = this.props;
     let { name, ...metadata } = file;
-    const newFileRef = this.storageRef.child(`${component}/${id}/${name}`);
+    const subpath = directory ? `${directory}/${name}` : `${name}`;
+    const newFileRef = this.storageRef.child(`${component}/${subpath}`);
     const uploadTask = newFileRef.put(file, { customMetadata: metadata });
 
     //Upload the file to cloud storage
     uploadTask.on(
       "state_changed",
       snapshot => {
+        console.log("snapshot", snapshot);
         this.props.updateSubitem(i, file, false, snapshot);
       },
       error => {
@@ -80,6 +85,7 @@ class FileUploader extends Component {
         this.createDBRecord({ name: url.name, url: url.fullPath })
           .then(response => response.json())
           .then(json => {
+            console.log("json --> ", json);
             this.props.updateSubitem(json.id, file, true);
             this.props.displayDetails(json.id);
           });
@@ -88,12 +94,12 @@ class FileUploader extends Component {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes } = this.props;
     return (
       <label htmlFor="outlined-button-file">
         <input
           id="raised-button-file"
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           className="file-input"
           type="file"
           name="resume"
@@ -102,13 +108,16 @@ class FileUploader extends Component {
           multiple
         />
         <label htmlFor="raised-button-file">
-          <Button variant="contained" component="span" className={classes.button}>
-            Upload
-                    <CloudUploadIcon className={classes.rightIcon} />
+          <Button
+            variant="contained"
+            component="span"
+            className={classes.button}
+          >
+            Upload <CloudUploadIcon className={classes.rightIcon} />
           </Button>
         </label>
       </label>
-    )
+    );
   }
 }
 

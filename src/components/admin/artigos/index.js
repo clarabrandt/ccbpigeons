@@ -114,7 +114,13 @@ class Artigos extends Component {
       <PanelComponent title="Artigos">
         <Fragment>
           <div className={classes.tableContainer}>
-            <FileUploaderComponent component="artigos" id={selecionado} evento={items[selecionado]} updateSubitem={this.updateSubitem} displayDetails={this.displayDetails}/>
+            <FileUploaderComponent 
+              component="artigos" 
+              directory={selecionado} 
+              evento={items[selecionado]} 
+              updateSubitem={this.updateSubitem} 
+              displayDetails={this.displayDetails}
+            />
           </div>
         </Fragment>
       </PanelComponent>

@@ -5,6 +5,7 @@ import { withFirebase } from "../../firebase";
 import withRoot from "../../../withRoot";
 import { withStyles } from '@material-ui/core/styles';
 import PanelComponent from '../panel';
+import { FilesListComponent } from "../files-list";
 import { FileUploaderComponent } from '../file-uploader';
 
 const styles = theme => ({
@@ -24,6 +25,7 @@ const styles = theme => ({
 });
 
 class Fotos extends Component {
+  // baseUrl = "http://localhost:5001/pigeon-90548/us-central1/api/";
   baseUrl = "https://us-central1-pigeon-90548.cloudfunctions.net/api/";
 
   constructor(props) {
@@ -32,11 +34,11 @@ class Fotos extends Component {
       items: {},
       subitems: {},
       snapshot: {},
-      selecionado: null,
+      directory: null,
       open: false,
       files: {},
       newSection: null,
-      fetching: true,
+      fetching: true
     };
 
     this.storageRef = props.firebase.storage.ref();
@@ -46,20 +48,22 @@ class Fotos extends Component {
   }
 
   componentDidMount() {
-    // this.fetchData()
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     this.setState(
-    //       {
-    //         items: data.fotos,
-    //         selecionado: Object.keys(data.fotos)[0]
-    //       },
-    //       this.displayDetails
-    //     );
-    //   });
+    const { directory } = this.state;
+    const fetcher = !!directory ? this.fetchDirectories : this.fetchArquivos;
+    fetcher()
+      .then(response => response.json())
+      .then(data => {
+        this.setState(
+          {
+            items: data.fotos,
+            directory: directory ? Object.keys(data.fotos)[0] : null,
+          },
+          this.displayDetails
+        );
+      });
   }
 
-  fetchData() {
+  fetchDirectories() {
     const endpoint = `${this.baseUrl}fotos`;
     return fetch(endpoint, {
       method: "GET",
@@ -75,13 +79,14 @@ class Fotos extends Component {
       .then(response => response.json())
       .then(subitems => {
         const result = {};
-        subitems.map(file => {
-          result[file.id] = file.data;
+        const files = subitems.fotos;
+        Object.keys(files).map(fileID => {
+          const file = files[fileID];
+          result[fileID] = file;
         });
-
         this.setState({
           subitems: result,
-          fetching: false,
+          fetching: false
         });
       });
   }
@@ -96,8 +101,8 @@ class Fotos extends Component {
   }
 
   fetchArquivos() {
-    const { selecionado } = this.state;
-    const endpoint = `${this.baseUrl}fotos/${selecionado}`;
+    const { directory } = this.state;
+    const endpoint = `${this.baseUrl}fotos/${directory ? directory : ""}`;
     return fetch(endpoint, {
       method: "GET",
       headers: {
@@ -109,16 +114,38 @@ class Fotos extends Component {
 
   render() {
     const { classes } = this.props;
-    const { items, selecionado } = this.state;
+    const { items, directory, subitems, fetching } = this.state;
     return (
       <PanelComponent title="Fotos">
         <Fragment>
           <div className={classes.tableContainer}>
-            <FileUploaderComponent component="fotos" id={selecionado} evento={items[selecionado]} updateSubitem={this.updateSubitem} displayDetails={this.displayDetails}/>
+            <div className={classes.tableContainer}>
+              {!fetching && Object.keys(subitems).length < 1 && (
+                <div>Ainda nao ha fotos cadastradas</div>
+              )}
+              {!fetching && Object.keys(subitems).length > 0 && (
+                <FilesListComponent
+                  id={directory}
+                  title={(directory && items[directory].name) || ""}
+                  files={subitems}
+                  deleteFile={this.deleteFile}
+                  displayDetails={this.displayDetails}
+                />
+              )}
+            </div>
+          </div>
+          <div className={classes.tableContainer}>
+            <FileUploaderComponent
+              component="fotos"
+              directory={directory}
+              evento={items[directory]}
+              updateSubitem={this.updateSubitem}
+              displayDetails={this.displayDetails}
+            />
           </div>
         </Fragment>
       </PanelComponent>
-    )
+    );
   }
 }
 

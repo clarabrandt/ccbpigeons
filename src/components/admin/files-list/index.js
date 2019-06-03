@@ -8,6 +8,7 @@ import List from '@material-ui/core/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
+import DeleteIcon from "@material-ui/icons/Delete";
 
 
 
@@ -78,18 +79,22 @@ class FilesList extends Component {
         <List>
           {
             Object.keys(files).map((key) => {
-              const blogPost = files[key];
+              const file = files[key];
               return (
                 <ListItem key={key}>
-                  {
-                    Object.keys(blogPost).map(postKey => {
-                      return (
-                        <ListItemText>opaa</ListItemText>
-                      )
-                    })
-                  }
+                  <ListItemText>
+                    <a href={file.url}>{file.name}</a>
+                  </ListItemText>
+                  <ListItemText>
+                    <DeleteIcon
+                      className={classes.delete}
+                      onClick={() =>
+                        this.deleteFile(key, files[key].url)
+                      }
+                    />
+                  </ListItemText>
                 </ListItem>
-              )
+              );
             })
           }
         </List>
@@ -106,22 +111,3 @@ const FilesListComponent = compose(
 export default FilesList;
 
 export { FilesListComponent };
-
-
-// Object.keys(blogPost).forEach(postKey => {
-//   console.log("Essa e uma chave do post --> ", postKey)
-//   console.log("Essa e uma chave do post --> ", blogPost[postKey])
-// })
-
-// {
-//   Object.keys(files).forEach(key => (
-//     <ListItem key={key}>
-//       <ListItemText component="th" scope="row">
-//         {files[key]}
-//       </ListItemText>
-//       <ListItemText >
-//         <DeleteIcon className={classes.delete} onClick={() => this.deleteFile(key, files[key].url)} />
-//       </ListItemText>
-//     </ListItem>
-//   ))
-// }
