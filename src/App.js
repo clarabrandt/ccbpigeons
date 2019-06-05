@@ -5,7 +5,6 @@ import Layout from "./components/Layout.js";
 import { LoginPage } from "./components/login.js";
 
 // import { AdminPage } from "./components/admin/Admin.js";
-import { AdminPage2 } from "./components/admin2/Admin2.js";
 import { AdminPage } from "./components/admin/Admin";
 
 class App extends Component {
@@ -16,7 +15,6 @@ class App extends Component {
         <Switch>
           <Route path="/login" component={LoginPage} />
           <Route path="/admin" component={AdminPage} />
-          <Route path="/admin2" component={AdminPage2} />
           <Route path={process.env.PUBLIC_URL + "/"} component={Layout} />
           <Route path="/home" component={Layout} />
           <Route path="/sobre" component={Layout} />
