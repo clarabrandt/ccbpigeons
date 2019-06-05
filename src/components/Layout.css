@@ -5,6 +5,9 @@
   overflow: scroll;
   background-color: #f4f4f4;
 }
+.layout-top {
+  width: 100%;
+}
 .layout-content {
   display: flex;
 }

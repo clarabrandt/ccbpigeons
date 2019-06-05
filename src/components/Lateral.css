@@ -18,7 +18,7 @@
   font-weight: 600;
   cursor: pointer;
 }
-.competitios-pics--title {
+.competitions-pics--title {
   font-size: 24px;
   color: rgb(10, 10, 134);
   text-align: left;
@@ -63,7 +63,7 @@
   text-align: left;
 }
 
-.artigos-titulo {
+.artigos-title {
   font-size: 24px;
   color: rgb(10, 10, 134);
   text-align: left;
@@ -88,12 +88,15 @@
   .anuncios-content-- {
     margin: 10px 0;
   }
-  .artigos-titulo {
+  .artigos-title {
     font-size: 18px;
     padding: 0;
   }
-  .post-title{
-    padding: 0;
+  .artigos-conteudo--title{
+    padding-top: 20px;
+  }
+  .competitions-pics--title {
+    font-size: 18px;
   }
 }
 
@@ -101,6 +104,7 @@
   .lateral {
     margin: 0;
     max-width: 100%;
+    
   }
   .anuncios-content-- {
     margin: 10px 0;
@@ -108,14 +112,17 @@
   .anuncios-content {
     padding: 20px 0;
   }
-  .artigos-titulo {
+  .artigos-title {
     font-size: 18px;
   }
   .anuncios-title {
     font-size: 18px;
     padding: 0;
   }
-  .post-title{
-    padding: 0;
+  .artigos-conteudo--title{
+    padding-top: 20px;
+  }
+  .competitions-pics--title {
+    font-size: 18px;
   }
 }

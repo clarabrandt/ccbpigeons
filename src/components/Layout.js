@@ -150,7 +150,7 @@ class Layout extends Component {
   onScroll() {
     const isTop =
       this.layout.current.scrollTop === null ||
-      this.layout.current.scrollTop <= 0
+        this.layout.current.scrollTop <= 0
         ? false
         : true;
     this.setState({
@@ -178,8 +178,8 @@ class Layout extends Component {
         ref={this.layout}
         onScroll={this.onScroll}
       >
-        <div className="essa_div" width="100%" height="100%">
-          <div className="essa_div" ref={this.top} width="100%" />
+        <div className="layout-top" width="100%" height="100%">
+          <div className="layout-top" ref={this.top} width="100%" />
 
           <Banner
             handleClick={this.handleClick}
