@@ -1,0 +1,36 @@
+.box {
+  display: flex;
+  margin: 0 80px;
+}
+  .box-layout {
+    font-size: 3em;
+    text-align: left;
+    padding: 70px 70px 50px 80px;
+    color:#444649;
+    text-decoration: underline;
+  }
+    .box-title{
+
+    }
+    .box-content{
+
+    }
+      .box-content--left{
+
+      }
+        .box-subtitle--left{
+
+        }
+        .box-inside--left {
+
+        }
+      .box-content--right{
+
+      }
+        .box-subtitle--right{
+
+        }
+        .box-inside--ight {
+        
+        }
+      

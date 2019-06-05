@@ -9,7 +9,7 @@
   color: darkblue;
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 620px) {
   .title{
     align-self: center;
     font-size: 40px;

@@ -1,0 +1,128 @@
+.lateral {
+  display: flex;
+  height: calc(100% - 140px);
+  background-color: white;
+  margin-bottom: 140px;
+}
+.lateral-content {
+  display: flex;
+  flex-direction: column;
+}
+.competitions-images {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  text-align: center;
+  /* color: rgb(10, 10, 134); */
+  padding: 30px 20px 20px 30px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.competitions-pics--title {
+  font-size: 24px;
+  color: rgb(10, 10, 134);
+  text-align: left;
+  padding-bottom: 20px;
+}
+.pigeon--pic {
+  max-height: 100px;
+  max-width: 100px;
+}
+
+.anuncios {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  flex: 0.7;
+  padding: 70px 30px 20px 30px;
+}
+
+.anuncios-title {
+  font-size: 24px;
+  color: rgb(10, 10, 134);
+  padding: 0 30px 30px 0;
+  font-weight: 600;
+}
+
+.anuncios-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.anuncios-content-- {
+  border: 1px solid black;
+  height: 20vh;
+  margin: 40px 0;
+}
+
+.artigos {
+  background-color: white;
+  flex: 1;
+  padding: 30px 20px 20px 30px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.artigos-title {
+  font-size: 24px;
+  color: rgb(10, 10, 134);
+  text-align: left;
+  padding-bottom: 20px;
+}
+.artigos-conteudo {
+  border-bottom: 0.5px solid lightgrey;
+  padding-bottom: 20px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 620px) {
+  .lateral {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .anuncios-content {
+    padding: 20px 0;
+  }
+  .anuncios-content-- {
+    margin: 10px 0;
+  }
+  .artigos-title {
+    font-size: 18px;
+    padding: 0;
+  }
+  .artigos-conteudo--title{
+    padding-top: 20px;
+  }
+  .competitions-pics--title {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .lateral {
+    margin: 0;
+    max-width: 100%;
+    
+  }
+  .anuncios-content-- {
+    margin: 10px 0;
+  }
+  .anuncios-content {
+    padding: 20px 0;
+  }
+  .artigos-title {
+    font-size: 18px;
+  }
+  .anuncios-title {
+    font-size: 18px;
+    padding: 0;
+  }
+  .artigos-conteudo--title{
+    padding-top: 20px;
+  }
+  .competitions-pics--title {
+    font-size: 18px;
+  }
+}
