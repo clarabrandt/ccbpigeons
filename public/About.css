@@ -86,7 +86,6 @@
 }
     @media only screen and (max-width: 780px) {
   .about {
-    
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;

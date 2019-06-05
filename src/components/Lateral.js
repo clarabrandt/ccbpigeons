@@ -41,22 +41,22 @@ export default class Lateral extends Component {
       <div className="lateral">
         <div className="lateral-content">
           <div className="artigos">
-            <div className="artigos-titulo"> Artigos </div>
+            <div className="artigos-title"> Artigos </div>
             {this.state.artigos.map((res, index) => {
               return (
                 <div key={index} className="artigos-conteudo">
-                  <div className="post-title">{res.title} </div>
+                  <div className="artigos-conteudo--title">{res.title} </div>
                 </div>
               );
             })}
           </div>
           <div className="competitions-images">
-            <div className="competitios-pics--title "> Fotos </div>
+            <div className="competitions-pics--title "> Fotos </div>
 
             {this.state.fotos.map((res, index) => {
               return (
                 <div key={index} className="pics-content">
-                  <div className="post-title">{res.foto} </div>
+                  <div className="artigos-conteudo--title">{res.foto} </div>
                 </div>
               );
             })}
