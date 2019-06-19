@@ -20,6 +20,7 @@ import "./style.css";
 const styles = theme => ({
   root: {
     display: 'flex',
+    width: '100%',
   },
 
   title: {
@@ -40,11 +41,12 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    width: '100%',
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
+    width: '100%',
   },
   dense: {
     marginTop: 19,
@@ -244,11 +246,14 @@ class Blog extends Component {
           />
 
           <TextField
-            id="standard-name"
+            id="standard-multiline-flexible"
             label="Conteudo"
             placeholder="texto"
             value={conteudo}
             onChange={this.handleChange('conteudo')}
+            margin="normal"
+            multiline
+            rowsMax="6000"
           />
           <div className="buttons">
             <Button type="button" onClick={this.closeForm}>

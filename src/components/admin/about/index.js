@@ -16,6 +16,7 @@ import List from '@material-ui/core/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography'
 
 
 const styles = theme => ({
@@ -42,7 +43,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
+    width: '100%',
   },
   dense: {
     marginTop: 19,
@@ -209,12 +210,14 @@ class About extends Component {
         <div className='postData-container'>
           <div>Nova informação sobre o CCB Pigeons</div>
           <TextField
-            id="standard-name"
+            id="standard-multiline-flexible"
             label="Conteúdo"
             className={classes.textField}
             value={editConteudo}
             onChange={this.handleChange('sobre')}
             margin="normal"
+            multiline
+            rowsMax="6000"
           />
           <div className="buttons">
             <Button type="button" onClick={this.closeForm}>
