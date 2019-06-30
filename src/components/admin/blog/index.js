@@ -15,6 +15,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
+import { Editor } from 'react-draft-wysiwyg';
+import { EditorState } from 'draft-js';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./style.css";
 
 const styles = theme => ({
@@ -64,12 +67,12 @@ class Blog extends Component {
     this.state = {
       titulo: "",
       date: "",
-      conteudo: "",
       items: {},
       opcao: null,
       clicado: null,
       resposta: null,
-      show: true
+      show: true,
+      conteudo: '',
     };
 
     this.storageRef = props.firebase.storage.ref();
@@ -199,6 +202,12 @@ class Blog extends Component {
     });
   }
 
+  onEditorStateChange(conteudo) {
+    this.setState({
+      conteudo,
+    });
+  }
+
   closeForm(e) {
     e.preventDefault();
     this.setState({
@@ -220,7 +229,7 @@ class Blog extends Component {
     const { classes } = this.props;
     const { titulo } = this.state;
     const { date } = this.state;
-    const { conteudo } = this.state;
+    // const { conteudo } = this.state;
     const { clicado } = this.state;
 
     return (
@@ -245,7 +254,7 @@ class Blog extends Component {
             margin="normal"
           />
 
-          <TextField
+          { /*<TextField
             id="standard-multiline-flexible"
             label="Conteudo"
             placeholder="texto"
@@ -254,6 +263,18 @@ class Blog extends Component {
             margin="normal"
             multiline
             rowsMax="6000"
+          />*/ }
+          <Editor
+            wrapperClassName="wrapper-class"
+            editorClassName="editor-class"
+            toolbarClassName="toolbar-class"
+            toolbar={{
+              inline: { inDropdown: true },
+              list: { inDropdown: true },
+              textAlign: { inDropdown: true },
+              link: { inDropdown: true },
+              history: { inDropdown: true },
+            }}
           />
           <div className="buttons">
             <Button type="button" onClick={this.closeForm}>
