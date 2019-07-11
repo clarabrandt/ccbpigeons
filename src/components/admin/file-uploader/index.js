@@ -40,9 +40,10 @@ class FileUploader extends Component {
     //If at least one file is selected, start the upload.
     if (this.fileSelector.current.files.length > 0) {
       const { files } = this.fileSelector.current;
+      this.props.setLocalFiles(files);
       Object.keys(files).map(i => {
         const file = files[i];
-        this.props.updateSubitem(i, file);
+        // this.props.updateFiles(i, file);
         this.uploadFile(i, file);
       });
     }
@@ -64,30 +65,33 @@ class FileUploader extends Component {
   }
 
   uploadFile(i, file) {
-    const { directory, component } = this.props;
-    let { name, ...metadata } = file;
-    const subpath = directory ? `${directory}/${name}` : `${name}`;
-    const newFileRef = this.storageRef.child(`${component}/${subpath}`);
-    const uploadTask = newFileRef.put(file, { customMetadata: metadata });
+    const { component } = this.props;
+    let { name, lastModified, lastModifiedDate, size, type, webkitRelativePath } = file;
+    const metadata = {
+      lastModified,
+      ...lastModifiedDate,
+      size,
+      type,
+      webkitRelativePath
+    }
 
-    //Upload the file to cloud storage
+    const newFileRef = this.storageRef.child(`${component}/${name}`);
+    const uploadTask = newFileRef.put(file, metadata);
+
     uploadTask.on(
       "state_changed",
       snapshot => {
         console.log("snapshot", snapshot);
-        this.props.updateSubitem(i, file, false, snapshot);
       },
       error => {
         console.error("Error while uploading new file", error);
       },
       () => {
         const url = uploadTask.snapshot.metadata;
-        this.createDBRecord({ name: url.name, url: url.fullPath })
+        this.createDBRecord({ name: url.name, url: url.fullPath, size, type })
           .then(response => response.json())
           .then(json => {
-            console.log("json --> ", json);
-            this.props.updateSubitem(json.id, file, true);
-            this.props.displayDetails(json.id);
+            this.props.updateFiles(json.id, file, url.fullPath, size, type);
           });
       }
     );
@@ -96,7 +100,7 @@ class FileUploader extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <label htmlFor="outlined-button-file">
+      <label htmlFor="raised-button-file">
         <input
           id="raised-button-file"
           style={{ display: "none" }}
