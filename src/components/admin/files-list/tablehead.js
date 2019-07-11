@@ -18,7 +18,7 @@ function EnhancedTableHead(props) {
     numSelected,
     rowCount,
     onRequestSort,
-    headRows,
+    fileListColumns,
   } = props;
   const createSortHandler = property => event => {
     onRequestSort(event, property);
@@ -35,7 +35,7 @@ function EnhancedTableHead(props) {
             inputProps={{ "aria-label": "Select all desserts" }}
           />
         </TableCell>
-        {headRows.map(row => (
+        {fileListColumns.map(row => (
           <TableCell
             key={row.id}
             align={row.numeric ? "right" : "left"}
@@ -44,7 +44,7 @@ function EnhancedTableHead(props) {
           >
             <TableSortLabel
               active={orderBy === row.id}
-              direction={order}
+              direction={'asc'}
               onClick={createSortHandler(row.id)}
             >
               {row.label}

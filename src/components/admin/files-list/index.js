@@ -134,19 +134,22 @@ class FilesList extends Component {
         // this.uploadFile(i, file);
       });
     }
+  };
+
+  handleRowClick = (e, file) => {
+    console.log(e, file);
   }
 
-  renderTableRow = (file) => {
-    const { classes } = this.props;
+  renderTableRow = file => {
+    const { classes, fileListColumns } = this.props;
     return (
       <TableRow
         className={classes.row}
         hover
-        // onClick={event => handleClick(event, row.name)}
+        onClick={event => this.handleRowClick(event, file)}
         role="checkbox"
         aria-checked={true}
         tabIndex={-1}
-        // key={row.name}
         // selected={isItemSelected}
       >
         <TableCell className={classes.cell} padding="checkbox">
@@ -155,7 +158,16 @@ class FilesList extends Component {
           // inputProps={{ 'aria-labelledby': labelId }}
           />
         </TableCell>
-        <TableCell
+        {
+          fileListColumns.map((column) => {
+            return (
+              <TableCell key={column.id} className={classes.cell} align={column.align}>
+                {file[column.id]}
+              </TableCell>
+            );
+          })
+        }
+        {/* <TableCell
           className={classes.cell}
           component="th"
           id={123}
@@ -172,13 +184,13 @@ class FilesList extends Component {
         </TableCell>
         <TableCell className={classes.cell} align="right">
           {file.type}
-        </TableCell>
+        </TableCell> */}
       </TableRow>
     );
-  }
+  };
 
   render = () => {
-    const { classes, files, localFiles, headRows } = this.props;
+    const { classes, files, localFiles, fileListColumns } = this.props;
     const { order, orderBy, selected } = this.state;
 
     return (
@@ -218,7 +230,7 @@ class FilesList extends Component {
             onSelectAllClick={this.handleSelectAllClick}
             onRequestSort={this.handleRequestSort}
             rowCount={files.length}
-            headRows={headRows}
+            fileListColumns={fileListColumns}
           />
 
           <TableBody>
@@ -230,7 +242,7 @@ class FilesList extends Component {
         </Table>
       </Card>
     );
-  }
+  };
 }
 
 const FilesListComponent = compose(

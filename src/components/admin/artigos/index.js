@@ -23,16 +23,11 @@ const styles = theme => ({
   },
 });
 
-const headRows = [
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: true,
-    label: "Nome"
-  },
-  { id: "url", numeric: true, disablePadding: false, label: "Endereço" },
-  { id: "size", numeric: true, disablePadding: false, label: "Tamanho" },
-  { id: "type", numeric: true, disablePadding: false, label: "Tipo" }
+const fileListColumns = [
+  { id: "name", numeric: false, disablePadding: false, align: 'left' ,label: "Nome" },
+  { id: "url", numeric: true, disablePadding: false, align: 'right' ,label: "Endereço" },
+  { id: "size", numeric: true, disablePadding: false, align: 'right' ,label: "Tamanho" },
+  { id: "type", numeric: true, disablePadding: false, align: 'right' ,label: "Tipo" },
 ];
 
 
@@ -121,7 +116,7 @@ class Artigos extends Component {
             <h3>Current Files</h3>
             <FilesListComponent
               id={selecionado}
-              headRows={headRows}
+              fileListColumns={fileListColumns}
               title={(selecionado && files[selecionado].name) || ""}
               files={files}
               deleteFile={this.deleteFile}
