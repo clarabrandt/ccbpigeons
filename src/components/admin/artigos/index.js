@@ -4,7 +4,6 @@ import { compose } from "recompose";
 import { withFirebase } from "../../firebase";
 import withRoot from "../../../withRoot";
 import { withStyles } from '@material-ui/core/styles';
-import LinearProgress from "@material-ui/core/LinearProgress";
 import { FilesListComponent } from "../files-list";
 
 const styles = theme => ({
@@ -52,32 +51,39 @@ class Artigos extends Component {
     this.removeLocalFile = this.removeLocalFile.bind(this);
   }
 
+  /**
+   * Component lifecycle
+   */
   componentDidMount() {
-    this.fetchArquivos()
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          files: data.artigos,
-          fetching: false
-        });
-      });
+    this.fetchArquivos();
   }
 
-  updateFiles(id, file, url, type, size) {
-    console.log(file);
+  /**
+   * File uploader callbacks
+   */
+
+  updateFiles(id, progress, url) {
+    console.log(id, progress);
     this.setState({
-      files: {
-        ...this.state.files,
-        [id]: { name: file.name, url, type, size }
+      localFiles: {
+        ...this.state.localFiles,
+        [id]: { 
+          ...this.state.localFiles[id],
+          progress,
+          url,
+        },
       }
     });
   }
 
   setLocalFiles(selectedFiles) {
     const localFiles = {};
+    console.log("selectedFiles", selectedFiles);
     Object.keys(selectedFiles).map(i => {
       const file = selectedFiles[i];
-      localFiles[i] = file;
+      localFiles[i] = {};
+      localFiles[i]['file'] = file;
+      localFiles[i]['progress'] = 0;
     });
     this.setState({
       localFiles
@@ -100,7 +106,14 @@ class Artigos extends Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       }
-    });
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          files: data.artigos,
+          fetching: false
+        });
+      }); 
   }
 
   render() {
@@ -116,11 +129,13 @@ class Artigos extends Component {
             <h3>Current Files</h3>
             <FilesListComponent
               id={selecionado}
-              fileListColumns={fileListColumns}
+              component={'artigos'}
               title={(selecionado && files[selecionado].name) || ""}
+              fileListColumns={fileListColumns}
               files={files}
               deleteFile={this.deleteFile}
               setLocalFiles={this.setLocalFiles}
+              updateFiles={this.updateFiles}
               localFiles={localFiles}
             />
           </Fragment>
@@ -128,7 +143,6 @@ class Artigos extends Component {
         {Object.keys(localFiles).length > 0 && (
           <Fragment>
             {`Uploading ${Object.keys(localFiles).length} files`}
-            <LinearProgress />
           </Fragment>
         )}
       </Fragment>

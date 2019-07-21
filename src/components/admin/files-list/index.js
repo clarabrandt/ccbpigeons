@@ -5,7 +5,6 @@ import { withFirebase } from "../../firebase";
 import withRoot from "../../../withRoot";
 import { withStyles } from '@material-ui/core/styles';
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -15,6 +14,9 @@ import EnhancedTableHead from './tablehead';
 import Button from "@material-ui/core/Button";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import CardContent from "@material-ui/core/CardContent";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import Drawer from "@material-ui/core/Drawer";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 
 const styles = theme => ({
@@ -62,10 +64,12 @@ class FilesList extends Component {
     this.state = {
       order: "name",
       orderBy: "",
-      selected: []
+      selected: [],
+      showDetails: false,
     };
     this.storageRef = props.firebase.storage.ref();
     this.fileSelector = React.createRef();
+    this.filesTable = React.createRef();
     this.deleteFile = this.deleteFile.bind(this);
   }
 
@@ -130,15 +134,66 @@ class FilesList extends Component {
       Object.keys(files).map(i => {
         const file = files[i];
         console.log(file);
-        // this.props.updateFiles(i, file);
-        // this.uploadFile(i, file);
+        this.uploadFile(i, file);
       });
     }
   };
 
-  handleRowClick = (e, file) => {
-    console.log(e, file);
+  uploadFile(i, file) {
+    const { component } = this.props;
+    let { name, lastModified, lastModifiedDate, size, type, webkitRelativePath } = file;
+    const metadata = {
+      lastModified,
+      ...lastModifiedDate,
+      size,
+      type,
+      webkitRelativePath
+    }
+
+    const newFileRef = this.storageRef.child(`${component}/${name}`);
+    const uploadTask = newFileRef.put(file, metadata);
+
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress = snapshot.bytesTransferred / snapshot.totalBytes;
+        this.props.updateFiles(i, progress);
+      },
+      error => {
+        console.error("Error while uploading new file", error);
+      },
+      () => {
+        const url = uploadTask.snapshot.metadata;
+        this.createDBRecord({ name: url.name, url: url.fullPath, size, type })
+          .then(response => response.json())
+          .then(json => {
+            this.props.updateFiles(i, 1, url.fullPath);
+          });
+      }
+    );
   }
+
+  createDBRecord(newDBrecord) {
+    const { directory, component } = this.props;
+    const endpoint = `${this.baseUrl}${component}/${
+      directory ? directory : ""
+      }`;
+    return fetch(endpoint, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newDBrecord)
+    });
+  }
+
+  handleRowClick = (e, file) => {
+    // this.toggleDrawer('right', false)
+     this.setState({
+       showDetails: !this.state.showDetails,
+     });
+  };
 
   renderTableRow = file => {
     const { classes, fileListColumns } = this.props;
@@ -158,33 +213,24 @@ class FilesList extends Component {
           // inputProps={{ 'aria-labelledby': labelId }}
           />
         </TableCell>
-        {
-          fileListColumns.map((column) => {
-            return (
-              <TableCell key={column.id} className={classes.cell} align={column.align}>
-                {file[column.id]}
-              </TableCell>
-            );
-          })
-        }
-        {/* <TableCell
-          className={classes.cell}
-          component="th"
-          id={123}
-          scope="cell"
-          padding="none"
-        >
-          {file.name}
-        </TableCell>
-        <TableCell className={classes.cell} align="right">
-          {file.url}
-        </TableCell>
-        <TableCell className={classes.cell} align="right">
-          {file.size}
-        </TableCell>
-        <TableCell className={classes.cell} align="right">
-          {file.type}
-        </TableCell> */}
+        {fileListColumns.map(column => {
+          return (
+            <TableCell
+              key={column.id}
+              className={classes.cell}
+              align={column.align}
+            >
+              {
+                console.log("file --> ", file)
+              }
+              {
+                column.id === 'url' && file.progress > 0 && file.progress < 1 ?
+                  <LinearProgress variant="determinate" value={file.progress * 100} /> :
+                  file.file[column.id] || file.url
+              }
+            </TableCell>
+          );
+        })}
       </TableRow>
     );
   };
@@ -222,6 +268,7 @@ class FilesList extends Component {
           className={classes.table}
           aria-labelledby="tableTitle"
           size="medium"
+          ref={this.filesTable}
         >
           <EnhancedTableHead
             numSelected={selected.length}
@@ -234,12 +281,18 @@ class FilesList extends Component {
           />
 
           <TableBody>
-            {Object.keys(localFiles).map(key =>
-              this.renderTableRow(localFiles[key])
-            )}
-            {Object.keys(files).map(key => this.renderTableRow(files[key]))}
+            {console.log("Object.keys(localFiles).length", Object.keys(localFiles).length)}
+            {
+              Object.keys(localFiles).length > 0 &&
+                Object.keys(localFiles).map(key =>
+                  this.renderTableRow(localFiles[key])
+                )}
+            {
+              Object.keys(files).map(key => this.renderTableRow({file: files[key]}))
+            }
           </TableBody>
         </Table>
+        {/* Details panel comes here */}
       </Card>
     );
   };
