@@ -13,6 +13,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import EnhancedTableHead from './tablehead';
 import Button from "@material-ui/core/Button";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import ImageIcon from "@material-ui/icons/Image";
 import CardContent from "@material-ui/core/CardContent";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import Drawer from "@material-ui/core/Drawer";
@@ -195,8 +196,28 @@ class FilesList extends Component {
      });
   };
 
+  renderTableCell = (column, file) => {
+    let result;
+    switch (column.id) {
+      case 'name':
+        result = <> <ImageIcon /> {file.file[column.id]} </>;
+        break;
+      case 'url':
+        if (file.progress > 0 && file.progress < 1){
+          result = <LinearProgress variant="determinate" value={file.progress * 100} />
+        }
+        result = file.file[column.id] || file.url
+        break;
+      default:
+        result = file.file[column.id]
+        break;
+    }
+    return result;
+  }
+
   renderTableRow = file => {
     const { classes, fileListColumns } = this.props;
+    console.log(file);
     return (
       <TableRow
         className={classes.row}
@@ -213,24 +234,19 @@ class FilesList extends Component {
           // inputProps={{ 'aria-labelledby': labelId }}
           />
         </TableCell>
-        {fileListColumns.map(column => {
-          return (
-            <TableCell
-              key={column.id}
-              className={classes.cell}
-              align={column.align}
-            >
-              {
-                console.log("file --> ", file)
-              }
-              {
-                column.id === 'url' && file.progress > 0 && file.progress < 1 ?
-                  <LinearProgress variant="determinate" value={file.progress * 100} /> :
-                  file.file[column.id] || file.url
-              }
-            </TableCell>
-          );
-        })}
+        {
+          fileListColumns.map(column => {
+            return (
+              <TableCell
+                key={column.id}
+                className={classes.cell}
+                align={column.align}
+              >
+                {this.renderTableCell(column, file)}
+              </TableCell>
+            );
+          })
+        }
       </TableRow>
     );
   };
@@ -264,34 +280,39 @@ class FilesList extends Component {
             </label>
           </label>
         </CardContent>
-        <Table
-          className={classes.table}
-          aria-labelledby="tableTitle"
-          size="medium"
-          ref={this.filesTable}
-        >
-          <EnhancedTableHead
-            numSelected={selected.length}
-            order={order}
-            orderBy={orderBy}
-            onSelectAllClick={this.handleSelectAllClick}
-            onRequestSort={this.handleRequestSort}
-            rowCount={files.length}
-            fileListColumns={fileListColumns}
-          />
+        <div>
+          <Table
+            className={classes.table}
+            aria-labelledby="tableTitle"
+            size="medium"
+            ref={this.filesTable}
+          >
+            <EnhancedTableHead
+              numSelected={selected.length}
+              order={order}
+              orderBy={orderBy}
+              onSelectAllClick={this.handleSelectAllClick}
+              onRequestSort={this.handleRequestSort}
+              rowCount={files.length}
+              fileListColumns={fileListColumns}
+            />
 
-          <TableBody>
-            {console.log("Object.keys(localFiles).length", Object.keys(localFiles).length)}
-            {
-              Object.keys(localFiles).length > 0 &&
-                Object.keys(localFiles).map(key =>
-                  this.renderTableRow(localFiles[key])
-                )}
-            {
-              Object.keys(files).map(key => this.renderTableRow({file: files[key]}))
-            }
-          </TableBody>
-        </Table>
+            <TableBody>
+              {console.log("Object.keys(localFiles).length", Object.keys(localFiles).length)}
+              {
+                Object.keys(localFiles).length > 0 &&
+                  Object.keys(localFiles).map(key =>
+                    this.renderTableRow(localFiles[key])
+                  )}
+              {
+                Object.keys(files).map(key => this.renderTableRow({file: files[key]}))
+              }
+            </TableBody>
+          </Table>
+          <div>
+            =)
+          </div>
+        </div>
         {/* Details panel comes here */}
       </Card>
     );

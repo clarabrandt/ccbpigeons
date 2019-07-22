@@ -24,6 +24,7 @@ const styles = theme => ({
 
 const fileListColumns = [
   { id: "name", numeric: false, disablePadding: false, align: 'left' ,label: "Nome" },
+  { id: "title", numeric: false, disablePadding: false, align: 'left' ,label: "Título" },
   { id: "url", numeric: true, disablePadding: false, align: 'right' ,label: "Endereço" },
   { id: "size", numeric: true, disablePadding: false, align: 'right' ,label: "Tamanho" },
   { id: "type", numeric: true, disablePadding: false, align: 'right' ,label: "Tipo" },

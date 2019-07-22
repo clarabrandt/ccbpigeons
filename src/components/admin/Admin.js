@@ -47,7 +47,7 @@ class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicked: "fotos",
+      clicked: "artigos",
       authUser: null,
       fetchingAuth: true,
       open: false,
