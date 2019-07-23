@@ -63,18 +63,32 @@ class Artigos extends Component {
    * File uploader callbacks
    */
 
-  updateFiles(id, progress, url) {
-    console.log(id, progress);
-    this.setState({
-      localFiles: {
-        ...this.state.localFiles,
-        [id]: { 
-          ...this.state.localFiles[id],
-          progress,
-          url,
+  updateFiles(id, progress, newFileID, newFile = {}) {
+    const { localFiles, files } = this.state;
+    const { url } = newFile;
+
+    if (progress === 1 && newFileID) {
+      this.setState(
+        {
+          files: {
+            ...files,
+            [newFileID]: newFile
+          }
         },
-      }
-    });
+        () => this.removeLocalFile(id)
+      );
+    } else {
+      this.setState({
+        localFiles: {
+          ...localFiles,
+          [id]: {
+            ...localFiles[id],
+            progress,
+            url
+          }
+        }
+      });
+    }
   }
 
   setLocalFiles(selectedFiles) {
@@ -83,8 +97,8 @@ class Artigos extends Component {
     Object.keys(selectedFiles).map(i => {
       const file = selectedFiles[i];
       localFiles[i] = {};
-      localFiles[i]['file'] = file;
-      localFiles[i]['progress'] = 0;
+      localFiles[i]["file"] = file;
+      localFiles[i]["progress"] = 0;
     });
     this.setState({
       localFiles
@@ -114,7 +128,7 @@ class Artigos extends Component {
           files: data.artigos,
           fetching: false
         });
-      }); 
+      });
   }
 
   render() {
@@ -122,25 +136,22 @@ class Artigos extends Component {
 
     return (
       <Fragment>
-        {!fetching && Object.keys(files).length < 1 && (
-          <div>Esse evento ainda não possui arquivos cadastrados</div>
-        )}
-        {!fetching && Object.keys(files).length > 0 && (
-          <Fragment>
-            <h3>Current Files</h3>
-            <FilesListComponent
-              id={selecionado}
-              component={'artigos'}
-              title={(selecionado && files[selecionado].name) || ""}
-              fileListColumns={fileListColumns}
-              files={files}
-              deleteFile={this.deleteFile}
-              setLocalFiles={this.setLocalFiles}
-              updateFiles={this.updateFiles}
-              localFiles={localFiles}
-            />
-          </Fragment>
-        )}
+        {/* {!fetching && Object.keys(files).length > 0 && ( */}
+        <Fragment>
+          <h3>Current Files</h3>
+          <FilesListComponent
+            id={selecionado}
+            component={"artigos"}
+            title={(selecionado && files[selecionado].name) || ""}
+            fileListColumns={fileListColumns}
+            files={files}
+            deleteFile={this.deleteFile}
+            setLocalFiles={this.setLocalFiles}
+            updateFiles={this.updateFiles}
+            localFiles={localFiles}
+          />
+        </Fragment>
+        {/* )} */}
         {Object.keys(localFiles).length > 0 && (
           <Fragment>
             {`Uploading ${Object.keys(localFiles).length} files`}

@@ -15,8 +15,7 @@ import Button from "@material-ui/core/Button";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import ImageIcon from "@material-ui/icons/Image";
 import CardContent from "@material-ui/core/CardContent";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import Drawer from "@material-ui/core/Drawer";
+import TextField from '@material-ui/core/TextField';
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 
@@ -165,10 +164,11 @@ class FilesList extends Component {
       },
       () => {
         const url = uploadTask.snapshot.metadata;
+        const newFile = { name: url.name, url: url.fullPath, size, type };
         this.createDBRecord({ name: url.name, url: url.fullPath, size, type })
           .then(response => response.json())
           .then(json => {
-            this.props.updateFiles(i, 1, url.fullPath);
+            this.props.updateFiles(i, 1, json.id, newFile);
           });
       }
     );
@@ -189,14 +189,34 @@ class FilesList extends Component {
     });
   }
 
+  updateDBRecord(payload) {
+    const { directory, component } = this.props;
+    const endpoint = `${this.baseUrl}${component}/${
+      directory ? directory : ""
+      }`;
+    return fetch(endpoint, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+  }
+
   handleRowClick = (e, file) => {
-    // this.toggleDrawer('right', false)
      this.setState({
        showDetails: !this.state.showDetails,
      });
   };
 
+  handleBlur = (e) => {
+    alert("B(l)uh")
+    this.updateDBRecord({id:123, title: e.target.value});
+  }
+
   renderTableCell = (column, file) => {
+    console.log("FILE", file)
     let result;
     switch (column.id) {
       case 'name':
@@ -208,6 +228,14 @@ class FilesList extends Component {
         }
         result = file.file[column.id] || file.url
         break;
+      case 'title':
+        result = <TextField
+          id="standard-name"
+          value={file.file.title}
+          onBlur={(e) => this.handleBlur(file.file.id)}
+          margin="normal"
+        />
+        break;
       default:
         result = file.file[column.id]
         break;
@@ -217,7 +245,6 @@ class FilesList extends Component {
 
   renderTableRow = file => {
     const { classes, fileListColumns } = this.props;
-    console.log(file);
     return (
       <TableRow
         className={classes.row}
@@ -242,7 +269,9 @@ class FilesList extends Component {
                 className={classes.cell}
                 align={column.align}
               >
-                {this.renderTableCell(column, file)}
+                {
+                  file.file && this.renderTableCell(column, file)
+                }
               </TableCell>
             );
           })
@@ -298,7 +327,6 @@ class FilesList extends Component {
             />
 
             <TableBody>
-              {console.log("Object.keys(localFiles).length", Object.keys(localFiles).length)}
               {
                 Object.keys(localFiles).length > 0 &&
                   Object.keys(localFiles).map(key =>
@@ -309,9 +337,12 @@ class FilesList extends Component {
               }
             </TableBody>
           </Table>
-          <div>
-            =)
-          </div>
+
+          {
+            Object.keys(files).length < 1 && (
+              <div>Esse evento ainda não possui arquivos cadastrados</div>
+            )
+          }
         </div>
         {/* Details panel comes here */}
       </Card>
