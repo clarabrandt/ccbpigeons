@@ -52,7 +52,7 @@ class FileUploader extends Component {
     const { directory, component } = this.props;
     const endpoint = `${this.baseUrl}${component}/${
       directory ? directory : ""
-    }`;
+      }`;
     return fetch(endpoint, {
       method: "POST",
       headers: {
@@ -64,7 +64,7 @@ class FileUploader extends Component {
   }
 
   uploadFile(i, file) {
-    const { directory, component } = this.props;
+    const { directory, component, immediateUpload = true } = this.props;
     let { name, ...metadata } = file;
     const subpath = directory ? `${directory}/${name}` : `${name}`;
     const newFileRef = this.storageRef.child(`${component}/${subpath}`);
@@ -82,13 +82,16 @@ class FileUploader extends Component {
       },
       () => {
         const url = uploadTask.snapshot.metadata;
-        this.createDBRecord({ name: url.name, url: url.fullPath })
-          .then(response => response.json())
-          .then(json => {
-            console.log("json --> ", json);
-            this.props.updateSubitem(json.id, file, true);
-            this.props.displayDetails(json.id);
-          });
+        immediateUpload ?
+          this.createDBRecord({ name: url.name, url: url.fullPath })
+            .then(response => response.json())
+            .then(json => {
+              console.log("json --> ", json);
+              // this.props.updateSubitem(json.id, file, true);
+              this.props.displayDetails(json.id);
+            })
+          :
+          console.log("HOI OI")
       }
     );
   }

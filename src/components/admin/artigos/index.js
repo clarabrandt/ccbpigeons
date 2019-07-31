@@ -5,6 +5,8 @@ import { withFirebase } from "../../firebase";
 import withRoot from "../../../withRoot";
 import { withStyles } from '@material-ui/core/styles';
 import PanelComponent from '../panel';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import { FileUploaderComponent } from '../file-uploader';
 
 const styles = theme => ({
@@ -29,6 +31,7 @@ class Artigos extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: "",
       items: {},
       subitems: {},
       snapshot: {},
@@ -43,6 +46,7 @@ class Artigos extends Component {
     this.displayDetails = this.displayDetails.bind(this);
     this.fetchArquivos = this.fetchArquivos.bind(this);
     this.updateSubitem = this.updateSubitem.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -106,20 +110,37 @@ class Artigos extends Component {
       }
     });
   }
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
+  };
 
   render() {
     const { classes } = this.props;
-    const { items, selecionado } = this.state;
+    const { items, selecionado, title } = this.state;
     return (
+
       <PanelComponent title="Artigos">
+        <form className={classes.container} noValidate autoComplete="off">
+          <div className='postData-container'>
+            <TextField
+              id="standard-name"
+              label="Título"
+              className={classes.textField}
+              value={title}
+              onChange={this.handleChange('title')}
+              margin="normal"
+            />
+          </div>
+        </form>
         <Fragment>
           <div className={classes.tableContainer}>
-            <FileUploaderComponent 
-              component="artigos" 
-              directory={selecionado} 
-              evento={items[selecionado]} 
-              updateSubitem={this.updateSubitem} 
+            <FileUploaderComponent
+              component="artigos"
+              directory={selecionado}
+              evento={items[selecionado]}
+              updateSubitem={this.updateSubitem}
               displayDetails={this.displayDetails}
+              immediateUpload={false}
             />
           </div>
         </Fragment>
