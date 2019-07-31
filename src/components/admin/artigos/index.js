@@ -4,10 +4,7 @@ import { compose } from "recompose";
 import { withFirebase } from "../../firebase";
 import withRoot from "../../../withRoot";
 import { withStyles } from '@material-ui/core/styles';
-import PanelComponent from '../panel';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import { FileUploaderComponent } from '../file-uploader';
+import { FilesListComponent } from "../files-list";
 
 const styles = theme => ({
   tableContainer: {
@@ -25,45 +22,97 @@ const styles = theme => ({
   },
 });
 
+const fileListColumns = [
+  { id: "name", numeric: false, disablePadding: false, align: 'left', label: "Nome" },
+  { id: "title", numeric: false, disablePadding: false, align: 'left', label: "Título" },
+  { id: "url", numeric: true, disablePadding: false, align: 'right', label: "Endereço" },
+  { id: "size", numeric: true, disablePadding: false, align: 'right', label: "Tamanho" },
+  { id: "type", numeric: true, disablePadding: false, align: 'right', label: "Tipo" },
+];
+
+
 class Artigos extends Component {
   baseUrl = "https://us-central1-pigeon-90548.cloudfunctions.net/api/";
 
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      items: {},
-      subitems: {},
-      snapshot: {},
-      selecionado: null,
-      open: false,
       files: {},
-      newSection: null,
+      localFiles: {},
+      snapshot: {},
+      open: false,
       fetching: true,
+      selecionado: null
     };
 
     this.storageRef = props.firebase.storage.ref();
-    this.displayDetails = this.displayDetails.bind(this);
     this.fetchArquivos = this.fetchArquivos.bind(this);
-    this.updateSubitem = this.updateSubitem.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.updateFiles = this.updateFiles.bind(this);
+    this.setLocalFiles = this.setLocalFiles.bind(this);
+    this.removeLocalFile = this.removeLocalFile.bind(this);
   }
 
+  /**
+   * Component lifecycle
+   */
   componentDidMount() {
-    // this.fetchData()
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     this.setState(
-    //       {
-    //         items: data.artigos,
-    //         selecionado: Object.keys(data.artigos)[0]
-    //       },
-    //       this.displayDetails
-    //     );
-    //   });
+    this.fetchArquivos();
   }
 
-  fetchData() {
+  /**
+   * File uploader callbacks
+   */
+
+  updateFiles(id, progress, newFileID, newFile = {}) {
+    const { localFiles, files } = this.state;
+    const { url } = newFile;
+
+    const newState = (progress === 1 && newFileID) ? {
+      files: {
+        ...files,
+        [newFileID]: newFile
+      }
+    }
+      :
+      {
+        localFiles: {
+          ...localFiles,
+          [id]: {
+            ...localFiles[id],
+            progress,
+            url
+          }
+        }
+      };
+
+    const callback = () => (progress === 1 && newFileID) ? this.removeLocalFile(id) : null;
+
+    this.setState(newState, callback);
+  }
+
+  setLocalFiles(selectedFiles) {
+    const localFiles = {};
+    console.log("selectedFiles", selectedFiles);
+    Object.keys(selectedFiles).map(i => {
+      const file = selectedFiles[i];
+      localFiles[i] = {};
+      localFiles[i]["file"] = file;
+      localFiles[i]["progress"] = 0;
+    });
+    this.setState({
+      localFiles
+    });
+  }
+
+  removeLocalFile(index) {
+    const { localFiles } = this.state;
+    let { [index]: omit, ...res } = localFiles;
+    this.setState({
+      localFiles: res
+    });
+  }
+
+  fetchArquivos() {
     const endpoint = `${this.baseUrl}artigos`;
     return fetch(endpoint, {
       method: "GET",
@@ -71,81 +120,47 @@ class Artigos extends Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       }
-    });
-  }
-
-  displayDetails() {
-    this.fetchArquivos()
+    })
       .then(response => response.json())
-      .then(subitems => {
-        const result = {};
-        subitems.map(file => {
-          result[file.id] = file.data;
-        });
-
+      .then(data => {
         this.setState({
-          subitems: result,
-          fetching: false,
+          files: data.artigos,
+          fetching: false
         });
       });
-  }
-
-  updateSubitem(i, file, done = false, snapshot = {}) {
-    this.setState({
-      subitems: {
-        ...this.state.subitems,
-        [i]: { done, snapshot, name: file.name }
-      }
-    });
-  }
-
-  fetchArquivos() {
-    const { selecionado } = this.state;
-    const endpoint = `${this.baseUrl}artigos/${selecionado}`;
-    return fetch(endpoint, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    });
   }
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
 
   render() {
-    const { classes } = this.props;
-    const { items, selecionado, title } = this.state;
-    return (
+    const { files, localFiles, selecionado } = this.state;
 
-      <PanelComponent title="Artigos">
-        <form className={classes.container} noValidate autoComplete="off">
-          <div className='postData-container'>
-            <TextField
-              id="standard-name"
-              label="Título"
-              className={classes.textField}
-              value={title}
-              onChange={this.handleChange('title')}
-              margin="normal"
-            />
-          </div>
-        </form>
+    return (
+      <Fragment>
+        {/* {!fetching && Object.keys(files).length > 0 && ( */}
         <Fragment>
-          <div className={classes.tableContainer}>
-            <FileUploaderComponent
-              component="artigos"
-              directory={selecionado}
-              evento={items[selecionado]}
-              updateSubitem={this.updateSubitem}
-              displayDetails={this.displayDetails}
-              immediateUpload={false}
-            />
-          </div>
+          <h3>Current Files</h3>
+          <FilesListComponent
+            id={selecionado}
+            component={"artigos"}
+            title={(selecionado && files[selecionado].name) || ""}
+            fileListColumns={fileListColumns}
+            files={files}
+            deleteFile={this.deleteFile}
+            setLocalFiles={this.setLocalFiles}
+            updateFiles={this.updateFiles}
+            localFiles={localFiles}
+          />
         </Fragment>
-      </PanelComponent>
-    )
+        {/* )} */}
+        {Object.keys(localFiles).length > 0 && (
+          <Fragment>
+            {`Uploading ${Object.keys(localFiles).length} files`}
+          </Fragment>
+        )}
+      </Fragment>
+    );
   }
 }
 

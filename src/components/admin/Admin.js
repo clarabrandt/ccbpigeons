@@ -47,7 +47,7 @@ class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicked: "fotos",
+      clicked: "artigos",
       authUser: null,
       fetchingAuth: true,
       open: false,
@@ -93,32 +93,32 @@ class Admin extends Component {
         <Menu open={this.state.open} handleDrawerClose={this.handleDrawerClose} goToComponent={this.goToComponent} />
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Paper className={classes.paper}>
-            {
-              this.state.clicked === "sobre" &&
-              <AboutComponent />
-            }
-            {
-              this.state.clicked === "resultados" &&
-              <ResultadosComponent />
-            }
-            {
-              this.state.clicked === "blog" &&
-              <BlogComponent />
-            }
-            {
-              this.state.clicked === "midia" &&
-              <MidiaComponent />
-            }
-            {
-              this.state.clicked === "fotos" &&
-              <FotosComponent />
-            }
-            {
-              this.state.clicked === "artigos" &&
-              <ArtigosComponent />
-            }
-          </Paper>
+          {/* <Paper className={classes.paper}> */}
+          {
+            this.state.clicked === "sobre" &&
+            <AboutComponent />
+          }
+          {
+            this.state.clicked === "resultados" &&
+            <ResultadosComponent />
+          }
+          {
+            this.state.clicked === "blog" &&
+            <BlogComponent />
+          }
+          {
+            this.state.clicked === "midia" &&
+            <MidiaComponent />
+          }
+          {
+            this.state.clicked === "fotos" &&
+            <FotosComponent />
+          }
+          {
+            this.state.clicked === "artigos" &&
+            <ArtigosComponent />
+          }
+          {/* </Paper> */}
         </main>
       </div>
     )
