@@ -133,7 +133,6 @@ class FilesList extends Component {
       this.props.setLocalFiles(files);
       Object.keys(files).map(i => {
         const file = files[i];
-        console.log(file);
         this.uploadFile(i, file);
       });
     }
@@ -195,7 +194,7 @@ class FilesList extends Component {
       directory ? directory : ""
       }`;
     return fetch(endpoint, {
-      method: "POST",
+      method: "PUT",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -210,13 +209,11 @@ class FilesList extends Component {
      });
   };
 
-  handleBlur = (e) => {
-    alert("B(l)uh")
-    this.updateDBRecord({id:123, title: e.target.value});
+  handleBlur = (e, file, fileID) => {
+    this.updateDBRecord({ id: fileID, title: e.target.value });
   }
 
-  renderTableCell = (column, file) => {
-    console.log("FILE", file)
+  renderTableCell = (column, file, fileID) => {
     let result;
     switch (column.id) {
       case 'name':
@@ -232,7 +229,7 @@ class FilesList extends Component {
         result = <TextField
           id="standard-name"
           value={file.file.title}
-          onBlur={(e) => this.handleBlur(file.file.id)}
+          onBlur={(e) => this.handleBlur(e, file, fileID)}
           margin="normal"
         />
         break;
@@ -243,7 +240,7 @@ class FilesList extends Component {
     return result;
   }
 
-  renderTableRow = file => {
+  renderTableRow = (file, fileID = undefined) => {
     const { classes, fileListColumns } = this.props;
     return (
       <TableRow
@@ -270,7 +267,7 @@ class FilesList extends Component {
                 align={column.align}
               >
                 {
-                  file.file && this.renderTableCell(column, file)
+                  file.file && this.renderTableCell(column, file, fileID)
                 }
               </TableCell>
             );
@@ -333,7 +330,7 @@ class FilesList extends Component {
                     this.renderTableRow(localFiles[key])
                   )}
               {
-                Object.keys(files).map(key => this.renderTableRow({file: files[key]}))
+                Object.keys(files).map(key => this.renderTableRow({file: files[key]}, key))
               }
             </TableBody>
           </Table>

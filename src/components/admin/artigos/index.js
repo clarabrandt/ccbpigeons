@@ -67,28 +67,27 @@ class Artigos extends Component {
     const { localFiles, files } = this.state;
     const { url } = newFile;
 
-    if (progress === 1 && newFileID) {
-      this.setState(
-        {
-          files: {
-            ...files,
-            [newFileID]: newFile
-          }
-        },
-        () => this.removeLocalFile(id)
-      );
-    } else {
-      this.setState({
-        localFiles: {
-          ...localFiles,
-          [id]: {
-            ...localFiles[id],
-            progress,
-            url
-          }
-        }
-      });
+    const newState = (progress === 1 && newFileID) ? {
+      files: {
+        ...files,
+        [newFileID]: newFile
+      }
     }
+     :
+    {
+    localFiles: {
+      ...localFiles,
+      [id]: {
+        ...localFiles[id],
+        progress,
+        url
+      }
+    }
+  };
+
+    const callback = () => (progress === 1 && newFileID) ? this.removeLocalFile(id) : null;
+    
+    this.setState(newState, callback);
   }
 
   setLocalFiles(selectedFiles) {
@@ -132,7 +131,7 @@ class Artigos extends Component {
   }
 
   render() {
-    const { fetching, files, localFiles, selecionado } = this.state;
+    const { files, localFiles, selecionado } = this.state;
 
     return (
       <Fragment>
