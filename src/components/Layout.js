@@ -200,7 +200,7 @@ class Layout extends Component {
               <Midia midia={this.midia} api={this.api} />
             </div>
             <div className="layout-content-right">
-              <Lateral api={this.api} />
+              <Lateral api={this.api} artigos={this.artigos} />
             </div>
           </div>
           <Footer
