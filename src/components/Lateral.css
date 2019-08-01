@@ -25,6 +25,7 @@
   padding-bottom: 20px;
 }
 .pigeon--pic {
+  overflow:auto;
   max-height: 100px;
   max-width: 100px;
 }

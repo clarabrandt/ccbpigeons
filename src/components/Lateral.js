@@ -37,6 +37,7 @@ export default class Lateral extends Component {
 
   render() {
     const pigeon = require("./images/pombo-correio.jpg");
+    const { fotos } = this.state
 
     return (
       <div className="lateral">
@@ -57,18 +58,16 @@ export default class Lateral extends Component {
           <div className="competitions-images">
             <div className="competitions-pics--title "> Fotos </div>
 
-            {this.state.fotos.map((res, index) => {
+            {fotos.map((res, index) => {
               return (
                 <div key={index} className="pics-content">
-                  <div className="artigos-conteudo--title">{res.foto} </div>
+                  <img src={res.url} className="pigeon--pic" alt="foto" width='100px' height='100px' />
                 </div>
               );
+
             })}
 
-            <img src={pigeon} className="pigeon--pic" alt="" />
-            <img src={pigeon} className="pigeon--pic" alt="" />
-            <img src={pigeon} className="pigeon--pic" alt="" />
-            <img src={pigeon} className="pigeon--pic" alt="" />
+
           </div>
           <div className="anuncios">
             <div>
