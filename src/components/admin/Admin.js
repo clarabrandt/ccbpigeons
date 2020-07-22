@@ -70,8 +70,12 @@ class Admin extends Component {
   goToComponent(e) {
     e.preventDefault();
     e.stopPropagation()
+    console.log('e.target.id')
+    console.log(e.target.id)
+    console.log('e.currentTarget.id')
+    console.log(e.currentTarget.id)
     this.setState({
-      clicked: e.target.id
+      clicked: e.currentTarget.id
     });
   }
 

@@ -31,7 +31,7 @@ export default class Menu extends Component {
   render() {
     return (
 
-      <div className={`menu ${this.props.sticky ? 'sticky' : 'notSticky'}`} >
+      <div className={`menu ${this.props.sticky ? 'sticky' : 'notSticky'}`} sticky={this.props.sticky}>
         <div className={`menu--dropdown ${this.state.open ? 'open' : 'closed'}`} onClick={this.toggleMenu} >
           <MenuItem name='Home' anchor='home' handleClick={this.props.handleClick} />
           <MenuItem name='Sobre' anchor='sobre' handleClick={this.props.handleClick} />

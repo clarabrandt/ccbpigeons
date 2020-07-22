@@ -16,7 +16,10 @@ import TextField from '@material-ui/core/TextField';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import { Editor } from 'react-draft-wysiwyg';
-import { EditorState } from 'draft-js';
+import moment from 'moment';
+import {
+  DatePicker,
+} from '@material-ui/pickers';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./style.css";
 
@@ -66,7 +69,7 @@ class Blog extends Component {
     super(props);
     this.state = {
       titulo: "",
-      date: "",
+      date: new Date(),
       items: {},
       opcao: null,
       clicado: null,
@@ -156,8 +159,19 @@ class Blog extends Component {
       });
   }
 
+  handleDateChange = (date) => {
+    this.setState({ date: date });
+  };
+
   handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
+    console.log('handlechange');
+    console.log('name');
+    console.log(name);
+    console.log('event');
+    console.log(event);
+    this.setState({ 
+      [name]: event.target.value 
+    });
   };
 
   handleClick(e, key) {
@@ -229,7 +243,7 @@ class Blog extends Component {
     const { classes } = this.props;
     const { titulo } = this.state;
     const { date } = this.state;
-    // const { conteudo } = this.state;
+    const { conteudo } = this.state;
     const { clicado } = this.state;
 
     return (
@@ -244,17 +258,13 @@ class Blog extends Component {
             onChange={this.handleChange('titulo')}
             margin="normal"
           />
-          <TextField
-            id="standard-name"
-            type="date"
-            placeholder="dd/mm/yyyy"
-            className={classes.textField}
+          <DatePicker
             value={date}
-            onChange={this.handleChange('date')}
-            margin="normal"
+            onChange={this.handleDateChange}
+
           />
 
-          { /*<TextField
+          <TextField
             id="standard-multiline-flexible"
             label="Conteudo"
             placeholder="texto"
@@ -263,7 +273,7 @@ class Blog extends Component {
             margin="normal"
             multiline
             rowsMax="6000"
-          />*/ }
+          />
           <Editor
             wrapperClassName="wrapper-class"
             editorClassName="editor-class"

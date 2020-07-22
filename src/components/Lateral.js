@@ -49,7 +49,7 @@ export default class Lateral extends Component {
               return (
                 <div key={index} className="artigos-conteudo">
                   <div className="artigos-conteudo--title">
-                    <a target="_blank" rel="noopener noreferrer" href={file_url}>{res.name}</a>
+                    <a target="_blank" rel="noopener noreferrer" href={file_url}>{res.title}</a>
                   </div>
                 </div>
               );
@@ -59,9 +59,10 @@ export default class Lateral extends Component {
             <div className="competitions-pics--title "> Fotos </div>
 
             {fotos.map((res, index) => {
+              const file_url = `https://firebasestorage.googleapis.com/v0/b/pigeon-90548.appspot.com/o/${encodeURIComponent(res.url)}?alt=media`
               return (
                 <div key={index} className="pics-content">
-                  <img src={res.url} className="pigeon--pic" alt="foto" width='100px' height='100px' />
+                  <img src={file_url} className="pigeon--pic" alt="foto" width='100px' height='100px' />
                 </div>
               );
 
