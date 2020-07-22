@@ -11,6 +11,8 @@
 .postData-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  text-align: justify;
 }
 #titulo {
   width: 100%;

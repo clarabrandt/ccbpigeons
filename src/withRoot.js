@@ -1,9 +1,9 @@
 import React from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import * as locale from '@material-ui/core/locale';
 
 // A theme with custom primary and secondary color.
 // It's optional.
@@ -24,7 +24,7 @@ const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
   },
-});
+}, locale.ptBR);
 
 function withRoot(Component) {
   function WithRoot(props) {

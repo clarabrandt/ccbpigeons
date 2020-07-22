@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import moment from 'moment';
 import "./Blog.css";
 
 export default class Blog extends Component {
@@ -57,7 +58,7 @@ export default class Blog extends Component {
                       }`}
                   >
                     <div className="post-title--date">{res.titulo} </div>
-                    <div className="post-date--left">{res.date} </div>
+                    <div className="post-date--left">{moment(new Date(res.date)).format("DD/MM/YYYY")} </div>
                   </div>
                 );
               })}
@@ -71,7 +72,7 @@ export default class Blog extends Component {
                     onClick={this.toggleList}
                   >
                     <div className="post-title">{res.titulo} </div>
-                    <div className="post-date">{res.date} </div>
+                    <div className="post-date">{moment(new Date(res.date)).format("DD/MM/YYYY")} </div>
                     <div className="post-content">{res.conteudo}</div>
                   </div>
                 );

@@ -15,11 +15,18 @@ import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
+import { Editor } from 'react-draft-wysiwyg';
+import moment from 'moment';
+import {
+  DatePicker,
+} from '@material-ui/pickers';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./style.css";
 
 const styles = theme => ({
   root: {
     display: 'flex',
+    width: '100%',
   },
 
   title: {
@@ -40,11 +47,12 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    width: '100%',
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
+    width: '100%',
   },
   dense: {
     marginTop: 19,
@@ -61,13 +69,13 @@ class Blog extends Component {
     super(props);
     this.state = {
       titulo: "",
-      date: "",
-      conteudo: "",
+      date: new Date(),
       items: {},
       opcao: null,
       clicado: null,
       resposta: null,
-      show: true
+      show: true,
+      conteudo: '',
     };
 
     this.storageRef = props.firebase.storage.ref();
@@ -151,8 +159,19 @@ class Blog extends Component {
       });
   }
 
+  handleDateChange = (date) => {
+    this.setState({ date: date });
+  };
+
   handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
+    console.log('handlechange');
+    console.log('name');
+    console.log(name);
+    console.log('event');
+    console.log(event);
+    this.setState({ 
+      [name]: event.target.value 
+    });
   };
 
   handleClick(e, key) {
@@ -197,6 +216,12 @@ class Blog extends Component {
     });
   }
 
+  onEditorStateChange(conteudo) {
+    this.setState({
+      conteudo,
+    });
+  }
+
   closeForm(e) {
     e.preventDefault();
     this.setState({
@@ -233,22 +258,33 @@ class Blog extends Component {
             onChange={this.handleChange('titulo')}
             margin="normal"
           />
-          <TextField
-            id="standard-name"
-            type="date"
-            placeholder="dd/mm/yyyy"
-            className={classes.textField}
+          <DatePicker
             value={date}
-            onChange={this.handleChange('date')}
-            margin="normal"
+            onChange={this.handleDateChange}
+
           />
 
           <TextField
-            id="standard-name"
+            id="standard-multiline-flexible"
             label="Conteudo"
             placeholder="texto"
             value={conteudo}
             onChange={this.handleChange('conteudo')}
+            margin="normal"
+            multiline
+            rowsMax="6000"
+          />
+          <Editor
+            wrapperClassName="wrapper-class"
+            editorClassName="editor-class"
+            toolbarClassName="toolbar-class"
+            toolbar={{
+              inline: { inDropdown: true },
+              list: { inDropdown: true },
+              textAlign: { inDropdown: true },
+              link: { inDropdown: true },
+              history: { inDropdown: true },
+            }}
           />
           <div className="buttons">
             <Button type="button" onClick={this.closeForm}>

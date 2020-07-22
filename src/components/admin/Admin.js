@@ -47,7 +47,7 @@ class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicked: "fotos",
+      clicked: "artigos",
       authUser: null,
       fetchingAuth: true,
       open: false,
@@ -70,8 +70,12 @@ class Admin extends Component {
   goToComponent(e) {
     e.preventDefault();
     e.stopPropagation()
+    console.log('e.target.id')
+    console.log(e.target.id)
+    console.log('e.currentTarget.id')
+    console.log(e.currentTarget.id)
     this.setState({
-      clicked: e.target.id
+      clicked: e.currentTarget.id
     });
   }
 
@@ -93,32 +97,32 @@ class Admin extends Component {
         <Menu open={this.state.open} handleDrawerClose={this.handleDrawerClose} goToComponent={this.goToComponent} />
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Paper className={classes.paper}>
-            {
-              this.state.clicked === "sobre" &&
-              <AboutComponent />
-            }
-            {
-              this.state.clicked === "resultados" &&
-              <ResultadosComponent />
-            }
-            {
-              this.state.clicked === "blog" &&
-              <BlogComponent />
-            }
-            {
-              this.state.clicked === "midia" &&
-              <MidiaComponent />
-            }
-            {
-              this.state.clicked === "fotos" &&
-              <FotosComponent />
-            }
-            {
-              this.state.clicked === "artigos" &&
-              <ArtigosComponent />
-            }
-          </Paper>
+          {/* <Paper className={classes.paper}> */}
+          {
+            this.state.clicked === "sobre" &&
+            <AboutComponent />
+          }
+          {
+            this.state.clicked === "resultados" &&
+            <ResultadosComponent />
+          }
+          {
+            this.state.clicked === "blog" &&
+            <BlogComponent />
+          }
+          {
+            this.state.clicked === "midia" &&
+            <MidiaComponent />
+          }
+          {
+            this.state.clicked === "fotos" &&
+            <FotosComponent />
+          }
+          {
+            this.state.clicked === "artigos" &&
+            <ArtigosComponent />
+          }
+          {/* </Paper> */}
         </main>
       </div>
     )

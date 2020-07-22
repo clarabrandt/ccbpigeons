@@ -116,7 +116,7 @@ class Menu extends React.Component {
           <div>
             <ListItem button onClick={this.props.goToComponent} id="sobre">
               <ListItemIcon>
-                <div onClick={this.props.goToComponent}>
+                <div>
                   <PersonIcon />
                 </div>
               </ListItemIcon>
@@ -124,7 +124,7 @@ class Menu extends React.Component {
             </ListItem>
             <ListItem button onClick={this.props.goToComponent} id="blog">
               <ListItemIcon>
-                <div onClick={this.props.goToComponent}>
+                <div>
                   <KeyboardIcon />
                 </div>
               </ListItemIcon>
@@ -132,7 +132,7 @@ class Menu extends React.Component {
             </ListItem>
             <ListItem button onClick={this.props.goToComponent} id="resultados">
               <ListItemIcon>
-                <div onClick={this.props.goToComponent}>
+                <div>
                   <StarIcon />
                 </div>
               </ListItemIcon>
@@ -140,7 +140,7 @@ class Menu extends React.Component {
             </ListItem>
             <ListItem button onClick={this.props.goToComponent} id="midia">
               <ListItemIcon>
-                <div onClick={this.props.goToComponent}>
+                <div>
                   <TvIcon />
                 </div>
               </ListItemIcon>
@@ -148,7 +148,7 @@ class Menu extends React.Component {
             </ListItem>
             <ListItem button onClick={this.props.goToComponent} id="fotos">
               <ListItemIcon>
-                <div onClick={this.props.goToComponent}>
+                <div>
                   <PhotoIcon />
                 </div>
               </ListItemIcon>
@@ -156,7 +156,7 @@ class Menu extends React.Component {
             </ListItem>
             <ListItem button onClick={this.props.goToComponent} id="artigos">
               <ListItemIcon>
-                <div onClick={this.props.goToComponent}>
+                <div>
                   <DescriptionIcon />
                 </div>
               </ListItemIcon>

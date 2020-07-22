@@ -19,6 +19,7 @@
 }
 .menu-item--name {
   align-self: center;
+  color: white;
 }
 
 @media only screen and (max-width: 620px) {
