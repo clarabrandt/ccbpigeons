@@ -16,7 +16,7 @@ import TextField from '@material-ui/core/TextField';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import { Editor } from 'react-draft-wysiwyg';
-import moment from 'moment';
+import { EditorState, convertToRaw } from 'draft-js';
 import {
   DatePicker,
 } from '@material-ui/pickers';
@@ -75,12 +75,13 @@ class Blog extends Component {
       clicado: null,
       resposta: null,
       show: true,
-      conteudo: '',
+      conteudo: EditorState.createEmpty(),
     };
 
     this.storageRef = props.firebase.storage.ref();
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.onEditorStateChange = this.onEditorStateChange.bind(this);
     this.addPost = this.addPost.bind(this);
     this.changeData = this.changeData.bind(this);
     this.editPost = this.editPost.bind(this);
@@ -118,7 +119,7 @@ class Blog extends Component {
     e.preventDefault();
     const titulo = this.state.titulo;
     const date = this.state.date;
-    const conteudo = this.state.conteudo;
+    const conteudo = convertToRaw(this.state.conteudo.getCurrentContent());
     const endpoint = `${this.baseUrl}blog`;
     fetch(endpoint, {
       method: "PUT",
@@ -159,6 +160,14 @@ class Blog extends Component {
       });
   }
 
+  onEditorStateChange = (editorState) => {
+    const contentState = editorState.getCurrentContent();
+    this.setState({
+      // conteudo: convertToRaw(contentState),
+      conteudo: editorState,
+    });
+  };
+
   handleDateChange = (date) => {
     this.setState({ date: date });
   };
@@ -169,8 +178,8 @@ class Blog extends Component {
     console.log(name);
     console.log('event');
     console.log(event);
-    this.setState({ 
-      [name]: event.target.value 
+    this.setState({
+      [name]: event.target.value
     });
   };
 
@@ -180,7 +189,7 @@ class Blog extends Component {
     const data = {
       titulo: this.state.titulo,
       date: this.state.date,
-      conteudo: this.state.conteudo
+      conteudo: convertToRaw(this.state.conteudo.getCurrentContent())
     };
     fetch(endpoint, {
       method: "POST",
@@ -216,11 +225,11 @@ class Blog extends Component {
     });
   }
 
-  onEditorStateChange(conteudo) {
-    this.setState({
-      conteudo,
-    });
-  }
+  // onEditorStateChange(conteudo) {
+  //   this.setState({
+  //     conteudo,
+  //   });
+  // }
 
   closeForm(e) {
     e.preventDefault();
@@ -264,17 +273,8 @@ class Blog extends Component {
 
           />
 
-          <TextField
-            id="standard-multiline-flexible"
-            label="Conteudo"
-            placeholder="texto"
-            value={conteudo}
-            onChange={this.handleChange('conteudo')}
-            margin="normal"
-            multiline
-            rowsMax="6000"
-          />
           <Editor
+            editorState={this.state.conteudo}
             wrapperClassName="wrapper-class"
             editorClassName="editor-class"
             toolbarClassName="toolbar-class"
@@ -285,6 +285,11 @@ class Blog extends Component {
               link: { inDropdown: true },
               history: { inDropdown: true },
             }}
+            onEditorStateChange={this.onEditorStateChange}
+          />
+          <textarea
+            disabled
+            value={conteudo}
           />
           <div className="buttons">
             <Button type="button" onClick={this.closeForm}>

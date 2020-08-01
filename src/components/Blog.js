@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import moment from 'moment';
+import { stateToHTML } from 'draft-js-export-html';
+import { convertFromRaw } from 'draft-js';
 import "./Blog.css";
 
 export default class Blog extends Component {
@@ -16,6 +18,10 @@ export default class Blog extends Component {
 
   componentDidMount() {
     this.showBlog();
+  }
+
+  convertCommentFromJSONToHTML = (text) => {
+    return stateToHTML(convertFromRaw(text));
   }
 
   showBlog() {
@@ -73,7 +79,7 @@ export default class Blog extends Component {
                   >
                     <div className="post-title">{res.titulo} </div>
                     <div className="post-date">{moment(new Date(res.date)).format("DD/MM/YYYY")} </div>
-                    <div className="post-content">{res.conteudo}</div>
+                    <div dangerouslySetInnerHTML={{ __html: this.convertCommentFromJSONToHTML(res.conteudo) }} />
                   </div>
                 );
               })}
