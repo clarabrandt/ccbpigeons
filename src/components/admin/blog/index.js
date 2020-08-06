@@ -16,7 +16,7 @@ import TextField from '@material-ui/core/TextField';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import { Editor } from 'react-draft-wysiwyg';
-import { EditorState, convertToRaw } from 'draft-js';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import {
   DatePicker,
 } from '@material-ui/pickers';
@@ -90,6 +90,8 @@ class Blog extends Component {
   }
 
   componentDidMount() {
+    console.log('this.state.conteudo');
+    console.log(this.state.conteudo);
     this.getBlogPosts();
   }
 
@@ -161,9 +163,7 @@ class Blog extends Component {
   }
 
   onEditorStateChange = (editorState) => {
-    const contentState = editorState.getCurrentContent();
     this.setState({
-      // conteudo: convertToRaw(contentState),
       conteudo: editorState,
     });
   };
@@ -216,20 +216,15 @@ class Blog extends Component {
   editPost(e, key) {
     e.preventDefault();
     const { items } = this.state;
+
     this.setState({
       opcao: "editar",
       clicado: key,
       titulo: items[key].titulo,
       date: items[key].date,
-      conteudo: items[key].conteudo
+      conteudo: EditorState.createWithContent(convertFromRaw(items[key].conteudo))
     });
   }
-
-  // onEditorStateChange(conteudo) {
-  //   this.setState({
-  //     conteudo,
-  //   });
-  // }
 
   closeForm(e) {
     e.preventDefault();
@@ -250,10 +245,7 @@ class Blog extends Component {
       })
     }
     const { classes } = this.props;
-    const { titulo } = this.state;
-    const { date } = this.state;
-    const { conteudo } = this.state;
-    const { clicado } = this.state;
+    const { clicado, date, titulo } = this.state;
 
     return (
       <form className={classes.container} noValidate autoComplete="off">
@@ -272,7 +264,6 @@ class Blog extends Component {
             onChange={this.handleDateChange}
 
           />
-
           <Editor
             editorState={this.state.conteudo}
             wrapperClassName="wrapper-class"
@@ -286,10 +277,6 @@ class Blog extends Component {
               history: { inDropdown: true },
             }}
             onEditorStateChange={this.onEditorStateChange}
-          />
-          <textarea
-            disabled
-            value={conteudo}
           />
           <div className="buttons">
             <Button type="button" onClick={this.closeForm}>
