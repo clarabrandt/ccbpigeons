@@ -15,7 +15,7 @@
     "firebase": "^5.8.5",
     "gh-pages": "^2.0.1",
     "megadraft": "^0.7.2",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "react": "^16.7.0",
     "react-app-polyfill": "^0.2.1",
     "react-dom": "^16.7.0",
